@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ETHOS Soul — Apoyo, Paz, Humanidad</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       TOKENS — Misma paleta que index.html
+    ============================================================ */
+    :root {
+      --negro:        #0a0a0a;
+      --negro-card:   #111111;
+      --negro-borde:  #1e1e1e;
+      --dorado:       #c9a84c;
+      --dorado-claro: #e8c97a;
+      --dorado-oscuro:#8a6a20;
+      --blanco:       #f5f0e8;
+      --gris:         #888888;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body:    'Montserrat', sans-serif;
+      --transicion:   0.35s ease;
+    }
+
+    /* ============================================================
+       RESET Y BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--negro);
+      color: var(--blanco);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    .etiqueta { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado); }
+    .separador { width: 40px; height: 1px; background: var(--dorado); margin: 1rem 0; }
+
+    /* ============================================================
+       BOTÓN BASE
+    ============================================================ */
+    .btn {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.85rem 2.5rem;
+      border: 1px solid var(--dorado);
+      color: var(--dorado);
+      background: transparent;
+      cursor: pointer;
+      transition: color var(--transicion), box-shadow var(--transicion);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--dorado);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transicion);
+      z-index: 0;
+    }
+    .btn span { position: relative; z-index: 1; }
+    .btn:hover::after { transform: scaleX(1); }
+    .btn:hover { color: var(--negro); box-shadow: 0 0 20px rgba(201,168,76,0.3); }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      transition: background var(--transicion);
+    }
+    #navbar.scrolled {
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--negro-borde);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gris);
+      transition: color var(--transicion);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--dorado);
+      transition: width var(--transicion);
+    }
+    .nav-links a:hover, .nav-links a.activo { color: var(--dorado); }
+    .nav-links a:hover::after, .nav-links a.activo::after { width: 100%; }
+    .hamburguesa {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .hamburguesa span { display: block; width: 24px; height: 1px; background: var(--blanco); transition: all var(--transicion); }
+    .hamburguesa.abierto span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburguesa.abierto span:nth-child(2) { opacity: 0; }
+    .hamburguesa.abierto span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .nav-movil {
+      display: none; position: fixed; inset: 0;
+      background: rgba(10,10,10,0.97); z-index: 999;
+      flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+    }
+    .nav-movil.abierto { display: flex; }
+    .nav-movil a { font-family: var(--font-display); font-size: 2rem; letter-spacing: 0.15em; color: var(--blanco); transition: color var(--transicion); }
+    .nav-movil a:hover { color: var(--dorado); }
+
+    /* ============================================================
+       HERO — Banner con imagen ETHOS Soul copia 4.png
+       Cambia "ETHOS Soul copia 4.png" si renombras el archivo
+    ============================================================ */
+    #hero {
+      position: relative;
+      min-height: 70vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-banner {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, var(--negro) 20%, rgba(10,10,10,0.55) 60%, rgba(10,10,10,0.2) 100%);
+    }
+    .hero-contenido {
+      position: relative;
+      z-index: 2;
+      padding: 0 4rem 5rem;
+      max-width: 700px;
+    }
+    .hero-eyebrow {
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 1rem;
+    }
+    .hero-titulo {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      line-height: 0.95;
+      margin-bottom: 1.5rem;
+    }
+    .hero-subtitulo {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.8vw, 1.3rem);
+      font-style: italic;
+      color: var(--dorado);
+      margin-bottom: 0.5rem;
+    }
+    .hero-desc {
+      font-size: 0.8rem;
+      color: var(--gris);
+      max-width: 480px;
+      line-height: 1.8;
+    }
+
+    /* ============================================================
+       SECCIÓN TÍTULO DECORADO — Reutilizable
+    ============================================================ */
+    .seccion-titulo {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .seccion-titulo::before, .seccion-titulo::after {
+      content: ''; width: 60px; height: 1px; background: var(--dorado-oscuro);
+    }
+
+    /* ============================================================
+       QUÉ ES ETHOS SOUL — Bloque de introducción
+    ============================================================ */
+    #que-es {
+      padding: 7rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .que-es-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .que-es-texto h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .que-es-texto p {
+      font-size: 0.82rem;
+      color: var(--gris);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+    .que-es-texto p strong { color: var(--blanco); font-weight: 500; }
+    .que-es-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .stat-item {
+      border-left: 1px solid var(--dorado-oscuro);
+      padding-left: 1.5rem;
+      transition: border-color var(--transicion);
+    }
+    .stat-item:hover { border-color: var(--dorado); }
+    .stat-numero {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--dorado);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gris);
+    }
+
+    /* ============================================================
+       PILARES — Las 4 líneas de acción de Soul
+       Edita título, descripción e icono de cada pilar
+    ============================================================ */
+    #pilares {
+      padding: 5rem 4rem;
+      background: var(--negro-card);
+      border-top: 1px solid var(--negro-borde);
+      border-bottom: 1px solid var(--negro-borde);
+    }
+    .pilares-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .pilar-card {
+      padding: 2.5rem 2rem;
+      border: 1px solid var(--negro-borde);
+      position: relative;
+      transition: border-color var(--transicion), box-shadow var(--transicion), transform var(--transicion);
+    }
+    .pilar-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--dorado);
+      opacity: 0;
+      transition: opacity var(--transicion);
+      pointer-events: none;
+    }
+    .pilar-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(201,168,76,0.1); }
+    .pilar-card:hover::before { opacity: 1; }
+    .pilar-icono {
+      font-size: 1.8rem;
+      color: var(--dorado);
+      margin-bottom: 1.2rem;
+    }
+    .pilar-titulo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 0.8rem;
+    }
+    .pilar-desc {
+      font-size: 0.75rem;
+      color: var(--gris);
+      line-height: 1.8;
+    }
+
+    /* ============================================================
+       GUÍA VG — Producto principal de Soul
+       Cambia el href del botón por el enlace de Stripe
+    ============================================================ */
+    #guia-vg {
+      padding: 7rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .guia-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .guia-imagen-wrap {
+      position: relative;
+    }
+    .guia-imagen {
+      width: 100%;
+      border: 1px solid var(--negro-borde);
+      transition: box-shadow var(--transicion);
+    }
+    .guia-imagen-wrap:hover .guia-imagen {
+      box-shadow: 0 0 40px rgba(201,168,76,0.2);
+    }
+    .guia-imagen-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border: 1px solid var(--dorado-oscuro);
+      pointer-events: none;
+      transition: border-color var(--transicion);
+    }
+    .guia-imagen-wrap:hover::before { border-color: var(--dorado); }
+    .guia-info h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+    .guia-info p {
+      font-size: 0.82rem;
+      color: var(--gris);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+    .guia-info p strong { color: var(--blanco); font-weight: 500; }
+    .guia-lista {
+      list-style: none;
+      margin: 1.5rem 0 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .guia-lista li {
+      font-size: 0.78rem;
+      color: var(--gris);
+      padding-left: 1.2rem;
+      position: relative;
+    }
+    .guia-lista li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--dorado);
+    }
+    .guia-donacion {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border: 1px solid var(--negro-borde);
+      background: rgba(201,168,76,0.03);
+    }
+    .guia-donacion p {
+      font-size: 0.75rem;
+      color: var(--gris);
+      margin-bottom: 1rem;
+    }
+    .guia-donacion p strong { color: var(--dorado); }
+
+    /* ============================================================
+       GRUPO DE APOYO — Información del grupo WhatsApp
+    ============================================================ */
+    #grupo-apoyo {
+      padding: 5rem 4rem;
+      background: var(--negro-card);
+      border-top: 1px solid var(--negro-borde);
+      border-bottom: 1px solid var(--negro-borde);
+      text-align: center;
+    }
+    .grupo-contenido {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .grupo-contenido h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+    .grupo-contenido p {
+      font-size: 0.82rem;
+      color: var(--gris);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+    .grupo-contenido p strong { color: var(--blanco); font-weight: 500; }
+    .grupo-features {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 2.5rem 0;
+    }
+    .grupo-feature {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .grupo-feature span:first-child {
+      font-size: 1.5rem;
+      color: var(--dorado);
+    }
+    .grupo-feature span:last-child {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gris);
+    }
+
+    /* ============================================================
+       FAQ — Preguntas frecuentes de Soul
+       Añade o elimina bloques .faq-item según necesites
+    ============================================================ */
+    #faq {
+      padding: 7rem 4rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--negro-borde);
+      overflow: hidden;
+    }
+    .faq-pregunta {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--blanco);
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 300;
+      text-align: left;
+      padding: 1.5rem 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      transition: color var(--transicion);
+    }
+    .faq-pregunta:hover { color: var(--dorado); }
+    .faq-icono {
+      font-size: 1.2rem;
+      color: var(--dorado);
+      transition: transform var(--transicion);
+      flex-shrink: 0;
+    }
+    .faq-item.abierto .faq-icono { transform: rotate(45deg); }
+    .faq-respuesta {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+    .faq-item.abierto .faq-respuesta { max-height: 300px; padding-bottom: 1.5rem; }
+    .faq-respuesta p {
+      font-size: 0.8rem;
+      color: var(--gris);
+      line-height: 1.9;
+    }
+
+    /* ============================================================
+       CTA FINAL
+    ============================================================ */
+    #cta-final {
+      padding: 7rem 4rem;
+      text-align: center;
+      border-top: 1px solid var(--negro-borde);
+    }
+    #cta-final h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    #cta-final p {
+      font-size: 0.82rem;
+      color: var(--gris);
+      margin-bottom: 2.5rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-botones { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: #070707;
+      border-top: 1px solid var(--negro-borde);
+      padding: 3rem 4rem;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: 0.4em;
+      margin-bottom: 1.5rem;
+    }
+    .footer-links {
+      display: flex; gap: 2rem; justify-content: center;
+      flex-wrap: wrap; margin-bottom: 2rem; list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gris); transition: color var(--transicion);
+    }
+    .footer-links a:hover { color: var(--dorado); }
+    .footer-copy { font-size: 0.65rem; color: var(--negro-borde); letter-spacing: 0.1em; }
+
+    /* ============================================================
+       BOTÓN FLOTANTE DONACIÓN
+       Cambia el href por el enlace de Stripe cuando lo tengas
+    ============================================================ */
+    #btn-donar {
+      position: fixed;
+      bottom: 2.5rem; right: 2.5rem;
+      z-index: 1500;
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+    }
+    .donar-circulo {
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: var(--negro-card);
+      border: 1px solid var(--dorado);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; color: var(--dorado);
+      cursor: pointer; text-decoration: none;
+      transition: background var(--transicion), box-shadow var(--transicion), transform var(--transicion);
+      animation: pulso 2.5s ease-in-out infinite;
+    }
+    .donar-circulo:hover {
+      background: var(--dorado); color: var(--negro);
+      box-shadow: 0 0 25px rgba(201,168,76,0.5);
+      transform: scale(1.08); animation: none;
+    }
+    .donar-etiqueta { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dorado); }
+    @keyframes pulso {
+      0%   { box-shadow: 0 0 0 0 rgba(201,168,76,0.4); }
+      70%  { box-shadow: 0 0 0 12px rgba(201,168,76,0); }
+      100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
+    }
+
+    /* ============================================================
+       ANIMACIONES REVEAL AL SCROLL
+    ============================================================ */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ============================================================
+       RESPONSIVE — Versión móvil
+    ============================================================ */
+    @media (max-width: 768px) {
+      #navbar { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburguesa { display: flex; }
+      #hero { min-height: 60vh; }
+      .hero-contenido { padding: 0 1.5rem 4rem; }
+      #que-es { padding: 4rem 1.5rem; }
+      .que-es-grid { grid-template-columns: 1fr; gap: 3rem; }
+      #pilares { padding: 4rem 1.5rem; }
+      .pilares-grid { grid-template-columns: 1fr 1fr; }
+      #guia-vg { padding: 4rem 1.5rem; }
+      .guia-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .guia-imagen-wrap::before { display: none; }
+      #grupo-apoyo { padding: 4rem 1.5rem; }
+      #faq { padding: 4rem 1.5rem; }
+      #cta-final { padding: 4rem 1.5rem; }
+      footer { padding: 2rem 1.5rem; }
+      #btn-donar { bottom: 1.5rem; right: 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .pilares-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVBAR — Misma estructura que index.html
+  ============================================================ -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">ETHOS</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#sobre-mi">Sobre mí</a></li>
+      <li><a href="soul.html" class="activo">Ethos Soul</a></li>
+      <li><a href="iron.html">Ethos Iron</a></li>
+      <li><a href="index.html#productos">Productos</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+    </ul>
+    <button class="hamburguesa" id="hamburguesa" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-movil" id="nav-movil">
+    <a href="index.html" onclick="cerrarMenu()">Inicio</a>
+    <a href="index.html#sobre-mi" onclick="cerrarMenu()">Sobre mí</a>
+    <a href="soul.html" onclick="cerrarMenu()">Ethos Soul</a>
+    <a href="iron.html" onclick="cerrarMenu()">Ethos Iron</a>
+    <a href="index.html#productos" onclick="cerrarMenu()">Productos</a>
+    <a href="index.html#contacto" onclick="cerrarMenu()">Contacto</a>
+  </div>
+
+  <!-- ============================================================
+       HERO — Banner principal Soul
+       Imagen: ETHOS Soul copia 4.png
+  ============================================================ -->
+  <section id="hero">
+    <img src="ETHOS Soul copia 4.png" alt="ETHOS Soul" class="hero-banner" />
+    <div class="hero-overlay"></div>
+    <div class="hero-contenido">
+      <p class="hero-eyebrow">· Ethos Soul ·</p>
+      <h1 class="hero-titulo">Apoyo.<br />Paz.<br />Humanidad.</h1>
+      <p class="hero-subtitulo">Porque nadie debería enfrentarlo solo.</p>
+      <p class="hero-desc">Un espacio de acompañamiento real, orientación legal y comunidad para quienes lo necesitan.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       QUÉ ES ETHOS SOUL — Introducción y misión
+       Edita los textos y los números estadísticos
+  ============================================================ -->
+  <section id="que-es">
+    <div class="que-es-grid">
+      <div class="que-es-texto reveal">
+        <p class="etiqueta">¿Qué es?</p>
+        <div class="separador"></div>
+        <h2>Un proyecto que nació de ver el silencio de los que nadie escucha.</h2>
+        <p>ETHOS Soul es la rama humanitaria de ETHOS. Existe para dar apoyo real a hombres que atraviesan situaciones de alta vulnerabilidad, especialmente acusaciones falsas o procesos de violencia de género en España.</p>
+        <p><strong>No es ideología. Es humanidad.</strong> Creemos que cualquier persona merece orientación, acompañamiento y herramientas para defenderse con dignidad.</p>
+        <p>Los fondos recaudados a través de donaciones se destinan íntegramente a financiar el grupo de apoyo psicológico privado y los recursos legales gratuitos.</p>
+      </div>
+      <div class="que-es-stats reveal">
+        <div class="stat-item">
+          <div class="stat-numero">44</div>
+          <div class="stat-label">Páginas de orientación legal en la Guía VG</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-numero">100%</div>
+          <div class="stat-label">De las donaciones van al grupo de apoyo</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-numero">0€</div>
+          <div class="stat-label">Precio mínimo — donación libre</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PILARES — Las 4 líneas de acción
+       Edita icono, título y descripción de cada pilar
+  ============================================================ -->
+  <section id="pilares">
+    <p class="seccion-titulo">En qué consiste</p>
+    <div class="pilares-grid">
+      <div class="pilar-card reveal">
+        <div class="pilar-icono">♡</div>
+        <h3 class="pilar-titulo">Apoyo real</h3>
+        <p class="pilar-desc">Acompañamiento humano y emocional en momentos de alta vulnerabilidad. No estás solo.</p>
+      </div>
+      <div class="pilar-card reveal">
+        <div class="pilar-icono">§</div>
+        <h3 class="pilar-titulo">Guía legal</h3>
+        <p class="pilar-desc">Orientación práctica sobre tus derechos y los pasos a seguir ante una acusación en España.</p>
+      </div>
+      <div class="pilar-card reveal">
+        <div class="pilar-icono">◇</div>
+        <h3 class="pilar-titulo">Donaciones</h3>
+        <p class="pilar-desc">Cada aportación financia recursos reales. Tu donación transforma la situación de otra persona.</p>
+      </div>
+      <div class="pilar-card reveal">
+        <div class="pilar-icono">✦</div>
+        <h3 class="pilar-titulo">Comunidad privada</h3>
+        <p class="pilar-desc">Grupo privado de apoyo psicológico donde encontrar contención y compañía entre iguales.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       GUÍA VG — Producto principal
+       Cambia el href del botón por el enlace de Stripe
+  ============================================================ -->
+  <section id="guia-vg">
+    <div class="guia-grid">
+      <div class="guia-imagen-wrap reveal">
+        <img src="ETHOS Soul copia.png" alt="Guía VG — ETHOS Soul" class="guia-imagen" />
+      </div>
+      <div class="guia-info reveal">
+        <p class="etiqueta">Producto principal</p>
+        <div class="separador"></div>
+        <h2>Guía VG</h2>
+        <p>Una guía legal de 44 páginas para hombres que enfrentan o temen enfrentar una acusación de violencia de género en España. Redactada con rigor, revisada por profesionales del derecho.</p>
+        <p><strong>No es un panfleto. Es una herramienta.</strong></p>
+        <ul class="guia-lista">
+          <li>Marco legal vigente en España (LO 1/2025 y jurisprudencia reciente)</li>
+          <li>Tus derechos desde el momento de la detención</li>
+          <li>Cómo actuar en cada fase del proceso judicial</li>
+          <li>Recursos y organismos a los que puedes acudir</li>
+          <li>Revisada y validada por Manuela, especialista en derecho penal</li>
+        </ul>
+        <div class="guia-donacion">
+          <p><strong>Donación libre.</strong> Accede con lo que puedas. Lo que aporten quienes pueden, financia el acceso de quienes no pueden.</p>
+          <!-- Cambia el href por el enlace de Stripe cuando lo tengas -->
+          <a href="#" class="btn"><span>Acceder a la Guía VG</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       GRUPO DE APOYO — Información del grupo privado WhatsApp
+       Edita descripción y características del grupo
+  ============================================================ -->
+  <section id="grupo-apoyo">
+    <div class="grupo-contenido reveal">
+      <p class="etiqueta">Comunidad</p>
+      <div class="separador" style="margin: 1rem auto;"></div>
+      <h2>El grupo de apoyo psicológico</h2>
+      <p>Un espacio privado, cerrado y seguro donde hombres que atraviesan situaciones similares pueden encontrar contención, información y compañía.</p>
+      <p><strong>No es un foro de quejas.</strong> Es un espacio de orientación real, facilitado y con criterio.</p>
+      <div class="grupo-features">
+        <div class="grupo-feature">
+          <span>🔒</span>
+          <span>Privado y cerrado</span>
+        </div>
+        <div class="grupo-feature">
+          <span>◎</span>
+          <span>Acceso controlado</span>
+        </div>
+        <div class="grupo-feature">
+          <span>♡</span>
+          <span>Apoyo entre iguales</span>
+        </div>
+        <div class="grupo-feature">
+          <span>✦</span>
+          <span>Sin censura</span>
+        </div>
+      </div>
+      <p style="font-size:0.78rem; color:var(--gris);">El acceso al grupo se gestiona a través de donación. Contacta por email para más información.</p>
+      <!-- Cambia el href por el enlace real cuando lo tengas -->
+      <a href="mailto:hola@ethosironsoul.com" class="btn" style="margin-top:1.5rem;"><span>Solicitar acceso</span></a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FAQ — Preguntas frecuentes sobre Soul
+       Añade o elimina .faq-item según necesites
+  ============================================================ -->
+  <section id="faq">
+    <p class="seccion-titulo">Preguntas frecuentes</p>
+
+    <div class="faq-item">
+      <button class="faq-pregunta">
+        ¿Quién puede acceder a la Guía VG?
+        <span class="faq-icono">+</span>
+      </button>
+      <div class="faq-respuesta">
+        <p>Cualquier persona. No hace falta estar en medio de un proceso judicial. Puede ser útil como prevención, orientación o apoyo a alguien cercano.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pregunta">
+        ¿Cuánto tengo que donar para acceder?
+        <span class="faq-icono">+</span>
+      </button>
+      <div class="faq-respuesta">
+        <p>La donación es completamente libre. Accedes con lo que puedas o quieras aportar. No hay mínimo establecido.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pregunta">
+        ¿A dónde van las donaciones?
+        <span class="faq-icono">+</span>
+      </button>
+      <div class="faq-respuesta">
+        <p>El 100% de las donaciones recibidas a través de ETHOS Soul se destina a financiar el grupo de apoyo psicológico privado y los recursos legales de acceso libre.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pregunta">
+        ¿La guía está actualizada con la legislación vigente?
+        <span class="faq-icono">+</span>
+      </button>
+      <div class="faq-respuesta">
+        <p>Sí. Incluye referencias a la LO 1/2025 y la jurisprudencia más reciente del Tribunal Supremo (STS 116/2025, STS 603/2025, STS 629/2025), además de la nueva numeración del artículo 89 LOPJ.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pregunta">
+        ¿Cómo accedo al grupo de apoyo?
+        <span class="faq-icono">+</span>
+      </button>
+      <div class="faq-respuesta">
+        <p>El acceso al grupo privado se gestiona de forma manual para garantizar la seguridad del espacio. Escríbenos a hola@ethosironsoul.com con el asunto "Grupo Soul" y te informamos.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       CTA FINAL — Llamada a la acción de cierre
+  ============================================================ -->
+  <section id="cta-final">
+    <h2 class="reveal">Nadie debería<br />enfrentarlo solo.</h2>
+    <p class="reveal">Accede a la Guía VG o dona para que otros puedan hacerlo.</p>
+    <div class="cta-botones reveal">
+      <!-- Cambia los href por los enlaces reales cuando los tengas -->
+      <a href="#" class="btn"><span>Acceder a la Guía VG</span></a>
+      <a href="#" class="btn"><span>Hacer una donación</span></a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="footer-logo">ETHOS</div>
+    <ul class="footer-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#sobre-mi">Sobre mí</a></li>
+      <li><a href="soul.html">Soul</a></li>
+      <li><a href="iron.html">Iron</a></li>
+      <li><a href="index.html#productos">Productos</a></li>
+      <li><a href="mailto:hola@ethosironsoul.com">Contacto</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 ETHOS — Iron & Soul Group. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- ============================================================
+       BOTÓN FLOTANTE DONACIÓN
+       Cambia el href por el enlace de Stripe cuando lo tengas
+  ============================================================ -->
+  <div id="btn-donar">
+    <a href="#" class="donar-circulo" title="Donar a ETHOS Soul">♡</a>
+    <span class="donar-etiqueta">Donar</span>
+  </div>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // Navbar scroll
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Hamburguesa
+    document.getElementById('hamburguesa').addEventListener('click', function () {
+      this.classList.toggle('abierto');
+      document.getElementById('nav-movil').classList.toggle('abierto');
+    });
+    function cerrarMenu() {
+      document.getElementById('hamburguesa').classList.remove('abierto');
+      document.getElementById('nav-movil').classList.remove('abierto');
+    }
+
+    // Reveal al scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // FAQ acordeón
+    document.querySelectorAll('.faq-pregunta').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const abierto = item.classList.contains('abierto');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('abierto'));
+        if (!abierto) item.classList.add('abierto');
+      });
+    });
+  </script>
+
+</body>
+</html>
