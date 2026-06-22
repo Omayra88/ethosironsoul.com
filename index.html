@@ -82,10 +82,6 @@
     .hero-titulo { font-family: var(--font-display); font-size: clamp(8rem, 17vw, 15rem); font-weight: 300; letter-spacing: 0.08em; line-height: 0.9; color: var(--blanco); margin-bottom: 2rem; }
     .hero-subtitulo { font-family: var(--font-display); font-size: clamp(1.4rem, 2.3vw, 1.9rem); font-weight: 300; font-style: italic; color: var(--dorado); line-height: 1.5; margin-bottom: 0.6rem; }
     .hero-subtitulo-2 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.8vw, 1.4rem); font-weight: 300; color: var(--gris); font-style: italic; }
-    .scroll-indicator { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; z-index: 3; }
-    .scroll-indicator span { font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gris); }
-    .scroll-linea { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--dorado), transparent); animation: scrollBajar 1.5s ease-in-out infinite; }
-    @keyframes scrollBajar { 0% { transform: scaleY(0); transform-origin: top; opacity: 0; } 50% { transform: scaleY(1); transform-origin: top; opacity: 1; } 100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; } }
 
     /* ============================================================
        SOBRE MÍ — Bloque de presentación
@@ -160,7 +156,8 @@
     .producto-card:hover::before { opacity: 1; }
     .producto-imagen { width: 100%; aspect-ratio: 2/3; object-fit: contain; background: #0d0d0d; }
     .producto-badge { position: absolute; top: 1rem; right: 1rem; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--dorado); color: var(--negro); padding: 0.3rem 0.7rem; z-index: 2; }
-    .producto-info { padding: 1.2rem; }
+    .producto-info { padding: 1.2rem; display: flex; flex-direction: column; }
+    .producto-precio { margin-top: auto; }
     .producto-nombre { font-family: var(--font-display); font-size: 1rem; font-weight: 400; margin-bottom: 0.3rem; line-height: 1.3; }
     .producto-desc { font-size: 0.7rem; color: var(--gris); margin-bottom: 0.8rem; line-height: 1.5; }
     .producto-precio { font-family: var(--font-display); font-size: 1.3rem; color: var(--dorado); margin-bottom: 0.8rem; }
@@ -170,7 +167,7 @@
     .producto-card[data-lanzamiento="abierto"] .btn-espera { display: block; }
     .producto-card[data-lanzamiento="abierto"] .btn-espera { display: none; }
     .producto-card[data-lanzamiento="abierto"] .btn-comprar { display: block; }
-    .btn-comprar { width: 100%; text-align: center; font-size: 0.6rem; padding: 0.65rem 1rem; border: 1px solid var(--dorado); color: var(--dorado); background: none; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; position: relative; overflow: hidden; transition: color var(--transicion); text-decoration: none; }
+    .btn-comprar { display: block; width: 100%; text-align: center; font-size: 0.6rem; padding: 0.65rem 1rem; border: 1px solid var(--dorado); color: var(--dorado); background: none; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; position: relative; overflow: hidden; transition: color var(--transicion); text-decoration: none; margin-top: 0.8rem; }
     .btn-comprar::after { content: ''; position: absolute; inset: 0; background: var(--dorado); transform: scaleX(0); transform-origin: left; transition: transform var(--transicion); z-index: 0; }
     .btn-comprar span { position: relative; z-index: 1; }
     .btn-comprar:hover::after { transform: scaleX(1); }
@@ -343,7 +340,6 @@
       <!-- Edita el subtítulo gris aquí -->
       <p class="hero-subtitulo-2">Al final solo quedan los hechos, lo que fuiste cuando nadie miraba.</p>
     </div>
-    <div class="scroll-indicator"><span>Scroll</span><div class="scroll-linea"></div></div>
   </section>
 
   <!-- ============================================================
@@ -495,7 +491,7 @@
           <p class="producto-desc">Psicología real sin filtro ideológico.</p>
           <p class="producto-precio"><sup>€</sup>47</p>
           <!-- Botón "Saber más" lleva a la ficha del producto en productos.html -->
-          <a href="productos.html#serie-1" class="btn-comprar" style="display:block;"><span>Saber más</span></a>
+          <a href="productos.html#serie-1" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
 
@@ -508,7 +504,7 @@
           <p class="producto-desc">Patrones de comportamiento explicados.</p>
           <p class="producto-precio"><sup>€</sup>47</p>
           <!-- Botón "Saber más" lleva a la ficha del producto en productos.html -->
-          <a href="productos.html#serie-2" class="btn-comprar" style="display:block;"><span>Saber más</span></a>
+          <a href="productos.html#serie-2" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
 
@@ -521,7 +517,7 @@
           <p class="producto-desc">Lo que nadie te enseñó sobre las relaciones.</p>
           <p class="producto-precio"><sup>€</sup>57</p>
           <!-- Botón "Saber más" lleva a la ficha del producto en productos.html -->
-          <a href="productos.html#serie-3" class="btn-comprar" style="display:block;"><span>Saber más</span></a>
+          <a href="productos.html#serie-3" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
 
@@ -534,7 +530,7 @@
           <p class="producto-desc">Argumentos sólidos contra la narrativa dominante.</p>
           <p class="producto-precio"><sup>€</sup>57</p>
           <!-- Botón "Saber más" lleva a la ficha del producto en productos.html -->
-          <a href="productos.html#serie-4" class="btn-comprar" style="display:block;"><span>Saber más</span></a>
+          <a href="productos.html#serie-4" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
 
@@ -547,7 +543,7 @@
           <p class="producto-desc">Por qué nos enfrentan y quién gana.</p>
           <p class="producto-precio"><sup>€</sup>57</p>
           <!-- Botón "Saber más" lleva a la ficha del producto en productos.html -->
-          <a href="productos.html#serie-5" class="btn-comprar" style="display:block;"><span>Saber más</span></a>
+          <a href="productos.html#serie-5" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
 
@@ -560,7 +556,7 @@
           <p class="producto-desc">Tu biología como herramienta, no como excusa.</p>
           <p class="producto-precio"><sup>€</sup>47</p>
           <!-- Botón "Saber más" lleva a la ficha del producto en productos.html -->
-          <a href="productos.html#serie-6" class="btn-comprar" style="display:block;"><span>Saber más</span></a>
+          <a href="productos.html#serie-6" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
 
@@ -573,7 +569,7 @@
           <p class="producto-desc">El movimiento que prometió libertad y entregó dogma.</p>
           <p class="producto-precio"><sup>€</sup>47</p>
           <!-- Botón "Saber más" lleva a la ficha del producto en productos.html -->
-          <a href="productos.html#serie-7" class="btn-comprar" style="display:block;"><span>Saber más</span></a>
+          <a href="productos.html#serie-7" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
 
@@ -586,7 +582,7 @@
           <p class="producto-desc">Guía legal para hombres acusados de violencia de género en España.</p>
           <p class="producto-precio">Donación libre</p>
           <!-- Cambia # por tu enlace de Stripe cuando lo tengas -->
-          <a href="#" class="btn-comprar" style="display:block;"><span>Acceder</span></a>
+          <a href="soul.html#guia-vg" class="btn-comprar"><span>Acceder</span></a>
         </div>
       </div>
 
@@ -609,6 +605,16 @@
       <div class="colaborador-item">· LOGO ·</div>
     </div>
   </section>
+
+
+  <!-- ============================================================
+       BANNER SOUL — aparece en todas las páginas
+       Edita el texto aquí si quieres cambiarlo
+  ============================================================ -->
+  <div style="background: linear-gradient(135deg, #0d0d0d 0%, #111111 100%); border-top: 1px solid var(--dorado-oscuro); border-bottom: 1px solid var(--dorado-oscuro); padding: 1.5rem 4rem; text-align: center;">
+    <p style="font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado);">✦ &nbsp; Con cualquier producto de ETHOS, colaboras con ETHOS Soul &nbsp; ✦</p>
+    <p style="font-family: var(--font-display); font-size: 0.9rem; color: var(--gris); margin-top: 0.3rem; font-style: italic;">Un porcentaje de cada compra se destina al grupo de apoyo y los recursos legales gratuitos.</p>
+  </div>
 
   <!-- ============================================================
        FOOTER — Edita el email de contacto aquí
