@@ -148,7 +148,7 @@
        La Guía VG usa Stripe; las series usan Hotmart
     ============================================================ */
     #productos { padding: 5rem 0 5rem 4rem; }
-    .seccion-titulo-productos { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dorado); display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-bottom: 0; padding-right: 4rem; }
+    .seccion-titulo-productos { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dorado); display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-bottom: 0; padding-right: 4rem; white-space: nowrap; }
     .seccion-titulo-productos::before, .seccion-titulo-productos::after { content: ''; width: 60px; height: 1px; background: var(--dorado-oscuro); }
     .productos-grid { display: flex; gap: 1.5rem; margin-top: 3rem; overflow-x: auto; padding-bottom: 1.5rem; padding-right: 4rem; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--dorado-oscuro) var(--negro-card); }
     .productos-grid::-webkit-scrollbar { height: 3px; }
@@ -275,9 +275,11 @@
       #colaboradores { padding: 3rem 1.5rem; }
 
       /* Footer móvil: más compacto */
-      footer { padding: 1.5rem 1rem; }
-      .footer-logo { font-size: 1.2rem; margin-bottom: 0.8rem; }
-      .footer-links { gap: 1rem; margin-bottom: 0.8rem; }
+      footer { padding: 1rem 1rem; }
+      .footer-logo { font-size: 1rem; margin-bottom: 0.5rem; }
+      .footer-links { gap: 0.6rem; margin-bottom: 0.5rem; }
+      .footer-links a { font-size: 0.5rem; }
+      .footer-copy { font-size: 0.5rem; }
 
       /* Botón donar móvil */
       #btn-donar { bottom: 1.5rem; right: 1.5rem; }
@@ -419,11 +421,11 @@
         <p class="programa-nombre">Acceso privado</p>
         <ul class="programa-features">
           <li>
-            <div class="feature-icono">▶</div>
+            <div class="feature-icono">◈</div>
             <div class="feature-texto"><strong>Series documentadas</strong><span>Contenido profundo y sin filtro.</span></div>
           </li>
           <li>
-            <div class="feature-icono">◈</div>
+            <div class="feature-icono">◇</div>
             <div class="feature-texto"><strong>Membresía</strong><span>Acceso exclusivo a todo el contenido.</span></div>
           </li>
           <li>
