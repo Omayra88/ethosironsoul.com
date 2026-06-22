@@ -115,27 +115,42 @@
        Imagen: ETHOS Iron copia 3.png
     ============================================================ */
     #hero {
-      position: relative; min-height: 75vh;
-      display: flex; align-items: flex-end; overflow: hidden;
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
     }
     .hero-banner {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center top;
+      position: absolute;
+      right: 4rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 55%;
+      width: auto;
+      max-width: 35%;
+      object-fit: contain;
+      object-position: center;
     }
     .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, var(--negro) 20%, rgba(10,10,10,0.5) 60%, rgba(10,10,10,0.15) 100%);
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--negro) 45%, rgba(10,10,10,0.3) 80%, transparent 100%);
     }
     .hero-contenido {
-      position: relative; z-index: 2;
-      padding: 0 4rem 5rem; max-width: 700px;
+      position: relative;
+      z-index: 2;
+      padding: 8rem 4rem 4rem;
+      max-width: 560px;
     }
     .hero-eyebrow { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--dorado); margin-bottom: 1rem; }
     .hero-titulo {
       font-family: var(--font-display);
-      font-size: clamp(3.5rem, 8vw, 7rem);
-      font-weight: 300; letter-spacing: 0.08em; line-height: 0.95; margin-bottom: 1.5rem;
+      font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
     }
     .hero-subtitulo { font-family: var(--font-display); font-size: clamp(1rem, 1.8vw, 1.3rem); font-style: italic; color: var(--dorado); margin-bottom: 0.5rem; }
     .hero-desc { font-size: 0.8rem; color: var(--gris); max-width: 480px; line-height: 1.8; }
@@ -436,8 +451,10 @@
       #navbar { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
       .hamburguesa { display: flex; }
-      #hero { min-height: 60vh; }
-      .hero-contenido { padding: 0 1.5rem 4rem; }
+      #hero { min-height: 100svh; }
+      .hero-banner { right: 0; top: 0; transform: none; height: 100%; max-width: 100%; opacity: 0.25; }
+      .hero-overlay { background: linear-gradient(to top, var(--negro) 40%, rgba(10,10,10,0.2) 100%); }
+      .hero-contenido { padding: 8rem 1.5rem 4rem; }
       #que-es { padding: 4rem 1.5rem; }
       .que-es-grid { grid-template-columns: 1fr; gap: 3rem; }
       #incluye { padding: 4rem 1.5rem; }
@@ -464,8 +481,8 @@
     <ul class="nav-links">
       <li><a href="index.html">Inicio</a></li>
       <li><a href="index.html#sobre-mi">Sobre mí</a></li>
-      <li><a href="soul.html">Ethos Soul</a></li>
-      <li><a href="iron.html" class="activo">Ethos Iron</a></li>
+      <li><a href="Soul.html">Ethos Soul</a></li>
+      <li><a href="Iron.html" class="activo">Ethos Iron</a></li>
       <li><a href="index.html#productos">Productos</a></li>
       <li><a href="index.html#contacto">Contacto</a></li>
     </ul>
@@ -477,8 +494,8 @@
   <div class="nav-movil" id="nav-movil">
     <a href="index.html" onclick="cerrarMenu()">Inicio</a>
     <a href="index.html#sobre-mi" onclick="cerrarMenu()">Sobre mí</a>
-    <a href="soul.html" onclick="cerrarMenu()">Ethos Soul</a>
-    <a href="iron.html" onclick="cerrarMenu()">Ethos Iron</a>
+    <a href="Soul.html" onclick="cerrarMenu()">Ethos Soul</a>
+    <a href="Iron.html" onclick="cerrarMenu()">Ethos Iron</a>
     <a href="index.html#productos" onclick="cerrarMenu()">Productos</a>
     <a href="index.html#contacto" onclick="cerrarMenu()">Contacto</a>
   </div>
@@ -776,8 +793,8 @@
     <ul class="footer-links">
       <li><a href="index.html">Inicio</a></li>
       <li><a href="index.html#sobre-mi">Sobre mí</a></li>
-      <li><a href="soul.html">Soul</a></li>
-      <li><a href="iron.html">Iron</a></li>
+      <li><a href="Soul.html">Soul</a></li>
+      <li><a href="Iron.html">Iron</a></li>
       <li><a href="index.html#productos">Productos</a></li>
       <li><a href="mailto:hola@ethosironsoul.com">Contacto</a></li>
     </ul>
