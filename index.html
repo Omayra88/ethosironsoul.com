@@ -226,7 +226,7 @@
     }
     .hero-titulo {
       font-family: var(--font-display);
-      font-size: clamp(5rem, 12vw, 10rem);
+      font-size: clamp(7rem, 16vw, 14rem);
       font-weight: 300;
       letter-spacing: 0.08em;
       line-height: 0.9;
@@ -235,7 +235,7 @@
     }
     .hero-subtitulo {
       font-family: var(--font-display);
-      font-size: clamp(1rem, 1.8vw, 1.3rem);
+      font-size: clamp(1.3rem, 2.2vw, 1.8rem);
       font-weight: 300;
       font-style: italic;
       color: var(--dorado);
@@ -244,7 +244,7 @@
     }
     .hero-subtitulo-2 {
       font-family: var(--font-display);
-      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+      font-size: clamp(1.1rem, 1.8vw, 1.4rem);
       font-weight: 300;
       color: var(--gris);
       font-style: italic;
@@ -582,9 +582,9 @@
     .producto-card:hover::before { opacity: 1; }
     .producto-imagen {
       width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      object-position: top center;
+      aspect-ratio: 2/3;
+      object-fit: contain;
+      background: #0d0d0d;
     }
     .producto-badge {
       position: absolute;
@@ -870,8 +870,8 @@
     <ul class="nav-links">
       <li><a href="#hero" class="activo">Inicio</a></li>
       <li><a href="#sobre-mi">Sobre mí</a></li>
-      <li><a href="soul.html">Ethos Soul</a></li>
-      <li><a href="iron.html">Ethos Iron</a></li>
+      <li><a href="Soul.html">Ethos Soul</a></li>
+      <li><a href="Iron.html">Ethos Iron</a></li>
       <li><a href="#productos">Productos</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
@@ -896,8 +896,8 @@
   <div class="nav-movil" id="nav-movil">
     <a href="#hero" onclick="cerrarMenu()">Inicio</a>
     <a href="#sobre-mi" onclick="cerrarMenu()">Sobre mí</a>
-    <a href="soul.html" onclick="cerrarMenu()">Ethos Soul</a>
-    <a href="iron.html" onclick="cerrarMenu()">Ethos Iron</a>
+    <a href="Soul.html" onclick="cerrarMenu()">Ethos Soul</a>
+    <a href="Iron.html" onclick="cerrarMenu()">Ethos Iron</a>
     <a href="#productos" onclick="cerrarMenu()">Productos</a>
     <a href="#contacto" onclick="cerrarMenu()">Contacto</a>
   </div>
@@ -996,7 +996,7 @@
             </div>
           </li>
         </ul>
-        <a href="soul.html" class="btn"><span>Conoce Ethos Soul</span></a>
+        <a href="Soul.html" class="btn"><span>Conoce Ethos Soul</span></a>
       </div>
 
       <!-- ETHOS IRON -->
@@ -1040,7 +1040,7 @@
             </div>
           </li>
         </ul>
-        <a href="iron.html" class="btn"><span>Conoce Ethos Iron</span></a>
+        <a href="Iron.html" class="btn"><span>Conoce Ethos Iron</span></a>
       </div>
 
     </div>
