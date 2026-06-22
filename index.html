@@ -284,8 +284,8 @@
        Edita el texto de presentación dentro del HTML
     ============================================================ */
     #sobre-mi {
-      padding: 8rem 4rem;
-      max-width: 1200px;
+      padding: 8rem 2rem;
+      max-width: 100%;
       margin: 0 auto;
     }
     .sobre-grid {
@@ -293,8 +293,10 @@
       grid-template-columns: 1fr 1fr 1fr;
       gap: 4rem;
       border: 1px solid var(--negro-borde);
-      padding: 4rem;
+      padding: 5rem 6rem;
       position: relative;
+      max-width: 1400px;
+      margin: 0 auto;
     }
     /* Marco dorado animado en hover */
     .sobre-grid::before {
@@ -831,25 +833,33 @@
       .hamburguesa { display: flex; }
 
       #hero { min-height: 100svh; align-items: flex-end; }
-      .hero-foto { width: 100%; height: 100%; opacity: 0.55; object-position: top center; }
-      .hero-gradiente { background: linear-gradient(to top, var(--negro) 35%, rgba(10,10,10,0.15) 100%); }
-      .hero-contenido { padding: 0 1.5rem 5rem; max-width: 100%; }
+      .hero-foto { width: 100%; height: 100%; opacity: 0.75; object-position: top center; }
+      .hero-gradiente { background: linear-gradient(to top, var(--negro) 40%, rgba(10,10,10,0.4) 70%, rgba(10,10,10,0.1) 100%); }
+      .hero-contenido { padding: 0 1.5rem 3rem; max-width: 100%; }
+      .hero-titulo { font-size: clamp(5rem, 22vw, 8rem); }
+      .hero-subtitulo { font-size: 1.1rem; }
+      .hero-subtitulo-2 { font-size: 0.9rem; }
       .hero-titulo { font-size: clamp(4rem, 18vw, 6rem); }
 
-      #sobre-mi { padding: 4rem 1.5rem; }
-      .sobre-grid { grid-template-columns: 1fr; gap: 2rem; padding: 2rem; }
+      #sobre-mi { padding: 3rem 1rem; }
+      .sobre-grid { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1.5rem; }
       .sobre-col-1, .sobre-col-2 { border-right: none; border-bottom: 1px solid var(--negro-borde); padding-right: 0; padding-bottom: 2rem; }
+      .sobre-titulo-grande { font-size: 1.6rem; }
 
-      #programas { padding: 3rem 1.5rem; }
-      .programas-grid { grid-template-columns: 1fr; }
+      #programas { padding: 2rem 1rem; }
+      .programas-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .programa-card { padding: 2rem 1.5rem; }
+      .programa-logo { height: 100px; max-width: 200px; }
 
       #como-funciona { padding: 4rem 1.5rem; }
       .pasos-grid { grid-template-columns: 1fr; }
       .paso-conector { display: none; }
 
-      #productos { padding: 4rem 0 4rem 1.5rem; }
-      .productos-grid { padding-right: 1.5rem; }
-      .producto-card { min-width: 240px; max-width: 240px; }
+      #productos { padding: 3rem 0 3rem 1.2rem; }
+      .productos-grid { padding-right: 1.2rem; gap: 1rem; }
+      .producto-card { min-width: 200px; max-width: 200px; }
+      .producto-nombre { font-size: 0.85rem; }
+      .producto-desc { font-size: 0.65rem; }
 
       #colaboradores { padding: 3rem 1.5rem; }
 
@@ -870,8 +880,8 @@
     <ul class="nav-links">
       <li><a href="#hero" class="activo">Inicio</a></li>
       <li><a href="#sobre-mi">Sobre mí</a></li>
-      <li><a href="Soul.html">Ethos Soul</a></li>
-      <li><a href="Iron.html">Ethos Iron</a></li>
+      <li><a href="soul.html">Ethos Soul</a></li>
+      <li><a href="iron.html">Ethos Iron</a></li>
       <li><a href="#productos">Productos</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
@@ -896,8 +906,8 @@
   <div class="nav-movil" id="nav-movil">
     <a href="#hero" onclick="cerrarMenu()">Inicio</a>
     <a href="#sobre-mi" onclick="cerrarMenu()">Sobre mí</a>
-    <a href="Soul.html" onclick="cerrarMenu()">Ethos Soul</a>
-    <a href="Iron.html" onclick="cerrarMenu()">Ethos Iron</a>
+    <a href="soul.html" onclick="cerrarMenu()">Ethos Soul</a>
+    <a href="iron.html" onclick="cerrarMenu()">Ethos Iron</a>
     <a href="#productos" onclick="cerrarMenu()">Productos</a>
     <a href="#contacto" onclick="cerrarMenu()">Contacto</a>
   </div>
@@ -996,7 +1006,7 @@
             </div>
           </li>
         </ul>
-        <a href="Soul.html" class="btn"><span>Conoce Ethos Soul</span></a>
+        <a href="soul.html" class="btn"><span>Conoce Ethos Soul</span></a>
       </div>
 
       <!-- ETHOS IRON -->
@@ -1040,7 +1050,7 @@
             </div>
           </li>
         </ul>
-        <a href="Iron.html" class="btn"><span>Conoce Ethos Iron</span></a>
+        <a href="iron.html" class="btn"><span>Conoce Ethos Iron</span></a>
       </div>
 
     </div>
