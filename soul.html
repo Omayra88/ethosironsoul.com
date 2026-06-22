@@ -600,10 +600,13 @@
       #navbar { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
       .hamburguesa { display: flex; }
-      #hero { min-height: 100svh; }
-      .hero-banner { right: 0; top: 0; transform: none; height: 100%; max-width: 100%; opacity: 0.25; }
-      .hero-overlay { background: linear-gradient(to top, var(--negro) 40%, rgba(10,10,10,0.2) 100%); }
-      .hero-contenido { padding: 8rem 1.5rem 4rem; }
+      #hero { min-height: 100svh; align-items: flex-end; }
+      .hero-banner { position: absolute; right: 0; top: 0; transform: none; width: 100%; height: 70%; max-width: 100%; opacity: 0.5; object-fit: cover; object-position: center top; }
+      .hero-overlay { background: linear-gradient(to top, var(--negro) 38%, rgba(10,10,10,0.4) 70%, rgba(10,10,10,0.1) 100%); }
+      .hero-contenido { padding: 0 1.5rem 4rem; max-width: 100%; }
+      .hero-subtitulo { font-size: 1.1rem; }
+      .hero-desc { font-size: 0.95rem; }
+      #que-es { padding: 2rem 1.5rem 3rem; }
       #que-es { padding: 4rem 1.5rem; }
       .que-es-grid { grid-template-columns: 1fr; gap: 3rem; }
       #pilares { padding: 4rem 1.5rem; }
@@ -612,9 +615,14 @@
       .guia-grid { grid-template-columns: 1fr; gap: 3rem; }
       .guia-imagen-wrap::before { display: none; }
       #grupo-apoyo { padding: 4rem 1.5rem; }
-      #faq { padding: 4rem 1.5rem; }
+      #faq { padding: 3rem 1rem; }
+      .faq-pregunta { font-size: 0.95rem; }
       #cta-final { padding: 4rem 1.5rem; }
-      footer { padding: 2rem 1.5rem; }
+      footer { padding: 1rem 1rem; }
+      .footer-logo { font-size: 1rem; margin-bottom: 0.6rem; }
+      .footer-links { gap: 0.6rem; margin-bottom: 0.6rem; }
+      .footer-links a { font-size: 0.5rem; }
+      .footer-copy { font-size: 0.5rem; }
       #btn-donar { bottom: 1.5rem; right: 1.5rem; }
     }
     @media (max-width: 480px) {
@@ -734,7 +742,7 @@
   <section id="guia-vg">
     <div class="guia-grid">
       <div class="guia-imagen-wrap reveal">
-        <img src="ETHOS Soul copia.png" alt="Guía VG — ETHOS Soul" class="guia-imagen" />
+        <img src="ETHOS Soul copia 3.png" alt="Guía VG — ETHOS Soul" class="guia-imagen" />
       </div>
       <div class="guia-info reveal">
         <p class="etiqueta">Producto principal</p>
