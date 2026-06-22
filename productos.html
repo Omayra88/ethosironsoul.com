@@ -140,6 +140,7 @@
        FAQ — Preguntas frecuentes
     ============================================================ */
     #faq { padding: 6rem 4rem; max-width: 800px; margin: 0 auto; }
+    #faq .seccion-titulo { justify-content: center; }
     .faq-item { border-bottom: 1px solid var(--negro-borde); overflow: hidden; }
     .faq-pregunta { width: 100%; background: none; border: none; color: var(--blanco); font-family: var(--font-display); font-size: 1.1rem; font-weight: 300; text-align: left; padding: 1.4rem 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; transition: color var(--transicion); }
     .faq-pregunta:hover { color: var(--dorado); }
@@ -201,7 +202,9 @@
       .producto-imagen-wrap::before { display: none; }
       #membresia { padding: 4rem 1.5rem; }
       #faq { padding: 3rem 1rem; }
-      .faq-pregunta { font-size: 0.95rem; text-align: center; justify-content: center; }
+      .faq-pregunta { font-size: 0.88rem; }
+      .seccion-titulo { white-space: nowrap; font-size: 0.55rem; gap: 0.8rem; }
+      .seccion-titulo::before, .seccion-titulo::after { width: 30px; }
       footer { padding: 1rem 1rem; }
       .footer-logo { font-size: 1rem; margin-bottom: 0.5rem; }
       .footer-links { gap: 0.6rem; margin-bottom: 0.5rem; }
@@ -543,6 +546,23 @@
   </section>
 
   <!-- ============================================================
+       DONACIONES SOUL — por qué donar y adónde va el dinero
+  ============================================================ -->
+  <div class="producto-seccion reveal" id="donaciones-soul" data-categoria="soul" data-lanzamiento="abierto" style="background: var(--negro-card); border-bottom: 1px solid var(--negro-borde);">
+    <div style="max-width:700px; margin:0 auto; text-align:center;">
+      <p class="etiqueta">Donaciones</p>
+      <div class="separador" style="margin:1rem auto;"></div>
+      <h2 style="font-family:var(--font-display); font-size:clamp(2rem,4vw,3rem); font-weight:300; line-height:1.2; margin-bottom:1.2rem;">Por qué donar<br />importa.</h2>
+      <p style="font-size:1rem; color:var(--gris); line-height:1.9; margin-bottom:1rem;">ETHOS Soul existe porque hay personas que lo necesitan y no tienen con qué pagarlo. La Guía VG es de acceso libre precisamente por eso. Tu donación financia ese acceso.</p>
+      <p style="font-size:1rem; color:var(--gris); line-height:1.9; margin-bottom:1rem;"><strong style="color:var(--blanco);">El 100% de las donaciones</strong> va directamente al grupo de apoyo psicológico privado y a los recursos legales gratuitos para hombres en situación de vulnerabilidad.</p>
+      <p style="font-size:1rem; color:var(--gris); line-height:1.9; margin-bottom:2rem;">No hay mínimo. No hay compromiso. Solo lo que puedas y quieras aportar.</p>
+      <!-- Cambia # por tu enlace de Stripe cuando lo tengas -->
+      <a href="#" class="btn"><span>Hacer una donación</span></a>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
        MEMBRESÍA IRON — imagen: misma que el banner de iron.html (ETHOS Iron copia 3.png)
        Cambia el href del botón por Hotmart cuando lo tengas
   ============================================================ -->
@@ -550,7 +570,7 @@
     <div style="display:grid; grid-template-columns:1fr 1fr; min-height:500px;">
       <!-- Imagen izquierda: misma que el banner de iron.html -->
       <div style="overflow:hidden; position:relative;">
-        <img src="ETHOS Iron copia 3.png" alt="ETHOS Iron Membresía" style="width:100%; height:100%; object-fit:cover; object-position:center; opacity:0.7;" />
+        <img src="ETHOS Iron copia 3.png" alt="ETHOS Iron Membresía" style="width:100%; height:100%; object-fit:contain; object-position:center; background:#0a0a0a; opacity:0.9;" />
         <div style="position:absolute; inset:0; background:linear-gradient(to right, transparent 60%, var(--negro) 100%);"></div>
       </div>
       <!-- Info derecha -->
@@ -600,7 +620,7 @@
        Para añadir una: copia un bloque .faq-item completo
   ============================================================ -->
   <section id="faq">
-    <p class="seccion-titulo" style="justify-content:flex-start;">Preguntas frecuentes</p>
+    <p class="seccion-titulo" style="justify-content:center;">Preguntas frecuentes</p>
 
     <div class="faq-item">
       <button class="faq-pregunta">¿Qué diferencia hay entre comprar una serie y la membresía?<span class="faq-icono">+</span></button>
@@ -633,6 +653,12 @@
     </div>
 
   </section>
+
+
+  <div style="background: linear-gradient(135deg, #0d0d0d 0%, #111111 100%); border-top: 1px solid var(--dorado-oscuro); border-bottom: 1px solid var(--dorado-oscuro); padding: 1.5rem 4rem; text-align: center;">
+    <p style="font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado);">✦ &nbsp; Con cualquier producto de ETHOS, colaboras con ETHOS Soul &nbsp; ✦</p>
+    <p style="font-family: var(--font-display); font-size: 0.9rem; color: var(--gris); margin-top: 0.3rem; font-style: italic;">Un porcentaje de cada compra se destina al grupo de apoyo y los recursos legales gratuitos.</p>
+  </div>
 
   <!-- FOOTER -->
   <footer>
