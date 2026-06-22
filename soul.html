@@ -183,10 +183,10 @@
     }
     .hero-subtitulo {
       font-family: var(--font-display);
-      font-size: clamp(1rem, 1.8vw, 1.3rem);
+      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
       font-style: italic;
       color: var(--dorado);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
     }
     .hero-desc {
       font-size: 0.8rem;
@@ -218,7 +218,7 @@
        QUÉ ES ETHOS SOUL — Bloque de introducción
     ============================================================ */
     #que-es {
-      padding: 7rem 4rem;
+      padding: 2rem 4rem 4rem;
       max-width: 1100px;
       margin: 0 auto;
     }
@@ -601,7 +601,7 @@
       .nav-links { display: none; }
       .hamburguesa { display: flex; }
       #hero { min-height: 100svh; align-items: flex-end; }
-      .hero-banner { position: absolute; right: 0; top: 0; transform: none; width: 100%; height: 70%; max-width: 100%; opacity: 0.5; object-fit: cover; object-position: center top; }
+      .hero-banner { position: absolute; left: 0; right: 0; top: 0; transform: none; width: 100%; height: 60%; object-fit: cover; object-position: center 20%; opacity: 0.55; }
       .hero-overlay { background: linear-gradient(to top, var(--negro) 38%, rgba(10,10,10,0.4) 70%, rgba(10,10,10,0.1) 100%); }
       .hero-contenido { padding: 0 1.5rem 4rem; max-width: 100%; }
       .hero-subtitulo { font-size: 1.1rem; }
@@ -616,7 +616,9 @@
       .guia-imagen-wrap::before { display: none; }
       #grupo-apoyo { padding: 4rem 1.5rem; }
       #faq { padding: 3rem 1rem; }
-      .faq-pregunta { font-size: 0.95rem; }
+      .faq-pregunta { font-size: 0.88rem; }
+      .seccion-titulo { white-space: nowrap; font-size: 0.55rem; gap: 0.8rem; }
+      .seccion-titulo::before, .seccion-titulo::after { width: 30px; }
       #cta-final { padding: 4rem 1.5rem; }
       footer { padding: 1rem 1rem; }
       .footer-logo { font-size: 1rem; margin-bottom: 0.6rem; }
@@ -642,7 +644,7 @@
       <li><a href="index.html#sobre-mi">Sobre mí</a></li>
       <li><a href="Soul.html" class="activo">Ethos Soul</a></li>
       <li><a href="Iron.html">Ethos Iron</a></li>
-      <li><a href="index.html#productos">Productos</a></li>
+      <li><a href="productos.html">Productos</a></li>
       <li><a href="index.html#contacto">Contacto</a></li>
     </ul>
     <button class="hamburguesa" id="hamburguesa" aria-label="Menú">
@@ -873,6 +875,12 @@
     </div>
   </section>
 
+
+  <div style="background: linear-gradient(135deg, #0d0d0d 0%, #111111 100%); border-top: 1px solid var(--dorado-oscuro); border-bottom: 1px solid var(--dorado-oscuro); padding: 1.5rem 4rem; text-align: center;">
+    <p style="font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado);">✦ &nbsp; Con cualquier producto de ETHOS, colaboras con ETHOS Soul &nbsp; ✦</p>
+    <p style="font-family: var(--font-display); font-size: 0.9rem; color: var(--gris); margin-top: 0.3rem; font-style: italic;">Un porcentaje de cada compra se destina al grupo de apoyo y los recursos legales gratuitos.</p>
+  </div>
+
   <!-- ============================================================
        FOOTER
   ============================================================ -->
@@ -883,7 +891,7 @@
       <li><a href="index.html#sobre-mi">Sobre mí</a></li>
       <li><a href="Soul.html">Soul</a></li>
       <li><a href="Iron.html">Iron</a></li>
-      <li><a href="index.html#productos">Productos</a></li>
+      <li><a href="productos.html">Productos</a></li>
       <li><a href="mailto:hola@ethosironsoul.com">Contacto</a></li>
     </ul>
     <p class="footer-copy">© 2026 ETHOS — Iron & Soul Group. Todos los derechos reservados.</p>
