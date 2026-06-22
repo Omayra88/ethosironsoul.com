@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Productos — ETHOS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       TOKENS — Misma paleta que el resto de páginas
+    ============================================================ */
+    :root {
+      --negro: #0a0a0a; --negro-card: #111111; --negro-borde: #1e1e1e;
+      --dorado: #c9a84c; --dorado-claro: #e8c97a; --dorado-oscuro: #8a6a20;
+      --blanco: #f5f0e8; --gris: #888888;
+      --font-display: 'Cormorant Garamond', serif; --font-body: 'Montserrat', sans-serif; --transicion: 0.35s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--negro); color: var(--blanco); font-family: var(--font-body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    .etiqueta { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado); }
+    .separador { width: 40px; height: 1px; background: var(--dorado); margin: 1rem 0; }
+
+    /* ============================================================
+       BOTÓN BASE
+    ============================================================ */
+    .btn { display: inline-block; font-family: var(--font-body); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.85rem 2.5rem; border: 1px solid var(--dorado); color: var(--dorado); background: transparent; cursor: pointer; position: relative; overflow: hidden; transition: color var(--transicion), box-shadow var(--transicion); }
+    .btn::after { content: ''; position: absolute; inset: 0; background: var(--dorado); transform: scaleX(0); transform-origin: left; transition: transform var(--transicion); z-index: 0; }
+    .btn span { position: relative; z-index: 1; }
+    .btn:hover::after { transform: scaleX(1); }
+    .btn:hover { color: var(--negro); box-shadow: 0 0 20px rgba(201,168,76,0.3); }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; transition: background var(--transicion); }
+    #navbar.scrolled { background: rgba(10,10,10,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--negro-borde); }
+    .nav-logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.35em; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris); transition: color var(--transicion); position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--dorado); transition: width var(--transicion); }
+    .nav-links a:hover, .nav-links a.activo { color: var(--dorado); }
+    .nav-links a:hover::after, .nav-links a.activo::after { width: 100%; }
+    .hamburguesa { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburguesa span { display: block; width: 24px; height: 1px; background: var(--blanco); transition: all var(--transicion); }
+    .hamburguesa.abierto span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburguesa.abierto span:nth-child(2) { opacity: 0; }
+    .hamburguesa.abierto span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .nav-movil { display: none; position: fixed; inset: 0; background: rgba(10,10,10,0.97); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+    .nav-movil.abierto { display: flex; }
+    .nav-movil a { font-family: var(--font-display); font-size: 2rem; letter-spacing: 0.15em; color: var(--blanco); transition: color var(--transicion); }
+    .nav-movil a:hover { color: var(--dorado); }
+
+    /* ============================================================
+       CABECERA DE PÁGINA
+    ============================================================ */
+    #page-header { padding: 10rem 4rem 5rem; text-align: center; border-bottom: 1px solid var(--negro-borde); }
+    #page-header h1 { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5rem); font-weight: 300; letter-spacing: 0.1em; margin-bottom: 1rem; }
+    #page-header p { font-size: 0.82rem; color: var(--gris); max-width: 500px; margin: 0 auto; }
+
+    /* ============================================================
+       FILTROS — Navegación entre categorías
+    ============================================================ */
+    #filtros { padding: 2.5rem 4rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; border-bottom: 1px solid var(--negro-borde); }
+    .filtro-btn { font-family: var(--font-body); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.5rem 1.5rem; border: 1px solid var(--negro-borde); color: var(--gris); background: none; cursor: pointer; transition: border-color var(--transicion), color var(--transicion); }
+    .filtro-btn:hover, .filtro-btn.activo { border-color: var(--dorado); color: var(--dorado); }
+
+    /* ============================================================
+       SECCIÓN TÍTULO
+    ============================================================ */
+    .seccion-titulo { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dorado); display: flex; align-items: center; gap: 1.5rem; margin-bottom: 3rem; }
+    .seccion-titulo::before, .seccion-titulo::after { content: ''; width: 40px; height: 1px; background: var(--dorado-oscuro); }
+
+    /* ============================================================
+       PRODUCTO DETALLE — Cada serie tiene su propio bloque
+       Estructura: imagen izquierda + info derecha
+       Para añadir una serie: copia un bloque .producto-detalle completo
+       Para abrir lanzamiento: cambia data-lanzamiento="cerrado" → "abierto"
+       Para enlace Hotmart: cambia href="#HOTMART" en .btn-hotmart
+    ============================================================ */
+    .producto-seccion { padding: 6rem 4rem; border-bottom: 1px solid var(--negro-borde); max-width: 1300px; margin: 0 auto; }
+    .producto-detalle { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
+    .producto-detalle.invertido { grid-template-columns: 1.4fr 1fr; }
+    .producto-detalle.invertido .producto-imagen-wrap { order: 2; }
+    .producto-detalle.invertido .producto-det-info { order: 1; }
+
+    /* Imagen con marco dorado */
+    .producto-imagen-wrap { position: relative; }
+    .producto-imagen-wrap::before { content: ''; position: absolute; inset: -8px; border: 1px solid var(--dorado-oscuro); pointer-events: none; transition: border-color var(--transicion); }
+    .producto-imagen-wrap:hover::before { border-color: var(--dorado); }
+    .producto-det-imagen { width: 100%; object-fit: contain; background: #0d0d0d; transition: box-shadow var(--transicion); }
+    .producto-imagen-wrap:hover .producto-det-imagen { box-shadow: 0 0 40px rgba(201,168,76,0.15); }
+
+    /* Info del producto */
+    .producto-det-info {}
+    .producto-det-badge { display: inline-block; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid var(--dorado-oscuro); color: var(--dorado); padding: 0.3rem 0.8rem; margin-bottom: 1.2rem; }
+    .producto-det-titulo { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; line-height: 1.15; margin-bottom: 1rem; }
+    .producto-det-tagline { font-family: var(--font-display); font-size: 1.1rem; font-style: italic; color: var(--dorado); margin-bottom: 1.5rem; }
+    .producto-det-desc { font-size: 0.82rem; color: var(--gris); line-height: 1.9; margin-bottom: 1.5rem; }
+    .producto-det-desc strong { color: var(--blanco); font-weight: 500; }
+
+    /* Lo que incluye */
+    .producto-incluye { margin: 1.5rem 0 2rem; }
+    .producto-incluye h4 { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dorado); margin-bottom: 0.8rem; }
+    .producto-incluye ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .producto-incluye li { font-size: 0.78rem; color: var(--gris); padding-left: 1.2rem; position: relative; }
+    .producto-incluye li::before { content: '—'; position: absolute; left: 0; color: var(--dorado); }
+
+    /* Precio y botones */
+    .producto-det-precio-wrap { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem; }
+    .producto-det-precio { font-family: var(--font-display); font-size: 2.5rem; color: var(--dorado); line-height: 1; }
+    .producto-det-precio sup { font-size: 1rem; vertical-align: super; }
+    .producto-det-precio small { font-size: 0.75rem; color: var(--gris); font-family: var(--font-body); }
+    .producto-botones { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* Estado lanzamiento abierto/cerrado */
+    .producto-seccion[data-lanzamiento="cerrado"] .btn-hotmart { display: none; }
+    .producto-seccion[data-lanzamiento="cerrado"] .btn-espera-det { display: inline-block; }
+    .producto-seccion[data-lanzamiento="abierto"] .btn-espera-det { display: none; }
+    .btn-espera-det { display: none; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); border: 1px solid var(--negro-borde); padding: 0.85rem 2rem; cursor: pointer; background: none; transition: border-color var(--transicion), color var(--transicion); }
+    .btn-espera-det:hover { border-color: var(--dorado); color: var(--dorado); }
+
+    /* ============================================================
+       MEMBRESÍA — Bloque especial al final
+    ============================================================ */
+    #membresia { padding: 6rem 4rem; background: var(--negro-card); border-top: 1px solid var(--negro-borde); text-align: center; }
+    .membresia-inner { max-width: 700px; margin: 0 auto; }
+    .membresia-inner h2 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; line-height: 1.1; margin-bottom: 1rem; }
+    .membresia-inner p { font-size: 0.82rem; color: var(--gris); margin-bottom: 0.8rem; }
+    .membresia-precio { font-family: var(--font-display); font-size: 4rem; color: var(--dorado); line-height: 1; margin: 2rem 0 0.5rem; }
+    .membresia-precio sup { font-size: 1.5rem; vertical-align: super; }
+    .membresia-precio small { font-size: 1rem; color: var(--gris); }
+    .membresia-lista { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; margin: 1.5rem auto 2rem; max-width: 400px; text-align: left; }
+    .membresia-lista li { font-size: 0.78rem; color: var(--gris); padding-left: 1.5rem; position: relative; }
+    .membresia-lista li::before { content: '✦'; position: absolute; left: 0; color: var(--dorado); font-size: 0.6rem; top: 0.2rem; }
+
+    /* ============================================================
+       FAQ — Preguntas frecuentes
+    ============================================================ */
+    #faq { padding: 6rem 4rem; max-width: 800px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--negro-borde); overflow: hidden; }
+    .faq-pregunta { width: 100%; background: none; border: none; color: var(--blanco); font-family: var(--font-display); font-size: 1.1rem; font-weight: 300; text-align: left; padding: 1.4rem 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; transition: color var(--transicion); }
+    .faq-pregunta:hover { color: var(--dorado); }
+    .faq-icono { font-size: 1.2rem; color: var(--dorado); transition: transform var(--transicion); flex-shrink: 0; }
+    .faq-item.abierto .faq-icono { transform: rotate(45deg); }
+    .faq-respuesta { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; }
+    .faq-item.abierto .faq-respuesta { max-height: 300px; padding-bottom: 1.5rem; }
+    .faq-respuesta p { font-size: 0.8rem; color: var(--gris); line-height: 1.9; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer { background: #070707; border-top: 1px solid var(--negro-borde); padding: 2rem 4rem; text-align: center; }
+    .footer-logo { font-family: var(--font-display); font-size: 1.6rem; font-weight: 300; letter-spacing: 0.4em; margin-bottom: 1.2rem; }
+    .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.2rem; list-style: none; }
+    .footer-links a { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris); transition: color var(--transicion); }
+    .footer-links a:hover { color: var(--dorado); }
+    .footer-copy { font-size: 0.6rem; color: var(--negro-borde); }
+
+    /* ============================================================
+       BOTÓN FLOTANTE DONACIÓN
+    ============================================================ */
+    #btn-donar { position: fixed; bottom: 2.5rem; right: 2.5rem; z-index: 1500; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .donar-circulo { width: 58px; height: 58px; border-radius: 50%; background: var(--negro-card); border: 1px solid var(--dorado); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--dorado); cursor: pointer; text-decoration: none; transition: background var(--transicion), box-shadow var(--transicion), transform var(--transicion); animation: pulso 2.5s ease-in-out infinite; }
+    .donar-circulo:hover { background: var(--dorado); color: var(--negro); box-shadow: 0 0 25px rgba(201,168,76,0.5); transform: scale(1.08); animation: none; }
+    .donar-etiqueta { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dorado); }
+    @keyframes pulso { 0% { box-shadow: 0 0 0 0 rgba(201,168,76,0.4); } 70% { box-shadow: 0 0 0 12px rgba(201,168,76,0); } 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); } }
+
+    /* ============================================================
+       MODAL ESPERA
+    ============================================================ */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 2000; align-items: center; justify-content: center; }
+    .modal-overlay.abierto { display: flex; }
+    .modal { background: var(--negro-card); border: 1px solid var(--dorado); padding: 3rem; max-width: 440px; width: 90%; text-align: center; position: relative; }
+    .modal-cerrar { position: absolute; top: 1rem; right: 1.2rem; background: none; border: none; color: var(--gris); font-size: 1.2rem; cursor: pointer; }
+    .modal h3 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 300; margin-bottom: 0.5rem; }
+    .modal p { font-size: 0.75rem; color: var(--gris); margin-bottom: 1.5rem; }
+    .modal input[type="email"] { width: 100%; background: var(--negro); border: 1px solid var(--negro-borde); color: var(--blanco); padding: 0.8rem 1rem; font-family: var(--font-body); font-size: 0.8rem; margin-bottom: 1rem; outline: none; transition: border-color var(--transicion); }
+    .modal input[type="email"]:focus { border-color: var(--dorado); }
+    .modal .btn { width: 100%; text-align: center; }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ============================================================
+       RESPONSIVE MÓVIL
+    ============================================================ */
+    @media (max-width: 768px) {
+      #navbar { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburguesa { display: flex; }
+      #page-header { padding: 7rem 1.5rem 3rem; }
+      #filtros { padding: 1.5rem 1rem; gap: 0.6rem; }
+      .producto-seccion { padding: 3rem 1.5rem; }
+      .producto-detalle, .producto-detalle.invertido { grid-template-columns: 1fr; gap: 2.5rem; }
+      .producto-detalle.invertido .producto-imagen-wrap, .producto-detalle.invertido .producto-det-info { order: unset; }
+      .producto-imagen-wrap::before { display: none; }
+      #membresia { padding: 4rem 1.5rem; }
+      #faq { padding: 4rem 1.5rem; }
+      footer { padding: 1.5rem 1rem; }
+      #btn-donar { bottom: 1.5rem; right: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">ETHOS</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#sobre-mi">Sobre mí</a></li>
+      <li><a href="soul.html">Ethos Soul</a></li>
+      <li><a href="iron.html">Ethos Iron</a></li>
+      <li><a href="productos.html" class="activo">Productos</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+    </ul>
+    <button class="hamburguesa" id="hamburguesa" aria-label="Menú"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="nav-movil" id="nav-movil">
+    <a href="index.html" onclick="cerrarMenu()">Inicio</a>
+    <a href="soul.html" onclick="cerrarMenu()">Ethos Soul</a>
+    <a href="iron.html" onclick="cerrarMenu()">Ethos Iron</a>
+    <a href="productos.html" onclick="cerrarMenu()">Productos</a>
+    <a href="index.html#contacto" onclick="cerrarMenu()">Contacto</a>
+  </div>
+
+  <!-- CABECERA -->
+  <section id="page-header">
+    <p class="etiqueta">Todo el contenido</p>
+    <div class="separador" style="margin: 1rem auto;"></div>
+    <h1>PRODUCTOS</h1>
+    <p>Series documentadas, guía legal y membresía completa.<br />Elige lo que necesitas o accede a todo.</p>
+  </section>
+
+  <!-- FILTROS DE NAVEGACIÓN -->
+  <div id="filtros">
+    <button class="filtro-btn activo" onclick="filtrar('todo', this)">Todo</button>
+    <button class="filtro-btn" onclick="filtrar('serie', this)">Series</button>
+    <button class="filtro-btn" onclick="filtrar('soul', this)">Ethos Soul</button>
+    <button class="filtro-btn" onclick="filtrar('membresia', this)">Membresía</button>
+  </div>
+
+  <!-- ============================================================
+       SERIE 1
+       id="serie-1" — enlazada desde el index
+       data-lanzamiento: cambia a "abierto" cuando lances
+       href="#HOTMART": reemplaza por tu URL de Hotmart
+  ============================================================ -->
+  <div class="producto-seccion reveal" id="serie-1" data-categoria="serie" data-lanzamiento="cerrado">
+    <div class="producto-detalle">
+      <div class="producto-imagen-wrap">
+        <img src="S1-La mente femenina al descubierto.png" alt="La mente femenina al descubierto" class="producto-det-imagen" />
+      </div>
+      <div class="producto-det-info">
+        <span class="producto-det-badge">Serie 01 · ETHOS Iron</span>
+        <h2 class="producto-det-titulo">La mente femenina al descubierto</h2>
+        <!-- Edita el tagline aquí -->
+        <p class="producto-det-tagline">Psicología real. Sin filtro ideológico.</p>
+        <!-- Edita la descripción aquí — hazla vendible sin que se note -->
+        <p class="producto-det-desc">La mayoría de los hombres aprenden sobre las mujeres a través de lo que las mujeres dicen sobre sí mismas. Hay un problema con eso. Esta serie te da otra perspectiva: la que viene de <strong>la psicología, la biología y la observación directa</strong>, no del activismo.</p>
+        <p class="producto-det-desc">No es un manual para manipular. Es una herramienta para entender. Porque comprender no es juzgar.</p>
+        <div class="producto-incluye">
+          <h4>Qué incluye</h4>
+          <ul>
+            <!-- Edita los puntos según el contenido real de la serie -->
+            <li>X episodios en vídeo — acceso de por vida</li>
+            <li>Análisis basado en estudios y datos reales</li>
+            <li>Sin ideología. Solo hechos.</li>
+          </ul>
+        </div>
+        <div class="producto-det-precio-wrap">
+          <div class="producto-det-precio"><sup>€</sup>47</div>
+        </div>
+        <div class="producto-botones">
+          <!-- Reemplaza #HOTMART por tu enlace de Hotmart cuando abra el lanzamiento -->
+          <a href="#HOTMART" class="btn btn-hotmart"><span>Comprar ahora</span></a>
+          <button class="btn-espera-det" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERIE 2 -->
+  <div class="producto-seccion reveal" id="serie-2" data-categoria="serie" data-lanzamiento="cerrado">
+    <div class="producto-detalle invertido">
+      <div class="producto-imagen-wrap">
+        <img src="S2-La logica femenina al descubierto.png" alt="La lógica femenina al descubierto" class="producto-det-imagen" />
+      </div>
+      <div class="producto-det-info">
+        <span class="producto-det-badge">Serie 02 · ETHOS Iron</span>
+        <h2 class="producto-det-titulo">La lógica femenina al descubierto</h2>
+        <p class="producto-det-tagline">Los patrones que nadie te explicó.</p>
+        <p class="producto-det-desc">No es que no tenga lógica. Es que tiene <strong>otra lógica</strong>. Una que responde a incentivos distintos, a presiones distintas, a una historia evolutiva distinta. Esta serie te la explica sin condescendencia y sin excusas.</p>
+        <div class="producto-incluye">
+          <h4>Qué incluye</h4>
+          <ul>
+            <li>X episodios en vídeo — acceso de por vida</li>
+            <li>Patrones de comportamiento explicados con datos</li>
+            <li>Sin generalizar. Sin infantilizar.</li>
+          </ul>
+        </div>
+        <div class="producto-det-precio-wrap">
+          <div class="producto-det-precio"><sup>€</sup>47</div>
+        </div>
+        <div class="producto-botones">
+          <a href="#HOTMART" class="btn btn-hotmart"><span>Comprar ahora</span></a>
+          <button class="btn-espera-det" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERIE 3 -->
+  <div class="producto-seccion reveal" id="serie-3" data-categoria="serie" data-lanzamiento="cerrado">
+    <div class="producto-detalle">
+      <div class="producto-imagen-wrap">
+        <img src="S3-La conquista real.png" alt="La conquista real" class="producto-det-imagen" />
+      </div>
+      <div class="producto-det-info">
+        <span class="producto-det-badge">Serie 03 · ETHOS Iron</span>
+        <h2 class="producto-det-titulo">La conquista real</h2>
+        <p class="producto-det-tagline">Atracción, seducción y relaciones. Sin romanticismo vacío.</p>
+        <p class="producto-det-desc">Lo que nadie te enseñó sobre las relaciones entre hombres y mujeres. Ni el colegio, ni tus amigos, ni las películas. Esta serie va a la raíz: <strong>qué funciona, por qué funciona y qué destruye lo que tenías</strong> antes de que te des cuenta.</p>
+        <div class="producto-incluye">
+          <h4>Qué incluye</h4>
+          <ul>
+            <li>X episodios en vídeo — acceso de por vida</li>
+            <li>Atracción y seducción explicadas desde la psicología</li>
+            <li>Dinámica de relaciones a largo plazo</li>
+          </ul>
+        </div>
+        <div class="producto-det-precio-wrap">
+          <div class="producto-det-precio"><sup>€</sup>57</div>
+        </div>
+        <div class="producto-botones">
+          <a href="#HOTMART" class="btn btn-hotmart"><span>Comprar ahora</span></a>
+          <button class="btn-espera-det" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERIE 4 -->
+  <div class="producto-seccion reveal" id="serie-4" data-categoria="serie" data-lanzamiento="cerrado">
+    <div class="producto-detalle invertido">
+      <div class="producto-imagen-wrap">
+        <img src="S4-Destruye el feminismo.png" alt="Destruye el feminismo" class="producto-det-imagen" />
+      </div>
+      <div class="producto-det-info">
+        <span class="producto-det-badge">Serie 04 · ETHOS Iron</span>
+        <h2 class="producto-det-titulo">Destruye el feminismo</h2>
+        <p class="producto-det-tagline">Argumentos reales. Datos verificados. Sin perder los nervios.</p>
+        <p class="producto-det-desc">No se trata de odiar a nadie. Se trata de saber responder cuando alguien te lanza una afirmación que suena sólida pero no lo es. Esta serie te da <strong>las herramientas para rebatir con hechos</strong> cada uno de los argumentos más repetidos del feminismo institucional.</p>
+        <div class="producto-incluye">
+          <h4>Qué incluye</h4>
+          <ul>
+            <li>X episodios en vídeo — acceso de por vida</li>
+            <li>Fuentes oficiales: INE, CGPJ, BOE, estudios peer-reviewed</li>
+            <li>Argumentario completo listo para usar</li>
+          </ul>
+        </div>
+        <div class="producto-det-precio-wrap">
+          <div class="producto-det-precio"><sup>€</sup>57</div>
+        </div>
+        <div class="producto-botones">
+          <a href="#HOTMART" class="btn btn-hotmart"><span>Comprar ahora</span></a>
+          <button class="btn-espera-det" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERIE 5 -->
+  <div class="producto-seccion reveal" id="serie-5" data-categoria="serie" data-lanzamiento="cerrado">
+    <div class="producto-detalle">
+      <div class="producto-imagen-wrap">
+        <img src="S5-La guerra de sexos.png" alt="La guerra de sexos" class="producto-det-imagen" />
+      </div>
+      <div class="producto-det-info">
+        <span class="producto-det-badge">Serie 05 · ETHOS Iron</span>
+        <h2 class="producto-det-titulo">La guerra de sexos</h2>
+        <p class="producto-det-tagline">Por qué nos enfrentan. Quién gana. Qué pierden todos.</p>
+        <p class="producto-det-desc">Hay un conflicto artificial entre hombres y mujeres. No nació solo. Esta serie analiza <strong>quién lo alimenta, por qué y cómo nos afecta</strong> a todos, incluidas las mujeres que se supone que deberían beneficiarse de él.</p>
+        <div class="producto-incluye">
+          <h4>Qué incluye</h4>
+          <ul>
+            <li>X episodios en vídeo — acceso de por vida</li>
+            <li>Análisis sociológico y político sin sesgos</li>
+            <li>El coste real de la polarización entre sexos</li>
+          </ul>
+        </div>
+        <div class="producto-det-precio-wrap">
+          <div class="producto-det-precio"><sup>€</sup>57</div>
+        </div>
+        <div class="producto-botones">
+          <a href="#HOTMART" class="btn btn-hotmart"><span>Comprar ahora</span></a>
+          <button class="btn-espera-det" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERIE 6 -->
+  <div class="producto-seccion reveal" id="serie-6" data-categoria="serie" data-lanzamiento="cerrado">
+    <div class="producto-detalle invertido">
+      <div class="producto-imagen-wrap">
+        <img src="S6-El ciclo tu poder.png" alt="El ciclo, tu poder" class="producto-det-imagen" />
+      </div>
+      <div class="producto-det-info">
+        <span class="producto-det-badge">Serie 06 · ETHOS Iron</span>
+        <h2 class="producto-det-titulo">El ciclo, tu poder</h2>
+        <p class="producto-det-tagline">Tu biología como herramienta. No como excusa.</p>
+        <p class="producto-det-desc">El ciclo menstrual no es un inconveniente. Es un sistema. Esta serie te explica <strong>cómo funciona de verdad</strong>, qué hace en cada fase y cómo usarlo a tu favor en lugar de ignorarlo o padecerlo. Para hombres que quieren entender. Para mujeres que quieren aprovechar.</p>
+        <div class="producto-incluye">
+          <h4>Qué incluye</h4>
+          <ul>
+            <li>X episodios en vídeo — acceso de por vida</li>
+            <li>Las 4 fases explicadas con base científica</li>
+            <li>Aplicación práctica en relaciones y rendimiento</li>
+          </ul>
+        </div>
+        <div class="producto-det-precio-wrap">
+          <div class="producto-det-precio"><sup>€</sup>47</div>
+        </div>
+        <div class="producto-botones">
+          <a href="#HOTMART" class="btn btn-hotmart"><span>Comprar ahora</span></a>
+          <button class="btn-espera-det" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERIE 7 -->
+  <div class="producto-seccion reveal" id="serie-7" data-categoria="serie" data-lanzamiento="cerrado">
+    <div class="producto-detalle">
+      <div class="producto-imagen-wrap">
+        <img src="S7- Woke.png" alt="Woke" class="producto-det-imagen" />
+      </div>
+      <div class="producto-det-info">
+        <span class="producto-det-badge">Serie 07 · ETHOS Iron</span>
+        <h2 class="producto-det-titulo">Woke</h2>
+        <p class="producto-det-tagline">El movimiento que prometió libertad y entregó dogma.</p>
+        <p class="producto-det-desc">No es una moda. Es una estructura de pensamiento con sus propios dogmas, sus propios rituales y sus propias herejías. Esta serie lo analiza como lo que es: <strong>un fenómeno cultural con consecuencias reales</strong> sobre la educación, la ley y las relaciones humanas.</p>
+        <div class="producto-incluye">
+          <h4>Qué incluye</h4>
+          <ul>
+            <li>X episodios en vídeo — acceso de por vida</li>
+            <li>Origen, evolución y estado actual del movimiento</li>
+            <li>Impacto en España y Europa con datos reales</li>
+          </ul>
+        </div>
+        <div class="producto-det-precio-wrap">
+          <div class="producto-det-precio"><sup>€</sup>47</div>
+        </div>
+        <div class="producto-botones">
+          <a href="#HOTMART" class="btn btn-hotmart"><span>Comprar ahora</span></a>
+          <button class="btn-espera-det" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUÍA VG — Usa Stripe, no Hotmart. Siempre abierta -->
+  <div class="producto-seccion reveal" id="guia-vg" data-categoria="soul" data-lanzamiento="abierto">
+    <div class="producto-detalle invertido">
+      <div class="producto-imagen-wrap">
+        <img src="ETHOS Soul copia 3.png" alt="Guía VG" class="producto-det-imagen" />
+      </div>
+      <div class="producto-det-info">
+        <span class="producto-det-badge">ETHOS Soul · Donación libre</span>
+        <h2 class="producto-det-titulo">Guía VG</h2>
+        <p class="producto-det-tagline">Porque cuando te acusan, el tiempo no espera.</p>
+        <p class="producto-det-desc">Una guía legal de 44 páginas para hombres que enfrentan o temen enfrentar una acusación de violencia de género en España. <strong>No es un panfleto. Es una herramienta.</strong> Redactada con rigor, revisada por especialistas en derecho penal.</p>
+        <p class="producto-det-desc">Incluye el marco legal vigente (LO 1/2025), tus derechos desde el primer momento, cómo actuar en cada fase del proceso y los recursos a los que puedes acudir.</p>
+        <div class="producto-incluye">
+          <h4>Qué incluye</h4>
+          <ul>
+            <li>44 páginas de orientación legal práctica</li>
+            <li>Actualizada con LO 1/2025 y jurisprudencia reciente</li>
+            <li>Revisada por Manuela, especialista en derecho penal</li>
+            <li>Acceso inmediato en PDF</li>
+          </ul>
+        </div>
+        <div class="producto-det-precio-wrap">
+          <div class="producto-det-precio" style="font-size:1.8rem;">Donación libre</div>
+        </div>
+        <div class="producto-botones">
+          <!-- Cambia # por tu enlace de Stripe cuando lo tengas -->
+          <a href="#" class="btn btn-hotmart"><span>Acceder a la Guía VG</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEMBRESÍA IRON -->
+  <section id="membresia" data-categoria="membresia">
+    <div class="membresia-inner reveal">
+      <p class="etiqueta">Membresía</p>
+      <div class="separador" style="margin:1rem auto;"></div>
+      <h2>Todo el contenido.<br />Una sola cuota.</h2>
+      <p>Acceso completo a las 7 series, comunidad privada, sesiones mensuales en vivo y la herramienta de IA para contrargumentar.</p>
+      <div class="membresia-precio"><sup>€</sup>49<small> / mes</small></div>
+      <ul class="membresia-lista">
+        <li>Acceso inmediato a todas las series</li>
+        <li>Nuevas series incluidas sin coste adicional</li>
+        <li>Sesión en vivo mensual sin censura</li>
+        <li>IA para contrargumentar con datos reales</li>
+        <li>Comunidad privada en Telegram</li>
+        <li>Análisis semanal de asimetrías legales</li>
+      </ul>
+      <!-- Cambia # por tu enlace de Hotmart cuando lo tengas -->
+      <a href="#" class="btn"><span>Unirme a Iron</span></a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FAQ — Edita preguntas y respuestas aquí
+       Para añadir una: copia un bloque .faq-item completo
+  ============================================================ -->
+  <section id="faq">
+    <p class="seccion-titulo" style="justify-content:flex-start;">Preguntas frecuentes</p>
+
+    <div class="faq-item">
+      <button class="faq-pregunta">¿Qué diferencia hay entre comprar una serie y la membresía?<span class="faq-icono">+</span></button>
+      <div class="faq-respuesta"><p>Las series son acceso de por vida a ese contenido específico. La membresía da acceso a todo el contenido mientras esté activa, más comunidad, IA y sesiones en vivo. Si quieres probar antes de comprometerte, empieza por una serie.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pregunta">¿Puedo cancelar la membresía cuando quiera?<span class="faq-icono">+</span></button>
+      <div class="faq-respuesta"><p>Sí. La membresía es mensual y puedes cancelarla en cualquier momento desde Hotmart sin penalización ni preguntas.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pregunta">¿Qué son los lanzamientos y cuándo abren?<span class="faq-icono">+</span></button>
+      <div class="faq-respuesta"><p>Las series se venden por ventanas de tiempo abiertas. Fuera de esas ventanas no se puede comprar. Déjame tu email en el botón de lista de espera y te aviso personalmente cuando abra el próximo.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pregunta">¿Los vídeos tienen fecha de caducidad?<span class="faq-icono">+</span></button>
+      <div class="faq-respuesta"><p>No. Las series que compras son tuyas de por vida. Puedes verlas a tu ritmo, las veces que quieras.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pregunta">¿Cómo accedo a la Guía VG?<span class="faq-icono">+</span></button>
+      <div class="faq-respuesta"><p>A través de donación libre por Stripe. Con cualquier aportación recibes acceso inmediato al PDF. Lo que aporten quienes pueden, financia el acceso de quienes no pueden.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-pregunta">¿Qué es la herramienta de IA para contrargumentar?<span class="faq-icono">+</span></button>
+      <div class="faq-respuesta"><p>Una IA entrenada con datos reales, jurisprudencia española y estudios científicos para ayudarte a rebatir argumentos feministas sin perder los nervios y sin inventarte nada. Disponible para miembros de Iron.</p></div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">ETHOS</div>
+    <ul class="footer-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="soul.html">Soul</a></li>
+      <li><a href="iron.html">Iron</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="mailto:hola@ethosironsoul.com">Contacto</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 ETHOS — Iron & Soul Group. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Modal espera -->
+  <div class="modal-overlay" id="modal-espera">
+    <div class="modal">
+      <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
+      <h3>Próximo lanzamiento</h3>
+      <p>Déjame tu email y te aviso cuando abra de nuevo.</p>
+      <input type="email" placeholder="tu@email.com" id="email-espera" />
+      <button class="btn" onclick="guardarEmail()"><span>Avísame</span></button>
+    </div>
+  </div>
+
+  <!-- Botón donar flotante — cambia # por Stripe -->
+  <div id="btn-donar">
+    <a href="#" class="donar-circulo" title="Donar a ETHOS Soul">♡</a>
+    <span class="donar-etiqueta">Donar</span>
+  </div>
+
+  <script>
+    window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50); });
+    document.getElementById('hamburguesa').addEventListener('click', function () { this.classList.toggle('abierto'); document.getElementById('nav-movil').classList.toggle('abierto'); });
+    function cerrarMenu() { document.getElementById('hamburguesa').classList.remove('abierto'); document.getElementById('nav-movil').classList.remove('abierto'); }
+    const observer = new IntersectionObserver((entries) => { entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80); }); }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.faq-pregunta').forEach(btn => { btn.addEventListener('click', () => { const item = btn.parentElement; const ab = item.classList.contains('abierto'); document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('abierto')); if (!ab) item.classList.add('abierto'); }); });
+    function abrirModal() { document.getElementById('modal-espera').classList.add('abierto'); }
+    function cerrarModal() { document.getElementById('modal-espera').classList.remove('abierto'); }
+    document.getElementById('modal-espera').addEventListener('click', function(e) { if (e.target === this) cerrarModal(); });
+    function guardarEmail() { const email = document.getElementById('email-espera').value; if (email) { alert('¡Gracias! Te avisamos en el próximo lanzamiento.'); cerrarModal(); } }
+
+    // Filtros de categoría
+    function filtrar(categoria, btn) {
+      document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
+      btn.classList.add('activo');
+      document.querySelectorAll('.producto-seccion, #membresia').forEach(el => {
+        if (categoria === 'todo') { el.style.display = ''; }
+        else if (categoria === 'membresia') { el.style.display = el.id === 'membresia' ? '' : 'none'; }
+        else { el.style.display = (el.dataset.categoria === categoria) ? '' : 'none'; }
+      });
+    }
+  </script>
+</body>
+</html>
