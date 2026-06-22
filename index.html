@@ -3,868 +3,283 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ETHOS — Omayra Pérez</title>
+  <title>ETHOS — Iron & Soul</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
   <style>
     /* ============================================================
-       TOKENS — Paleta, tipografía y variables globales
-       Cambia aquí los colores y fuentes para toda la página
+       TOKENS — Cambia aquí colores y fuentes para toda la web
     ============================================================ */
     :root {
-      --negro:       #0a0a0a;
-      --negro-card:  #111111;
-      --negro-borde: #1e1e1e;
-      --dorado:      #c9a84c;
-      --dorado-claro:#e8c97a;
+      --negro:        #0a0a0a;
+      --negro-card:   #111111;
+      --negro-borde:  #1e1e1e;
+      --dorado:       #c9a84c;
+      --dorado-claro: #e8c97a;
       --dorado-oscuro:#8a6a20;
-      --blanco:      #f5f0e8;
-      --gris:        #888888;
+      --blanco:       #f5f0e8;
+      --gris:         #888888;
       --font-display: 'Cormorant Garamond', serif;
       --font-body:    'Montserrat', sans-serif;
       --transicion:   0.35s ease;
     }
-
-    /* ============================================================
-       RESET Y BASE
-    ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      background: var(--negro);
-      color: var(--blanco);
-      font-family: var(--font-body);
-      font-weight: 300;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
+    body { background: var(--negro); color: var(--blanco); font-family: var(--font-body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
+    .etiqueta { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado); }
+    .separador { width: 40px; height: 1px; background: var(--dorado); margin: 1rem 0; }
 
     /* ============================================================
-       UTILIDADES — Clases reutilizables
-    ============================================================ */
-    .dorado        { color: var(--dorado); }
-    .separador     { width: 40px; height: 1px; background: var(--dorado); margin: 1rem 0; }
-    .etiqueta      { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado); }
-
-    /* ============================================================
-       BOTÓN BASE — Estilo compartido de todos los botones CTA
+       BOTÓN BASE — Estilo de todos los CTAs
     ============================================================ */
     .btn {
-      display: inline-block;
-      font-family: var(--font-body);
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      padding: 0.75rem 2rem;
-      border: 1px solid var(--dorado);
-      color: var(--dorado);
-      background: transparent;
-      cursor: pointer;
-      transition: background var(--transicion), color var(--transicion), box-shadow var(--transicion);
-      position: relative;
-      overflow: hidden;
+      display: inline-block; font-family: var(--font-body); font-size: 0.7rem;
+      letter-spacing: 0.2em; text-transform: uppercase; padding: 0.75rem 2rem;
+      border: 1px solid var(--dorado); color: var(--dorado); background: transparent;
+      cursor: pointer; position: relative; overflow: hidden;
+      transition: color var(--transicion), box-shadow var(--transicion);
     }
-    .btn::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--dorado);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform var(--transicion);
-      z-index: 0;
-    }
+    .btn::after { content: ''; position: absolute; inset: 0; background: var(--dorado); transform: scaleX(0); transform-origin: left; transition: transform var(--transicion); z-index: 0; }
     .btn span { position: relative; z-index: 1; }
     .btn:hover::after { transform: scaleX(1); }
     .btn:hover { color: var(--negro); box-shadow: 0 0 20px rgba(201,168,76,0.3); }
 
     /* ============================================================
-       NAVBAR — Barra de navegación fija
-       Cambia los enlaces en <nav> dentro del HTML
+       NAVBAR — Barra fija superior
+       Edita los enlaces de redes sociales abajo en el HTML
     ============================================================ */
-    #navbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.2rem 4rem;
-      transition: background var(--transicion), backdrop-filter var(--transicion);
-    }
-    #navbar.scrolled {
-      background: rgba(10,10,10,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--negro-borde);
-    }
-    .nav-logo {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 300;
-      letter-spacing: 0.35em;
-      color: var(--blanco);
-    }
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gris);
-      transition: color var(--transicion);
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 1px;
-      background: var(--dorado);
-      transition: width var(--transicion);
-    }
-    .nav-links a:hover { color: var(--dorado); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-links a.activo { color: var(--dorado); }
-    .nav-links a.activo::after { width: 100%; }
-    .nav-iconos {
-      display: flex;
-      gap: 1.2rem;
-      align-items: center;
-    }
-    .nav-iconos a {
-      color: var(--gris);
-      font-size: 0.9rem;
-      transition: color var(--transicion);
-    }
+    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; transition: background var(--transicion); }
+    #navbar.scrolled { background: rgba(10,10,10,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--negro-borde); }
+    .nav-logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.35em; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris); transition: color var(--transicion); position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--dorado); transition: width var(--transicion); }
+    .nav-links a:hover, .nav-links a.activo { color: var(--dorado); }
+    .nav-links a:hover::after, .nav-links a.activo::after { width: 100%; }
+    .nav-iconos { display: flex; gap: 1.2rem; align-items: center; }
+    .nav-iconos a { color: var(--gris); transition: color var(--transicion); }
     .nav-iconos a:hover { color: var(--dorado); }
-    /* Menú hamburguesa (móvil) */
-    .hamburguesa {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-    .hamburguesa span {
-      display: block;
-      width: 24px; height: 1px;
-      background: var(--blanco);
-      transition: all var(--transicion);
-    }
+    .hamburguesa { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburguesa span { display: block; width: 24px; height: 1px; background: var(--blanco); transition: all var(--transicion); }
     .hamburguesa.abierto span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
     .hamburguesa.abierto span:nth-child(2) { opacity: 0; }
     .hamburguesa.abierto span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-    /* Menú móvil desplegable */
-    .nav-movil {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(10,10,10,0.97);
-      z-index: 999;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-    }
+    .nav-movil { display: none; position: fixed; inset: 0; background: rgba(10,10,10,0.97); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
     .nav-movil.abierto { display: flex; }
-    .nav-movil a {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      letter-spacing: 0.15em;
-      color: var(--blanco);
-      transition: color var(--transicion);
-    }
+    .nav-movil a { font-family: var(--font-display); font-size: 2rem; letter-spacing: 0.15em; color: var(--blanco); transition: color var(--transicion); }
     .nav-movil a:hover { color: var(--dorado); }
 
     /* ============================================================
-       HERO — Sección principal con foto y título
-       Reemplaza WEB.png con tu foto cuando quieras cambiarla
+       HERO — Foto principal + título ETHOS
+       Cambia WEB.png si cambias el nombre de la foto
     ============================================================ */
-    #hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-    .hero-foto {
-      position: absolute;
-      right: 0; top: 0;
-      height: 100%;
-      width: 55%;
-      object-fit: cover;
-      object-position: top center;
-    }
-    .hero-gradiente {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to right,
-        var(--negro) 35%,
-        rgba(10,10,10,0.6) 60%,
-        transparent 100%
-      );
-    }
-    .hero-gradiente-abajo {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 200px;
-      background: linear-gradient(to top, var(--negro), transparent);
-    }
-    .hero-contenido {
-      position: relative;
-      z-index: 2;
-      padding: 8rem 4rem 0;
-      max-width: 680px;
-    }
-    .hero-titulo {
-      font-family: var(--font-display);
-      font-size: clamp(7rem, 16vw, 14rem);
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      line-height: 0.9;
-      color: var(--blanco);
-      margin-bottom: 2rem;
-    }
-    .hero-subtitulo {
-      font-family: var(--font-display);
-      font-size: clamp(1.3rem, 2.2vw, 1.8rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--dorado);
-      line-height: 1.6;
-      margin-bottom: 0.5rem;
-    }
-    .hero-subtitulo-2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.1rem, 1.8vw, 1.4rem);
-      font-weight: 300;
-      color: var(--gris);
-      font-style: italic;
-    }
-    /* Scroll indicator animado */
-    .scroll-indicator {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      z-index: 3;
-    }
-    .scroll-indicator span {
-      font-size: 0.55rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gris);
-    }
-    .scroll-linea {
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, var(--dorado), transparent);
-      animation: scrollBajar 1.5s ease-in-out infinite;
-    }
-    @keyframes scrollBajar {
-      0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
-      50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
-      100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
-    }
+    #hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
+    .hero-foto { position: absolute; right: 0; top: 0; height: 100%; width: 55%; object-fit: cover; object-position: top center; }
+    .hero-gradiente { position: absolute; inset: 0; background: linear-gradient(to right, var(--negro) 38%, rgba(10,10,10,0.55) 62%, transparent 100%); }
+    .hero-gradiente-abajo { position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to top, var(--negro), transparent); }
+    .hero-contenido { position: relative; z-index: 2; padding: 7rem 4rem 0; max-width: 700px; }
+    .hero-titulo { font-family: var(--font-display); font-size: clamp(8rem, 17vw, 15rem); font-weight: 300; letter-spacing: 0.08em; line-height: 0.9; color: var(--blanco); margin-bottom: 2rem; }
+    .hero-subtitulo { font-family: var(--font-display); font-size: clamp(1.4rem, 2.3vw, 1.9rem); font-weight: 300; font-style: italic; color: var(--dorado); line-height: 1.5; margin-bottom: 0.6rem; }
+    .hero-subtitulo-2 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.8vw, 1.4rem); font-weight: 300; color: var(--gris); font-style: italic; }
+    .scroll-indicator { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; z-index: 3; }
+    .scroll-indicator span { font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gris); }
+    .scroll-linea { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--dorado), transparent); animation: scrollBajar 1.5s ease-in-out infinite; }
+    @keyframes scrollBajar { 0% { transform: scaleY(0); transform-origin: top; opacity: 0; } 50% { transform: scaleY(1); transform-origin: top; opacity: 1; } 100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; } }
 
     /* ============================================================
-       SECCIÓN SOBRE MÍ
-       Edita el texto de presentación dentro del HTML
+       SOBRE MÍ — Bloque de presentación
+       Edita el texto directamente en el HTML más abajo
     ============================================================ */
-    #sobre-mi {
-      padding: 8rem 2rem;
-      max-width: 100%;
-      margin: 0 auto;
-    }
-    .sobre-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 4rem;
-      border: 1px solid var(--negro-borde);
-      padding: 5rem 6rem;
-      position: relative;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-    /* Marco dorado animado en hover */
-    .sobre-grid::before {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border: 1px solid transparent;
-      background: linear-gradient(135deg, var(--dorado), transparent, var(--dorado)) border-box;
-      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: destination-out;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
+    #sobre-mi { padding: 8rem 3rem; }
+    .sobre-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4rem; border: 1px solid var(--negro-borde); padding: 5rem 5rem; position: relative; max-width: 1500px; margin: 0 auto; }
+    .sobre-grid::before { content: ''; position: absolute; inset: -1px; border: 1px solid transparent; background: linear-gradient(135deg, var(--dorado), transparent, var(--dorado)) border-box; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask-composite: exclude; opacity: 0; transition: opacity 0.5s ease; }
     .sobre-grid:hover::before { opacity: 1; }
     .sobre-col-1 { border-right: 1px solid var(--negro-borde); padding-right: 4rem; }
     .sobre-col-2 { border-right: 1px solid var(--negro-borde); padding-right: 4rem; }
-    .sobre-titulo-grande {
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      font-weight: 300;
-      line-height: 1.3;
-      margin-top: 1rem;
-    }
-    .sobre-texto {
-      font-size: 0.8rem;
-      line-height: 1.9;
-      color: var(--gris);
-    }
-    .sobre-texto strong {
-      color: var(--blanco);
-      font-weight: 500;
-      letter-spacing: 0.05em;
-    }
-    .sobre-cita {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-style: italic;
-      font-weight: 300;
-      line-height: 1.7;
-      color: var(--blanco);
-    }
-    .sobre-cita::before {
-      content: '"';
-      display: block;
-      font-size: 3rem;
-      color: var(--dorado);
-      line-height: 1;
-      margin-bottom: 1rem;
-    }
+    .sobre-titulo-grande { font-family: var(--font-display); font-size: clamp(1.8rem, 2.8vw, 2.5rem); font-weight: 300; line-height: 1.3; margin-top: 1rem; }
+    .sobre-texto { font-size: 0.82rem; line-height: 1.9; color: var(--gris); }
+    .sobre-texto strong { color: var(--blanco); font-weight: 500; }
+    .sobre-cita { font-family: var(--font-display); font-size: 1.15rem; font-style: italic; font-weight: 300; line-height: 1.7; color: var(--blanco); }
+    .sobre-cita::before { content: '"'; display: block; font-size: 3rem; color: var(--dorado); line-height: 1; margin-bottom: 1rem; }
 
     /* ============================================================
-       SECCIÓN SOUL E IRON — Las dos ramas del proyecto
-       Edita los textos de características en el HTML
+       SOUL E IRON — Cards de las dos ramas
+       Logos: ETHOS Soul copia.png y ETHOS Iron copia.png
+       Cambia href de los botones a soul.html e iron.html (ya están)
     ============================================================ */
-    #programas {
-      padding: 4rem;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-    .programas-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-    .programa-card {
-      background: var(--negro-card);
-      border: 1px solid var(--negro-borde);
-      padding: 3.5rem;
-      position: relative;
-      transition: border-color var(--transicion), box-shadow var(--transicion);
-      overflow: hidden;
-    }
-    /* Marco dorado que brilla al hacer hover */
-    .programa-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border: 1px solid var(--dorado);
-      opacity: 0;
-      transition: opacity var(--transicion);
-      pointer-events: none;
-    }
-    .programa-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      box-shadow: inset 0 0 60px rgba(201,168,76,0.05);
-      opacity: 0;
-      transition: opacity var(--transicion);
-      pointer-events: none;
-    }
+    #programas { padding: 4rem 3rem; max-width: 1500px; margin: 0 auto; }
+    .programas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .programa-card { background: var(--negro-card); border: 1px solid var(--negro-borde); padding: 3.5rem; position: relative; transition: box-shadow var(--transicion); overflow: hidden; }
+    .programa-card::before { content: ''; position: absolute; inset: 0; border: 1px solid var(--dorado); opacity: 0; transition: opacity var(--transicion); pointer-events: none; }
+    .programa-card::after { content: ''; position: absolute; inset: 0; box-shadow: inset 0 0 60px rgba(201,168,76,0.05); opacity: 0; transition: opacity var(--transicion); pointer-events: none; }
     .programa-card:hover { box-shadow: 0 0 40px rgba(201,168,76,0.12); }
     .programa-card:hover::before { opacity: 1; }
     .programa-card:hover::after { opacity: 1; }
-    .programa-logo {
-      height: 140px;
-      width: auto;
-      max-width: 260px;
-      margin-bottom: 2rem;
-      opacity: 1;
-      border: 1px solid var(--dorado-oscuro);
-      padding: 1rem;
-      transition: border-color var(--transicion), box-shadow var(--transicion);
-    }
-    .programa-card:hover .programa-logo {
-      border-color: var(--dorado);
-      box-shadow: 0 0 20px rgba(201,168,76,0.2);
-    }
-    .programa-nombre {
-      font-family: var(--font-display);
-      font-size: 0.6rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--dorado);
-      margin-bottom: 2.5rem;
-    }
-    .programa-features {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-bottom: 2.5rem;
-    }
-    .programa-features li {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-    }
-    .feature-icono {
-      width: 32px; height: 32px;
-      border: 1px solid var(--dorado-oscuro);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 0.7rem;
-      color: var(--dorado);
-    }
-    .feature-texto strong {
-      display: block;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--dorado);
-      margin-bottom: 0.2rem;
-    }
-    .feature-texto span {
-      font-size: 0.75rem;
-      color: var(--gris);
-    }
+    /* Logo dentro de la card — doble de grande, reborde dorado */
+    .programa-logo { height: 180px; width: auto; max-width: 320px; margin-bottom: 2rem; border: 1px solid var(--dorado-oscuro); padding: 1.2rem; transition: border-color var(--transicion), box-shadow var(--transicion); }
+    .programa-card:hover .programa-logo { border-color: var(--dorado); box-shadow: 0 0 25px rgba(201,168,76,0.2); }
+    .programa-nombre { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--dorado); margin-bottom: 2.5rem; }
+    .programa-features { list-style: none; display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem; }
+    .programa-features li { display: flex; gap: 1rem; align-items: flex-start; }
+    .feature-icono { width: 32px; height: 32px; border: 1px solid var(--dorado-oscuro); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.7rem; color: var(--dorado); }
+    .feature-texto strong { display: block; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dorado); margin-bottom: 0.2rem; }
+    .feature-texto span { font-size: 0.75rem; color: var(--gris); }
 
     /* ============================================================
-       CÓMO FUNCIONA — Pasos del proceso
+       CÓMO FUNCIONA — 3 pasos
     ============================================================ */
-    #como-funciona {
-      padding: 6rem 4rem;
-      text-align: center;
-    }
-    .seccion-titulo {
-      font-family: var(--font-body);
-      font-size: 0.65rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--dorado);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
-    }
-    .seccion-titulo::before,
-    .seccion-titulo::after {
-      content: '';
-      width: 60px; height: 1px;
-      background: var(--dorado-oscuro);
-    }
-    .pasos-grid {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr auto 1fr;
-      align-items: start;
-      gap: 0;
-      max-width: 900px;
-      margin: 3rem auto 0;
-    }
-    .paso {
-      text-align: center;
-      padding: 2rem;
-      position: relative;
-      transition: transform var(--transicion);
-    }
+    #como-funciona { padding: 5rem 4rem; text-align: center; }
+    .seccion-titulo { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dorado); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 1.5rem; }
+    .seccion-titulo::before, .seccion-titulo::after { content: ''; width: 60px; height: 1px; background: var(--dorado-oscuro); }
+    .pasos-grid { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: start; max-width: 900px; margin: 3rem auto 0; }
+    .paso { text-align: center; padding: 1.5rem; transition: transform var(--transicion); }
     .paso:hover { transform: translateY(-6px); }
-    .paso-numero {
-      font-family: var(--font-display);
-      font-size: 3.5rem;
-      font-weight: 300;
-      color: var(--negro-borde);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-    .paso-icono {
-      width: 50px; height: 50px;
-      border: 1px solid var(--dorado);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.2rem;
-      font-size: 1.1rem;
-      color: var(--dorado);
-    }
-    .paso-titulo {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--blanco);
-      margin-bottom: 0.5rem;
-    }
-    .paso-desc {
-      font-size: 0.75rem;
-      color: var(--gris);
-      line-height: 1.6;
-    }
-    .paso-conector {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--dorado-oscuro);
-      font-size: 1rem;
-      padding-top: 3.5rem;
-    }
+    .paso-numero { font-family: var(--font-display); font-size: 3rem; font-weight: 300; color: var(--negro-borde); line-height: 1; margin-bottom: 0.5rem; }
+    .paso-icono { width: 46px; height: 46px; border: 1px solid var(--dorado); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1rem; color: var(--dorado); }
+    .paso-titulo { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blanco); margin-bottom: 0.4rem; }
+    .paso-desc { font-size: 0.75rem; color: var(--gris); line-height: 1.6; }
+    .paso-conector { display: flex; align-items: center; justify-content: center; color: var(--dorado-oscuro); font-size: 1rem; padding-top: 3rem; }
 
     /* ============================================================
-       PRODUCTOS — Series y membresía
-       Para activar/desactivar lanzamiento cambia data-lanzamiento="abierto/cerrado"
-       en cada .producto-card en el HTML
+       PRODUCTOS — Carrusel horizontal
+       Para abrir lanzamiento: cambia data-lanzamiento="abierto" → "abierto"
+       Para enlace de compra: cambia href="#" en .btn-comprar por tu URL de Hotmart/Stripe
+       La Guía VG usa Stripe; las series usan Hotmart
     ============================================================ */
-    #productos {
-      padding: 6rem 0 6rem 4rem;
-      max-width: 100%;
-    }
-    #productos .seccion-titulo { padding-right: 4rem; }
-    #productos > div:last-child { padding-right: 4rem; }
-    .productos-grid {
-      display: flex;
-      flex-direction: row;
-      gap: 1.5rem;
-      margin-top: 3rem;
-      overflow-x: auto;
-      padding-bottom: 1.5rem;
-      padding-right: 4rem;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-      scrollbar-color: var(--dorado-oscuro) var(--negro-card);
-    }
-    .productos-grid::-webkit-scrollbar { height: 4px; }
+    #productos { padding: 5rem 0 5rem 4rem; }
+    .seccion-titulo-productos { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dorado); display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-bottom: 0; padding-right: 4rem; }
+    .seccion-titulo-productos::before, .seccion-titulo-productos::after { content: ''; width: 60px; height: 1px; background: var(--dorado-oscuro); }
+    .productos-grid { display: flex; gap: 1.5rem; margin-top: 3rem; overflow-x: auto; padding-bottom: 1.5rem; padding-right: 4rem; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--dorado-oscuro) var(--negro-card); }
+    .productos-grid::-webkit-scrollbar { height: 3px; }
     .productos-grid::-webkit-scrollbar-track { background: var(--negro-card); }
     .productos-grid::-webkit-scrollbar-thumb { background: var(--dorado-oscuro); border-radius: 2px; }
-    .producto-card {
-      background: var(--negro-card);
-      border: 1px solid var(--negro-borde);
-      overflow: hidden;
-      position: relative;
-      transition: border-color var(--transicion), transform var(--transicion), box-shadow var(--transicion);
-      cursor: pointer;
-      min-width: 280px;
-      max-width: 280px;
-      flex-shrink: 0;
-      scroll-snap-align: start;
-    }
-    /* Marco dorado al hover */
-    .producto-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border: 1px solid var(--dorado);
-      opacity: 0;
-      transition: opacity var(--transicion);
-      z-index: 1;
-      pointer-events: none;
-    }
+    .producto-card { background: var(--negro-card); border: 1px solid var(--negro-borde); overflow: hidden; position: relative; transition: transform var(--transicion), box-shadow var(--transicion); cursor: pointer; min-width: 260px; max-width: 260px; flex-shrink: 0; scroll-snap-align: start; }
+    .producto-card::before { content: ''; position: absolute; inset: 0; border: 1px solid var(--dorado); opacity: 0; transition: opacity var(--transicion); z-index: 1; pointer-events: none; }
     .producto-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(201,168,76,0.15); }
     .producto-card:hover::before { opacity: 1; }
-    .producto-imagen {
-      width: 100%;
-      aspect-ratio: 2/3;
-      object-fit: contain;
-      background: #0d0d0d;
-    }
-    .producto-badge {
-      position: absolute;
-      top: 1rem; right: 1rem;
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      background: var(--dorado);
-      color: var(--negro);
-      padding: 0.3rem 0.7rem;
-      z-index: 2;
-    }
-    .producto-info {
-      padding: 1.2rem;
-    }
-    .producto-nombre {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 400;
-      margin-bottom: 0.3rem;
-    }
-    .producto-desc {
-      font-size: 0.7rem;
-      color: var(--gris);
-      margin-bottom: 1rem;
-      line-height: 1.5;
-    }
-    .producto-precio {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      color: var(--dorado);
-    }
+    .producto-imagen { width: 100%; aspect-ratio: 2/3; object-fit: contain; background: #0d0d0d; }
+    .producto-badge { position: absolute; top: 1rem; right: 1rem; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--dorado); color: var(--negro); padding: 0.3rem 0.7rem; z-index: 2; }
+    .producto-info { padding: 1.2rem; }
+    .producto-nombre { font-family: var(--font-display); font-size: 1rem; font-weight: 400; margin-bottom: 0.3rem; line-height: 1.3; }
+    .producto-desc { font-size: 0.7rem; color: var(--gris); margin-bottom: 0.8rem; line-height: 1.5; }
+    .producto-precio { font-family: var(--font-display); font-size: 1.3rem; color: var(--dorado); margin-bottom: 0.8rem; }
     .producto-precio sup { font-size: 0.7rem; vertical-align: super; }
-    .producto-precio small { font-size: 0.65rem; color: var(--gris); }
-    /* Estado cerrado del lanzamiento */
-    .producto-card[data-lanzamiento="cerrado"] .btn-comprar {
-      display: none;
-    }
-    .producto-card[data-lanzamiento="cerrado"] .btn-espera {
-      display: inline-block;
-    }
-    .producto-card[data-lanzamiento="abierto"] .btn-espera {
-      display: none;
-    }
-    .btn-espera {
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gris);
-      border: 1px solid var(--negro-borde);
-      padding: 0.6rem 1rem;
-      cursor: pointer;
-      background: none;
-      width: 100%;
-      transition: border-color var(--transicion), color var(--transicion);
-    }
+    /* Botón comprar: visible cuando lanzamiento abierto */
+    .producto-card[data-lanzamiento="abierto"] .btn-comprar { display: none; }
+    .producto-card[data-lanzamiento="abierto"] .btn-espera { display: block; }
+    .producto-card[data-lanzamiento="abierto"] .btn-espera { display: none; }
+    .producto-card[data-lanzamiento="abierto"] .btn-comprar { display: block; }
+    .btn-comprar { width: 100%; text-align: center; font-size: 0.6rem; padding: 0.65rem 1rem; border: 1px solid var(--dorado); color: var(--dorado); background: none; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; position: relative; overflow: hidden; transition: color var(--transicion); text-decoration: none; }
+    .btn-comprar::after { content: ''; position: absolute; inset: 0; background: var(--dorado); transform: scaleX(0); transform-origin: left; transition: transform var(--transicion); z-index: 0; }
+    .btn-comprar span { position: relative; z-index: 1; }
+    .btn-comprar:hover::after { transform: scaleX(1); }
+    .btn-comprar:hover { color: var(--negro); }
+    .btn-espera { display: none; width: 100%; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris); border: 1px solid var(--negro-borde); padding: 0.65rem 0.5rem; cursor: pointer; background: none; transition: border-color var(--transicion), color var(--transicion); }
     .btn-espera:hover { border-color: var(--dorado); color: var(--dorado); }
+    .productos-cta { text-align: center; margin-top: 3rem; padding-right: 4rem; }
 
-    /* Modal lista de espera */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      z-index: 2000;
-      align-items: center;
-      justify-content: center;
-    }
+    /* ============================================================
+       MODAL — Lista de espera (lanzamiento cerrado)
+       Conecta el botón "Avísame" a tu plataforma de email
+    ============================================================ */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 2000; align-items: center; justify-content: center; }
     .modal-overlay.abierto { display: flex; }
-    .modal {
-      background: var(--negro-card);
-      border: 1px solid var(--dorado);
-      padding: 3rem;
-      max-width: 440px;
-      width: 90%;
-      text-align: center;
-      position: relative;
-    }
-    .modal-cerrar {
-      position: absolute;
-      top: 1rem; right: 1.2rem;
-      background: none;
-      border: none;
-      color: var(--gris);
-      font-size: 1.2rem;
-      cursor: pointer;
-    }
-    .modal h3 {
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      font-weight: 300;
-      margin-bottom: 0.5rem;
-    }
+    .modal { background: var(--negro-card); border: 1px solid var(--dorado); padding: 3rem; max-width: 440px; width: 90%; text-align: center; position: relative; }
+    .modal-cerrar { position: absolute; top: 1rem; right: 1.2rem; background: none; border: none; color: var(--gris); font-size: 1.2rem; cursor: pointer; }
+    .modal h3 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 300; margin-bottom: 0.5rem; }
     .modal p { font-size: 0.75rem; color: var(--gris); margin-bottom: 1.5rem; }
-    .modal input[type="email"] {
-      width: 100%;
-      background: var(--negro);
-      border: 1px solid var(--negro-borde);
-      color: var(--blanco);
-      padding: 0.8rem 1rem;
-      font-family: var(--font-body);
-      font-size: 0.8rem;
-      margin-bottom: 1rem;
-      outline: none;
-      transition: border-color var(--transicion);
-    }
+    .modal input[type="email"] { width: 100%; background: var(--negro); border: 1px solid var(--negro-borde); color: var(--blanco); padding: 0.8rem 1rem; font-family: var(--font-body); font-size: 0.8rem; margin-bottom: 1rem; outline: none; transition: border-color var(--transicion); }
     .modal input[type="email"]:focus { border-color: var(--dorado); }
     .modal .btn { width: 100%; text-align: center; }
 
     /* ============================================================
-       COLABORADORES — Logos de partners
-       Reemplaza los textos "LOGO" con <img> cuando tengas los logos
+       COLABORADORES — Reemplaza · LOGO · por <img> cuando los tengas
     ============================================================ */
-    #colaboradores {
-      padding: 5rem 4rem;
-      border-top: 1px solid var(--negro-borde);
-    }
-    .colaboradores-grid {
-      display: flex;
-      gap: 3rem;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 3rem;
-    }
-    .colaborador-item {
-      opacity: 0.35;
-      transition: opacity var(--transicion);
-      font-family: var(--font-display);
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-    }
+    #colaboradores { padding: 4rem 4rem; border-top: 1px solid var(--negro-borde); }
+    .colaboradores-grid { display: flex; gap: 3rem; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 2.5rem; }
+    .colaborador-item { opacity: 0.35; transition: opacity var(--transicion); font-family: var(--font-display); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; }
     .colaborador-item:hover { opacity: 1; }
 
     /* ============================================================
-       FOOTER
+       FOOTER — Edita email y copyright
     ============================================================ */
-    footer {
-      background: #070707;
-      border-top: 1px solid var(--negro-borde);
-      padding: 3rem 4rem;
-      text-align: center;
-    }
-    .footer-logo {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 300;
-      letter-spacing: 0.4em;
-      margin-bottom: 1.5rem;
-    }
-    .footer-links {
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-      list-style: none;
-    }
-    .footer-links a {
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gris);
-      transition: color var(--transicion);
-    }
+    footer { background: #070707; border-top: 1px solid var(--negro-borde); padding: 2rem 4rem; text-align: center; }
+    .footer-logo { font-family: var(--font-display); font-size: 1.6rem; font-weight: 300; letter-spacing: 0.4em; margin-bottom: 1.2rem; }
+    .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.2rem; list-style: none; }
+    .footer-links a { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris); transition: color var(--transicion); }
     .footer-links a:hover { color: var(--dorado); }
-    .footer-copy {
-      font-size: 0.65rem;
-      color: var(--negro-borde);
-      letter-spacing: 0.1em;
-    }
+    .footer-copy { font-size: 0.6rem; color: var(--negro-borde); letter-spacing: 0.1em; }
 
     /* ============================================================
-       BOTÓN FLOTANTE DE DONACIÓN — Sigue al usuario en toda la página
-       Cambia el href por el enlace de Stripe cuando lo tengas
+       BOTÓN FLOTANTE DONACIÓN — Siempre visible en pantalla
+       Cambia el href por tu enlace de Stripe cuando lo tengas
     ============================================================ */
-    #btn-donar {
-      position: fixed;
-      bottom: 2.5rem;
-      right: 2.5rem;
-      z-index: 1500;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .donar-circulo {
-      width: 58px; height: 58px;
-      border-radius: 50%;
-      background: var(--negro-card);
-      border: 1px solid var(--dorado);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      color: var(--dorado);
-      cursor: pointer;
-      transition: background var(--transicion), box-shadow var(--transicion), transform var(--transicion);
-      box-shadow: 0 0 0 0 rgba(201,168,76,0.4);
-      animation: pulso 2.5s ease-in-out infinite;
-      text-decoration: none;
-    }
-    .donar-circulo:hover {
-      background: var(--dorado);
-      color: var(--negro);
-      box-shadow: 0 0 25px rgba(201,168,76,0.5);
-      transform: scale(1.08);
-      animation: none;
-    }
-    .donar-etiqueta {
-      font-size: 0.5rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--dorado);
-      text-align: center;
-    }
-    @keyframes pulso {
-      0%   { box-shadow: 0 0 0 0 rgba(201,168,76,0.4); }
-      70%  { box-shadow: 0 0 0 12px rgba(201,168,76,0); }
-      100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
-    }
+    #btn-donar { position: fixed; bottom: 2.5rem; right: 2.5rem; z-index: 1500; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .donar-circulo { width: 58px; height: 58px; border-radius: 50%; background: var(--negro-card); border: 1px solid var(--dorado); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--dorado); cursor: pointer; text-decoration: none; transition: background var(--transicion), box-shadow var(--transicion), transform var(--transicion); animation: pulso 2.5s ease-in-out infinite; }
+    .donar-circulo:hover { background: var(--dorado); color: var(--negro); box-shadow: 0 0 25px rgba(201,168,76,0.5); transform: scale(1.08); animation: none; }
+    .donar-etiqueta { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dorado); }
+    @keyframes pulso { 0% { box-shadow: 0 0 0 0 rgba(201,168,76,0.4); } 70% { box-shadow: 0 0 0 12px rgba(201,168,76,0); } 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); } }
 
     /* ============================================================
-       ANIMACIONES DE ENTRADA AL HACER SCROLL
+       ANIMACIONES REVEAL AL SCROLL
     ============================================================ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ============================================================
-       RESPONSIVE — Versión móvil
+       RESPONSIVE MÓVIL
     ============================================================ */
     @media (max-width: 768px) {
+      /* Navbar */
       #navbar { padding: 1rem 1.5rem; }
-      .nav-links { display: none; }
-      .nav-iconos { display: none; }
+      .nav-links, .nav-iconos { display: none; }
       .hamburguesa { display: flex; }
 
+      /* Hero móvil: cara visible, texto centrado y más arriba */
       #hero { min-height: 100svh; align-items: flex-end; }
-      .hero-foto { width: 100%; height: 100%; opacity: 0.75; object-position: top center; }
-      .hero-gradiente { background: linear-gradient(to top, var(--negro) 40%, rgba(10,10,10,0.4) 70%, rgba(10,10,10,0.1) 100%); }
-      .hero-contenido { padding: 0 1.5rem 3rem; max-width: 100%; }
-      .hero-titulo { font-size: clamp(5rem, 22vw, 8rem); }
-      .hero-subtitulo { font-size: 1.1rem; }
-      .hero-subtitulo-2 { font-size: 0.9rem; }
-      .hero-titulo { font-size: clamp(4rem, 18vw, 6rem); }
+      .hero-foto { width: 100%; height: 85%; opacity: 0.7; object-position: top center; }
+      .hero-gradiente { background: linear-gradient(to top, var(--negro) 38%, rgba(10,10,10,0.35) 70%, rgba(10,10,10,0.05) 100%); }
+      .hero-contenido { padding: 0 1.5rem 4rem; max-width: 100%; }
+      .hero-titulo { font-size: clamp(5.5rem, 24vw, 8rem); }
+      .hero-subtitulo { font-size: 1.15rem; }
+      .hero-subtitulo-2 { font-size: 0.95rem; }
 
+      /* Sobre mí móvil */
       #sobre-mi { padding: 3rem 1rem; }
       .sobre-grid { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1.5rem; }
       .sobre-col-1, .sobre-col-2 { border-right: none; border-bottom: 1px solid var(--negro-borde); padding-right: 0; padding-bottom: 2rem; }
       .sobre-titulo-grande { font-size: 1.6rem; }
 
+      /* Soul e Iron cards móvil */
       #programas { padding: 2rem 1rem; }
       .programas-grid { grid-template-columns: 1fr; gap: 1.5rem; }
       .programa-card { padding: 2rem 1.5rem; }
-      .programa-logo { height: 100px; max-width: 200px; }
+      .programa-logo { height: 120px; max-width: 220px; }
 
-      #como-funciona { padding: 4rem 1.5rem; }
-      .pasos-grid { grid-template-columns: 1fr; }
+      /* Cómo funciona móvil: menos espacio entre pasos */
+      #como-funciona { padding: 3rem 1.5rem; }
+      .pasos-grid { grid-template-columns: 1fr; gap: 0; }
+      .paso { padding: 1rem 1.5rem; }
+      .paso-numero { font-size: 2rem; }
       .paso-conector { display: none; }
 
+      /* Productos carrusel móvil */
       #productos { padding: 3rem 0 3rem 1.2rem; }
+      .seccion-titulo-productos { padding-right: 1.2rem; }
       .productos-grid { padding-right: 1.2rem; gap: 1rem; }
-      .producto-card { min-width: 200px; max-width: 200px; }
-      .producto-nombre { font-size: 0.85rem; }
-      .producto-desc { font-size: 0.65rem; }
+      .producto-card { min-width: 210px; max-width: 210px; }
+      .productos-cta { padding-right: 1.2rem; }
 
+      /* Colaboradores móvil */
       #colaboradores { padding: 3rem 1.5rem; }
 
-      footer { padding: 2rem 1.5rem; }
+      /* Footer móvil: más compacto */
+      footer { padding: 1.5rem 1rem; }
+      .footer-logo { font-size: 1.2rem; margin-bottom: 0.8rem; }
+      .footer-links { gap: 1rem; margin-bottom: 0.8rem; }
 
+      /* Botón donar móvil */
       #btn-donar { bottom: 1.5rem; right: 1.5rem; }
     }
   </style>
@@ -872,8 +287,8 @@
 <body>
 
   <!-- ============================================================
-       NAVBAR — Barra de navegación
-       Edita los nombres de sección y los enlaces de redes sociales
+       NAVBAR
+       Edita URLs de Instagram y YouTube aquí
   ============================================================ -->
   <nav id="navbar">
     <div class="nav-logo">ETHOS</div>
@@ -882,14 +297,15 @@
       <li><a href="#sobre-mi">Sobre mí</a></li>
       <li><a href="soul.html">Ethos Soul</a></li>
       <li><a href="iron.html">Ethos Iron</a></li>
-      <li><a href="#productos">Productos</a></li>
+      <li><a href="productos.html">Productos</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
     <div class="nav-iconos">
-      <!-- Cambia los href por tus URLs reales -->
+      <!-- Cambia las URLs de redes sociales aquí -->
       <a href="https://instagram.com/o.mispecas" target="_blank" title="Instagram">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
       </a>
+      <!-- Cambia # por tu URL de YouTube -->
       <a href="#" target="_blank" title="YouTube">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
       </a>
@@ -897,56 +313,51 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
       </a>
     </div>
-    <button class="hamburguesa" id="hamburguesa" aria-label="Menú">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="hamburguesa" id="hamburguesa" aria-label="Menú"><span></span><span></span><span></span></button>
   </nav>
 
-  <!-- Menú móvil -->
+  <!-- Menú móvil desplegable -->
   <div class="nav-movil" id="nav-movil">
     <a href="#hero" onclick="cerrarMenu()">Inicio</a>
     <a href="#sobre-mi" onclick="cerrarMenu()">Sobre mí</a>
     <a href="soul.html" onclick="cerrarMenu()">Ethos Soul</a>
     <a href="iron.html" onclick="cerrarMenu()">Ethos Iron</a>
-    <a href="#productos" onclick="cerrarMenu()">Productos</a>
+    <a href="productos.html" onclick="cerrarMenu()">Productos</a>
     <a href="#contacto" onclick="cerrarMenu()">Contacto</a>
   </div>
 
   <!-- ============================================================
        HERO — Sección principal
-       Cambia WEB.png por el nombre de tu foto si lo cambias
+       Foto: WEB.png — cámbiala aquí si la renombras
   ============================================================ -->
   <section id="hero">
-    <img src="WEB.png" alt="Omayra Pérez" class="hero-foto" />
+    <img src="WEB.png" alt="ETHOS" class="hero-foto" />
     <div class="hero-gradiente"></div>
     <div class="hero-gradiente-abajo"></div>
     <div class="hero-contenido">
       <h1 class="hero-titulo">ETHOS</h1>
+      <!-- Edita el subtítulo dorado aquí -->
       <p class="hero-subtitulo">Donde vive la verdad que siempre estuvo ahí.</p>
+      <!-- Edita el subtítulo gris aquí -->
       <p class="hero-subtitulo-2">Al final solo quedan los hechos, lo que fuiste cuando nadie miraba.</p>
     </div>
-    <div class="scroll-indicator">
-      <span>Scroll</span>
-      <div class="scroll-linea"></div>
-    </div>
+    <div class="scroll-indicator"><span>Scroll</span><div class="scroll-linea"></div></div>
   </section>
 
   <!-- ============================================================
-       SOBRE MÍ — Presentación y filosofía
-       Edita los tres bloques de texto dentro del grid
+       SOBRE MÍ
+       Edita los tres bloques: título izquierda, texto centro, cita derecha
   ============================================================ -->
   <section id="sobre-mi">
     <div class="sobre-grid reveal">
       <div class="sobre-col-1">
         <p class="etiqueta">Sobre mí</p>
         <div class="separador"></div>
-        <h2 class="sobre-titulo-grande">
-          Soy Omayra.<br />
-          Y hubo un momento<br />
-          en que algo no cuadraba.
-        </h2>
+        <!-- Título principal de la sección -->
+        <h2 class="sobre-titulo-grande">Soy Omayra.<br />Y hubo un momento<br />en que algo no cuadraba.</h2>
       </div>
       <div class="sobre-col-2">
+        <!-- Texto central — edita aquí -->
         <p class="sobre-texto">
           Cuando el discurso dejó de tener sentido.<br />
           Cuando la ideología comenzó a imponerse por encima de los hechos.<br />
@@ -958,96 +369,74 @@
         </p>
       </div>
       <div>
-        <p class="sobre-cita">
-          Aquí no te dices qué pensar. Te damos las herramientas para que lo hagas con verdad.
-        </p>
+        <!-- Cita derecha — edita aquí -->
+        <p class="sobre-cita">Aquí no te dicen qué pensar. Te damos las herramientas para que lo hagas con verdad.</p>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
        SOUL E IRON — Las dos ramas
-       Edita características, logos y enlace de los botones
+       Logos: ETHOS Soul copia.png / ETHOS Iron copia.png
+       Botones enlazan a soul.html e iron.html
   ============================================================ -->
   <section id="programas">
     <div class="programas-grid">
 
-      <!-- ETHOS SOUL -->
+      <!-- ETHOS SOUL — Edita características aquí -->
       <div class="programa-card reveal">
         <img src="ETHOS Soul copia.png" alt="ETHOS Soul" class="programa-logo" />
         <p class="programa-nombre">Apoyo · Paz · Humanidad</p>
         <ul class="programa-features">
           <li>
             <div class="feature-icono">♡</div>
-            <div class="feature-texto">
-              <strong>Apoyo real</strong>
-              <span>Acompañamiento humano y emocional.</span>
-            </div>
+            <div class="feature-texto"><strong>Apoyo real</strong><span>Acompañamiento humano y emocional.</span></div>
           </li>
           <li>
             <div class="feature-icono">§</div>
-            <div class="feature-texto">
-              <strong>Guía legal</strong>
-              <span>Orientación y recursos legales.</span>
-            </div>
+            <div class="feature-texto"><strong>Guía legal</strong><span>Orientación y recursos legales.</span></div>
           </li>
           <li>
             <div class="feature-icono">◇</div>
-            <div class="feature-texto">
-              <strong>Donaciones</strong>
-              <span>Cada aporte transforma vidas.</span>
-            </div>
+            <div class="feature-texto"><strong>Donaciones</strong><span>Cada aporte transforma vidas.</span></div>
           </li>
           <li>
             <div class="feature-icono">✦</div>
-            <div class="feature-texto">
-              <strong>Acompañamiento</strong>
-              <span>No estás solo. Estamos contigo.</span>
-            </div>
+            <div class="feature-texto"><strong>Psicología de crisis</strong><span>Recursos para atravesar el momento más difícil.</span></div>
+          </li>
+          <li>
+            <div class="feature-icono">⬡</div>
+            <!-- Edita el texto del grupo privado aquí cuando lo tengas claro -->
+            <div class="feature-texto"><strong>Grupo privado</strong><span>WhatsApp exclusivo para hombres en tu situación o que quieran apoyar.</span></div>
           </li>
         </ul>
         <a href="soul.html" class="btn"><span>Conoce Ethos Soul</span></a>
       </div>
 
-      <!-- ETHOS IRON -->
+      <!-- ETHOS IRON — Edita características aquí -->
       <div class="programa-card reveal">
         <img src="ETHOS Iron copia.png" alt="ETHOS Iron" class="programa-logo" />
         <p class="programa-nombre">Acceso privado</p>
         <ul class="programa-features">
           <li>
             <div class="feature-icono">▶</div>
-            <div class="feature-texto">
-              <strong>Series documentadas</strong>
-              <span>Contenido profundo y sin filtro.</span>
-            </div>
+            <div class="feature-texto"><strong>Series documentadas</strong><span>Contenido profundo y sin filtro.</span></div>
           </li>
           <li>
             <div class="feature-icono">◈</div>
-            <div class="feature-texto">
-              <strong>Membresía</strong>
-              <span>Acceso exclusivo a todo el contenido.</span>
-            </div>
+            <div class="feature-texto"><strong>Membresía</strong><span>Acceso exclusivo a todo el contenido.</span></div>
           </li>
           <li>
             <div class="feature-icono">⊕</div>
-            <div class="feature-texto">
-              <strong>IA para contrargumentar</strong>
-              <span>Herramientas para debatir con hechos.</span>
-            </div>
+            <div class="feature-texto"><strong>IA para contrargumentar</strong><span>Herramientas para debatir con hechos.</span></div>
           </li>
           <li>
             <div class="feature-icono">◎</div>
-            <div class="feature-texto">
-              <strong>Reunión mensual</strong>
-              <span>Encuentros en vivo y sin censura.</span>
-            </div>
+            <div class="feature-texto"><strong>Reunión mensual</strong><span>Encuentros en vivo y sin censura.</span></div>
           </li>
           <li>
-            <div class="feature-icono">⬡</div>
-            <div class="feature-texto">
-              <strong>Comunidad privada</strong>
-              <span>Mujeres críticas. Libres. Despiertas.</span>
-            </div>
+            <div class="feature-icono">✦</div>
+            <div class="feature-texto"><strong>Comunidad privada</strong><span>Mujeres críticas. Libres. Despiertas.</span></div>
           </li>
         </ul>
         <a href="iron.html" class="btn"><span>Conoce Ethos Iron</span></a>
@@ -1057,8 +446,7 @@
   </section>
 
   <!-- ============================================================
-       CÓMO FUNCIONA — 3 pasos
-       Edita los títulos y descripciones de cada paso
+       CÓMO FUNCIONA — Edita títulos y descripciones de los 3 pasos
   ============================================================ -->
   <section id="como-funciona">
     <p class="seccion-titulo">Cómo funciona</p>
@@ -1087,130 +475,127 @@
   </section>
 
   <!-- ============================================================
-       PRODUCTOS — Series individuales
-       Para abrir/cerrar un lanzamiento: cambia data-lanzamiento="abierto" o "cerrado"
-       Para el precio: edita el texto dentro de .producto-precio
-       Para el enlace de compra: edita el href del .btn-comprar (Hotmart)
+       PRODUCTOS — Carrusel de series
+       ABRIR lanzamiento: cambia data-lanzamiento="abierto" → "abierto"
+       ENLACE HOTMART: cambia href="#" en cada .btn-comprar por tu URL
+       ENLACE STRIPE (Guía VG): cambia href="#" del btn-comprar de la Guía VG
   ============================================================ -->
   <section id="productos">
-    <p class="seccion-titulo">Productos destacados</p>
+    <p class="seccion-titulo-productos">Productos destacados</p>
     <div class="productos-grid">
 
-      <!-- Serie 1 -->
-      <div class="producto-card reveal" data-lanzamiento="cerrado">
+      <!-- Serie 1 — href a productos.html#serie-1 cuando tengas la página -->
+      <div class="producto-card reveal" data-lanzamiento="abierto">
         <span class="producto-badge">Serie</span>
         <img src="S1-La mente femenina al descubierto.png" alt="La mente femenina al descubierto" class="producto-imagen" />
         <div class="producto-info">
           <p class="producto-nombre">La mente femenina al descubierto</p>
           <p class="producto-desc">Psicología real sin filtro ideológico.</p>
           <p class="producto-precio"><sup>€</sup>47</p>
-          <!-- Cambia el href por el enlace de Hotmart cuando lo tengas -->
-          <a href="#" class="btn btn-comprar" style="font-size:0.6rem;padding:0.6rem 1rem;display:block;text-align:center;margin-top:0.8rem;"><span>Comprar</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <!-- Botón "Saber más" lleva a la ficha del producto en productos.html -->
+          <a href="productos.html#serie-1" class="btn-comprar" style="display:block;"><span>Saber más</span></a>
         </div>
       </div>
 
       <!-- Serie 2 -->
-      <div class="producto-card reveal" data-lanzamiento="cerrado">
+      <div class="producto-card reveal" data-lanzamiento="abierto">
         <span class="producto-badge">Serie</span>
         <img src="S2-La logica femenina al descubierto.png" alt="La lógica femenina al descubierto" class="producto-imagen" />
         <div class="producto-info">
           <p class="producto-nombre">La lógica femenina al descubierto</p>
           <p class="producto-desc">Patrones de comportamiento explicados.</p>
           <p class="producto-precio"><sup>€</sup>47</p>
-          <a href="#" class="btn btn-comprar" style="font-size:0.6rem;padding:0.6rem 1rem;display:block;text-align:center;margin-top:0.8rem;"><span>Comprar</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <!-- Botón "Saber más" lleva a la ficha del producto en productos.html -->
+          <a href="productos.html#serie-2" class="btn-comprar" style="display:block;"><span>Saber más</span></a>
         </div>
       </div>
 
       <!-- Serie 3 -->
-      <div class="producto-card reveal" data-lanzamiento="cerrado">
+      <div class="producto-card reveal" data-lanzamiento="abierto">
         <span class="producto-badge">Serie</span>
         <img src="S3-La conquista real.png" alt="La conquista real" class="producto-imagen" />
         <div class="producto-info">
           <p class="producto-nombre">La conquista real</p>
           <p class="producto-desc">Lo que nadie te enseñó sobre las relaciones.</p>
           <p class="producto-precio"><sup>€</sup>57</p>
-          <a href="#" class="btn btn-comprar" style="font-size:0.6rem;padding:0.6rem 1rem;display:block;text-align:center;margin-top:0.8rem;"><span>Comprar</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <!-- Botón "Saber más" lleva a la ficha del producto en productos.html -->
+          <a href="productos.html#serie-3" class="btn-comprar" style="display:block;"><span>Saber más</span></a>
         </div>
       </div>
 
       <!-- Serie 4 -->
-      <div class="producto-card reveal" data-lanzamiento="cerrado">
+      <div class="producto-card reveal" data-lanzamiento="abierto">
         <span class="producto-badge">Serie</span>
         <img src="S4-Destruye el feminismo.png" alt="Destruye el feminismo" class="producto-imagen" />
         <div class="producto-info">
           <p class="producto-nombre">Destruye el feminismo</p>
           <p class="producto-desc">Argumentos sólidos contra la narrativa dominante.</p>
           <p class="producto-precio"><sup>€</sup>57</p>
-          <a href="#" class="btn btn-comprar" style="font-size:0.6rem;padding:0.6rem 1rem;display:block;text-align:center;margin-top:0.8rem;"><span>Comprar</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <!-- Botón "Saber más" lleva a la ficha del producto en productos.html -->
+          <a href="productos.html#serie-4" class="btn-comprar" style="display:block;"><span>Saber más</span></a>
         </div>
       </div>
 
       <!-- Serie 5 -->
-      <div class="producto-card reveal" data-lanzamiento="cerrado">
+      <div class="producto-card reveal" data-lanzamiento="abierto">
         <span class="producto-badge">Serie</span>
         <img src="S5-La guerra de sexos.png" alt="La guerra de sexos" class="producto-imagen" />
         <div class="producto-info">
           <p class="producto-nombre">La guerra de sexos</p>
           <p class="producto-desc">Por qué nos enfrentan y quién gana.</p>
           <p class="producto-precio"><sup>€</sup>57</p>
-          <a href="#" class="btn btn-comprar" style="font-size:0.6rem;padding:0.6rem 1rem;display:block;text-align:center;margin-top:0.8rem;"><span>Comprar</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <!-- Botón "Saber más" lleva a la ficha del producto en productos.html -->
+          <a href="productos.html#serie-5" class="btn-comprar" style="display:block;"><span>Saber más</span></a>
         </div>
       </div>
 
       <!-- Serie 6 -->
-      <div class="producto-card reveal" data-lanzamiento="cerrado">
+      <div class="producto-card reveal" data-lanzamiento="abierto">
         <span class="producto-badge">Serie</span>
         <img src="S6-El ciclo tu poder.png" alt="El ciclo, tu poder" class="producto-imagen" />
         <div class="producto-info">
           <p class="producto-nombre">El ciclo, tu poder</p>
           <p class="producto-desc">Tu biología como herramienta, no como excusa.</p>
           <p class="producto-precio"><sup>€</sup>47</p>
-          <a href="#" class="btn btn-comprar" style="font-size:0.6rem;padding:0.6rem 1rem;display:block;text-align:center;margin-top:0.8rem;"><span>Comprar</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <!-- Botón "Saber más" lleva a la ficha del producto en productos.html -->
+          <a href="productos.html#serie-6" class="btn-comprar" style="display:block;"><span>Saber más</span></a>
         </div>
       </div>
 
       <!-- Serie 7 -->
-      <div class="producto-card reveal" data-lanzamiento="cerrado">
+      <div class="producto-card reveal" data-lanzamiento="abierto">
         <span class="producto-badge">Serie</span>
         <img src="S7- Woke.png" alt="Woke" class="producto-imagen" />
         <div class="producto-info">
           <p class="producto-nombre">Woke</p>
           <p class="producto-desc">El movimiento que prometió libertad y entregó dogma.</p>
           <p class="producto-precio"><sup>€</sup>47</p>
-          <a href="#" class="btn btn-comprar" style="font-size:0.6rem;padding:0.6rem 1rem;display:block;text-align:center;margin-top:0.8rem;"><span>Comprar</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <!-- Botón "Saber más" lleva a la ficha del producto en productos.html -->
+          <a href="productos.html#serie-7" class="btn-comprar" style="display:block;"><span>Saber más</span></a>
         </div>
       </div>
 
-      <!-- Guía VG (ETHOS Soul) -->
+      <!-- Guía VG — usa Stripe, no Hotmart. Siempre abierta -->
       <div class="producto-card reveal" data-lanzamiento="abierto">
         <span class="producto-badge" style="background:transparent;border:1px solid var(--dorado);color:var(--dorado);">Soul</span>
-        <img src="ETHOS Soul copia 3.png" alt="Guía VG" class="producto-imagen" style="object-fit:contain;padding:1.5rem;background:#0d0d0d;" />
+        <img src="ETHOS Soul copia 3.png" alt="Guía VG" class="producto-imagen" />
         <div class="producto-info">
           <p class="producto-nombre">Guía VG</p>
           <p class="producto-desc">Guía legal para hombres acusados de violencia de género en España.</p>
           <p class="producto-precio">Donación libre</p>
-          <!-- Cambia el href por el enlace de Stripe cuando lo tengas -->
-          <a href="#" class="btn btn-comprar" style="font-size:0.6rem;padding:0.6rem 1rem;display:block;text-align:center;margin-top:0.8rem;"><span>Acceder</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <!-- Cambia # por tu enlace de Stripe cuando lo tengas -->
+          <a href="#" class="btn-comprar" style="display:block;"><span>Acceder</span></a>
         </div>
       </div>
 
     </div>
-    <div style="text-align:center;margin-top:3rem;">
-      <a href="#productos" class="btn"><span>Ver todos los productos</span></a>
+    <div class="productos-cta">
+      <a href="productos.html" class="btn"><span>Ver todos los productos</span></a>
     </div>
   </section>
 
   <!-- ============================================================
-       COLABORADORES — Añade logos reales cuando los tengas
-       Reemplaza cada <span> por <img src="logo.png" /> cuando tengas los archivos
+       COLABORADORES — Reemplaza cada · LOGO · por tu imagen real
   ============================================================ -->
   <section id="colaboradores">
     <p class="seccion-titulo">Colaboradores</p>
@@ -1224,94 +609,52 @@
   </section>
 
   <!-- ============================================================
-       FOOTER
-       Edita el email y los enlaces legales
+       FOOTER — Edita el email de contacto aquí
   ============================================================ -->
   <footer id="contacto">
     <div class="footer-logo">ETHOS</div>
     <ul class="footer-links">
       <li><a href="#hero">Inicio</a></li>
       <li><a href="#sobre-mi">Sobre mí</a></li>
-      <li><a href="#programas">Soul</a></li>
-      <li><a href="#programas">Iron</a></li>
-      <li><a href="#productos">Productos</a></li>
+      <li><a href="soul.html">Soul</a></li>
+      <li><a href="iron.html">Iron</a></li>
+      <li><a href="productos.html">Productos</a></li>
       <li><a href="mailto:hola@ethosironsoul.com">Contacto</a></li>
     </ul>
     <p class="footer-copy">© 2026 ETHOS — Iron & Soul Group. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- ============================================================
-       MODAL — Lista de espera para lanzamientos cerrados
-       El formulario recoge el email; conecta con tu plataforma cuando lo tengas
-  ============================================================ -->
+  <!-- Modal lista de espera -->
   <div class="modal-overlay" id="modal-espera">
     <div class="modal">
       <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
       <h3>Próximo lanzamiento</h3>
       <p>Déjame tu email y te aviso cuando abra de nuevo.</p>
       <input type="email" placeholder="tu@email.com" id="email-espera" />
-      <!-- Conecta este botón a tu plataforma de email (MailerLite, ConvertKit, etc.) -->
+      <!-- Conecta este botón a tu plataforma de email (MailerLite, etc.) -->
       <button class="btn" onclick="guardarEmail()"><span>Avísame</span></button>
     </div>
   </div>
 
   <!-- ============================================================
-       BOTÓN FLOTANTE DE DONACIÓN
-       Cambia el href por el enlace de Stripe cuando lo tengas
+       BOTÓN FLOTANTE DONACIÓN
+       Cambia href="#" por tu enlace de Stripe cuando lo tengas
   ============================================================ -->
   <div id="btn-donar">
     <a href="#" class="donar-circulo" title="Donar a ETHOS Soul">♡</a>
     <span class="donar-etiqueta">Donar</span>
   </div>
 
-  <!-- ============================================================
-       JAVASCRIPT — Interactividad
-  ============================================================ -->
   <script>
-    // Navbar: se oscurece al hacer scroll
-    window.addEventListener('scroll', () => {
-      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-    });
-
-    // Menú hamburguesa (móvil)
-    document.getElementById('hamburguesa').addEventListener('click', function () {
-      this.classList.toggle('abierto');
-      document.getElementById('nav-movil').classList.toggle('abierto');
-    });
-    function cerrarMenu() {
-      document.getElementById('hamburguesa').classList.remove('abierto');
-      document.getElementById('nav-movil').classList.remove('abierto');
-    }
-
-    // Animaciones al hacer scroll (reveal)
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        }
-      });
-    }, { threshold: 0.1 });
+    window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50); });
+    document.getElementById('hamburguesa').addEventListener('click', function () { this.classList.toggle('abierto'); document.getElementById('nav-movil').classList.toggle('abierto'); });
+    function cerrarMenu() { document.getElementById('hamburguesa').classList.remove('abierto'); document.getElementById('nav-movil').classList.remove('abierto'); }
+    const observer = new IntersectionObserver((entries) => { entries.forEach((entry, i) => { if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 80); }); }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // Modal lista de espera
-    function abrirModal() {
-      document.getElementById('modal-espera').classList.add('abierto');
-    }
-    function cerrarModal() {
-      document.getElementById('modal-espera').classList.remove('abierto');
-    }
-    document.getElementById('modal-espera').addEventListener('click', function(e) {
-      if (e.target === this) cerrarModal();
-    });
-    function guardarEmail() {
-      const email = document.getElementById('email-espera').value;
-      if (email) {
-        // Aquí conectas con MailerLite, ConvertKit, etc.
-        alert('¡Gracias! Te avisamos en el próximo lanzamiento.');
-        cerrarModal();
-      }
-    }
+    function abrirModal() { document.getElementById('modal-espera').classList.add('abierto'); }
+    function cerrarModal() { document.getElementById('modal-espera').classList.remove('abierto'); }
+    document.getElementById('modal-espera').addEventListener('click', function(e) { if (e.target === this) cerrarModal(); });
+    function guardarEmail() { const email = document.getElementById('email-espera').value; if (email) { alert('¡Gracias! Te avisamos en el próximo lanzamiento.'); cerrarModal(); } }
   </script>
-
 </body>
 </html>
