@@ -146,14 +146,15 @@
     .hero-eyebrow { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--dorado); margin-bottom: 1rem; }
     .hero-titulo {
       font-family: var(--font-display);
-      font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+      font-size: clamp(2.5rem, 4.5vw, 5rem);
       font-weight: 300;
       letter-spacing: 0.05em;
-      line-height: 1.05;
+      line-height: 1.1;
       margin-bottom: 1.5rem;
+      white-space: nowrap;
     }
-    .hero-subtitulo { font-family: var(--font-display); font-size: clamp(1rem, 1.8vw, 1.3rem); font-style: italic; color: var(--dorado); margin-bottom: 0.5rem; }
-    .hero-desc { font-size: 0.8rem; color: var(--gris); max-width: 480px; line-height: 1.8; }
+    .hero-subtitulo { font-family: var(--font-display); font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-style: italic; color: var(--dorado); margin-bottom: 0.8rem; }
+    .hero-desc { font-size: 1.1rem; color: var(--gris); max-width: 520px; line-height: 1.8; }
 
     /* ============================================================
        SECCIÓN TÍTULO DECORADO
@@ -169,7 +170,7 @@
        QUÉ ES IRON — Introducción
     ============================================================ */
     #que-es {
-      padding: 7rem 4rem; max-width: 1100px; margin: 0 auto;
+      padding: 3rem 4rem 5rem; max-width: 1100px; margin: 0 auto;
     }
     .que-es-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
     .que-es-texto h2 {
@@ -215,17 +216,28 @@
        Para el enlace: cambia el href del .btn-comprar (Hotmart)
     ============================================================ */
     #series {
-      padding: 7rem 4rem; max-width: 1300px; margin: 0 auto;
+      padding: 5rem 0 5rem 4rem; max-width: 100%;
     }
     .series-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 2rem; margin-top: 0;
+      display: flex;
+      flex-direction: row;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      overflow-x: auto;
+      padding-bottom: 1.5rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--dorado-oscuro) var(--negro-card);
     }
+    .series-grid::-webkit-scrollbar { height: 3px; }
+    .series-grid::-webkit-scrollbar-track { background: var(--negro-card); }
+    .series-grid::-webkit-scrollbar-thumb { background: var(--dorado-oscuro); border-radius: 2px; }
     .serie-card {
       background: var(--negro-card); border: 1px solid var(--negro-borde);
       overflow: hidden; position: relative;
       transition: transform var(--transicion), box-shadow var(--transicion);
+      min-width: 260px; max-width: 260px; flex-shrink: 0; scroll-snap-align: start;
     }
     .serie-card::before {
       content: ''; position: absolute; inset: 0;
@@ -290,7 +302,7 @@
       font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 300; line-height: 1.1; margin-bottom: 1.2rem;
     }
-    .membresia-contenido p { font-size: 0.82rem; color: var(--gris); line-height: 1.9; margin-bottom: 1rem; }
+    .membresia-contenido p { font-size: 1.15rem; color: var(--gris); line-height: 1.9; margin-bottom: 1rem; }
     .membresia-precio {
       font-family: var(--font-display); font-size: 4rem; color: var(--dorado);
       line-height: 1; margin: 2rem 0 0.5rem;
@@ -451,20 +463,28 @@
       #navbar { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
       .hamburguesa { display: flex; }
-      #hero { min-height: 100svh; }
-      .hero-banner { right: 0; top: 0; transform: none; height: 100%; max-width: 100%; opacity: 0.25; }
-      .hero-overlay { background: linear-gradient(to top, var(--negro) 40%, rgba(10,10,10,0.2) 100%); }
-      .hero-contenido { padding: 8rem 1.5rem 4rem; }
+      #hero { min-height: 100svh; align-items: flex-end; }
+      .hero-banner { position: absolute; right: 0; top: 0; transform: none; width: 100%; height: 70%; max-width: 100%; opacity: 0.5; object-fit: cover; object-position: center top; }
+      .hero-overlay { background: linear-gradient(to top, var(--negro) 38%, rgba(10,10,10,0.4) 70%, rgba(10,10,10,0.1) 100%); }
+      .hero-contenido { padding: 0 1.5rem 4rem; max-width: 100%; }
+      .hero-titulo { white-space: normal; font-size: clamp(2.2rem, 10vw, 3.5rem); }
+      .hero-subtitulo { font-size: 1.1rem; }
+      .hero-desc { font-size: 0.95rem; }
+      #que-es { padding: 2rem 1.5rem 3rem; }
+      #series { padding: 3rem 0 3rem 1.2rem; }
+      .serie-card { min-width: 220px; max-width: 220px; }
       #que-es { padding: 4rem 1.5rem; }
       .que-es-grid { grid-template-columns: 1fr; gap: 3rem; }
-      #incluye { padding: 4rem 1.5rem; }
-      .incluye-grid { grid-template-columns: 1fr; }
+      #incluye { padding: 3rem 1.5rem; }
+      .incluye-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .incluye-card { padding: 1.5rem; }
       #series { padding: 4rem 1.5rem; }
       .series-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
       #membresia { padding: 4rem 1.5rem; }
       #bundles { padding: 4rem 1.5rem; }
       .bundles-grid { grid-template-columns: 1fr; }
-      #faq { padding: 4rem 1.5rem; }
+      #faq { padding: 3rem 1rem; }
+      .faq-pregunta { font-size: 0.95rem; }
       #cta-final { padding: 4rem 1.5rem; }
       footer { padding: 2rem 1.5rem; }
       #btn-donar { bottom: 1.5rem; right: 1.5rem; }
@@ -543,7 +563,7 @@
     <p class="seccion-titulo">Qué incluye Iron</p>
     <div class="incluye-grid">
       <div class="incluye-card reveal">
-        <div class="incluye-icono">▶</div>
+        <div class="incluye-icono">◈</div>
         <h3 class="incluye-titulo">Series documentadas</h3>
         <p class="incluye-desc">7 series de contenido profundo y sin filtro ideológico. Psicología, relaciones, feminismo, biología y más.</p>
       </div>
@@ -592,8 +612,7 @@
           <p class="serie-nombre">La mente femenina al descubierto</p>
           <p class="serie-desc">Psicología real sin filtro ideológico. Cómo funciona la mente femenina según la ciencia.</p>
           <p class="serie-precio"><sup>€</sup>47</p>
-          <a href="#" class="btn-comprar"><span>Comprar</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <a href="productos.html#serie-1" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
         </div>
       </div>
 
@@ -605,8 +624,7 @@
           <p class="serie-nombre">La lógica femenina al descubierto</p>
           <p class="serie-desc">Patrones de comportamiento explicados con datos y sin condescendencia.</p>
           <p class="serie-precio"><sup>€</sup>47</p>
-          <a href="#" class="btn-comprar"><span>Comprar</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <a href="productos.html#serie-2" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
         </div>
       </div>
 
@@ -618,8 +636,7 @@
           <p class="serie-nombre">La conquista real</p>
           <p class="serie-desc">Lo que nadie te enseñó sobre las relaciones entre hombres y mujeres.</p>
           <p class="serie-precio"><sup>€</sup>57</p>
-          <a href="#" class="btn-comprar"><span>Comprar</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <a href="productos.html#serie-3" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
         </div>
       </div>
 
@@ -631,8 +648,7 @@
           <p class="serie-nombre">Destruye el feminismo</p>
           <p class="serie-desc">Argumentos sólidos y datos reales para rebatir la narrativa dominante.</p>
           <p class="serie-precio"><sup>€</sup>57</p>
-          <a href="#" class="btn-comprar"><span>Comprar</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <a href="productos.html#serie-4" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
         </div>
       </div>
 
@@ -644,8 +660,7 @@
           <p class="serie-nombre">La guerra de sexos</p>
           <p class="serie-desc">Por qué nos enfrentan, quién gana y qué pierden todos.</p>
           <p class="serie-precio"><sup>€</sup>57</p>
-          <a href="#" class="btn-comprar"><span>Comprar</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <a href="productos.html#serie-5" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
         </div>
       </div>
 
@@ -657,8 +672,7 @@
           <p class="serie-nombre">El ciclo, tu poder</p>
           <p class="serie-desc">Tu biología como herramienta real, no como excusa ni como limitación.</p>
           <p class="serie-precio"><sup>€</sup>47</p>
-          <a href="#" class="btn-comprar"><span>Comprar</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <a href="productos.html#serie-6" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
         </div>
       </div>
 
@@ -670,8 +684,7 @@
           <p class="serie-nombre">Woke</p>
           <p class="serie-desc">El movimiento que prometió libertad y entregó dogma. Análisis sin concesiones.</p>
           <p class="serie-precio"><sup>€</sup>47</p>
-          <a href="#" class="btn-comprar"><span>Comprar</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <a href="productos.html#serie-7" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
         </div>
       </div>
 
