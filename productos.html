@@ -182,6 +182,20 @@
     .modal input[type="email"]:focus { border-color: var(--dorado); }
     .modal .btn { width: 100%; text-align: center; }
 
+
+    /* ============================================================
+       ACORDEÓN PACKS — desplegable de series incluidas
+    ============================================================ */
+    .pack-acordeon { margin: 1rem 0 1.5rem; border-top: 1px solid var(--negro-borde); }
+    .pack-item { border-bottom: 1px solid var(--negro-borde); }
+    .pack-item-btn { width: 100%; background: none; border: none; color: var(--blanco); font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.1em; text-align: left; padding: 0.8rem 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: color var(--transicion); }
+    .pack-item-btn:hover { color: var(--dorado); }
+    .pack-item-icono { font-size: 1rem; color: var(--dorado); transition: transform var(--transicion); flex-shrink: 0; }
+    .pack-item.abierto .pack-item-icono { transform: rotate(45deg); }
+    .pack-item-contenido { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .pack-item.abierto .pack-item-contenido { max-height: 200px; }
+    .pack-item-contenido p { font-size: 0.72rem; color: var(--gris); line-height: 1.7; padding-bottom: 0.8rem; text-align: left; }
+
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
@@ -251,6 +265,76 @@
     <button class="filtro-btn" onclick="filtrar('serie', this)">Series</button>
     <button class="filtro-btn" onclick="filtrar('soul', this)">Ethos Soul</button>
     <button class="filtro-btn" onclick="filtrar('membresia', this)">Membresía</button>
+  </div>
+
+  <!-- ============================================================
+       MEMBRESÍA IRON — imagen: misma que el banner de iron.html (ETHOS Iron copia 3.png)
+       Cambia el href del botón por Hotmart cuando lo tengas
+  ============================================================ -->
+  <section id="membresia" style="padding:0; border-top:1px solid var(--negro-borde); margin-bottom:0;" data-categoria="membresia">
+    <div style="display:grid; grid-template-columns:1fr 1fr; min-height:500px;">
+      <!-- Imagen izquierda: misma que el banner de iron.html -->
+      <div style="overflow:hidden; position:relative;">
+        <img src="ETHOS Iron copia 3.png" alt="ETHOS Iron Membresía" style="width:85%; height:85%; object-fit:contain; object-position:center; background:#0a0a0a; opacity:0.9; margin:auto;" />
+        <div style="position:absolute; inset:0; background:linear-gradient(to right, transparent 60%, var(--negro) 100%);"></div>
+      </div>
+      <!-- Info derecha -->
+      <div style="background:var(--negro-card); padding:5rem 4rem; display:flex; flex-direction:column; justify-content:center;">
+        <p class="etiqueta">Membresía</p>
+        <div class="separador"></div>
+        <h2 style="font-family:var(--font-display); font-size:clamp(2rem,4vw,3.2rem); font-weight:300; line-height:1.1; margin-bottom:1rem;">Todo el contenido.<br />Una sola cuota.</h2>
+        <p style="font-size:1rem; color:var(--gris); margin-bottom:1.5rem; line-height:1.8;">Acceso completo a las 7 series, comunidad privada, sesiones mensuales en vivo y la herramienta de IA para contrargumentar.</p>
+        <p style="font-family:var(--font-display); font-size:3.5rem; color:var(--dorado); line-height:1; margin-bottom:0.5rem;"><sup style="font-size:1.2rem;vertical-align:super;">€</sup>49<small style="font-size:1rem;color:var(--gris);"> / mes</small></p>
+        <ul style="list-style:none; margin:1.2rem 0 2rem; display:flex; flex-direction:column; gap:0.6rem;">
+          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Acceso inmediato a todas las series</li>
+          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Nuevas series incluidas sin coste adicional</li>
+          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Sesión en vivo mensual sin censura</li>
+          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> IA para contrargumentar con datos reales</li>
+          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Comunidad privada en Telegram</li>
+          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Análisis semanal de asimetrías legales</li>
+        </ul>
+        <!-- Cambia # por tu enlace de Hotmart -->
+        <a href="#" class="btn" style="align-self:flex-start;"><span>Unirme a Iron</span></a>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ============================================================
+       MEMBRESÍA IRON EN SERIES — primera opción visible
+       Cambia href por Hotmart cuando lo tengas
+  ============================================================ -->
+  <div class="producto-seccion reveal" id="iron-en-series" data-categoria="serie" data-lanzamiento="abierto">
+    <div class="producto-detalle">
+      <div class="producto-imagen-wrap reveal">
+        <img src="ETHOS Iron copia 3.png" alt="Membresía Iron" class="producto-det-imagen" />
+      </div>
+      <div class="producto-det-info">
+        <span class="producto-det-badge">ETHOS Iron · La opción más completa</span>
+        <h2 class="producto-det-titulo">Membresía Iron</h2>
+        <p class="producto-det-tagline">Todas las series. Una sola cuota. Cancela cuando quieras.</p>
+        <p class="producto-det-desc">Si vas a ver más de dos series, la membresía sale mejor. Acceso inmediato a todo el contenido Iron — series actuales y futuras, comunidad privada, sesiones en vivo y la herramienta de IA para contrargumentar.</p>
+        <p class="producto-det-desc"><strong>La forma más inteligente de acceder a Iron.</strong></p>
+        <div class="producto-incluye">
+          <h4>Qué incluye</h4>
+          <ul>
+            <li>Todas las series actuales y las que se publiquen en el futuro</li>
+            <li>Comunidad privada en Telegram</li>
+            <li>Sesión mensual en vivo sin censura</li>
+            <li>IA para contrargumentar con datos reales</li>
+            <li>Análisis semanal de asimetrías legales</li>
+          </ul>
+        </div>
+        <div class="producto-det-precio-wrap">
+          <div class="producto-det-precio"><sup>€</sup>49<small> / mes</small></div>
+        </div>
+        <div class="producto-botones">
+          <!-- Cambia # por tu enlace de Hotmart cuando lo tengas -->
+          <a href="#" class="btn btn-hotmart"><span>Unirme a Iron</span></a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ============================================================
@@ -563,7 +647,11 @@
           <img src="S7- Woke.png" style="width:100%; height:100px; object-fit:cover; object-position:top;" />
         </div>
         <p style="font-family:var(--font-display); font-size:1.4rem; font-weight:300; margin-bottom:0.5rem;">Pack Completo</p>
-        <p style="font-size:0.75rem; color:var(--gris); margin-bottom:1.5rem; line-height:1.6;">Las 7 series<br />Acceso total al contenido Iron</p>
+        <p style="font-size:0.75rem; color:var(--gris); margin-bottom:1rem; line-height:1.6;">Las 7 series · Acceso total al contenido Iron</p>
+        <div style="margin: 0 0 1.5rem; padding: 1.2rem; border: 1px solid var(--negro-borde); text-align: left;">
+          <p style="font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dorado); margin-bottom: 0.6rem;">Qué incluye</p>
+          <p style="font-size: 0.75rem; color: var(--gris); line-height: 1.8;">Psicología femenina · Lógica femenina · Conquista real · Feminismo al descubierto · Guerra de sexos · El ciclo como poder · Anatomía del movimiento woke.<br /><br />Todo el contenido que la narrativa dominante preferiría que no vieras, en un solo acceso de por vida.</p>
+        </div>
         <p style="font-family:var(--font-display); font-size:2.5rem; color:var(--dorado); line-height:1; margin-bottom:0.3rem;"><sup style="font-size:1rem;vertical-align:super;">€</sup>247</p>
         <p style="font-size:0.65rem; color:var(--dorado-oscuro); letter-spacing:0.1em; margin-bottom:1.5rem;">Ahorras 94€</p>
         <a href="#" class="btn"><span>Ver pack</span></a>
@@ -593,40 +681,6 @@
       </div>
     </div>
   </div>
-
-
-  <!-- ============================================================
-       MEMBRESÍA IRON — imagen: misma que el banner de iron.html (ETHOS Iron copia 3.png)
-       Cambia el href del botón por Hotmart cuando lo tengas
-  ============================================================ -->
-  <section id="membresia" style="padding:0; border-top:1px solid var(--negro-borde); margin-bottom:0;" data-categoria="membresia">
-    <div style="display:grid; grid-template-columns:1fr 1fr; min-height:500px;">
-      <!-- Imagen izquierda: misma que el banner de iron.html -->
-      <div style="overflow:hidden; position:relative;">
-        <img src="ETHOS Iron copia 3.png" alt="ETHOS Iron Membresía" style="width:85%; height:85%; object-fit:contain; object-position:center; background:#0a0a0a; opacity:0.9; margin:auto;" />
-        <div style="position:absolute; inset:0; background:linear-gradient(to right, transparent 60%, var(--negro) 100%);"></div>
-      </div>
-      <!-- Info derecha -->
-      <div style="background:var(--negro-card); padding:5rem 4rem; display:flex; flex-direction:column; justify-content:center;">
-        <p class="etiqueta">Membresía</p>
-        <div class="separador"></div>
-        <h2 style="font-family:var(--font-display); font-size:clamp(2rem,4vw,3.2rem); font-weight:300; line-height:1.1; margin-bottom:1rem;">Todo el contenido.<br />Una sola cuota.</h2>
-        <p style="font-size:1rem; color:var(--gris); margin-bottom:1.5rem; line-height:1.8;">Acceso completo a las 7 series, comunidad privada, sesiones mensuales en vivo y la herramienta de IA para contrargumentar.</p>
-        <p style="font-family:var(--font-display); font-size:3.5rem; color:var(--dorado); line-height:1; margin-bottom:0.5rem;"><sup style="font-size:1.2rem;vertical-align:super;">€</sup>49<small style="font-size:1rem;color:var(--gris);"> / mes</small></p>
-        <ul style="list-style:none; margin:1.2rem 0 2rem; display:flex; flex-direction:column; gap:0.6rem;">
-          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Acceso inmediato a todas las series</li>
-          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Nuevas series incluidas sin coste adicional</li>
-          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Sesión en vivo mensual sin censura</li>
-          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> IA para contrargumentar con datos reales</li>
-          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Comunidad privada en Telegram</li>
-          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Análisis semanal de asimetrías legales</li>
-        </ul>
-        <!-- Cambia # por tu enlace de Hotmart -->
-        <a href="#" class="btn" style="align-self:flex-start;"><span>Unirme a Iron</span></a>
-      </div>
-    </div>
-  </section>
-
 
 
   <!-- ============================================================
@@ -725,6 +779,15 @@
         else { el.style.display = (el.dataset.categoria === categoria) ? '' : 'none'; }
       });
     }
+
+    // Acordeón packs
+    document.querySelectorAll('.pack-item-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        item.classList.toggle('abierto');
+      });
+    });
+
   </script>
 </body>
 </html>
