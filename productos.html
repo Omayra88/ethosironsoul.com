@@ -509,7 +509,7 @@
   <!-- ============================================================
        PACKS DE SERIES — Edita precios y series incluidas aquí
   ============================================================ -->
-  <section style="padding: 6rem 4rem; max-width: 1300px; margin: 0 auto;" data-categoria="serie">
+  <section id="packs-series" style="padding: 6rem 4rem; max-width: 1300px; margin: 0 auto;" data-categoria="serie">
     <p class="seccion-titulo" style="justify-content:center; margin-bottom:3rem;">Packs de series</p>
     <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:2rem;">
 
@@ -570,7 +570,7 @@
     <div style="display:grid; grid-template-columns:1fr 1fr; min-height:500px;">
       <!-- Imagen izquierda: misma que el banner de iron.html -->
       <div style="overflow:hidden; position:relative;">
-        <img src="ETHOS Iron copia 3.png" alt="ETHOS Iron Membresía" style="width:100%; height:100%; object-fit:contain; object-position:center; background:#0a0a0a; opacity:0.9;" />
+        <img src="ETHOS Iron copia 3.png" alt="ETHOS Iron Membresía" style="width:85%; height:85%; object-fit:contain; object-position:center; background:#0a0a0a; opacity:0.9; margin:auto;" />
         <div style="position:absolute; inset:0; background:linear-gradient(to right, transparent 60%, var(--negro) 100%);"></div>
       </div>
       <!-- Info derecha -->
@@ -594,26 +594,7 @@
     </div>
   </section>
 
-  <!-- MEMBRESÍA IRON —eliminado, reemplazado arriba -->
-  <section id="membresia" data-categoria="membresia">
-    <div class="membresia-inner reveal">
-      <p class="etiqueta">Membresía</p>
-      <div class="separador" style="margin:1rem auto;"></div>
-      <h2>Todo el contenido.<br />Una sola cuota.</h2>
-      <p>Acceso completo a las 7 series, comunidad privada, sesiones mensuales en vivo y la herramienta de IA para contrargumentar.</p>
-      <div class="membresia-precio"><sup>€</sup>49<small> / mes</small></div>
-      <ul class="membresia-lista">
-        <li>Acceso inmediato a todas las series</li>
-        <li>Nuevas series incluidas sin coste adicional</li>
-        <li>Sesión en vivo mensual sin censura</li>
-        <li>IA para contrargumentar con datos reales</li>
-        <li>Comunidad privada en Telegram</li>
-        <li>Análisis semanal de asimetrías legales</li>
-      </ul>
-      <!-- Cambia # por tu enlace de Hotmart cuando lo tengas -->
-      <a href="#" class="btn"><span>Unirme a Iron</span></a>
-    </div>
-  </section>
+
 
   <!-- ============================================================
        FAQ — Edita preguntas y respuestas aquí
@@ -706,12 +687,27 @@
     function filtrar(categoria, btn) {
       document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
       btn.classList.add('activo');
-      document.querySelectorAll('.producto-seccion, #membresia').forEach(el => {
+      document.querySelectorAll('[data-categoria]').forEach(el => {
         if (categoria === 'todo') { el.style.display = ''; }
-        else if (categoria === 'membresia') { el.style.display = el.id === 'membresia' ? '' : 'none'; }
         else { el.style.display = (el.dataset.categoria === categoria) ? '' : 'none'; }
       });
     }
   </script>
 </body>
 </html>
+
+  <!-- ============================================================
+       BANNER COLABORACIÓN IRON→SOUL — visible en filtro Soul
+       Edita el texto aquí
+  ============================================================ -->
+  <div id="iron-soul-banner" data-categoria="soul" style="padding: 4rem; text-align: center; border-top: 1px solid var(--negro-borde); border-bottom: 1px solid var(--negro-borde);">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <p style="font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dorado); margin-bottom: 1.5rem;">· También colaboras con Soul ·</p>
+      <h2 style="font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem; color: var(--blanco);">Con cualquier producto<br />de ETHOS Iron,<br />colaboras con Soul.</h2>
+      <p style="font-size: 1rem; color: var(--gris); line-height: 1.9; max-width: 580px; margin: 0 auto 2rem;">Un porcentaje de cada compra de series, packs o membresía Iron se destina directamente al grupo de apoyo psicológico y los recursos legales gratuitos de ETHOS Soul.</p>
+      <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+        <a href="iron.html" class="btn"><span>Ver productos Iron</span></a>
+        <a href="#" class="btn"><span>Hacer una donación</span></a>
+      </div>
+    </div>
+  </div>
