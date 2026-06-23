@@ -1,4 +1,19 @@
-<!DOCTYPE html>
+<!D
+      <div class="btn-comprar-wrap cerrado" style="margin-top:0.8rem;">
+        <!-- Cambia # por enlace Hotmart del pack cuando lo tengas -->
+        <a href="#" class="btn-compra"><span>Comprar</span></a>
+        <span class="lanzamiento-badge">Lanzamiento cerrado</span>
+      </div>
+      <div class="btn-comprar-wrap cerrado" style="margin-top:0.8rem;">
+        <!-- Cambia # por enlace Hotmart del pack cuando lo tengas -->
+        <a href="#" class="btn-compra"><span>Comprar</span></a>
+        <span class="lanzamiento-badge">Lanzamiento cerrado</span>
+      </div>
+      <div class="btn-comprar-wrap cerrado" style="margin-top:0.8rem;">
+        <!-- Cambia # por enlace Hotmart del pack cuando lo tengas -->
+        <a href="#" class="btn-compra"><span>Comprar</span></a>
+        <span class="lanzamiento-badge">Lanzamiento cerrado</span>
+      </div>OCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -196,6 +211,51 @@
     .pack-item.abierto .pack-item-contenido { max-height: 200px; }
     .pack-item-contenido p { font-size: 0.72rem; color: var(--gris); line-height: 1.7; padding-bottom: 0.8rem; text-align: left; }
 
+
+    /* ============================================================
+       BOTÓN COMPRAR — dos estados: abierto y cerrado
+       Cambia data-lanzamiento="cerrado" a "abierto" para activar
+    ============================================================ */
+    .btn-comprar-wrap { position: relative; margin-top: 0.8rem; }
+    .btn-compra {
+      display: block; width: 100%; text-align: center;
+      font-size: 0.6rem; padding: 0.65rem 1rem;
+      border: 1px solid var(--dorado); color: var(--dorado); background: none;
+      letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer;
+      position: relative; overflow: hidden; transition: color var(--transicion);
+      text-decoration: none;
+    }
+    .btn-compra::after { content: ''; position: absolute; inset: 0; background: var(--dorado); transform: scaleX(0); transform-origin: left; transition: transform var(--transicion); z-index: 0; }
+    .btn-compra span { position: relative; z-index: 1; }
+    .btn-compra:hover::after { transform: scaleX(1); }
+    .btn-compra:hover { color: var(--negro); }
+
+    /* Estado CERRADO: tachado, no clicable */
+    .btn-comprar-wrap.cerrado .btn-compra {
+      pointer-events: none;
+      opacity: 0.4;
+      border-color: var(--gris);
+      color: var(--gris);
+      cursor: not-allowed;
+    }
+    .btn-comprar-wrap.cerrado .btn-compra::after { display: none; }
+    .btn-comprar-wrap.cerrado::before {
+      content: '✕';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.2rem;
+      color: var(--gris);
+      z-index: 10;
+      pointer-events: none;
+    }
+    .lanzamiento-badge {
+      display: block; width: 100%; text-align: center;
+      font-size: 0.5rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gris); margin-top: 0.3rem;
+    }
+    .btn-comprar-wrap.cerrado .lanzamiento-badge { color: var(--dorado-oscuro); }
+
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
@@ -267,45 +327,12 @@
     <button class="filtro-btn" onclick="filtrar('membresia', this)">Membresía</button>
   </div>
 
-  <!-- ============================================================
-       MEMBRESÍA IRON — imagen: misma que el banner de iron.html (ETHOS Iron copia 3.png)
-       Cambia el href del botón por Hotmart cuando lo tengas
-  ============================================================ -->
-  <section id="membresia" style="padding:0; border-top:1px solid var(--negro-borde); margin-bottom:0;" data-categoria="membresia">
-    <div style="display:grid; grid-template-columns:1fr 1fr; min-height:500px;">
-      <!-- Imagen izquierda: misma que el banner de iron.html -->
-      <div style="overflow:hidden; position:relative;">
-        <img src="ETHOS Iron copia 3.png" alt="ETHOS Iron Membresía" style="width:85%; height:85%; object-fit:contain; object-position:center; background:#0a0a0a; opacity:0.9; margin:auto;" />
-        <div style="position:absolute; inset:0; background:linear-gradient(to right, transparent 60%, var(--negro) 100%);"></div>
-      </div>
-      <!-- Info derecha -->
-      <div style="background:var(--negro-card); padding:5rem 4rem; display:flex; flex-direction:column; justify-content:center;">
-        <p class="etiqueta">Membresía</p>
-        <div class="separador"></div>
-        <h2 style="font-family:var(--font-display); font-size:clamp(2rem,4vw,3.2rem); font-weight:300; line-height:1.1; margin-bottom:1rem;">Todo el contenido.<br />Una sola cuota.</h2>
-        <p style="font-size:1rem; color:var(--gris); margin-bottom:1.5rem; line-height:1.8;">Acceso completo a las 7 series, comunidad privada, sesiones mensuales en vivo y la herramienta de IA para contrargumentar.</p>
-        <p style="font-family:var(--font-display); font-size:3.5rem; color:var(--dorado); line-height:1; margin-bottom:0.5rem;"><sup style="font-size:1.2rem;vertical-align:super;">€</sup>49<small style="font-size:1rem;color:var(--gris);"> / mes</small></p>
-        <ul style="list-style:none; margin:1.2rem 0 2rem; display:flex; flex-direction:column; gap:0.6rem;">
-          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Acceso inmediato a todas las series</li>
-          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Nuevas series incluidas sin coste adicional</li>
-          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Sesión en vivo mensual sin censura</li>
-          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> IA para contrargumentar con datos reales</li>
-          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Comunidad privada en Telegram</li>
-          <li style="font-size:0.95rem; color:var(--gris); padding-left:1.5rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Análisis semanal de asimetrías legales</li>
-        </ul>
-        <!-- Cambia # por tu enlace de Hotmart -->
-        <a href="#" class="btn" style="align-self:flex-start;"><span>Unirme a Iron</span></a>
-      </div>
-    </div>
-  </section>
-
-
 
   <!-- ============================================================
        MEMBRESÍA IRON EN SERIES — primera opción visible
        Cambia href por Hotmart cuando lo tengas
   ============================================================ -->
-  <div class="producto-seccion reveal" id="iron-en-series" data-categoria="serie" data-lanzamiento="abierto">
+  <div class="producto-seccion reveal" id="iron-en-series" data-categoria="membresia" data-lanzamiento="abierto">
     <div class="producto-detalle">
       <div class="producto-imagen-wrap reveal">
         <img src="ETHOS Iron copia 3.png" alt="Membresía Iron" class="producto-det-imagen" />
@@ -330,8 +357,13 @@
           <div class="producto-det-precio"><sup>€</sup>49<small> / mes</small></div>
         </div>
         <div class="producto-botones">
-          <!-- Cambia # por tu enlace de Hotmart cuando lo tengas -->
-          <a href="#" class="btn btn-hotmart"><span>Unirme a Iron</span></a>
+          <!-- Botón Unirme a Iron con estado cerrado/abierto -->
+          <!-- Para abrir: quita clase "cerrado" del div y cambia href por tu URL Hotmart -->
+          <div class="btn-comprar-wrap cerrado">
+            <a href="#" class="btn-compra"><span>Unirme a Iron</span></a>
+            <span class="lanzamiento-badge">Lanzamiento cerrado</span>
+          </div>
+          <button class="btn-espera-lista" onclick="abrirModal()" style="margin-top:0.8rem; width:100%; background:none; border:1px solid var(--negro-borde); color:var(--gris); font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.65rem 1rem; cursor:pointer; transition:border-color 0.35s ease, color 0.35s ease;" onmouseover="this.style.borderColor='var(--dorado)';this.style.color='var(--dorado)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.color='var(--gris)'">Avísame del próximo lanzamiento</button>
         </div>
       </div>
     </div>
@@ -372,6 +404,13 @@
           <!-- Reemplaza #HOTMART por tu enlace de Hotmart cuando abra el lanzamiento -->
           <a href="#HOTMART" class="btn btn-hotmart"><span>Comprar ahora</span></a>
           <button class="btn-espera-det" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        
+          <!-- Botón comprar — cambia href por Hotmart cuando lo tengas -->
+          <!-- Para cerrar lanzamiento: añade clase "cerrado" al div -->
+          <div class="btn-comprar-wrap cerrado">
+            <a href="#" class="btn-compra"><span>Comprar</span></a>
+            <span class="lanzamiento-badge">Lanzamiento cerrado</span>
+          </div>
         </div>
       </div>
     </div>
@@ -402,6 +441,13 @@
         <div class="producto-botones">
           <a href="#HOTMART" class="btn btn-hotmart"><span>Comprar ahora</span></a>
           <button class="btn-espera-det" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        
+          <!-- Botón comprar — cambia href por Hotmart cuando lo tengas -->
+          <!-- Para cerrar lanzamiento: añade clase "cerrado" al div -->
+          <div class="btn-comprar-wrap cerrado">
+            <a href="#" class="btn-compra"><span>Comprar</span></a>
+            <span class="lanzamiento-badge">Lanzamiento cerrado</span>
+          </div>
         </div>
       </div>
     </div>
@@ -432,6 +478,13 @@
         <div class="producto-botones">
           <a href="#HOTMART" class="btn btn-hotmart"><span>Comprar ahora</span></a>
           <button class="btn-espera-det" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        
+          <!-- Botón comprar — cambia href por Hotmart cuando lo tengas -->
+          <!-- Para cerrar lanzamiento: añade clase "cerrado" al div -->
+          <div class="btn-comprar-wrap cerrado">
+            <a href="#" class="btn-compra"><span>Comprar</span></a>
+            <span class="lanzamiento-badge">Lanzamiento cerrado</span>
+          </div>
         </div>
       </div>
     </div>
@@ -462,6 +515,13 @@
         <div class="producto-botones">
           <a href="#HOTMART" class="btn btn-hotmart"><span>Comprar ahora</span></a>
           <button class="btn-espera-det" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        
+          <!-- Botón comprar — cambia href por Hotmart cuando lo tengas -->
+          <!-- Para cerrar lanzamiento: añade clase "cerrado" al div -->
+          <div class="btn-comprar-wrap cerrado">
+            <a href="#" class="btn-compra"><span>Comprar</span></a>
+            <span class="lanzamiento-badge">Lanzamiento cerrado</span>
+          </div>
         </div>
       </div>
     </div>
@@ -492,6 +552,13 @@
         <div class="producto-botones">
           <a href="#HOTMART" class="btn btn-hotmart"><span>Comprar ahora</span></a>
           <button class="btn-espera-det" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        
+          <!-- Botón comprar — cambia href por Hotmart cuando lo tengas -->
+          <!-- Para cerrar lanzamiento: añade clase "cerrado" al div -->
+          <div class="btn-comprar-wrap cerrado">
+            <a href="#" class="btn-compra"><span>Comprar</span></a>
+            <span class="lanzamiento-badge">Lanzamiento cerrado</span>
+          </div>
         </div>
       </div>
     </div>
@@ -522,6 +589,13 @@
         <div class="producto-botones">
           <a href="#HOTMART" class="btn btn-hotmart"><span>Comprar ahora</span></a>
           <button class="btn-espera-det" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        
+          <!-- Botón comprar — cambia href por Hotmart cuando lo tengas -->
+          <!-- Para cerrar lanzamiento: añade clase "cerrado" al div -->
+          <div class="btn-comprar-wrap cerrado">
+            <a href="#" class="btn-compra"><span>Comprar</span></a>
+            <span class="lanzamiento-badge">Lanzamiento cerrado</span>
+          </div>
         </div>
       </div>
     </div>
@@ -552,6 +626,13 @@
         <div class="producto-botones">
           <a href="#HOTMART" class="btn btn-hotmart"><span>Comprar ahora</span></a>
           <button class="btn-espera-det" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        
+          <!-- Botón comprar — cambia href por Hotmart cuando lo tengas -->
+          <!-- Para cerrar lanzamiento: añade clase "cerrado" al div -->
+          <div class="btn-comprar-wrap cerrado">
+            <a href="#" class="btn-compra"><span>Comprar</span></a>
+            <span class="lanzamiento-badge">Lanzamiento cerrado</span>
+          </div>
         </div>
       </div>
     </div>
