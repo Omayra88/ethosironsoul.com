@@ -156,8 +156,9 @@
     .producto-card:hover::before { opacity: 1; }
     .producto-imagen { width: 100%; aspect-ratio: 2/3; object-fit: contain; background: #0d0d0d; }
     .producto-badge { position: absolute; top: 1rem; right: 1rem; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--dorado); color: var(--negro); padding: 0.3rem 0.7rem; z-index: 2; }
-    .producto-info { padding: 1.2rem; display: flex; flex-direction: column; }
-    .producto-precio { margin-top: auto; }
+    .producto-info { padding: 1.2rem; display: flex; flex-direction: column; height: 100%; }
+    .producto-desc { flex: 1; }
+    .producto-precio { margin-top: 0.8rem; }
     .producto-nombre { font-family: var(--font-display); font-size: 1rem; font-weight: 400; margin-bottom: 0.3rem; line-height: 1.3; }
     .producto-desc { font-size: 0.7rem; color: var(--gris); margin-bottom: 0.8rem; line-height: 1.5; }
     .producto-precio { font-family: var(--font-display); font-size: 1.3rem; color: var(--dorado); margin-bottom: 0.8rem; }
@@ -172,6 +173,7 @@
     .btn-comprar span { position: relative; z-index: 1; }
     .btn-comprar:hover::after { transform: scaleX(1); }
     .btn-comprar:hover { color: var(--negro); }
+    .btn-espera { display: none; }
     .btn-espera { display: none; width: 100%; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris); border: 1px solid var(--negro-borde); padding: 0.65rem 0.5rem; cursor: pointer; background: none; transition: border-color var(--transicion), color var(--transicion); }
     .btn-espera:hover { border-color: var(--dorado); color: var(--dorado); }
     .productos-cta { text-align: center; margin-top: 3rem; padding-right: 4rem; }
