@@ -6,9 +6,6 @@
   <title>ETHOS Iron — Acceso Privado</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-    /* ============================================================
-       TOKENS — Misma paleta que index.html y soul.html
-    ============================================================ */
     :root {
       --negro:        #0a0a0a;
       --negro-card:   #111111;
@@ -22,350 +19,134 @@
       --font-body:    'Montserrat', sans-serif;
       --transicion:   0.35s ease;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      background: var(--negro);
-      color: var(--blanco);
-      font-family: var(--font-body);
-      font-weight: 300;
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
+    body { background: var(--negro); color: var(--blanco); font-family: var(--font-body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
     .etiqueta { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado); }
     .separador { width: 40px; height: 1px; background: var(--dorado); margin: 1rem 0; }
-
-    /* ============================================================
-       BOTÓN BASE
-    ============================================================ */
     .btn {
-      display: inline-block;
-      font-family: var(--font-body);
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      padding: 0.85rem 2.5rem;
-      border: 1px solid var(--dorado);
-      color: var(--dorado);
-      background: transparent;
-      cursor: pointer;
-      transition: color var(--transicion), box-shadow var(--transicion);
-      position: relative;
-      overflow: hidden;
+      display: inline-block; font-family: var(--font-body); font-size: 0.7rem;
+      letter-spacing: 0.2em; text-transform: uppercase; padding: 0.85rem 2.5rem;
+      border: 1px solid var(--dorado); color: var(--dorado); background: transparent;
+      cursor: pointer; transition: color var(--transicion), box-shadow var(--transicion);
+      position: relative; overflow: hidden;
     }
-    .btn::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: var(--dorado);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform var(--transicion); z-index: 0;
-    }
+    .btn::after { content: ''; position: absolute; inset: 0; background: var(--dorado); transform: scaleX(0); transform-origin: left; transition: transform var(--transicion); z-index: 0; }
     .btn span { position: relative; z-index: 1; }
     .btn:hover::after { transform: scaleX(1); }
     .btn:hover { color: var(--negro); box-shadow: 0 0 20px rgba(201,168,76,0.3); }
 
-    /* ============================================================
-       NAVBAR
-    ============================================================ */
-    #navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.2rem 4rem;
-      transition: background var(--transicion);
-    }
-    #navbar.scrolled {
-      background: rgba(10,10,10,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--negro-borde);
-    }
+    /* NAVBAR */
+    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; transition: background var(--transicion); }
+    #navbar.scrolled { background: rgba(10,10,10,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--negro-borde); }
     .nav-logo { font-family: var(--font-display); font-size: 1.4rem; font-weight: 300; letter-spacing: 0.35em; }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--gris); transition: color var(--transicion); position: relative;
-    }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: -4px; left: 0;
-      width: 0; height: 1px; background: var(--dorado); transition: width var(--transicion);
-    }
+    .nav-links a { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris); transition: color var(--transicion); position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--dorado); transition: width var(--transicion); }
     .nav-links a:hover, .nav-links a.activo { color: var(--dorado); }
     .nav-links a:hover::after, .nav-links a.activo::after { width: 100%; }
-    .hamburguesa {
-      display: none; flex-direction: column; gap: 5px;
-      cursor: pointer; background: none; border: none; padding: 4px;
-    }
+    .hamburguesa { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .hamburguesa span { display: block; width: 24px; height: 1px; background: var(--blanco); transition: all var(--transicion); }
     .hamburguesa.abierto span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
     .hamburguesa.abierto span:nth-child(2) { opacity: 0; }
     .hamburguesa.abierto span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-    .nav-movil {
-      display: none; position: fixed; inset: 0;
-      background: rgba(10,10,10,0.97); z-index: 999;
-      flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
-    }
+    .nav-movil { display: none; position: fixed; inset: 0; background: rgba(10,10,10,0.97); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
     .nav-movil.abierto { display: flex; }
     .nav-movil a { font-family: var(--font-display); font-size: 2rem; letter-spacing: 0.15em; color: var(--blanco); transition: color var(--transicion); }
     .nav-movil a:hover { color: var(--dorado); }
 
-    /* ============================================================
-       HERO — Banner principal Iron
-       Imagen: ETHOS Iron copia 3.png
-    ============================================================ */
-    #hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-    .hero-banner {
-      position: absolute;
-      right: 4rem;
-      top: 50%;
-      transform: translateY(-50%);
-      height: 55%;
-      width: auto;
-      max-width: 35%;
-      object-fit: contain;
-      object-position: center;
-    }
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, var(--negro) 45%, rgba(10,10,10,0.3) 80%, transparent 100%);
-    }
-    .hero-contenido {
-      position: relative;
-      z-index: 2;
-      padding: 8rem 4rem 4rem;
-      max-width: 560px;
-    }
+    /* HERO */
+    #hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
+    .hero-banner { position: absolute; right: 4rem; top: 50%; transform: translateY(-50%); height: 55%; width: auto; max-width: 35%; object-fit: contain; object-position: center; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, var(--negro) 45%, rgba(10,10,10,0.3) 80%, transparent 100%); }
+    .hero-contenido { position: relative; z-index: 2; padding: 8rem 4rem 4rem; max-width: 560px; }
     .hero-eyebrow { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--dorado); margin-bottom: 1rem; }
-    .hero-titulo {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 4.5vw, 5rem);
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      white-space: nowrap;
-    }
+    .hero-titulo { font-family: var(--font-display); font-size: clamp(2.5rem, 4.5vw, 5rem); font-weight: 300; letter-spacing: 0.05em; line-height: 1.1; margin-bottom: 1.5rem; white-space: nowrap; }
     .hero-subtitulo { font-family: var(--font-display); font-size: clamp(1.3rem, 2vw, 1.7rem); font-style: italic; color: var(--dorado); margin-bottom: 0.8rem; white-space: nowrap; }
-    .hero-desc { font-size: 1.1rem; color: var(--gris); max-width: 520px; line-height: 1.8; }
+    .hero-desc { font-size: 1.1rem; color: var(--gris); max-width: 520px; line-height: 1.8; font-family: var(--font-body); }
 
-    /* ============================================================
-       SECCIÓN TÍTULO DECORADO
-    ============================================================ */
-    .seccion-titulo {
-      font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.35em;
-      text-transform: uppercase; color: var(--dorado);
-      display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-bottom: 3rem;
-    }
+    /* SECCION TITULO */
+    .seccion-titulo { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dorado); display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-bottom: 3rem; }
     .seccion-titulo::before, .seccion-titulo::after { content: ''; width: 60px; height: 1px; background: var(--dorado-oscuro); }
 
-    /* ============================================================
-       QUÉ ES IRON — Introducción
-    ============================================================ */
-    #que-es {
-      padding: 3rem 4rem 5rem; max-width: 1100px; margin: 0 auto;
-    }
+    /* QUÉ ES */
+    #que-es { padding: 3rem 4rem 5rem; max-width: 1100px; margin: 0 auto; }
     .que-es-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-    .que-es-texto h2 {
-      font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 300; line-height: 1.2; margin-bottom: 1.5rem;
-    }
+    .que-es-texto h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.2; margin-bottom: 1.5rem; }
     .que-es-texto p { font-size: 0.82rem; color: var(--gris); line-height: 1.9; margin-bottom: 1rem; }
     .que-es-texto p strong { color: var(--blanco); font-weight: 500; }
     .que-es-logo { width: 100%; max-width: 280px; opacity: 0.85; margin: 0 auto; }
 
-    /* ============================================================
-       LO QUE INCLUYE — Membresía y acceso
-    ============================================================ */
-    #incluye {
-      padding: 5rem 4rem;
-      background: var(--negro-card);
-      border-top: 1px solid var(--negro-borde);
-      border-bottom: 1px solid var(--negro-borde);
-    }
-    .incluye-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 2rem; max-width: 1100px; margin: 0 auto;
-    }
-    .incluye-card {
-      padding: 2.5rem 2rem; border: 1px solid var(--negro-borde);
-      position: relative;
-      transition: transform var(--transicion), box-shadow var(--transicion);
-    }
-    .incluye-card::before {
-      content: ''; position: absolute; inset: 0;
-      border: 1px solid var(--dorado); opacity: 0;
-      transition: opacity var(--transicion); pointer-events: none;
-    }
-    .incluye-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(201,168,76,0.1); }
-    .incluye-card:hover::before { opacity: 1; }
-    .incluye-icono { font-size: 1.6rem; color: var(--dorado); margin-bottom: 1rem; }
-    .incluye-titulo { font-family: var(--font-display); font-size: 1.2rem; font-weight: 400; margin-bottom: 0.7rem; }
-    .incluye-desc { font-size: 0.75rem; color: var(--gris); line-height: 1.8; }
+    /* TUS OPCIONES */
+    #opciones { padding: 5rem 4rem; max-width: 1300px; margin: 0 auto; }
+    .opciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .opcion-card { background: var(--negro-card); padding: 3rem; position: relative; transition: border-color 0.35s ease, box-shadow 0.35s ease; display: flex; flex-direction: column; }
 
-    /* ============================================================
-       SERIES — Las 7 series individuales
-       Para abrir/cerrar lanzamiento: cambia data-lanzamiento="abierto" o "cerrado"
-       Para el enlace: cambia el href del .btn-comprar (Hotmart)
-    ============================================================ */
-    #series {
-      padding: 5rem 0 5rem 4rem; max-width: 100%;
-    }
-    .series-grid {
-      display: flex;
-      flex-direction: row;
-      gap: 1.5rem;
-      margin-top: 2rem;
-      overflow-x: auto;
-      padding-bottom: 1.5rem;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-      scrollbar-color: var(--dorado-oscuro) var(--negro-card);
-    }
+    /* MEMBRESÍA CON FOTO */
+    #membresia { padding: 0; overflow: hidden; background: var(--negro-card); border-top: 1px solid var(--negro-borde); }
+    .membresia-imagen-wrap { position: relative; height: 320px; overflow: hidden; }
+    .membresia-imagen-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; opacity: 0.6; }
+    .membresia-imagen-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 30%, var(--negro-card) 100%); }
+    .membresia-contenido { max-width: 700px; margin: 0 auto; padding: 0 4rem 5rem; text-align: center; position: relative; z-index: 1; margin-top: -2rem; }
+    .membresia-contenido h2 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.2rem; }
+    .membresia-contenido p { font-size: 1.15rem; color: var(--gris); line-height: 1.9; margin-bottom: 1rem; }
+    .membresia-precio { font-family: var(--font-display); font-size: 4rem; color: var(--dorado); line-height: 1; margin: 2rem 0 0.5rem; }
+    .membresia-precio sup { font-size: 1.5rem; vertical-align: super; }
+    .membresia-precio small { font-size: 1rem; color: var(--gris); }
+    .membresia-lista { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; margin: 2rem auto; max-width: 400px; text-align: left; }
+    .membresia-lista li { font-size: 0.78rem; color: var(--gris); padding-left: 1.5rem; position: relative; }
+    .membresia-lista li::before { content: '✦'; position: absolute; left: 0; color: var(--dorado); font-size: 0.6rem; top: 0.15rem; }
+
+    /* SERIES */
+    #series { padding: 5rem 0 5rem 4rem; max-width: 100%; }
+    .series-grid { display: flex; flex-direction: row; gap: 1.5rem; margin-top: 2rem; overflow-x: auto; padding-bottom: 1.5rem; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--dorado-oscuro) var(--negro-card); }
     .series-grid::-webkit-scrollbar { height: 3px; }
     .series-grid::-webkit-scrollbar-track { background: var(--negro-card); }
     .series-grid::-webkit-scrollbar-thumb { background: var(--dorado-oscuro); border-radius: 2px; }
-    .serie-card {
-      background: var(--negro-card); border: 1px solid var(--negro-borde);
-      overflow: hidden; position: relative;
-      transition: transform var(--transicion), box-shadow var(--transicion);
-      min-width: 260px; max-width: 260px; flex-shrink: 0; scroll-snap-align: start;
-      display: flex; flex-direction: column;
-    }
-    .serie-card::before {
-      content: ''; position: absolute; inset: 0;
-      border: 1px solid var(--dorado); opacity: 0;
-      transition: opacity var(--transicion); z-index: 1; pointer-events: none;
-    }
+    .serie-card { background: var(--negro-card); border: 1px solid var(--negro-borde); overflow: hidden; position: relative; transition: transform var(--transicion), box-shadow var(--transicion); min-width: 260px; max-width: 260px; flex-shrink: 0; scroll-snap-align: start; display: flex; flex-direction: column; }
+    .serie-card::before { content: ''; position: absolute; inset: 0; border: 1px solid var(--dorado); opacity: 0; transition: opacity var(--transicion); z-index: 1; pointer-events: none; }
     .serie-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(201,168,76,0.15); }
     .serie-card:hover::before { opacity: 1; }
-    .serie-imagen { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
-    .serie-badge {
-      position: absolute; top: 1rem; right: 1rem;
-      font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
-      background: var(--dorado); color: var(--negro); padding: 0.3rem 0.7rem; z-index: 2;
-    }
+    .serie-imagen { width: 100%; aspect-ratio: 2/3; object-fit: cover; }
+    .serie-badge { position: absolute; top: 1rem; right: 1rem; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--dorado); color: var(--negro); padding: 0.3rem 0.7rem; z-index: 2; }
     .serie-info { padding: 1.5rem; display: flex; flex-direction: column; flex: 1; }
     .serie-numero { font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado-oscuro); margin-bottom: 0.3rem; }
     .serie-nombre { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; margin-bottom: 0.4rem; }
     .serie-desc { font-size: 0.72rem; color: var(--gris); line-height: 1.6; margin-bottom: 1.2rem; flex: 1; }
     .serie-precio { font-family: var(--font-display); font-size: 1.4rem; color: var(--dorado); margin-bottom: 1rem; }
     .serie-precio sup { font-size: 0.7rem; vertical-align: super; }
-    /* Sistema lanzamiento abierto/cerrado */
     .serie-card[data-lanzamiento="cerrado"] .btn-comprar { display: none; }
     .serie-card[data-lanzamiento="cerrado"] .btn-espera { display: block; }
     .serie-card[data-lanzamiento="abierto"] .btn-espera { display: none; }
-    .btn-comprar {
-      display: block; width: 100%; text-align: center;
-      font-size: 0.6rem; padding: 0.65rem 1rem;
-      border: 1px solid var(--dorado); color: var(--dorado); background: none;
-      letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer;
-      transition: background var(--transicion), color var(--transicion);
-      position: relative; overflow: hidden;
-    }
-    .btn-comprar::after {
-      content: ''; position: absolute; inset: 0;
-      background: var(--dorado); transform: scaleX(0); transform-origin: left;
-      transition: transform var(--transicion); z-index: 0;
-    }
+    .btn-comprar { display: block; width: 100%; text-align: center; font-size: 0.6rem; padding: 0.65rem 1rem; border: 1px solid var(--dorado); color: var(--dorado); background: none; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: background var(--transicion), color var(--transicion); position: relative; overflow: hidden; }
+    .btn-comprar::after { content: ''; position: absolute; inset: 0; background: var(--dorado); transform: scaleX(0); transform-origin: left; transition: transform var(--transicion); z-index: 0; }
     .btn-comprar span { position: relative; z-index: 1; }
     .btn-comprar:hover::after { transform: scaleX(1); }
     .btn-comprar:hover { color: var(--negro); }
-    .btn-espera {
-      display: none; width: 100%;
-      font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--gris); border: 1px solid var(--negro-borde);
-      padding: 0.65rem 1rem; cursor: pointer; background: none;
-      transition: border-color var(--transicion), color var(--transicion);
-    }
+    .btn-espera { display: none; width: 100%; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); border: 1px solid var(--negro-borde); padding: 0.65rem 1rem; cursor: pointer; background: none; transition: border-color var(--transicion), color var(--transicion); }
     .btn-espera:hover { border-color: var(--dorado); color: var(--dorado); }
 
-    /* ============================================================
-       MEMBRESÍA — Precio y acceso completo
-       Cambia el href del botón por el enlace de Hotmart
-    ============================================================ */
-    #membresia {
-      padding: 7rem 4rem;
-      background: var(--negro-card);
-      border-top: 1px solid var(--negro-borde);
-      text-align: center;
-    }
-    .membresia-contenido { max-width: 700px; margin: 0 auto; }
-    .membresia-contenido h2 {
-      font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 300; line-height: 1.1; margin-bottom: 1.2rem;
-    }
-    .membresia-contenido p { font-size: 1.15rem; color: var(--gris); line-height: 1.9; margin-bottom: 1rem; }
-    .membresia-precio {
-      font-family: var(--font-display); font-size: 4rem; color: var(--dorado);
-      line-height: 1; margin: 2rem 0 0.5rem;
-    }
-    .membresia-precio sup { font-size: 1.5rem; vertical-align: super; }
-    .membresia-precio small { font-size: 1rem; color: var(--gris); }
-    .membresia-lista {
-      list-style: none; display: flex; flex-direction: column; gap: 0.8rem;
-      margin: 2rem auto; max-width: 400px; text-align: left;
-    }
-    .membresia-lista li {
-      font-size: 0.78rem; color: var(--gris);
-      padding-left: 1.5rem; position: relative;
-    }
-    .membresia-lista li::before { content: '✦'; position: absolute; left: 0; color: var(--dorado); font-size: 0.6rem; top: 0.15rem; }
-
-    /* ============================================================
-       BUNDLES — Packs de series
-       Edita precios y contenido de cada pack
-    ============================================================ */
-    #bundles {
-      padding: 7rem 4rem; max-width: 1100px; margin: 0 auto;
-    }
+    /* PACKS */
+    #bundles { padding: 5rem 4rem; max-width: 1100px; margin: 0 auto; }
     .bundles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-    .bundle-card {
-      background: var(--negro-card); border: 1px solid var(--negro-borde);
-      padding: 2.5rem 2rem; text-align: center; position: relative;
-      transition: transform var(--transicion), box-shadow var(--transicion);
-    }
-    .bundle-card::before {
-      content: ''; position: absolute; inset: 0;
-      border: 1px solid var(--dorado); opacity: 0;
-      transition: opacity var(--transicion); pointer-events: none;
-    }
+    .bundle-card { background: var(--negro-card); border: 1px solid var(--negro-borde); padding: 2.5rem 2rem; text-align: center; position: relative; transition: transform var(--transicion), box-shadow var(--transicion); }
+    .bundle-card::before { content: ''; position: absolute; inset: 0; border: 1px solid var(--dorado); opacity: 0; transition: opacity var(--transicion); pointer-events: none; }
     .bundle-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(201,168,76,0.12); }
     .bundle-card:hover::before { opacity: 1; }
     .bundle-card.destacado { border-color: var(--dorado-oscuro); }
-    .bundle-card.destacado::after {
-      content: 'Más popular';
-      position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
-      background: var(--dorado); color: var(--negro);
-      font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
-      padding: 0.3rem 1rem;
-    }
+    .bundle-card.destacado::after { content: 'Más popular'; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: var(--dorado); color: var(--negro); font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.3rem 1rem; }
     .bundle-nombre { font-family: var(--font-display); font-size: 1.4rem; font-weight: 400; margin-bottom: 0.5rem; }
     .bundle-series { font-size: 0.7rem; color: var(--gris); margin-bottom: 1.5rem; line-height: 1.6; }
     .bundle-precio { font-family: var(--font-display); font-size: 2.5rem; color: var(--dorado); margin-bottom: 0.3rem; }
     .bundle-precio sup { font-size: 0.9rem; vertical-align: super; }
     .bundle-ahorro { font-size: 0.65rem; color: var(--dorado-oscuro); letter-spacing: 0.1em; margin-bottom: 1.5rem; }
 
-    /* ============================================================
-       FAQ — Preguntas frecuentes de Iron
-    ============================================================ */
+    /* FAQ */
     #faq { padding: 7rem 4rem; max-width: 800px; margin: 0 auto; }
     .faq-item { border-bottom: 1px solid var(--negro-borde); overflow: hidden; }
-    .faq-pregunta {
-      width: 100%; background: none; border: none; color: var(--blanco);
-      font-family: var(--font-display); font-size: 1.1rem; font-weight: 300;
-      text-align: left; padding: 1.5rem 0; cursor: pointer;
-      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
-      transition: color var(--transicion);
-    }
+    .faq-pregunta { width: 100%; background: none; border: none; color: var(--blanco); font-family: var(--font-display); font-size: 1.1rem; font-weight: 300; text-align: left; padding: 1.5rem 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; transition: color var(--transicion); }
     .faq-pregunta:hover { color: var(--dorado); }
     .faq-icono { font-size: 1.2rem; color: var(--dorado); transition: transform var(--transicion); flex-shrink: 0; }
     .faq-item.abierto .faq-icono { transform: rotate(45deg); }
@@ -373,160 +154,100 @@
     .faq-item.abierto .faq-respuesta { max-height: 300px; padding-bottom: 1.5rem; }
     .faq-respuesta p { font-size: 0.8rem; color: var(--gris); line-height: 1.9; }
 
-    /* ============================================================
-       CTA FINAL
-    ============================================================ */
-    #cta-final {
-      padding: 7rem 4rem; text-align: center;
-      border-top: 1px solid var(--negro-borde);
-    }
-    #cta-final h2 {
-      font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem);
-      font-weight: 300; line-height: 1.2; margin-bottom: 1rem;
-    }
+    /* CTA FINAL */
+    #cta-final { padding: 7rem 4rem; text-align: center; border-top: 1px solid var(--negro-borde); }
+    #cta-final h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; line-height: 1.2; margin-bottom: 1rem; }
     #cta-final p { font-size: 0.82rem; color: var(--gris); margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
     .cta-botones { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
 
-    /* ============================================================
-       FOOTER
-    ============================================================ */
-    footer {
-      background: #070707; border-top: 1px solid var(--negro-borde);
-      padding: 3rem 4rem; text-align: center;
-    }
-    .footer-logo { font-family: var(--font-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.4em; margin-bottom: 1.5rem; }
-    .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; list-style: none; }
-    .footer-links a { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris); transition: color var(--transicion); }
+    /* FOOTER */
+    footer { background: #070707; border-top: 1px solid var(--negro-borde); padding: 1rem 4rem; text-align: center; }
+    .footer-logo { font-family: var(--font-display); font-size: 1rem; font-weight: 300; letter-spacing: 0.4em; margin-bottom: 0.6rem; }
+    .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 0.6rem; list-style: none; }
+    .footer-links a { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris); transition: color var(--transicion); }
     .footer-links a:hover { color: var(--dorado); }
-    .footer-copy { font-size: 0.65rem; color: var(--negro-borde); letter-spacing: 0.1em; }
+    .footer-copy { font-size: 0.5rem; color: var(--negro-borde); letter-spacing: 0.1em; }
 
-    /* ============================================================
-       BOTÓN FLOTANTE DONACIÓN
-       Cambia el href por el enlace de Stripe cuando lo tengas
-    ============================================================ */
-    #btn-donar {
-      position: fixed; bottom: 2.5rem; right: 2.5rem; z-index: 1500;
-      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
-    }
-    .donar-circulo {
-      width: 58px; height: 58px; border-radius: 50%;
-      background: var(--negro-card); border: 1px solid var(--dorado);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; color: var(--dorado); cursor: pointer; text-decoration: none;
-      transition: background var(--transicion), box-shadow var(--transicion), transform var(--transicion);
-      animation: pulso 2.5s ease-in-out infinite;
-    }
-    .donar-circulo:hover {
-      background: var(--dorado); color: var(--negro);
-      box-shadow: 0 0 25px rgba(201,168,76,0.5); transform: scale(1.08); animation: none;
-    }
+    /* BOTÓN FLOTANTE */
+    #btn-donar { position: fixed; bottom: 2.5rem; right: 2.5rem; z-index: 1500; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .donar-circulo { width: 58px; height: 58px; border-radius: 50%; background: var(--negro-card); border: 1px solid var(--dorado); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--dorado); cursor: pointer; text-decoration: none; transition: background var(--transicion), box-shadow var(--transicion), transform var(--transicion); animation: pulso 2.5s ease-in-out infinite; }
+    .donar-circulo:hover { background: var(--dorado); color: var(--negro); box-shadow: 0 0 25px rgba(201,168,76,0.5); transform: scale(1.08); animation: none; }
     .donar-etiqueta { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dorado); }
-    @keyframes pulso {
-      0%   { box-shadow: 0 0 0 0 rgba(201,168,76,0.4); }
-      70%  { box-shadow: 0 0 0 12px rgba(201,168,76,0); }
-      100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
-    }
+    @keyframes pulso { 0% { box-shadow: 0 0 0 0 rgba(201,168,76,0.4); } 70% { box-shadow: 0 0 0 12px rgba(201,168,76,0); } 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); } }
 
-    /* ============================================================
-       MODAL LISTA DE ESPERA
-    ============================================================ */
-    .modal-overlay {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.85); z-index: 2000;
-      align-items: center; justify-content: center;
-    }
+    /* MODAL */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 2000; align-items: center; justify-content: center; }
     .modal-overlay.abierto { display: flex; }
-    .modal {
-      background: var(--negro-card); border: 1px solid var(--dorado);
-      padding: 3rem; max-width: 440px; width: 90%; text-align: center; position: relative;
-    }
+    .modal { background: var(--negro-card); border: 1px solid var(--dorado); padding: 3rem; max-width: 440px; width: 90%; text-align: center; position: relative; }
     .modal-cerrar { position: absolute; top: 1rem; right: 1.2rem; background: none; border: none; color: var(--gris); font-size: 1.2rem; cursor: pointer; }
     .modal h3 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 300; margin-bottom: 0.5rem; }
     .modal p { font-size: 0.75rem; color: var(--gris); margin-bottom: 1.5rem; }
-    .modal input[type="email"] {
-      width: 100%; background: var(--negro); border: 1px solid var(--negro-borde);
-      color: var(--blanco); padding: 0.8rem 1rem; font-family: var(--font-body);
-      font-size: 0.8rem; margin-bottom: 1rem; outline: none; transition: border-color var(--transicion);
-    }
+    .modal input[type="email"] { width: 100%; background: var(--negro); border: 1px solid var(--negro-borde); color: var(--blanco); padding: 0.8rem 1rem; font-family: var(--font-body); font-size: 0.8rem; margin-bottom: 1rem; outline: none; transition: border-color var(--transicion); }
     .modal input[type="email"]:focus { border-color: var(--dorado); }
     .modal .btn { width: 100%; text-align: center; }
 
-    /* ============================================================
-       ANIMACIONES REVEAL
-    ============================================================ */
+    /* REVEAL */
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ============================================================
-       RESPONSIVE — Versión móvil
-    ============================================================ */
+    /* MÓVIL */
     @media (max-width: 768px) {
       #navbar { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
       .hamburguesa { display: flex; }
       #hero { min-height: 100svh; align-items: flex-end; }
-      .hero-banner { position: absolute; left: 0; right: 0; top: 0; transform: none; width: 100%; height: 60%; object-fit: cover; object-position: center 20%; opacity: 0.55; }
+      .hero-banner { position: absolute !important; left: 0 !important; right: 0 !important; top: 0 !important; transform: none !important; width: 100% !important; height: 60% !important; max-width: 100% !important; object-fit: cover !important; object-position: center 20% !important; opacity: 0.55 !important; }
       .hero-overlay { background: linear-gradient(to top, var(--negro) 38%, rgba(10,10,10,0.4) 70%, rgba(10,10,10,0.1) 100%); }
       .hero-contenido { padding: 0 1.5rem 4rem; max-width: 100%; }
       .hero-titulo { white-space: normal; font-size: clamp(2.2rem, 10vw, 3.5rem); }
       .hero-subtitulo { white-space: normal; font-size: 1rem; }
-      .hero-subtitulo { font-size: 1.1rem; }
       .hero-desc { font-size: 0.95rem; }
       #que-es { padding: 2rem 1.5rem 3rem; }
+      .que-es-grid { grid-template-columns: 1fr; gap: 3rem; }
+      #opciones { padding: 2rem 1rem; }
+      .opciones-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .opcion-card { padding: 2rem 1.5rem; }
+      .membresia-contenido { padding: 0 1.5rem 3rem; }
       #series { padding: 3rem 0 3rem 1.2rem; }
       .serie-card { min-width: 220px; max-width: 220px; }
-      #que-es { padding: 4rem 1.5rem; }
-      .que-es-grid { grid-template-columns: 1fr; gap: 3rem; }
-      #incluye { padding: 2rem 1rem; }
-      #incluye > div { grid-template-columns: 1fr !important; gap: 1rem; }
-      #series { padding: 4rem 1.5rem; }
-      .series-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-      #membresia { padding: 4rem 1.5rem; }
-      #bundles { padding: 4rem 1.5rem; }
+      #bundles { padding: 3rem 1.5rem; }
       .bundles-grid { grid-template-columns: 1fr; }
       #faq { padding: 3rem 1rem; }
       .faq-pregunta { font-size: 0.88rem; }
       .seccion-titulo { white-space: nowrap; font-size: 0.55rem; gap: 0.8rem; }
       .seccion-titulo::before, .seccion-titulo::after { width: 30px; }
       #cta-final { padding: 4rem 1.5rem; }
-      footer { padding: 2rem 1.5rem; }
+      footer { padding: 1rem; }
       #btn-donar { bottom: 1.5rem; right: 1.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ============================================================
-       NAVBAR
-  ============================================================ -->
+  <!-- NAVBAR -->
   <nav id="navbar">
     <a href="index.html" class="nav-logo">ETHOS</a>
     <ul class="nav-links">
       <li><a href="index.html">Inicio</a></li>
       <li><a href="index.html#sobre-mi">Sobre mí</a></li>
-      <li><a href="Soul.html">Ethos Soul</a></li>
-      <li><a href="Iron.html" class="activo">Ethos Iron</a></li>
+      <li><a href="soul.html">Ethos Soul</a></li>
+      <li><a href="iron.html" class="activo">Ethos Iron</a></li>
       <li><a href="productos.html">Productos</a></li>
       <li><a href="index.html#contacto">Contacto</a></li>
     </ul>
-    <button class="hamburguesa" id="hamburguesa" aria-label="Menú">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="hamburguesa" id="hamburguesa" aria-label="Menú"><span></span><span></span><span></span></button>
   </nav>
 
   <div class="nav-movil" id="nav-movil">
     <a href="index.html" onclick="cerrarMenu()">Inicio</a>
     <a href="index.html#sobre-mi" onclick="cerrarMenu()">Sobre mí</a>
-    <a href="Soul.html" onclick="cerrarMenu()">Ethos Soul</a>
-    <a href="Iron.html" onclick="cerrarMenu()">Ethos Iron</a>
+    <a href="soul.html" onclick="cerrarMenu()">Ethos Soul</a>
+    <a href="iron.html" onclick="cerrarMenu()">Ethos Iron</a>
     <a href="productos.html" onclick="cerrarMenu()">Productos</a>
     <a href="index.html#contacto" onclick="cerrarMenu()">Contacto</a>
   </div>
 
-  <!-- ============================================================
-       HERO — Banner principal Iron
-       Imagen: ETHOS Iron copia 3.png
-  ============================================================ -->
+  <!-- HERO -->
   <section id="hero">
     <img src="ETHOS Iron copia 3.png" alt="ETHOS Iron" class="hero-banner" />
     <div class="hero-overlay"></div>
@@ -538,10 +259,7 @@
     </div>
   </section>
 
-  <!-- ============================================================
-       QUÉ ES IRON — Introducción
-       Edita los textos de descripción
-  ============================================================ -->
+  <!-- QUÉ ES -->
   <section id="que-es">
     <div class="que-es-grid">
       <div class="que-es-texto reveal">
@@ -559,33 +277,20 @@
   </section>
 
   <!-- ============================================================
-       TUS OPCIONES CON IRON — Dos caminos: series sueltas o membresía
-       Edita descripciones y precios aquí
+       TUS OPCIONES CON IRON
+       Opción A: Únete a Iron (membresía) — PRIMERA
+       Opción B: Compra lo que necesitas (series sueltas) — SEGUNDA
   ============================================================ -->
-  <section id="incluye" style="padding: 5rem 4rem; max-width: 1300px; margin: 0 auto;">
+  <section id="opciones">
     <p class="seccion-titulo">Tus opciones con Iron</p>
-    <p style="text-align:center; font-size:0.82rem; color:var(--gris); margin-bottom:3rem; max-width:600px; margin-left:auto; margin-right:auto;">Elige tu camino. Puedes acceder a las series que quieras de forma individual, o unirte a la membresía y tenerlo todo.</p>
+    <p style="text-align:center; font-size:0.82rem; color:var(--gris); margin-bottom:3rem; max-width:600px; margin-left:auto; margin-right:auto;">Elige tu camino. Puedes unirte a la membresía y tenerlo todo, o acceder a las series que quieras de forma individual.</p>
 
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+    <div class="opciones-grid">
 
-      <!-- OPCIÓN A: Series individuales -->
-      <div style="background:var(--negro-card); border:1px solid var(--negro-borde); padding:3rem; position:relative; transition: border-color 0.35s ease, box-shadow 0.35s ease;" class="reveal" onmouseover="this.style.borderColor='var(--dorado)';this.style.boxShadow='0 0 30px rgba(201,168,76,0.1)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.boxShadow=''">
-        <p style="font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--dorado); margin-bottom:1rem;">Opción A</p>
-        <h3 style="font-family:var(--font-display); font-size:2rem; font-weight:300; margin-bottom:1rem;">Compra lo que necesitas</h3>
-        <p style="font-size:0.85rem; color:var(--gris); line-height:1.8; margin-bottom:1.5rem;">Accede a las series que quieras de forma individual o en pack. Acceso de por vida al contenido que elijas.</p>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.6rem; margin-bottom:2rem;">
-          <li style="font-size:0.8rem; color:var(--gris); padding-left:1.2rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">—</span> 7 series disponibles desde €47</li>
-          <li style="font-size:0.8rem; color:var(--gris); padding-left:1.2rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">—</span> Packs con hasta 44€ de ahorro</li>
-          <li style="font-size:0.8rem; color:var(--gris); padding-left:1.2rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">—</span> Acceso de por vida a lo que compres</li>
-          <li style="font-size:0.8rem; color:var(--gris); padding-left:1.2rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">—</span> Sin suscripción ni compromisos</li>
-        </ul>
-        <a href="#series" class="btn"><span>Ver las series</span></a>
-      </div>
-
-      <!-- OPCIÓN B: Membresía -->
-      <div style="background:var(--negro-card); border:1px solid var(--dorado-oscuro); padding:3rem; position:relative; transition: border-color 0.35s ease, box-shadow 0.35s ease;" class="reveal" onmouseover="this.style.borderColor='var(--dorado)';this.style.boxShadow='0 0 30px rgba(201,168,76,0.15)'" onmouseout="this.style.borderColor='var(--dorado-oscuro)';this.style.boxShadow=''">
+      <!-- OPCIÓN A: Únete a Iron (membresía) -->
+      <div class="opcion-card reveal" style="border:1px solid var(--dorado-oscuro);" onmouseover="this.style.borderColor='var(--dorado)';this.style.boxShadow='0 0 30px rgba(201,168,76,0.15)'" onmouseout="this.style.borderColor='var(--dorado-oscuro)';this.style.boxShadow=''">
         <div style="position:absolute; top:-1px; right:2rem; background:var(--dorado); color:var(--negro); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.3rem 1rem;">Recomendado</div>
-        <p style="font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--dorado); margin-bottom:1rem;">Opción B</p>
+        <p style="font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--dorado); margin-bottom:1rem;">Opción A</p>
         <h3 style="font-family:var(--font-display); font-size:2rem; font-weight:300; margin-bottom:0.5rem;">Únete a Iron</h3>
         <p style="font-family:var(--font-display); font-size:2.5rem; color:var(--dorado); line-height:1; margin-bottom:1rem;"><sup style="font-size:1rem;vertical-align:super;">€</sup>49<small style="font-size:0.9rem;color:var(--gris);font-family:var(--font-body);"> / mes</small></p>
         <p style="font-size:0.85rem; color:var(--gris); line-height:1.8; margin-bottom:1.5rem;">Todo el contenido, la comunidad y las herramientas. Una cuota mensual. Cancela cuando quieras.</p>
@@ -598,158 +303,34 @@
           <li style="font-size:0.8rem; color:var(--gris); padding-left:1.2rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Acceso prioritario a nuevos lanzamientos</li>
         </ul>
         <!-- Cambia # por tu enlace de Hotmart cuando lo tengas -->
-        <a href="#" class="btn"><span>Unirme a Iron</span></a>
+        <a href="#" class="btn" style="margin-top:auto;"><span>Unirme a Iron</span></a>
+      </div>
+
+      <!-- OPCIÓN B: Compra lo que necesitas -->
+      <div class="opcion-card reveal" style="border:1px solid var(--negro-borde);" onmouseover="this.style.borderColor='var(--dorado)';this.style.boxShadow='0 0 30px rgba(201,168,76,0.1)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.boxShadow=''">
+        <p style="font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--dorado); margin-bottom:1rem;">Opción B</p>
+        <h3 style="font-family:var(--font-display); font-size:2rem; font-weight:300; margin-bottom:1rem;">Compra lo que necesitas</h3>
+        <p style="font-size:0.85rem; color:var(--gris); line-height:1.8; margin-bottom:1.5rem;">Accede a las series que quieras de forma individual o en pack. Acceso de por vida al contenido que elijas.</p>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:0.6rem; margin-bottom:2rem;">
+          <li style="font-size:0.8rem; color:var(--gris); padding-left:1.2rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">—</span> 7 series disponibles desde €47</li>
+          <li style="font-size:0.8rem; color:var(--gris); padding-left:1.2rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">—</span> Packs con hasta 44€ de ahorro</li>
+          <li style="font-size:0.8rem; color:var(--gris); padding-left:1.2rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">—</span> Acceso de por vida a lo que compres</li>
+          <li style="font-size:0.8rem; color:var(--gris); padding-left:1.2rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">—</span> Sin suscripción ni compromisos</li>
+        </ul>
+        <a href="#series" class="btn" style="margin-top:auto;"><span>Ver las series</span></a>
       </div>
 
     </div>
   </section>
 
   <!-- ============================================================
-       SERIES — Las 7 series individuales
-       Para abrir un lanzamiento: cambia data-lanzamiento="cerrado" a "abierto"
-       Para el enlace de compra: cambia el href del .btn-comprar (Hotmart)
-  ============================================================ -->
-  <section id="series">
-    <p class="seccion-titulo">Las series</p>
-    <div class="series-grid">
-
-      <div class="serie-card reveal" data-lanzamiento="cerrado">
-        <span class="serie-badge">Serie</span>
-        <img src="S1-La mente femenina al descubierto.png" alt="Serie 1" class="serie-imagen" />
-        <div class="serie-info">
-          <p class="serie-numero">Serie 01</p>
-          <p class="serie-nombre">La mente femenina al descubierto</p>
-          <p class="serie-desc">Psicología real sin filtro ideológico. Cómo funciona la mente femenina según la ciencia.</p>
-          <p class="serie-precio"><sup>€</sup>47</p>
-          <a href="productos.html#serie-1" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-        </div>
-      </div>
-
-      <div class="serie-card reveal" data-lanzamiento="cerrado">
-        <span class="serie-badge">Serie</span>
-        <img src="S2-La logica femenina al descubierto.png" alt="Serie 2" class="serie-imagen" />
-        <div class="serie-info">
-          <p class="serie-numero">Serie 02</p>
-          <p class="serie-nombre">La lógica femenina al descubierto</p>
-          <p class="serie-desc">Patrones de comportamiento explicados con datos y sin condescendencia.</p>
-          <p class="serie-precio"><sup>€</sup>47</p>
-          <a href="productos.html#serie-2" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-        </div>
-      </div>
-
-      <div class="serie-card reveal" data-lanzamiento="cerrado">
-        <span class="serie-badge">Serie</span>
-        <img src="S3-La conquista real.png" alt="Serie 3" class="serie-imagen" />
-        <div class="serie-info">
-          <p class="serie-numero">Serie 03</p>
-          <p class="serie-nombre">La conquista real</p>
-          <p class="serie-desc">Lo que nadie te enseñó sobre las relaciones entre hombres y mujeres.</p>
-          <p class="serie-precio"><sup>€</sup>57</p>
-          <a href="productos.html#serie-3" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-        </div>
-      </div>
-
-      <div class="serie-card reveal" data-lanzamiento="cerrado">
-        <span class="serie-badge">Serie</span>
-        <img src="S4-Destruye el feminismo.png" alt="Serie 4" class="serie-imagen" />
-        <div class="serie-info">
-          <p class="serie-numero">Serie 04</p>
-          <p class="serie-nombre">Destruye el feminismo</p>
-          <p class="serie-desc">Argumentos sólidos y datos reales para rebatir la narrativa dominante.</p>
-          <p class="serie-precio"><sup>€</sup>57</p>
-          <a href="productos.html#serie-4" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-        </div>
-      </div>
-
-      <div class="serie-card reveal" data-lanzamiento="cerrado">
-        <span class="serie-badge">Serie</span>
-        <img src="S5-La guerra de sexos.png" alt="Serie 5" class="serie-imagen" />
-        <div class="serie-info">
-          <p class="serie-numero">Serie 05</p>
-          <p class="serie-nombre">La guerra de sexos</p>
-          <p class="serie-desc">Por qué nos enfrentan, quién gana y qué pierden todos.</p>
-          <p class="serie-precio"><sup>€</sup>57</p>
-          <a href="productos.html#serie-5" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-        </div>
-      </div>
-
-      <div class="serie-card reveal" data-lanzamiento="cerrado">
-        <span class="serie-badge">Serie</span>
-        <img src="S6-El ciclo tu poder.png" alt="Serie 6" class="serie-imagen" />
-        <div class="serie-info">
-          <p class="serie-numero">Serie 06</p>
-          <p class="serie-nombre">El ciclo, tu poder</p>
-          <p class="serie-desc">Tu biología como herramienta real, no como excusa ni como limitación.</p>
-          <p class="serie-precio"><sup>€</sup>47</p>
-          <a href="productos.html#serie-6" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-        </div>
-      </div>
-
-      <div class="serie-card reveal" data-lanzamiento="cerrado">
-        <span class="serie-badge">Serie</span>
-        <img src="S7- Woke.png" alt="Serie 7" class="serie-imagen" />
-        <div class="serie-info">
-          <p class="serie-numero">Serie 07</p>
-          <p class="serie-nombre">Woke</p>
-          <p class="serie-desc">El movimiento que prometió libertad y entregó dogma. Análisis sin concesiones.</p>
-          <p class="serie-precio"><sup>€</sup>47</p>
-          <a href="productos.html#serie-7" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-        </div>
-      </div>
-
-      <!-- Pack Fundamentos -->
-      <div class="serie-card reveal" style="background:var(--negro); border:1px solid var(--dorado-oscuro);">
-        <div style="background:var(--dorado); color:var(--negro); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.4rem 1rem; text-align:right;">Pack</div>
-        <div style="padding:1.5rem 1.5rem 0; flex:1; display:flex; align-items:center; justify-content:center; min-height:200px;">
-          <div style="text-align:center;">
-            <p style="font-family:var(--font-display); font-size:1.8rem; font-weight:300; margin-bottom:0.5rem;">Pack<br/>Fundamentos</p>
-            <p style="font-size:0.7rem; color:var(--gris);">Series 01 + 02 + 06</p>
-          </div>
-        </div>
-        <div class="serie-info">
-          <p class="serie-precio"><sup>€</sup>97 <small style="font-size:0.65rem;color:var(--dorado-oscuro);">Ahorras 44€</small></p>
-          <a href="productos.html#pack-fundamentos" class="btn-comprar" style="display:block;text-align:center;"><span>Ver pack</span></a>
-        </div>
-      </div>
-
-      <!-- Pack Relaciones -->
-      <div class="serie-card reveal" style="background:var(--negro); border:1px solid var(--dorado-oscuro);">
-        <div style="background:var(--dorado); color:var(--negro); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.4rem 1rem; text-align:right;">Más popular</div>
-        <div style="padding:1.5rem 1.5rem 0; flex:1; display:flex; align-items:center; justify-content:center; min-height:200px;">
-          <div style="text-align:center;">
-            <p style="font-family:var(--font-display); font-size:1.8rem; font-weight:300; margin-bottom:0.5rem;">Pack<br/>Relaciones</p>
-            <p style="font-size:0.7rem; color:var(--gris);">Series 03 + 04 + 05</p>
-          </div>
-        </div>
-        <div class="serie-info">
-          <p class="serie-precio"><sup>€</sup>127 <small style="font-size:0.65rem;color:var(--dorado-oscuro);">Ahorras 44€</small></p>
-          <a href="productos.html#pack-relaciones" class="btn-comprar" style="display:block;text-align:center;"><span>Ver pack</span></a>
-        </div>
-      </div>
-
-      <!-- Pack Completo -->
-      <div class="serie-card reveal" style="background:var(--negro); border:1px solid var(--dorado-oscuro);">
-        <div style="background:var(--dorado); color:var(--negro); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.4rem 1rem; text-align:right;">Pack</div>
-        <div style="padding:1.5rem 1.5rem 0; flex:1; display:flex; align-items:center; justify-content:center; min-height:200px;">
-          <div style="text-align:center;">
-            <p style="font-family:var(--font-display); font-size:1.8rem; font-weight:300; margin-bottom:0.5rem;">Pack<br/>Completo</p>
-            <p style="font-size:0.7rem; color:var(--gris);">Las 7 series</p>
-          </div>
-        </div>
-        <div class="serie-info">
-          <p class="serie-precio"><sup>€</sup>247 <small style="font-size:0.65rem;color:var(--dorado-oscuro);">Ahorras 94€</small></p>
-          <a href="productos.html#pack-completo" class="btn-comprar" style="display:block;text-align:center;"><span>Ver pack</span></a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ============================================================
-       MEMBRESÍA — Precio y acceso completo
-       Cambia el precio y el href del botón (Hotmart)
+       MEMBRESÍA CON FOTO — justo después de las opciones
+       Imagen: ETHOS Iron copia 3.png fusionada arriba
   ============================================================ -->
   <section id="membresia">
+    <div class="membresia-imagen-wrap">
+      <img src="ETHOS Iron copia 3.png" alt="ETHOS Iron Membresía" />
+    </div>
     <div class="membresia-contenido reveal">
       <p class="etiqueta">Membresía</p>
       <div class="separador" style="margin: 1rem auto;"></div>
@@ -770,8 +351,112 @@
   </section>
 
   <!-- ============================================================
-       BUNDLES — Packs de series
-       Edita precios y series incluidas en cada pack
+       SERIES — Carrusel solo con las 7 series sueltas
+       Para abrir lanzamiento: cambia data-lanzamiento="cerrado" a "abierto"
+       Para enlace de compra: cambia href en .btn-comprar (Hotmart)
+  ============================================================ -->
+  <section id="series">
+    <p class="seccion-titulo">Las series</p>
+    <div class="series-grid">
+
+      <div class="serie-card reveal" data-lanzamiento="cerrado">
+        <span class="serie-badge">Serie</span>
+        <img src="S1-La mente femenina al descubierto.png" alt="Serie 1" class="serie-imagen" />
+        <div class="serie-info">
+          <p class="serie-numero">Serie 01</p>
+          <p class="serie-nombre">La mente femenina al descubierto</p>
+          <p class="serie-desc">Psicología real sin filtro ideológico. Cómo funciona la mente femenina según la ciencia.</p>
+          <p class="serie-precio"><sup>€</sup>47</p>
+          <a href="productos.html#serie-1" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
+          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        </div>
+      </div>
+
+      <div class="serie-card reveal" data-lanzamiento="cerrado">
+        <span class="serie-badge">Serie</span>
+        <img src="S2-La logica femenina al descubierto.png" alt="Serie 2" class="serie-imagen" />
+        <div class="serie-info">
+          <p class="serie-numero">Serie 02</p>
+          <p class="serie-nombre">La lógica femenina al descubierto</p>
+          <p class="serie-desc">Patrones de comportamiento explicados con datos y sin condescendencia.</p>
+          <p class="serie-precio"><sup>€</sup>47</p>
+          <a href="productos.html#serie-2" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
+          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        </div>
+      </div>
+
+      <div class="serie-card reveal" data-lanzamiento="cerrado">
+        <span class="serie-badge">Serie</span>
+        <img src="S3-La conquista real.png" alt="Serie 3" class="serie-imagen" />
+        <div class="serie-info">
+          <p class="serie-numero">Serie 03</p>
+          <p class="serie-nombre">La conquista real</p>
+          <p class="serie-desc">Lo que nadie te enseñó sobre las relaciones entre hombres y mujeres.</p>
+          <p class="serie-precio"><sup>€</sup>57</p>
+          <a href="productos.html#serie-3" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
+          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        </div>
+      </div>
+
+      <div class="serie-card reveal" data-lanzamiento="cerrado">
+        <span class="serie-badge">Serie</span>
+        <img src="S4-Destruye el feminismo.png" alt="Serie 4" class="serie-imagen" />
+        <div class="serie-info">
+          <p class="serie-numero">Serie 04</p>
+          <p class="serie-nombre">Destruye el feminismo</p>
+          <p class="serie-desc">Argumentos sólidos y datos reales para rebatir la narrativa dominante.</p>
+          <p class="serie-precio"><sup>€</sup>57</p>
+          <a href="productos.html#serie-4" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
+          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        </div>
+      </div>
+
+      <div class="serie-card reveal" data-lanzamiento="cerrado">
+        <span class="serie-badge">Serie</span>
+        <img src="S5-La guerra de sexos.png" alt="Serie 5" class="serie-imagen" />
+        <div class="serie-info">
+          <p class="serie-numero">Serie 05</p>
+          <p class="serie-nombre">La guerra de sexos</p>
+          <p class="serie-desc">Por qué nos enfrentan, quién gana y qué pierden todos.</p>
+          <p class="serie-precio"><sup>€</sup>57</p>
+          <a href="productos.html#serie-5" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
+          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        </div>
+      </div>
+
+      <div class="serie-card reveal" data-lanzamiento="cerrado">
+        <span class="serie-badge">Serie</span>
+        <img src="S6-El ciclo tu poder.png" alt="Serie 6" class="serie-imagen" />
+        <div class="serie-info">
+          <p class="serie-numero">Serie 06</p>
+          <p class="serie-nombre">El ciclo, tu poder</p>
+          <p class="serie-desc">Tu biología como herramienta real, no como excusa ni como limitación.</p>
+          <p class="serie-precio"><sup>€</sup>47</p>
+          <a href="productos.html#serie-6" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
+          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        </div>
+      </div>
+
+      <div class="serie-card reveal" data-lanzamiento="cerrado">
+        <span class="serie-badge">Serie</span>
+        <img src="S7- Woke.png" alt="Serie 7" class="serie-imagen" />
+        <div class="serie-info">
+          <p class="serie-numero">Serie 07</p>
+          <p class="serie-nombre">Woke</p>
+          <p class="serie-desc">El movimiento que prometió libertad y entregó dogma. Análisis sin concesiones.</p>
+          <p class="serie-precio"><sup>€</sup>47</p>
+          <a href="productos.html#serie-7" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
+          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PACKS DE SERIES — Justo debajo del carrusel
+       Edita precios y series de cada pack aquí
+       Cambia href de cada botón por el enlace de Hotmart
   ============================================================ -->
   <section id="bundles">
     <p class="seccion-titulo">Packs de series</p>
@@ -782,8 +467,7 @@
         <p class="bundle-series">Series 01 + 02 + 06<br />Mente, lógica y biología</p>
         <div class="bundle-precio"><sup>€</sup>97</div>
         <p class="bundle-ahorro">Ahorras 44€ frente al precio individual</p>
-        <!-- Cambia el href por el enlace de Hotmart -->
-        <a href="#" class="btn"><span>Ver pack</span></a>
+        <a href="productos.html#pack-fundamentos" class="btn"><span>Ver pack</span></a>
       </div>
 
       <div class="bundle-card destacado reveal">
@@ -791,7 +475,7 @@
         <p class="bundle-series">Series 03 + 04 + 05<br />Conquista, feminismo y guerra de sexos</p>
         <div class="bundle-precio"><sup>€</sup>127</div>
         <p class="bundle-ahorro">Ahorras 44€ frente al precio individual</p>
-        <a href="#" class="btn"><span>Ver pack</span></a>
+        <a href="productos.html#pack-relaciones" class="btn"><span>Ver pack</span></a>
       </div>
 
       <div class="bundle-card reveal">
@@ -799,84 +483,68 @@
         <p class="bundle-series">Las 7 series<br />Acceso total al contenido Iron</p>
         <div class="bundle-precio"><sup>€</sup>247</div>
         <p class="bundle-ahorro">Ahorras 94€ frente al precio individual</p>
-        <a href="#" class="btn"><span>Ver pack</span></a>
+        <a href="productos.html#pack-completo" class="btn"><span>Ver pack</span></a>
       </div>
 
     </div>
   </section>
 
-  <!-- ============================================================
-       FAQ — Preguntas frecuentes sobre Iron
-       Añade o elimina .faq-item según necesites
-  ============================================================ -->
+  <!-- FAQ -->
   <section id="faq">
     <p class="seccion-titulo">Preguntas frecuentes</p>
-
     <div class="faq-item">
       <button class="faq-pregunta">¿Qué diferencia hay entre comprar una serie y la membresía?<span class="faq-icono">+</span></button>
       <div class="faq-respuesta"><p>Las series son acceso de por vida a ese contenido específico. La membresía da acceso a todo el contenido mientras esté activa, más comunidad, IA y sesiones en vivo.</p></div>
     </div>
-
     <div class="faq-item">
       <button class="faq-pregunta">¿Cuándo se publican nuevas series?<span class="faq-icono">+</span></button>
       <div class="faq-respuesta"><p>Las series se lanzan por temporadas. Los miembros activos tienen acceso automático a todas las series nuevas sin coste adicional.</p></div>
     </div>
-
     <div class="faq-item">
       <button class="faq-pregunta">¿Puedo cancelar la membresía cuando quiera?<span class="faq-icono">+</span></button>
       <div class="faq-respuesta"><p>Sí. La membresía es mensual y puedes cancelarla en cualquier momento desde Hotmart sin penalización.</p></div>
     </div>
-
     <div class="faq-item">
       <button class="faq-pregunta">¿Qué es la herramienta de IA para contrargumentar?<span class="faq-icono">+</span></button>
       <div class="faq-respuesta"><p>Una herramienta de IA entrenada con datos reales, jurisprudencia y estudios científicos para ayudarte a rebatir argumentos feministas con hechos y sin perder los nervios.</p></div>
     </div>
-
     <div class="faq-item">
       <button class="faq-pregunta">¿Hay períodos en los que no se puede comprar?<span class="faq-icono">+</span></button>
-      <div class="faq-respuesta"><p>Sí. Las series se venden por lanzamientos, lo que significa que hay ventanas de compra abiertas y períodos cerrados. Puedes apuntarte a la lista de espera para recibir aviso cuando abra el próximo lanzamiento.</p></div>
+      <div class="faq-respuesta"><p>Sí. Las series se venden por lanzamientos, hay ventanas de compra abiertas y períodos cerrados. Apúntate a la lista de espera para recibir aviso del próximo lanzamiento.</p></div>
     </div>
-
   </section>
 
-  <!-- ============================================================
-       CTA FINAL
-  ============================================================ -->
+  <!-- CTA FINAL -->
   <section id="cta-final">
     <h2 class="reveal">Pensar con criterio<br />no debería ser radical.</h2>
     <p class="reveal">Únete a Iron y accede al contenido que la narrativa dominante preferiría que no vieras.</p>
     <div class="cta-botones reveal">
-      <!-- Cambia los href por los enlaces reales de Hotmart -->
       <a href="#" class="btn"><span>Unirme a la membresía</span></a>
       <a href="#series" class="btn"><span>Ver las series</span></a>
     </div>
   </section>
 
-
+  <!-- BANNER SOUL -->
   <div style="background: linear-gradient(135deg, #0d0d0d 0%, #111111 100%); border-top: 1px solid var(--dorado-oscuro); border-bottom: 1px solid var(--dorado-oscuro); padding: 1.5rem 4rem; text-align: center;">
     <p style="font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado);">✦ &nbsp; Con cualquier producto de ETHOS, colaboras con ETHOS Soul &nbsp; ✦</p>
     <p style="font-family: var(--font-display); font-size: 0.9rem; color: var(--gris); margin-top: 0.3rem; font-style: italic;">Un porcentaje de cada compra se destina al grupo de apoyo y los recursos legales gratuitos.</p>
   </div>
 
-  <!-- ============================================================
-       FOOTER
-  ============================================================ -->
+  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">ETHOS</div>
     <ul class="footer-links">
       <li><a href="index.html">Inicio</a></li>
       <li><a href="index.html#sobre-mi">Sobre mí</a></li>
-      <li><a href="Soul.html">Soul</a></li>
-      <li><a href="Iron.html">Iron</a></li>
+      <li><a href="soul.html">Soul</a></li>
+      <li><a href="iron.html">Iron</a></li>
       <li><a href="productos.html">Productos</a></li>
       <li><a href="mailto:hola@ethosironsoul.com">Contacto</a></li>
     </ul>
     <p class="footer-copy">© 2026 ETHOS — Iron & Soul Group. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- ============================================================
-       MODAL LISTA DE ESPERA
-  ============================================================ -->
+  <!-- MODAL -->
   <div class="modal-overlay" id="modal-espera">
     <div class="modal">
       <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
@@ -887,51 +555,23 @@
     </div>
   </div>
 
-  <!-- ============================================================
-       BOTÓN FLOTANTE DONACIÓN
-       Cambia el href por el enlace de Stripe cuando lo tengas
-  ============================================================ -->
+  <!-- BOTÓN FLOTANTE -->
   <div id="btn-donar">
     <a href="#" class="donar-circulo" title="Donar a ETHOS Soul">♡</a>
     <span class="donar-etiqueta">Donar</span>
   </div>
 
-  <!-- ============================================================
-       JAVASCRIPT
-  ============================================================ -->
   <script>
-    window.addEventListener('scroll', () => {
-      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-    });
-    document.getElementById('hamburguesa').addEventListener('click', function () {
-      this.classList.toggle('abierto');
-      document.getElementById('nav-movil').classList.toggle('abierto');
-    });
-    function cerrarMenu() {
-      document.getElementById('hamburguesa').classList.remove('abierto');
-      document.getElementById('nav-movil').classList.remove('abierto');
-    }
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 80);
-      });
-    }, { threshold: 0.1 });
+    window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50); });
+    document.getElementById('hamburguesa').addEventListener('click', function () { this.classList.toggle('abierto'); document.getElementById('nav-movil').classList.toggle('abierto'); });
+    function cerrarMenu() { document.getElementById('hamburguesa').classList.remove('abierto'); document.getElementById('nav-movil').classList.remove('abierto'); }
+    const observer = new IntersectionObserver((entries) => { entries.forEach((entry, i) => { if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 80); }); }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    document.querySelectorAll('.faq-pregunta').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item = btn.parentElement;
-        const abierto = item.classList.contains('abierto');
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('abierto'));
-        if (!abierto) item.classList.add('abierto');
-      });
-    });
+    document.querySelectorAll('.faq-pregunta').forEach(btn => { btn.addEventListener('click', () => { const item = btn.parentElement; const abierto = item.classList.contains('abierto'); document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('abierto')); if (!abierto) item.classList.add('abierto'); }); });
     function abrirModal() { document.getElementById('modal-espera').classList.add('abierto'); }
     function cerrarModal() { document.getElementById('modal-espera').classList.remove('abierto'); }
     document.getElementById('modal-espera').addEventListener('click', function(e) { if (e.target === this) cerrarModal(); });
-    function guardarEmail() {
-      const email = document.getElementById('email-espera').value;
-      if (email) { alert('¡Gracias! Te avisamos en el próximo lanzamiento.'); cerrarModal(); }
-    }
+    function guardarEmail() { const email = document.getElementById('email-espera').value; if (email) { alert('¡Gracias! Te avisamos en el próximo lanzamiento.'); cerrarModal(); } }
   </script>
 
 </body>
