@@ -58,14 +58,14 @@
     .nav-movil a:hover { color: var(--dorado); }
 
     /* HERO */
-    #hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
-    .hero-banner { position: absolute; right: 4rem; top: 50%; transform: translateY(-50%); height: 55%; width: auto; max-width: 35%; object-fit: contain; object-position: center; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, var(--negro) 45%, rgba(10,10,10,0.3) 80%, transparent 100%); }
-    .hero-contenido { position: relative; z-index: 2; padding: 8rem 4rem 4rem; max-width: 560px; }
+    #hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .hero-banner { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center; opacity: 0.75; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.3) 50%, var(--negro) 100%); }
+    .hero-contenido { position: relative; z-index: 2; width: 100%; padding: 0 2rem; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
     .hero-eyebrow { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--dorado); margin-bottom: 1rem; text-align: center; }
-    .hero-titulo { font-family: var(--font-display); font-size: clamp(2.5rem, 5.5vw, 6rem); font-weight: 300; letter-spacing: 0.2em; line-height: 1.1; margin-bottom: 0.5rem; text-transform: uppercase; text-align: center; }
-    .hero-subtitulo { font-family: var(--font-display); font-size: clamp(1.8rem, 4.1vw, 4.5rem); font-weight: 300; font-style: normal; color: var(--dorado); margin-bottom: 1.5rem; letter-spacing: 0.2em; text-transform: uppercase; text-align: center; }
-    .hero-desc { font-family: var(--font-display); font-size: clamp(1rem, 1.6vw, 1.4rem); font-style: italic; color: var(--blanco); max-width: 700px; line-height: 1.8; text-align: center; }
+    .hero-titulo { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 9rem); font-weight: 300; letter-spacing: 0.2em; line-height: 1; margin-bottom: 0.5rem; text-transform: uppercase; text-align: center; color: var(--blanco); }
+    .hero-subtitulo { font-family: var(--font-display); font-size: clamp(2rem, 6vw, 6.75rem); font-weight: 300; font-style: normal; color: var(--dorado); margin-bottom: 2rem; letter-spacing: 0.2em; text-transform: uppercase; text-align: center; }
+    .hero-desc { font-family: var(--font-display); font-size: clamp(1rem, 1.6vw, 1.5rem); font-style: italic; color: var(--blanco); max-width: 700px; line-height: 1.8; text-align: center; }
 
     /* SECCION TITULO */
     .seccion-titulo { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dorado); display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-bottom: 3rem; }
@@ -195,13 +195,13 @@
       #navbar { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
       .hamburguesa { display: flex; }
-      #hero { min-height: 100svh; align-items: flex-end; }
-      .hero-banner { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; max-width: 100% !important; object-fit: cover !important; object-position: center center !important; opacity: 0.65 !important; }
-      .hero-overlay { background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.5) 60%, var(--negro) 100%); }
-      .hero-contenido { padding: 0 1.5rem 4rem; max-width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: flex-end; }
-      .hero-titulo { font-size: clamp(1.4rem, 6vw, 2.5rem); letter-spacing: 0.1em; }
-      .hero-subtitulo { font-size: clamp(1rem, 4.5vw, 1.8rem); letter-spacing: 0.1em; }
-      .hero-desc { font-size: 0.95rem; }
+      #hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+      .hero-banner { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center; opacity: 0.75; }
+      .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.3) 50%, var(--negro) 100%); }
+      .hero-contenido { position: relative; z-index: 2; width: 100%; padding: 0 2rem; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+      .hero-titulo { font-family: var(--font-display); font-size: clamp(3rem, 8vw, 9rem); font-weight: 300; letter-spacing: 0.2em; line-height: 1; margin-bottom: 0.5rem; text-transform: uppercase; text-align: center; color: var(--blanco); }
+      .hero-subtitulo { font-family: var(--font-display); font-size: clamp(2rem, 6vw, 6.75rem); font-weight: 300; font-style: normal; color: var(--dorado); margin-bottom: 2rem; letter-spacing: 0.2em; text-transform: uppercase; text-align: center; }
+      .hero-desc { font-family: var(--font-display); font-size: clamp(1rem, 1.6vw, 1.5rem); font-style: italic; color: var(--blanco); max-width: 700px; line-height: 1.8; text-align: center; }
       #que-es { padding: 2rem 1.5rem 3rem; }
       .que-es-grid { grid-template-columns: 1fr; gap: 3rem; }
       #opciones { padding: 2rem 1rem; }
@@ -260,7 +260,6 @@
 
   <!-- HERO -->
   <section id="hero">
-    <!-- Imagen a pantalla completa — cambia ETHOS Iron copia 3.png si cambias el archivo -->
     <img src="ETHOS Iron copia 3.png" alt="ETHOS Iron" class="hero-banner" />
     <div class="hero-overlay"></div>
     <div class="hero-contenido">
