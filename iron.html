@@ -86,10 +86,10 @@
 
     /* MEMBRESÍA CON FOTO */
     #membresia { padding: 0; overflow: hidden; background: var(--negro-card); border-top: 1px solid var(--negro-borde); }
-    .membresia-imagen-wrap { position: relative; height: 320px; overflow: hidden; }
+    .membresia-imagen-wrap { position: relative; height: 420px; overflow: hidden; }
     .membresia-imagen-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; opacity: 0.6; }
-    .membresia-imagen-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 30%, var(--negro-card) 100%); }
-    .membresia-contenido { max-width: 700px; margin: 0 auto; padding: 0 4rem 5rem; text-align: center; position: relative; z-index: 1; margin-top: -2rem; }
+    .membresia-imagen-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 50%, var(--negro-card) 100%); }
+    .membresia-contenido { max-width: 700px; margin: 0 auto; padding: 2rem 4rem 5rem; text-align: center; position: relative; z-index: 1; margin-top: -1rem; }
     .membresia-contenido h2 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.2rem; }
     .membresia-contenido p { font-size: 1.15rem; color: var(--gris); line-height: 1.9; margin-bottom: 1rem; }
     .membresia-precio { font-family: var(--font-display); font-size: 4rem; color: var(--dorado); line-height: 1; margin: 2rem 0 0.5rem; }
@@ -339,7 +339,7 @@
   ============================================================ -->
   <section id="membresia">
     <div class="membresia-imagen-wrap">
-      <img src="ETHOS IRON simple.png" alt="ETHOS Iron Membresía" />
+      <img src="ETHOS IRON simple.png" alt="ETHOS Iron Membresía" style="width:100%; height:100%; object-fit:cover; object-position:center top; opacity:1;" />
     </div>
     <div class="membresia-contenido reveal">
       <p class="etiqueta">Membresía</p>
