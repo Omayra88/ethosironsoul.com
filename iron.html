@@ -312,8 +312,12 @@
           <li style="font-size:0.8rem; color:var(--gris); padding-left:1.2rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Análisis semanal de asimetrías legales</li>
           <li style="font-size:0.8rem; color:var(--gris); padding-left:1.2rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Acceso prioritario a nuevos lanzamientos</li>
         </ul>
-        <!-- Cambia # por tu enlace de Hotmart cuando lo tengas -->
-        <a href="#" class="btn" style="margin-top:auto;"><span>Unirme a Iron</span></a>
+        <!-- Cambia # por Hotmart cuando lo tengas -->
+          <div class="btn-comprar-wrap cerrado" style="width:100%;">
+            <a href="#" class="btn-compra" style="display:block; text-align:center;"><span>Unirme a Iron</span></a>
+            <span class="lanzamiento-badge">Lanzamiento cerrado</span>
+          </div>
+          <button onclick="abrirModal()" style="margin-top:0.5rem; width:100%; background:none; border:1px solid var(--negro-borde); color:var(--gris); font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.65rem 1rem; cursor:pointer; transition:border-color 0.35s ease, color 0.35s ease;" onmouseover="this.style.borderColor='var(--dorado)';this.style.color='var(--dorado)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.color='var(--gris)'">Avísame del próximo lanzamiento</button>
       </div>
 
       <!-- OPCIÓN B: Compra lo que necesitas -->
@@ -355,12 +359,17 @@
         <li>Comunidad privada en Telegram</li>
         <li>Análisis semanal de asimetrías legales</li>
       </ul>
-      <!-- Cambia el href por el enlace de Hotmart cuando lo tengas -->
-      <a href="#" class="btn"><span>Unirme a Iron</span></a>
+      <!-- Cambia # por tu enlace de Hotmart cuando lo tengas -->
+      <div class="btn-comprar-wrap cerrado" style="width:100%;">
+            <a href="#" class="btn-compra" style="display:block; text-align:center;"><span>Unirme a Iron</span></a>
+            <span class="lanzamiento-badge">Lanzamiento cerrado</span>
+          </div>
+          <button onclick="abrirModal()" style="margin-top:0.5rem; width:100%; background:none; border:1px solid var(--negro-borde); color:var(--gris); font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.65rem 1rem; cursor:pointer; transition:border-color 0.35s ease, color 0.35s ease;" onmouseover="this.style.borderColor='var(--dorado)';this.style.color='var(--dorado)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.color='var(--gris)'">Avísame del próximo lanzamiento</button>
     </div>
   </section>
 
   <!-- ============================================================
+       SERIES<!-- ============================================================
        SERIES — Carrusel solo con las 7 series sueltas
        Para abrir lanzamiento: cambia data-lanzamiento="cerrado" a "abierto"
        Para enlace de compra: cambia href en .btn-comprar (Hotmart)
@@ -529,7 +538,11 @@
     <h2 class="reveal">Pensar con criterio<br />no debería ser radical.</h2>
     <p class="reveal">Únete a Iron y accede al contenido que la narrativa dominante preferiría que no vieras.</p>
     <div class="cta-botones reveal">
-      <a href="#" class="btn"><span>Unirme a la membresía</span></a>
+      <div class="btn-comprar-wrap cerrado" style="margin-bottom:0.8rem;">
+        <a href="#" class="btn-compra" style="display:block; text-align:center;"><span>Unirme a la membresía</span></a>
+        <span class="lanzamiento-badge">Lanzamiento cerrado</span>
+      </div>
+      <button onclick="abrirModal()" style="margin-bottom:0.8rem; background:none; border:1px solid var(--negro-borde); color:var(--gris); font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.65rem 2rem; cursor:pointer; transition:border-color 0.35s ease, color 0.35s ease;" onmouseover="this.style.borderColor='var(--dorado)';this.style.color='var(--dorado)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.color='var(--gris)'">Avísame del próximo lanzamiento</button>
       <a href="#series" class="btn"><span>Ver las series</span></a>
     </div>
   </section>
