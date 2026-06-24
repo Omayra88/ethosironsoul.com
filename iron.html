@@ -63,9 +63,9 @@
     .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, var(--negro) 45%, rgba(10,10,10,0.3) 80%, transparent 100%); }
     .hero-contenido { position: relative; z-index: 2; padding: 8rem 4rem 4rem; max-width: 560px; }
     .hero-eyebrow { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--dorado); margin-bottom: 1rem; }
-    .hero-titulo { font-family: var(--font-display); font-size: clamp(2.5rem, 4.5vw, 5rem); font-weight: 300; letter-spacing: 0.05em; line-height: 1.1; margin-bottom: 1.5rem; white-space: nowrap; }
-    .hero-subtitulo { font-family: var(--font-display); font-size: clamp(1.3rem, 2vw, 1.7rem); font-style: italic; color: var(--dorado); margin-bottom: 0.8rem; white-space: nowrap; }
-    .hero-desc { font-size: 1.1rem; color: var(--gris); max-width: 520px; line-height: 1.8; font-family: var(--font-body); }
+    .hero-titulo { font-family: var(--font-display); font-size: clamp(3rem, 7vw, 7rem); font-weight: 300; letter-spacing: 0.15em; line-height: 1.1; margin-bottom: 0.5rem; text-transform: uppercase; }
+    .hero-subtitulo { font-family: var(--font-display); font-size: clamp(2.25rem, 5.25vw, 5.25rem); font-weight: 300; font-style: normal; color: var(--dorado); margin-bottom: 1.5rem; letter-spacing: 0.15em; text-transform: uppercase; }
+    .hero-desc { font-family: var(--font-display); font-size: clamp(1rem, 1.8vw, 1.4rem); font-style: italic; color: var(--blanco); max-width: 700px; line-height: 1.8; text-align: center; }
 
     /* SECCION TITULO */
     .seccion-titulo { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dorado); display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-bottom: 3rem; }
@@ -109,7 +109,7 @@
     .serie-card::before { content: ''; position: absolute; inset: 0; border: 1px solid var(--dorado); opacity: 0; transition: opacity var(--transicion); z-index: 1; pointer-events: none; }
     .serie-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(201,168,76,0.15); }
     .serie-card:hover::before { opacity: 1; }
-    .serie-imagen { width: 100%; aspect-ratio: 2/3; object-fit: cover; }
+    .serie-imagen { width: 100%; aspect-ratio: 4/3; object-fit: contain; background: #0d0d0d; }
     .serie-badge { position: absolute; top: 1rem; right: 1rem; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--dorado); color: var(--negro); padding: 0.3rem 0.7rem; z-index: 2; }
     .serie-info { padding: 1.5rem; display: flex; flex-direction: column; flex: 1; }
     .serie-numero { font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado-oscuro); margin-bottom: 0.3rem; }
@@ -196,10 +196,10 @@
       .nav-links { display: none; }
       .hamburguesa { display: flex; }
       #hero { min-height: 100svh; align-items: flex-end; }
-      .hero-banner { position: absolute !important; left: 0 !important; right: 0 !important; top: 0 !important; transform: none !important; width: 100% !important; height: 60% !important; max-width: 100% !important; object-fit: cover !important; object-position: center 20% !important; opacity: 0.55 !important; }
-      .hero-overlay { background: linear-gradient(to top, var(--negro) 38%, rgba(10,10,10,0.4) 70%, rgba(10,10,10,0.1) 100%); }
-      .hero-contenido { padding: 0 1.5rem 4rem; max-width: 100%; }
-      .hero-titulo { white-space: normal; font-size: clamp(2.2rem, 10vw, 3.5rem); }
+      .hero-banner { position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important; max-width: 100% !important; object-fit: cover !important; object-position: center center !important; opacity: 0.65 !important; }
+      .hero-overlay { background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.5) 60%, var(--negro) 100%); }
+      .hero-contenido { padding: 0 1.5rem 4rem; max-width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: flex-end; }
+      .hero-titulo { white-space: nowrap; font-size: clamp(1.8rem, 8vw, 3rem); }
       .hero-subtitulo { white-space: normal; font-size: 1rem; }
       .hero-desc { font-size: 0.95rem; }
       #que-es { padding: 2rem 1.5rem 3rem; }
@@ -235,6 +235,17 @@
       <li><a href="productos.html">Productos</a></li>
       <li><a href="index.html#contacto">Contacto</a></li>
     </ul>
+    <div class="nav-iconos" style="display:flex; gap:1.2rem; align-items:center;">
+      <a href="https://instagram.com/o.mispecas" target="_blank" title="Instagram" style="color:var(--gris); transition:color 0.35s ease;" onmouseover="this.style.color='var(--dorado)'" onmouseout="this.style.color='var(--gris)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="#" target="_blank" title="YouTube" style="color:var(--gris); transition:color 0.35s ease;" onmouseover="this.style.color='var(--dorado)'" onmouseout="this.style.color='var(--gris)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="mailto:hola@ethosironsoul.com" title="Email" style="color:var(--gris); transition:color 0.35s ease;" onmouseover="this.style.color='var(--dorado)'" onmouseout="this.style.color='var(--gris)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+      </a>
+    </div>
     <button class="hamburguesa" id="hamburguesa" aria-label="Menú"><span></span><span></span><span></span></button>
   </nav>
 
@@ -249,13 +260,14 @@
 
   <!-- HERO -->
   <section id="hero">
+    <!-- Imagen a pantalla completa — cambia ETHOS Iron copia 3.png si cambias el archivo -->
     <img src="ETHOS Iron copia 3.png" alt="ETHOS Iron" class="hero-banner" />
     <div class="hero-overlay"></div>
     <div class="hero-contenido">
       <p class="hero-eyebrow">· Ethos Iron ·</p>
-      <h1 class="hero-titulo">Conocimiento.<br />Sin filtro.<br />Sin censura.</h1>
-      <p class="hero-subtitulo">Acceso privado al contenido que incomoda.</p>
-      <p class="hero-desc">Series documentadas, membresía exclusiva y herramientas para pensar con criterio propio.</p>
+      <h1 class="hero-titulo">Conocimiento</h1>
+      <p class="hero-subtitulo">Sin filtro · Sin censura</p>
+      <p class="hero-desc">Acceso privado al contenido que incomoda.<br />Series documentadas, membresía exclusiva y herramientas para pensar con criterio propio.</p>
     </div>
   </section>
 
