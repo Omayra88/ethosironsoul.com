@@ -187,6 +187,29 @@
     .modal .btn { width: 100%; text-align: center; }
 
     /* REVEAL */
+
+    /* ============================================================
+       BOTÓN CERRADO — tachado con X cuando lanzamiento cerrado
+       Para abrir: quita clase "cerrado" del div y cambia href
+    ============================================================ */
+    .btn-comprar-wrap { position: relative; width: 100%; margin-top: 0.8rem; }
+    .btn-compra {
+      display: block; width: 100%; text-align: center;
+      font-family: var(--font-body); font-size: 0.7rem; letter-spacing: 0.2em;
+      text-transform: uppercase; padding: 0.85rem 2.5rem;
+      border: 1px solid var(--dorado); color: var(--dorado); background: transparent;
+      cursor: pointer; position: relative; overflow: hidden;
+      transition: color var(--transicion); text-decoration: none;
+    }
+    .btn-compra::after { content: ''; position: absolute; inset: 0; background: var(--dorado); transform: scaleX(0); transform-origin: left; transition: transform var(--transicion); z-index: 0; }
+    .btn-compra span { position: relative; z-index: 1; }
+    .btn-compra:hover::after { transform: scaleX(1); }
+    .btn-compra:hover { color: var(--negro); }
+    .btn-comprar-wrap.cerrado .btn-compra { pointer-events: none; opacity: 0.45; border-color: var(--gris); color: var(--gris); }
+    .btn-comprar-wrap.cerrado .btn-compra::after { display: none; }
+    .btn-comprar-wrap.cerrado::before { content: '✕'; position: absolute; top: 38%; left: 50%; transform: translate(-50%, -50%); font-size: 1.4rem; color: var(--gris); z-index: 10; pointer-events: none; }
+    .lanzamiento-badge { display: block; width: 100%; text-align: center; font-size: 0.5rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dorado-oscuro); margin-top: 0.4rem; }
+
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
