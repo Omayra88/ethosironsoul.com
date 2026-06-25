@@ -96,15 +96,12 @@
     .estado-badge.preparacion { border: 1px solid var(--dorado-oscuro); color: var(--dorado-oscuro); }
     .estado-badge.publicado { border: 1px solid var(--dorado); color: var(--dorado); }
 
-    /* TABLA DE MOVIMIENTOS */
-    .tabla-wrap { overflow-x: auto; margin-bottom: 2rem; }
-    .tabla-movimientos { width: 100%; border-collapse: collapse; min-width: 500px; }
-    .tabla-movimientos th { font-family: var(--font-body); font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dorado); padding: 0.7rem 1rem; border-bottom: 1px solid var(--dorado-oscuro); text-align: left; white-space: nowrap; }
-    .tabla-movimientos td { font-size: 0.75rem; color: var(--gris); padding: 0.8rem 1rem; border-bottom: 1px solid var(--negro-borde); }
-    .tabla-movimientos tbody tr:last-child td { border-bottom: none; }
-    .importe-ingreso { color: var(--blanco) !important; }
-    .importe-gasto { color: var(--gris) !important; }
-    .fila-total td { border-top: 1px solid var(--dorado-oscuro) !important; color: var(--dorado) !important; font-weight: 500; font-size: 0.78rem; }
+    /* DATOS DEL TRIMESTRE */
+    .trimestre-datos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem; padding: 1.5rem 2rem; border: 1px solid var(--negro-borde); }
+    .dato-item { display: flex; flex-direction: column; gap: 0.4rem; }
+    .dato-label { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris); }
+    .dato-valor { font-family: var(--font-display); font-size: 2rem; font-weight: 300; color: var(--dorado); }
+    .dato-balance .dato-valor { color: var(--blanco); }
     .sin-datos { font-size: 0.78rem; color: var(--gris); font-style: italic; padding: 1.2rem 0; border-top: 1px solid var(--negro-borde); border-bottom: 1px solid var(--negro-borde); margin-bottom: 1.5rem; }
 
     /* DOCUMENTOS */
@@ -261,28 +258,33 @@
       </button>
       <div class="trimestre-contenido">
         <div class="trimestre-inner">
-          <p class="trimestre-intro">ETHOS Soul inició su actividad en junio de 2026. No hubo movimientos durante este período.</p>
-          <p class="sin-datos">Sin movimientos registrados — ETHOS Soul no había arrancado aún.</p>
+          <div class="trimestre-datos">
+            <div class="dato-item">
+              <span class="dato-label">Ingresos</span>
+              <span class="dato-valor">—</span><!-- sustituye por ej: €0,00 -->
+            </div>
+            <div class="dato-item">
+              <span class="dato-label">Gastos</span>
+              <span class="dato-valor">—</span><!-- sustituye por ej: €0,00 -->
+            </div>
+            <div class="dato-item dato-balance">
+              <span class="dato-label">Balance</span>
+              <span class="dato-valor">—</span><!-- sustituye por ej: €0,00 -->
+            </div>
+          </div>
           <div class="documentos-bloque">
-            <p class="documentos-titulo">Documentos adjuntos</p>
+            <p class="documentos-titulo">Documentos</p>
             <div class="documentos-lista">
-              <p class="sin-docs">Sin documentos — período sin actividad</p>
+              <!-- AÑADE AQUÍ los documentos cuando los tengas:
+                   <a href="docs/extracto-t1-2026.jpg" target="_blank" class="btn-documento">↓ Extracto T1 2026</a> -->
+              <p class="sin-docs">Sin actividad — ETHOS Soul no había arrancado aún</p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ============================================================
-         T2 2026 — Abril · Mayo · Junio
-         Publicación prevista: antes del 31 de julio 2026
-
-         CUANDO TENGAS LOS DATOS:
-         1. Cambia estado-badge de "preparacion" a "publicado"
-         2. Rellena la tabla con los movimientos reales
-         3. Sube el PDF al repo y sustituye href="#" por la ruta
-            ej: href="docs/extracto-t2-2026.pdf"
-    ============================================================ -->
+    <!-- T2 2026 -->
     <div class="trimestre-item">
       <button class="trimestre-btn">
         T2 2026 &nbsp;·&nbsp; Abril — Junio
@@ -291,59 +293,25 @@
       </button>
       <div class="trimestre-contenido">
         <div class="trimestre-inner">
-          <p class="trimestre-intro">ETHOS Soul arrancó en junio de 2026. El informe completo se publicará antes del 31 de julio de 2026.</p>
-
-          <div class="tabla-wrap">
-            <table class="tabla-movimientos">
-              <thead>
-                <tr>
-                  <th>Fecha</th>
-                  <th>Concepto</th>
-                  <th>Tipo</th>
-                  <th>Importe</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- ============================================================
-                     AÑADE AQUÍ UNA FILA POR CADA MOVIMIENTO
-                     Ejemplo ingreso:
-                     <tr>
-                       <td>01/06/2026</td>
-                       <td>Donación — anónimo</td>
-                       <td>Ingreso</td>
-                       <td class="importe-ingreso">+ €25,00</td>
-                     </tr>
-                     Ejemplo gasto:
-                     <tr>
-                       <td>15/06/2026</td>
-                       <td>Honorarios psicólogo — sesión grupo</td>
-                       <td>Gasto</td>
-                       <td class="importe-gasto">− €120,00</td>
-                     </tr>
-                ============================================================ -->
-                <tr>
-                  <td colspan="4" style="text-align:center; color:var(--negro-borde); font-style:italic; padding:1.5rem;">
-                    Informe en preparación — se publicará en julio 2026
-                  </td>
-                </tr>
-              </tbody>
-              <!-- ============================================================
-                   FILA DE BALANCE TOTAL — descomenta y rellena cuando tengas datos
-                   <tfoot>
-                     <tr class="fila-total">
-                       <td colspan="3">Balance del trimestre</td>
-                       <td>+ €XXX,XX</td>
-                     </tr>
-                   </tfoot>
-              ============================================================ -->
-            </table>
+          <div class="trimestre-datos">
+            <div class="dato-item">
+              <span class="dato-label">Ingresos</span>
+              <span class="dato-valor">—</span><!-- sustituye por ej: €240,00 -->
+            </div>
+            <div class="dato-item">
+              <span class="dato-label">Gastos</span>
+              <span class="dato-valor">—</span><!-- sustituye por ej: €120,00 -->
+            </div>
+            <div class="dato-item dato-balance">
+              <span class="dato-label">Balance</span>
+              <span class="dato-valor">—</span><!-- sustituye por ej: €120,00 -->
+            </div>
           </div>
-
           <div class="documentos-bloque">
-            <p class="documentos-titulo">Documentos adjuntos</p>
+            <p class="documentos-titulo">Documentos</p>
             <div class="documentos-lista">
-              <!-- SUSTITUYE href="#" por la ruta al PDF cuando lo tengas
-                   ej: <a href="docs/extracto-t2-2026.pdf" target="_blank" class="btn-documento">↓ Extracto bancario</a> -->
+              <!-- AÑADE AQUÍ los documentos cuando los tengas:
+                   <a href="docs/extracto-t2-2026.jpg" target="_blank" class="btn-documento">↓ Extracto jun. 2026</a> -->
               <p class="sin-docs">Se publicarán en julio 2026</p>
             </div>
           </div>
@@ -351,10 +319,6 @@
       </div>
     </div>
 
-    <!-- ============================================================
-         T3 2026 — Julio · Agosto · Septiembre
-         Publicación prevista: antes del 31 de octubre 2026
-    ============================================================ -->
     <div class="trimestre-item">
       <button class="trimestre-btn">
         T3 2026 &nbsp;·&nbsp; Julio — Septiembre
@@ -363,20 +327,30 @@
       </button>
       <div class="trimestre-contenido">
         <div class="trimestre-inner">
-          <p class="trimestre-intro">Tercer trimestre de 2026. El informe se publicará antes del 31 de octubre de 2026.</p>
-          <p class="sin-datos">Período aún no cerrado.</p>
+          <div class="trimestre-datos">
+            <div class="dato-item">
+              <span class="dato-label">Ingresos</span>
+              <span class="dato-valor">—</span>
+            </div>
+            <div class="dato-item">
+              <span class="dato-label">Gastos</span>
+              <span class="dato-valor">—</span>
+            </div>
+            <div class="dato-item dato-balance">
+              <span class="dato-label">Balance</span>
+              <span class="dato-valor">—</span>
+            </div>
+          </div>
           <div class="documentos-bloque">
-            <p class="documentos-titulo">Documentos adjuntos</p>
-            <div class="documentos-lista"><p class="sin-docs">Se publicarán en octubre 2026</p></div>
+            <p class="documentos-titulo">Documentos</p>
+            <div class="documentos-lista">
+              <p class="sin-docs">Se publicarán en octubre 2026</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ============================================================
-         T4 2026 — Octubre · Noviembre · Diciembre
-         Publicación prevista: antes del 31 de enero 2027
-    ============================================================ -->
     <div class="trimestre-item">
       <button class="trimestre-btn">
         T4 2026 &nbsp;·&nbsp; Octubre — Diciembre
@@ -385,21 +359,31 @@
       </button>
       <div class="trimestre-contenido">
         <div class="trimestre-inner">
-          <p class="trimestre-intro">Cuarto trimestre de 2026. El informe se publicará antes del 31 de enero de 2027.</p>
-          <p class="sin-datos">Período aún no cerrado.</p>
+          <div class="trimestre-datos">
+            <div class="dato-item">
+              <span class="dato-label">Ingresos</span>
+              <span class="dato-valor">—</span>
+            </div>
+            <div class="dato-item">
+              <span class="dato-label">Gastos</span>
+              <span class="dato-valor">—</span>
+            </div>
+            <div class="dato-item dato-balance">
+              <span class="dato-label">Balance</span>
+              <span class="dato-valor">—</span>
+            </div>
+          </div>
           <div class="documentos-bloque">
-            <p class="documentos-titulo">Documentos adjuntos</p>
-            <div class="documentos-lista"><p class="sin-docs">Se publicarán en enero 2027</p></div>
+            <p class="documentos-titulo">Documentos</p>
+            <div class="documentos-lista">
+              <p class="sin-docs">Se publicarán en enero 2027</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ============================================================
-         PARA AÑADIR EL AÑO 2027 Y SIGUIENTES:
-         Copia el bloque desde <p class="anio-titulo">2026</p> hasta
-         el último </div> de trimestre, pégalo debajo y cambia el año.
-    ============================================================ -->
+    <!-- Para añadir 2027: copia un bloque trimestre, cambia el año y los textos -->
 
   </section>
 
