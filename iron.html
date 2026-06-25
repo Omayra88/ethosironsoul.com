@@ -186,21 +186,8 @@
     .modal input[type="email"]:focus { border-color: var(--dorado); }
     .modal .btn { width: 100%; text-align: center; }
 
-    /* REVEAL */
-
-    /* ============================================================
-       BOTÓN CERRADO — tachado con X cuando lanzamiento cerrado
-       Para abrir: quita clase "cerrado" del div y cambia href
-    ============================================================ */
     .btn-comprar-wrap { position: relative; width: 100%; margin-top: 0.8rem; }
-    .btn-compra {
-      display: block; width: 100%; text-align: center;
-      font-family: var(--font-body); font-size: 0.7rem; letter-spacing: 0.2em;
-      text-transform: uppercase; padding: 0.85rem 2.5rem;
-      border: 1px solid var(--dorado); color: var(--dorado); background: transparent;
-      cursor: pointer; position: relative; overflow: hidden;
-      transition: color var(--transicion); text-decoration: none;
-    }
+    .btn-compra { display: block; width: 100%; text-align: center; font-family: var(--font-body); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.85rem 2.5rem; border: 1px solid var(--dorado); color: var(--dorado); background: transparent; cursor: pointer; position: relative; overflow: hidden; transition: color var(--transicion); text-decoration: none; }
     .btn-compra::after { content: ''; position: absolute; inset: 0; background: var(--dorado); transform: scaleX(0); transform-origin: left; transition: transform var(--transicion); z-index: 0; }
     .btn-compra span { position: relative; z-index: 1; }
     .btn-compra:hover::after { transform: scaleX(1); }
@@ -247,7 +234,6 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <nav id="navbar">
     <a href="index.html" class="nav-logo">ETHOS</a>
     <ul class="nav-links">
@@ -256,7 +242,8 @@
       <li><a href="soul.html">Ethos Soul</a></li>
       <li><a href="iron.html" class="activo">Ethos Iron</a></li>
       <li><a href="productos.html">Productos</a></li>
-      <li><a href="index.html#contacto">Contacto</a></li>
+      <li><a href="transparencia.html">Transparencia</a></li>
+      <li><a href="mailto:contacto@ethosironsoul.com">Contacto</a></li>
     </ul>
     <div class="nav-iconos" style="display:flex; gap:1.2rem; align-items:center;">
       <a href="https://instagram.com/o.mispecas" target="_blank" title="Instagram" style="color:var(--gris); transition:color 0.35s ease;" onmouseover="this.style.color='var(--dorado)'" onmouseout="this.style.color='var(--gris)'">
@@ -265,7 +252,7 @@
       <a href="#" target="_blank" title="YouTube" style="color:var(--gris); transition:color 0.35s ease;" onmouseover="this.style.color='var(--dorado)'" onmouseout="this.style.color='var(--gris)'">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
       </a>
-      <a href="mailto:hola@ethosironsoul.com" title="Email" style="color:var(--gris); transition:color 0.35s ease;" onmouseover="this.style.color='var(--dorado)'" onmouseout="this.style.color='var(--gris)'">
+      <a href="mailto:contacto@ethosironsoul.com" title="Email" style="color:var(--gris); transition:color 0.35s ease;" onmouseover="this.style.color='var(--dorado)'" onmouseout="this.style.color='var(--gris)'">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
       </a>
     </div>
@@ -278,10 +265,10 @@
     <a href="soul.html" onclick="cerrarMenu()">Ethos Soul</a>
     <a href="iron.html" onclick="cerrarMenu()">Ethos Iron</a>
     <a href="productos.html" onclick="cerrarMenu()">Productos</a>
-    <a href="index.html#contacto" onclick="cerrarMenu()">Contacto</a>
+    <a href="transparencia.html" onclick="cerrarMenu()">Transparencia</a>
+    <a href="mailto:contacto@ethosironsoul.com" onclick="cerrarMenu()">Contacto</a>
   </div>
 
-  <!-- HERO -->
   <section id="hero">
     <img src="ETHOS Iron copia 3.png" alt="ETHOS Iron" class="hero-banner" />
     <div class="hero-overlay"></div>
@@ -292,7 +279,6 @@
     </div>
   </section>
 
-  <!-- QUÉ ES -->
   <section id="que-es">
     <div class="que-es-grid">
       <div class="que-es-texto reveal">
@@ -309,18 +295,10 @@
     </div>
   </section>
 
-  <!-- ============================================================
-       TUS OPCIONES CON IRON
-       Opción A: Únete a Iron (membresía) — PRIMERA
-       Opción B: Compra lo que necesitas (series sueltas) — SEGUNDA
-  ============================================================ -->
   <section id="opciones">
     <p class="seccion-titulo">Tus opciones con Iron</p>
     <p style="text-align:center; font-size:0.82rem; color:var(--gris); margin-bottom:3rem; max-width:600px; margin-left:auto; margin-right:auto;">Elige tu camino. Puedes unirte a la membresía y tenerlo todo, o acceder a las series que quieras de forma individual.</p>
-
     <div class="opciones-grid">
-
-      <!-- OPCIÓN A: Únete a Iron (membresía) -->
       <div class="opcion-card reveal" style="border:1px solid var(--dorado-oscuro);" onmouseover="this.style.borderColor='var(--dorado)';this.style.boxShadow='0 0 30px rgba(201,168,76,0.15)'" onmouseout="this.style.borderColor='var(--dorado-oscuro)';this.style.boxShadow=''">
         <div style="position:absolute; top:-1px; right:2rem; background:var(--dorado); color:var(--negro); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.3rem 1rem;">Recomendado</div>
         <p style="font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--dorado); margin-bottom:1rem;">Opción A</p>
@@ -335,15 +313,12 @@
           <li style="font-size:0.8rem; color:var(--gris); padding-left:1.2rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Análisis semanal de asimetrías legales</li>
           <li style="font-size:0.8rem; color:var(--gris); padding-left:1.2rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Acceso prioritario a nuevos lanzamientos</li>
         </ul>
-        <!-- Cambia # por Hotmart cuando lo tengas -->
-          <div class="btn-comprar-wrap cerrado" style="width:100%;">
-            <a href="#" class="btn-compra" style="display:block; text-align:center;"><span>Unirme a Iron</span></a>
-            <span class="lanzamiento-badge">Lanzamiento cerrado</span>
-          </div>
-          <button onclick="abrirModal()" style="margin-top:0.5rem; width:100%; background:none; border:1px solid var(--negro-borde); color:var(--gris); font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.65rem 1rem; cursor:pointer; transition:border-color 0.35s ease, color 0.35s ease;" onmouseover="this.style.borderColor='var(--dorado)';this.style.color='var(--dorado)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.color='var(--gris)'">Avísame del próximo lanzamiento</button>
+        <div class="btn-comprar-wrap cerrado" style="width:100%;">
+          <a href="#" class="btn-compra" style="display:block; text-align:center;"><span>Unirme a Iron</span></a>
+          <span class="lanzamiento-badge">Lanzamiento cerrado</span>
+        </div>
+        <button onclick="abrirModal()" style="margin-top:0.5rem; width:100%; background:none; border:1px solid var(--negro-borde); color:var(--gris); font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.65rem 1rem; cursor:pointer; transition:border-color 0.35s ease, color 0.35s ease;" onmouseover="this.style.borderColor='var(--dorado)';this.style.color='var(--dorado)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.color='var(--gris)'">Avísame del próximo lanzamiento</button>
       </div>
-
-      <!-- OPCIÓN B: Compra lo que necesitas -->
       <div class="opcion-card reveal" style="border:1px solid var(--negro-borde);" onmouseover="this.style.borderColor='var(--dorado)';this.style.boxShadow='0 0 30px rgba(201,168,76,0.1)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.boxShadow=''">
         <p style="font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--dorado); margin-bottom:1rem;">Opción B</p>
         <h3 style="font-family:var(--font-display); font-size:2rem; font-weight:300; margin-bottom:1rem;">Compra lo que necesitas</h3>
@@ -356,14 +331,9 @@
         </ul>
         <a href="#series" class="btn" style="margin-top:auto;"><span>Ver las series</span></a>
       </div>
-
     </div>
   </section>
 
-  <!-- ============================================================
-       MEMBRESÍA CON FOTO — justo después de las opciones
-       Imagen: ETHOS Iron copia 3.png fusionada arriba
-  ============================================================ -->
   <section id="membresia">
     <div class="membresia-imagen-wrap">
       <img src="ETHOS IRON simple.png" alt="ETHOS Iron Membresía" style="width:100%; height:100%; object-fit:cover; object-position:center top; opacity:1;" />
@@ -382,25 +352,17 @@
         <li>Comunidad privada en Telegram</li>
         <li>Análisis semanal de asimetrías legales</li>
       </ul>
-      <!-- Cambia # por tu enlace de Hotmart cuando lo tengas -->
       <div class="btn-comprar-wrap cerrado" style="width:100%;">
-            <a href="#" class="btn-compra" style="display:block; text-align:center;"><span>Unirme a Iron</span></a>
-            <span class="lanzamiento-badge">Lanzamiento cerrado</span>
-          </div>
-          <button onclick="abrirModal()" style="margin-top:0.5rem; width:100%; background:none; border:1px solid var(--negro-borde); color:var(--gris); font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.65rem 1rem; cursor:pointer; transition:border-color 0.35s ease, color 0.35s ease;" onmouseover="this.style.borderColor='var(--dorado)';this.style.color='var(--dorado)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.color='var(--gris)'">Avísame del próximo lanzamiento</button>
+        <a href="#" class="btn-compra" style="display:block; text-align:center;"><span>Unirme a Iron</span></a>
+        <span class="lanzamiento-badge">Lanzamiento cerrado</span>
+      </div>
+      <button onclick="abrirModal()" style="margin-top:0.5rem; width:100%; background:none; border:1px solid var(--negro-borde); color:var(--gris); font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.65rem 1rem; cursor:pointer; transition:border-color 0.35s ease, color 0.35s ease;" onmouseover="this.style.borderColor='var(--dorado)';this.style.color='var(--dorado)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.color='var(--gris)'">Avísame del próximo lanzamiento</button>
     </div>
   </section>
 
-  <!-- ============================================================
-       SERIES<!-- ============================================================
-       SERIES — Carrusel solo con las 7 series sueltas
-       Para abrir lanzamiento: cambia data-lanzamiento="cerrado" a "abierto"
-       Para enlace de compra: cambia href en .btn-comprar (Hotmart)
-  ============================================================ -->
   <section id="series">
     <p class="seccion-titulo">Las series</p>
     <div class="series-grid">
-
       <div class="serie-card reveal" data-lanzamiento="cerrado">
         <span class="serie-badge">Serie</span>
         <img src="S1-La mente femenina al descubierto.png" alt="Serie 1" class="serie-imagen" />
@@ -413,7 +375,6 @@
           <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
         </div>
       </div>
-
       <div class="serie-card reveal" data-lanzamiento="cerrado">
         <span class="serie-badge">Serie</span>
         <img src="S2-La logica femenina al descubierto.png" alt="Serie 2" class="serie-imagen" />
@@ -426,7 +387,6 @@
           <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
         </div>
       </div>
-
       <div class="serie-card reveal" data-lanzamiento="cerrado">
         <span class="serie-badge">Serie</span>
         <img src="S3-La conquista real.png" alt="Serie 3" class="serie-imagen" />
@@ -439,7 +399,6 @@
           <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
         </div>
       </div>
-
       <div class="serie-card reveal" data-lanzamiento="cerrado">
         <span class="serie-badge">Serie</span>
         <img src="S4-Destruye el feminismo.png" alt="Serie 4" class="serie-imagen" />
@@ -452,7 +411,6 @@
           <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
         </div>
       </div>
-
       <div class="serie-card reveal" data-lanzamiento="cerrado">
         <span class="serie-badge">Serie</span>
         <img src="S5-La guerra de sexos.png" alt="Serie 5" class="serie-imagen" />
@@ -465,7 +423,6 @@
           <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
         </div>
       </div>
-
       <div class="serie-card reveal" data-lanzamiento="cerrado">
         <span class="serie-badge">Serie</span>
         <img src="S6-El ciclo tu poder.png" alt="Serie 6" class="serie-imagen" />
@@ -478,7 +435,6 @@
           <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
         </div>
       </div>
-
       <div class="serie-card reveal" data-lanzamiento="cerrado">
         <span class="serie-badge">Serie</span>
         <img src="S7- Woke.png" alt="Serie 7" class="serie-imagen" />
@@ -491,19 +447,12 @@
           <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- ============================================================
-       PACKS DE SERIES — Justo debajo del carrusel
-       Edita precios y series de cada pack aquí
-       Cambia href de cada botón por el enlace de Hotmart
-  ============================================================ -->
   <section id="bundles">
     <p class="seccion-titulo">Packs de series</p>
     <div class="bundles-grid">
-
       <div class="bundle-card reveal">
         <p class="bundle-nombre">Pack Fundamentos</p>
         <p class="bundle-series">Series 01 + 02 + 06<br />Mente, lógica y biología</p>
@@ -511,7 +460,6 @@
         <p class="bundle-ahorro">Ahorras 44€ frente al precio individual</p>
         <a href="productos.html#pack-fundamentos" class="btn"><span>Ver pack</span></a>
       </div>
-
       <div class="bundle-card destacado reveal">
         <p class="bundle-nombre">Pack Relaciones</p>
         <p class="bundle-series">Series 03 + 04 + 05<br />Conquista, feminismo y guerra de sexos</p>
@@ -519,7 +467,6 @@
         <p class="bundle-ahorro">Ahorras 44€ frente al precio individual</p>
         <a href="productos.html#pack-relaciones" class="btn"><span>Ver pack</span></a>
       </div>
-
       <div class="bundle-card reveal">
         <p class="bundle-nombre">Pack Completo</p>
         <p class="bundle-series">Las 7 series<br />Acceso total al contenido Iron</p>
@@ -527,11 +474,9 @@
         <p class="bundle-ahorro">Ahorras 94€ frente al precio individual</p>
         <a href="productos.html#pack-completo" class="btn"><span>Ver pack</span></a>
       </div>
-
     </div>
   </section>
 
-  <!-- FAQ -->
   <section id="faq">
     <p class="seccion-titulo">Preguntas frecuentes</p>
     <div class="faq-item">
@@ -556,7 +501,6 @@
     </div>
   </section>
 
-  <!-- CTA FINAL -->
   <section id="cta-final">
     <h2 class="reveal">Pensar con criterio<br />no debería ser radical.</h2>
     <p class="reveal">Únete a Iron y accede al contenido que la narrativa dominante preferiría que no vieras.</p>
@@ -576,6 +520,13 @@
     <p style="font-family: var(--font-display); font-size: 0.9rem; color: var(--gris); margin-top: 0.3rem; font-style: italic;">Un porcentaje de cada compra se destina al grupo de apoyo y los recursos legales gratuitos.</p>
   </div>
 
+  <!-- BANNER TRANSPARENCIA -->
+  <div style="background: var(--negro-card); border-top: 1px solid var(--negro-borde); border-bottom: 1px solid var(--negro-borde); padding: 2.5rem 4rem; text-align: center;">
+    <p style="font-family: var(--font-body); font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dorado); margin-bottom: 0.8rem;">· Transparencia ·</p>
+    <p style="font-family: var(--font-display); font-size: clamp(1rem, 2.25vw, 2.1rem); font-style: italic; color: var(--blanco); margin-bottom: 1.2rem; line-height: 1.6;">Publicamos todo lo que entra y sale de ETHOS Soul. Con extractos. Con nombres. Cada trimestre.</p>
+    <a href="transparencia.html" style="display: inline-block; font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.75rem 2rem; border: 1px solid var(--dorado); color: var(--dorado); position: relative; overflow: hidden; transition: color 0.35s ease; text-decoration: none;">Ver transparencia →</a>
+  </div>
+
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">ETHOS</div>
@@ -585,12 +536,12 @@
       <li><a href="soul.html">Soul</a></li>
       <li><a href="iron.html">Iron</a></li>
       <li><a href="productos.html">Productos</a></li>
-      <li><a href="mailto:hola@ethosironsoul.com">Contacto</a></li>
+      <li><a href="transparencia.html">Transparencia</a></li>
+      <li><a href="mailto:contacto@ethosironsoul.com">Contacto</a></li>
     </ul>
     <p class="footer-copy">© 2026 ETHOS — Iron & Soul Group. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- MODAL -->
   <div class="modal-overlay" id="modal-espera">
     <div class="modal">
       <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
@@ -601,7 +552,6 @@
     </div>
   </div>
 
-  <!-- BOTÓN FLOTANTE -->
   <div id="btn-donar">
     <a href="#" class="donar-circulo" title="Donar a ETHOS Soul">♡</a>
     <span class="donar-etiqueta">Donar</span>
