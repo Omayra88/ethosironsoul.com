@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Transparencia — ETHOS Soul</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --negro: #0a0a0a; --negro-card: #111111; --negro-borde: #1e1e1e;
+      --dorado: #c9a84c; --dorado-claro: #e8c97a; --dorado-oscuro: #8a6a20;
+      --blanco: #f5f0e8; --gris: #888888;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'Montserrat', sans-serif;
+      --transicion: 0.35s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--negro); color: var(--blanco); font-family: var(--font-body); font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    .etiqueta { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado); }
+    .separador { width: 40px; height: 1px; background: var(--dorado); margin: 1rem 0; }
+
+    /* BTN */
+    .btn { display: inline-block; font-family: var(--font-body); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.85rem 2.5rem; border: 1px solid var(--dorado); color: var(--dorado); background: transparent; cursor: pointer; position: relative; overflow: hidden; transition: color var(--transicion), box-shadow var(--transicion); }
+    .btn::after { content: ''; position: absolute; inset: 0; background: var(--dorado); transform: scaleX(0); transform-origin: left; transition: transform var(--transicion); z-index: 0; }
+    .btn span { position: relative; z-index: 1; }
+    .btn:hover::after { transform: scaleX(1); }
+    .btn:hover { color: var(--negro); box-shadow: 0 0 20px rgba(201,168,76,0.3); }
+
+    /* NAVBAR */
+    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; transition: background var(--transicion); }
+    #navbar.scrolled { background: rgba(10,10,10,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--negro-borde); }
+    .nav-logo { font-family: var(--font-display); font-size: 1.4rem; font-weight: 300; letter-spacing: 0.35em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris); transition: color var(--transicion); position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--dorado); transition: width var(--transicion); }
+    .nav-links a:hover, .nav-links a.activo { color: var(--dorado); }
+    .nav-links a:hover::after, .nav-links a.activo::after { width: 100%; }
+    .hamburguesa { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburguesa span { display: block; width: 24px; height: 1px; background: var(--blanco); transition: all var(--transicion); }
+    .hamburguesa.abierto span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburguesa.abierto span:nth-child(2) { opacity: 0; }
+    .hamburguesa.abierto span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .nav-movil { display: none; position: fixed; inset: 0; background: rgba(10,10,10,0.97); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+    .nav-movil.abierto { display: flex; }
+    .nav-movil a { font-family: var(--font-display); font-size: 2rem; letter-spacing: 0.15em; color: var(--blanco); transition: color var(--transicion); }
+    .nav-movil a:hover { color: var(--dorado); }
+
+    /* PAGE HEADER */
+    #page-header { padding: 10rem 4rem 5rem; text-align: center; border-bottom: 1px solid var(--negro-borde); }
+    #page-header .separador { margin: 1rem auto; }
+    #page-header h1 { font-family: var(--font-display); font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .header-subtitulo { font-family: var(--font-display); font-size: clamp(1.2rem, 2vw, 1.8rem); font-style: italic; color: var(--dorado); margin-bottom: 1rem; }
+    .header-desc { font-size: 0.8rem; color: var(--gris); max-width: 600px; margin: 0 auto; line-height: 1.9; }
+
+    /* SECCION TITULO */
+    .seccion-titulo { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dorado); display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-bottom: 3rem; }
+    .seccion-titulo::before, .seccion-titulo::after { content: ''; width: 60px; height: 1px; background: var(--dorado-oscuro); }
+
+    /* INTRO */
+    #intro { padding: 5rem 4rem; max-width: 900px; margin: 0 auto; text-align: center; }
+    #intro h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 300; line-height: 1.3; margin-bottom: 1.5rem; }
+    #intro p { font-size: 0.82rem; color: var(--gris); line-height: 1.9; margin-bottom: 1rem; }
+    #intro p strong { color: var(--blanco); font-weight: 500; }
+
+    /* STATS RESUMEN */
+    #resumen { padding: 3rem 4rem 5rem; background: var(--negro-card); border-top: 1px solid var(--negro-borde); border-bottom: 1px solid var(--negro-borde); }
+    .resumen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 900px; margin: 0 auto; }
+    .resumen-stat { border-left: 1px solid var(--dorado-oscuro); padding-left: 2rem; transition: border-color var(--transicion); }
+    .resumen-stat:hover { border-color: var(--dorado); }
+    .stat-numero { font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 300; color: var(--dorado); line-height: 1; margin-bottom: 0.4rem; }
+    /* ============================================================
+       ACTUALIZA stat-numero CADA TRIMESTRE
+       Sustituye — por la cifra real en formato €X.XXX
+    ============================================================ */
+    .stat-label { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris); line-height: 1.6; }
+
+    /* HISTORIAL ACORDEÓN */
+    #historial { padding: 6rem 4rem; max-width: 1000px; margin: 0 auto; }
+    .anio-titulo { font-family: var(--font-display); font-size: 2rem; font-weight: 300; color: var(--dorado); letter-spacing: 0.15em; margin-bottom: 2rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--dorado-oscuro); }
+    .trimestre-item { border-bottom: 1px solid var(--negro-borde); }
+    .trimestre-btn { width: 100%; background: none; border: none; color: var(--blanco); font-family: var(--font-body); font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; text-align: left; padding: 1.5rem 0; cursor: pointer; display: flex; align-items: center; gap: 1rem; transition: color var(--transicion); }
+    .trimestre-btn:hover { color: var(--dorado); }
+    .trimestre-icono { font-size: 1.2rem; color: var(--dorado); transition: transform var(--transicion); flex-shrink: 0; margin-left: auto; }
+    .trimestre-item.abierto .trimestre-icono { transform: rotate(45deg); }
+    .trimestre-contenido { max-height: 0; overflow: hidden; transition: max-height 0.45s ease; }
+    .trimestre-item.abierto .trimestre-contenido { max-height: 900px; }
+    .trimestre-inner { padding: 0.5rem 0 2.5rem; }
+    .trimestre-intro { font-size: 0.8rem; color: var(--gris); line-height: 1.9; margin-bottom: 1.5rem; }
+
+    /* BADGES DE ESTADO */
+    .estado-badge { display: inline-block; font-family: var(--font-body); font-size: 0.48rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.2rem 0.8rem; }
+    .estado-badge.pendiente { border: 1px solid var(--negro-borde); color: var(--gris); }
+    .estado-badge.preparacion { border: 1px solid var(--dorado-oscuro); color: var(--dorado-oscuro); }
+    .estado-badge.publicado { border: 1px solid var(--dorado); color: var(--dorado); }
+
+    /* TABLA DE MOVIMIENTOS */
+    .tabla-wrap { overflow-x: auto; margin-bottom: 2rem; }
+    .tabla-movimientos { width: 100%; border-collapse: collapse; min-width: 500px; }
+    .tabla-movimientos th { font-family: var(--font-body); font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dorado); padding: 0.7rem 1rem; border-bottom: 1px solid var(--dorado-oscuro); text-align: left; white-space: nowrap; }
+    .tabla-movimientos td { font-size: 0.75rem; color: var(--gris); padding: 0.8rem 1rem; border-bottom: 1px solid var(--negro-borde); }
+    .tabla-movimientos tbody tr:last-child td { border-bottom: none; }
+    .importe-ingreso { color: var(--blanco) !important; }
+    .importe-gasto { color: var(--gris) !important; }
+    .fila-total td { border-top: 1px solid var(--dorado-oscuro) !important; color: var(--dorado) !important; font-weight: 500; font-size: 0.78rem; }
+    .sin-datos { font-size: 0.78rem; color: var(--gris); font-style: italic; padding: 1.2rem 0; border-top: 1px solid var(--negro-borde); border-bottom: 1px solid var(--negro-borde); margin-bottom: 1.5rem; }
+
+    /* DOCUMENTOS */
+    .documentos-bloque { margin-top: 1.5rem; }
+    .documentos-titulo { font-size: 0.52rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado); margin-bottom: 0.8rem; }
+    .documentos-lista { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+    .btn-documento { display: inline-block; font-family: var(--font-body); font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dorado); border: 1px solid var(--dorado-oscuro); padding: 0.5rem 1.2rem; transition: border-color var(--transicion), background var(--transicion), color var(--transicion); }
+    .btn-documento:hover { border-color: var(--dorado); background: var(--dorado); color: var(--negro); }
+    .sin-docs { font-size: 0.7rem; color: var(--negro-borde); font-style: italic; }
+
+    /* CTA FINAL */
+    #cta-final { padding: 6rem 4rem; text-align: center; border-top: 1px solid var(--negro-borde); }
+    #cta-final h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.2; margin-bottom: 1rem; }
+    #cta-final p { font-size: 0.82rem; color: var(--gris); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+    /* FOOTER */
+    footer { background: #070707; border-top: 1px solid var(--negro-borde); padding: 2rem 4rem; text-align: center; }
+    .footer-logo { font-family: var(--font-display); font-size: 1.6rem; font-weight: 300; letter-spacing: 0.4em; margin-bottom: 1.2rem; }
+    .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.2rem; list-style: none; }
+    .footer-links a { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris); transition: color var(--transicion); }
+    .footer-links a:hover { color: var(--dorado); }
+    .footer-copy { font-size: 0.6rem; color: var(--negro-borde); letter-spacing: 0.1em; }
+
+    /* BOTÓN FLOTANTE */
+    #btn-donar { position: fixed; bottom: 2.5rem; right: 2.5rem; z-index: 1500; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .donar-circulo { width: 58px; height: 58px; border-radius: 50%; background: var(--negro-card); border: 1px solid var(--dorado); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--dorado); cursor: pointer; text-decoration: none; transition: background var(--transicion), box-shadow var(--transicion), transform var(--transicion); animation: pulso 2.5s ease-in-out infinite; }
+    .donar-circulo:hover { background: var(--dorado); color: var(--negro); box-shadow: 0 0 25px rgba(201,168,76,0.5); transform: scale(1.08); animation: none; }
+    .donar-etiqueta { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dorado); }
+    @keyframes pulso { 0% { box-shadow: 0 0 0 0 rgba(201,168,76,0.4); } 70% { box-shadow: 0 0 0 12px rgba(201,168,76,0); } 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); } }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* MÓVIL */
+    @media (max-width: 768px) {
+      #navbar { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburguesa { display: flex; }
+      #page-header { padding: 7rem 1.5rem 3rem; }
+      #intro { padding: 3rem 1.5rem; }
+      #resumen { padding: 3rem 1.5rem; }
+      .resumen-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      #historial { padding: 3rem 1.5rem; }
+      .trimestre-btn { font-size: 0.62rem; }
+      #cta-final { padding: 4rem 1.5rem; }
+      footer { padding: 1rem; }
+      .footer-logo { font-size: 1rem; margin-bottom: 0.5rem; }
+      .footer-links { gap: 0.6rem; margin-bottom: 0.5rem; }
+      .footer-links a { font-size: 0.5rem; }
+      .footer-copy { font-size: 0.5rem; }
+      #btn-donar { bottom: 1.5rem; right: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">ETHOS</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#sobre-mi">Sobre mí</a></li>
+      <li><a href="soul.html">Ethos Soul</a></li>
+      <li><a href="iron.html">Ethos Iron</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="transparencia.html" class="activo">Transparencia</a></li>
+      <li><a href="mailto:hola@ethosironsoul.com">Contacto</a></li>
+    </ul>
+    <button class="hamburguesa" id="hamburguesa" aria-label="Menú"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="nav-movil" id="nav-movil">
+    <a href="index.html" onclick="cerrarMenu()">Inicio</a>
+    <a href="index.html#sobre-mi" onclick="cerrarMenu()">Sobre mí</a>
+    <a href="soul.html" onclick="cerrarMenu()">Ethos Soul</a>
+    <a href="iron.html" onclick="cerrarMenu()">Ethos Iron</a>
+    <a href="productos.html" onclick="cerrarMenu()">Productos</a>
+    <a href="transparencia.html" onclick="cerrarMenu()">Transparencia</a>
+    <a href="mailto:hola@ethosironsoul.com" onclick="cerrarMenu()">Contacto</a>
+  </div>
+
+  <!-- CABECERA -->
+  <section id="page-header">
+    <p class="etiqueta">· ETHOS Soul ·</p>
+    <div class="separador"></div>
+    <h1>Transparencia</h1>
+    <p class="header-subtitulo">Cada euro tiene nombre. Cada movimiento, su justificante.</p>
+    <p class="header-desc">Publicamos trimestralmente todos los ingresos y gastos de ETHOS Soul. Extractos reales. Sin letra pequeña.</p>
+  </section>
+
+  <!-- POR QUÉ LO PUBLICAMOS -->
+  <section id="intro">
+    <div class="reveal">
+      <p class="etiqueta" style="display:block; text-align:center; margin-bottom:1rem;">Por qué lo publicamos</p>
+      <div class="separador" style="margin: 0 auto 2rem;"></div>
+      <h2>Si confías en nosotros con tu dinero,<br />tienes derecho a saber adónde va.</h2>
+      <p>ETHOS Soul funciona gracias a donaciones voluntarias y a un porcentaje de las ventas de ETHOS Iron. No somos una ONG regulada, pero elegimos actuar con los mismos estándares de transparencia.</p>
+      <p><strong>Cada trimestre publicamos</strong> los extractos bancarios de la cuenta Soul, los pagos a profesionales (psicólogos, asesores legales) y el balance de lo ingresado frente a lo gastado. Con documentos. Con números reales.</p>
+    </div>
+  </section>
+
+  <!-- RESUMEN ACUMULADO -->
+  <!-- ============================================================
+       ACTUALIZA ESTOS TRES NÚMEROS CADA TRIMESTRE
+       Sustituye — por la cifra real en formato €X.XXX
+  ============================================================ -->
+  <section id="resumen">
+    <p class="seccion-titulo">Resumen acumulado 2026</p>
+    <div class="resumen-grid">
+      <div class="resumen-stat reveal">
+        <div class="stat-numero">—</div><!-- SUSTITUIR por cifra real ej: €1.240 -->
+        <div class="stat-label">Total ingresado<br />(donaciones + % Iron)</div>
+      </div>
+      <div class="resumen-stat reveal">
+        <div class="stat-numero">—</div><!-- SUSTITUIR por cifra real ej: €840 -->
+        <div class="stat-label">Destinado a profesionales<br />(psicólogos, asesores)</div>
+      </div>
+      <div class="resumen-stat reveal">
+        <div class="stat-numero">—</div><!-- SUSTITUIR por cifra real ej: €400 -->
+        <div class="stat-label">Destinado a recursos libres<br />(Guía VG, materiales)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORIAL POR TRIMESTRES -->
+  <section id="historial">
+    <p class="seccion-titulo">Historial por trimestre</p>
+    <p style="font-size:0.78rem; color:var(--gris); text-align:center; margin:-1rem auto 3rem; max-width:600px; line-height:1.8;">
+      Los informes se publican en los 30 días siguientes al cierre de cada trimestre.<br />Haz clic en cada período para ver el detalle.
+    </p>
+
+    <p class="anio-titulo">2026</p>
+
+    <!-- ============================================================
+         T1 2026 — Enero · Febrero · Marzo
+         ETHOS Soul no tenía actividad aún en este período.
+    ============================================================ -->
+    <div class="trimestre-item">
+      <button class="trimestre-btn">
+        T1 2026 &nbsp;·&nbsp; Enero — Marzo
+        <span class="estado-badge pendiente">Sin actividad</span>
+        <span class="trimestre-icono">+</span>
+      </button>
+      <div class="trimestre-contenido">
+        <div class="trimestre-inner">
+          <p class="trimestre-intro">ETHOS Soul inició su actividad en junio de 2026. No hubo movimientos durante este período.</p>
+          <p class="sin-datos">Sin movimientos registrados — ETHOS Soul no había arrancado aún.</p>
+          <div class="documentos-bloque">
+            <p class="documentos-titulo">Documentos adjuntos</p>
+            <div class="documentos-lista">
+              <p class="sin-docs">Sin documentos — período sin actividad</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         T2 2026 — Abril · Mayo · Junio
+         Publicación prevista: antes del 31 de julio 2026
+
+         CUANDO TENGAS LOS DATOS:
+         1. Cambia estado-badge de "preparacion" a "publicado"
+         2. Rellena la tabla con los movimientos reales
+         3. Sube el PDF al repo y sustituye href="#" por la ruta
+            ej: href="docs/extracto-t2-2026.pdf"
+    ============================================================ -->
+    <div class="trimestre-item">
+      <button class="trimestre-btn">
+        T2 2026 &nbsp;·&nbsp; Abril — Junio
+        <span class="estado-badge preparacion">En preparación</span>
+        <span class="trimestre-icono">+</span>
+      </button>
+      <div class="trimestre-contenido">
+        <div class="trimestre-inner">
+          <p class="trimestre-intro">ETHOS Soul arrancó en junio de 2026. El informe completo se publicará antes del 31 de julio de 2026.</p>
+
+          <div class="tabla-wrap">
+            <table class="tabla-movimientos">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Concepto</th>
+                  <th>Tipo</th>
+                  <th>Importe</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- ============================================================
+                     AÑADE AQUÍ UNA FILA POR CADA MOVIMIENTO
+                     Ejemplo ingreso:
+                     <tr>
+                       <td>01/06/2026</td>
+                       <td>Donación — anónimo</td>
+                       <td>Ingreso</td>
+                       <td class="importe-ingreso">+ €25,00</td>
+                     </tr>
+                     Ejemplo gasto:
+                     <tr>
+                       <td>15/06/2026</td>
+                       <td>Honorarios psicólogo — sesión grupo</td>
+                       <td>Gasto</td>
+                       <td class="importe-gasto">− €120,00</td>
+                     </tr>
+                ============================================================ -->
+                <tr>
+                  <td colspan="4" style="text-align:center; color:var(--negro-borde); font-style:italic; padding:1.5rem;">
+                    Informe en preparación — se publicará en julio 2026
+                  </td>
+                </tr>
+              </tbody>
+              <!-- ============================================================
+                   FILA DE BALANCE TOTAL — descomenta y rellena cuando tengas datos
+                   <tfoot>
+                     <tr class="fila-total">
+                       <td colspan="3">Balance del trimestre</td>
+                       <td>+ €XXX,XX</td>
+                     </tr>
+                   </tfoot>
+              ============================================================ -->
+            </table>
+          </div>
+
+          <div class="documentos-bloque">
+            <p class="documentos-titulo">Documentos adjuntos</p>
+            <div class="documentos-lista">
+              <!-- SUSTITUYE href="#" por la ruta al PDF cuando lo tengas
+                   ej: <a href="docs/extracto-t2-2026.pdf" target="_blank" class="btn-documento">↓ Extracto bancario</a> -->
+              <p class="sin-docs">Se publicarán en julio 2026</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         T3 2026 — Julio · Agosto · Septiembre
+         Publicación prevista: antes del 31 de octubre 2026
+    ============================================================ -->
+    <div class="trimestre-item">
+      <button class="trimestre-btn">
+        T3 2026 &nbsp;·&nbsp; Julio — Septiembre
+        <span class="estado-badge pendiente">Próximamente</span>
+        <span class="trimestre-icono">+</span>
+      </button>
+      <div class="trimestre-contenido">
+        <div class="trimestre-inner">
+          <p class="trimestre-intro">Tercer trimestre de 2026. El informe se publicará antes del 31 de octubre de 2026.</p>
+          <p class="sin-datos">Período aún no cerrado.</p>
+          <div class="documentos-bloque">
+            <p class="documentos-titulo">Documentos adjuntos</p>
+            <div class="documentos-lista"><p class="sin-docs">Se publicarán en octubre 2026</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         T4 2026 — Octubre · Noviembre · Diciembre
+         Publicación prevista: antes del 31 de enero 2027
+    ============================================================ -->
+    <div class="trimestre-item">
+      <button class="trimestre-btn">
+        T4 2026 &nbsp;·&nbsp; Octubre — Diciembre
+        <span class="estado-badge pendiente">Próximamente</span>
+        <span class="trimestre-icono">+</span>
+      </button>
+      <div class="trimestre-contenido">
+        <div class="trimestre-inner">
+          <p class="trimestre-intro">Cuarto trimestre de 2026. El informe se publicará antes del 31 de enero de 2027.</p>
+          <p class="sin-datos">Período aún no cerrado.</p>
+          <div class="documentos-bloque">
+            <p class="documentos-titulo">Documentos adjuntos</p>
+            <div class="documentos-lista"><p class="sin-docs">Se publicarán en enero 2027</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         PARA AÑADIR EL AÑO 2027 Y SIGUIENTES:
+         Copia el bloque desde <p class="anio-titulo">2026</p> hasta
+         el último </div> de trimestre, pégalo debajo y cambia el año.
+    ============================================================ -->
+
+  </section>
+
+  <!-- CTA FINAL -->
+  <section id="cta-final">
+    <h2 class="reveal">Confías en nosotros.<br />Nosotros respondemos.</h2>
+    <p class="reveal">Tu donación se usa exactamente para lo que decimos. Puedes comprobarlo aquí cada trimestre.</p>
+    <a href="soul.html#donaciones" class="btn"><span>Hacer una donación</span></a>
+  </section>
+
+  <!-- BANNER SOUL -->
+  <div style="background: linear-gradient(135deg, #0d0d0d 0%, #111111 100%); border-top: 1px solid var(--dorado-oscuro); border-bottom: 1px solid var(--dorado-oscuro); padding: 1.5rem 4rem; text-align: center;">
+    <p style="font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado);">✦ &nbsp; Con cualquier producto de ETHOS, colaboras con ETHOS Soul &nbsp; ✦</p>
+    <p style="font-family: var(--font-display); font-size: 0.9rem; color: var(--gris); margin-top: 0.3rem; font-style: italic;">Un porcentaje de cada compra se destina al grupo de apoyo y los recursos legales gratuitos.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">ETHOS</div>
+    <ul class="footer-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="soul.html">Soul</a></li>
+      <li><a href="iron.html">Iron</a></li>
+      <li><a href="productos.html">Productos</a></li>
+      <li><a href="transparencia.html">Transparencia</a></li>
+      <li><a href="mailto:hola@ethosironsoul.com">Contacto</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 ETHOS — Iron & Soul Group. Todos los derechos reservados.</p>
+  </footer>
+
+  <div id="btn-donar">
+    <a href="soul.html#donaciones" class="donar-circulo" title="Donar a ETHOS Soul">♡</a>
+    <span class="donar-etiqueta">Donar</span>
+  </div>
+
+  <script>
+    window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50); });
+    document.getElementById('hamburguesa').addEventListener('click', function () { this.classList.toggle('abierto'); document.getElementById('nav-movil').classList.toggle('abierto'); });
+    function cerrarMenu() { document.getElementById('hamburguesa').classList.remove('abierto'); document.getElementById('nav-movil').classList.remove('abierto'); }
+    const observer = new IntersectionObserver((entries) => { entries.forEach((entry, i) => { if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 80); }); }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.trimestre-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const abierto = item.classList.contains('abierto');
+        document.querySelectorAll('.trimestre-item').forEach(i => i.classList.remove('abierto'));
+        if (!abierto) item.classList.add('abierto');
+      });
+    });
+  </script>
+
+</body>
+</html>
