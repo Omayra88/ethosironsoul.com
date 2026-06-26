@@ -79,11 +79,8 @@
     .producto-seccion[data-lanzamiento="abierto"] .btn-espera-det { display: none; }
     .btn-espera-det { display: none; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); border: 1px solid var(--negro-borde); padding: 0.85rem 2rem; cursor: pointer; background: none; transition: border-color var(--transicion), color var(--transicion); }
     .btn-espera-det:hover { border-color: var(--dorado); color: var(--dorado); }
-
-    /* PACK CARDS — flex para alinear botones al fondo */
     .pack-card { display: flex; flex-direction: column; }
     .pack-card-body { flex: 1; }
-
     #faq { padding: 6rem 4rem; max-width: 800px; margin: 0 auto; }
     #faq .seccion-titulo { justify-content: center; }
     .faq-item { border-bottom: 1px solid var(--negro-borde); overflow: hidden; }
@@ -114,8 +111,6 @@
     .modal input[type="email"] { width: 100%; background: var(--negro); border: 1px solid var(--negro-borde); color: var(--blanco); padding: 0.8rem 1rem; font-family: var(--font-body); font-size: 0.8rem; margin-bottom: 1rem; outline: none; transition: border-color var(--transicion); }
     .modal input[type="email"]:focus { border-color: var(--dorado); }
     .modal .btn { width: 100%; text-align: center; }
-
-    /* ACORDEÓN PACKS */
     .pack-acordeon { margin: 1rem 0 1.5rem; border-top: 1px solid var(--negro-borde); }
     .pack-item { border-bottom: 1px solid var(--negro-borde); }
     .pack-item-btn { width: 100%; background: none; border: none; color: var(--blanco); font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.1em; text-align: left; padding: 0.8rem 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: color var(--transicion); }
@@ -125,8 +120,6 @@
     .pack-item-contenido { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
     .pack-item.abierto .pack-item-contenido { max-height: 200px; }
     .pack-item-contenido p { font-size: 0.72rem; color: var(--gris); line-height: 1.7; padding-bottom: 0.8rem; text-align: left; }
-
-    /* BOTÓN COMPRAR */
     .btn-comprar-wrap { position: relative; margin-top: 0.8rem; }
     .btn-compra { display: block; width: 100%; text-align: center; font-size: 0.6rem; padding: 0.65rem 1rem; border: 1px solid var(--dorado); color: var(--dorado); background: none; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; position: relative; overflow: hidden; transition: color var(--transicion); text-decoration: none; }
     .btn-compra::after { content: ''; position: absolute; inset: 0; background: var(--dorado); transform: scaleX(0); transform-origin: left; transition: transform var(--transicion); z-index: 0; }
@@ -138,10 +131,8 @@
     .btn-comprar-wrap.cerrado::before { content: '✕'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.2rem; color: var(--gris); z-index: 10; pointer-events: none; }
     .lanzamiento-badge { display: block; width: 100%; text-align: center; font-size: 0.5rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); margin-top: 0.3rem; }
     .btn-comprar-wrap.cerrado .lanzamiento-badge { color: var(--dorado-oscuro); }
-
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-
     @media (max-width: 768px) {
       #navbar { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
@@ -176,7 +167,7 @@
       <li><a href="soul.html">Ethos Soul</a></li>
       <li><a href="iron.html">Ethos Iron</a></li>
       <li><a href="productos.html" class="activo">Productos</a></li>
-      <li><a href="index.html#contacto">Contacto</a></li>
+      <li><a href="mailto:contacto@ethosironsoul.com">Contacto</a></li>
     </ul>
     <div class="nav-iconos" style="display:flex; gap:1.2rem; align-items:center;">
       <a href="https://instagram.com/o.mispecas" target="_blank" title="Instagram" style="color:var(--gris); transition:color 0.35s ease;" onmouseover="this.style.color='var(--dorado)'" onmouseout="this.style.color='var(--gris)'">
@@ -196,7 +187,7 @@
     <a href="soul.html" onclick="cerrarMenu()">Ethos Soul</a>
     <a href="iron.html" onclick="cerrarMenu()">Ethos Iron</a>
     <a href="productos.html" onclick="cerrarMenu()">Productos</a>
-    <a href="index.html#contacto" onclick="cerrarMenu()">Contacto</a>
+    <a href="mailto:contacto@ethosironsoul.com" onclick="cerrarMenu()">Contacto</a>
   </div>
 
   <section id="page-header">
@@ -213,8 +204,8 @@
     <button class="filtro-btn" onclick="filtrar('membresia', this)">Membresía</button>
   </div>
 
-  <!-- MEMBRESÍA IRON -->
-  <div class="producto-seccion reveal" id="iron-en-series" data-categoria="membresia" data-lanzamiento="abierto">
+  <!-- MEMBRESÍA IRON — data-categoria incluye 'serie' para aparecer también al filtrar por series -->
+  <div class="producto-seccion reveal" id="iron-en-series" data-categoria="membresia serie" data-lanzamiento="abierto">
     <div class="producto-detalle">
       <div class="producto-imagen-wrap reveal">
         <img src="ETHOS Iron copia 3.png" alt="Membresía Iron" class="producto-det-imagen" />
@@ -524,7 +515,6 @@
     <p class="seccion-titulo" style="justify-content:center; margin-bottom:3rem;">Packs de series</p>
     <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:2rem; align-items:stretch;">
 
-      <!-- Pack Fundamentos -->
       <div id="pack-fundamentos" class="pack-card reveal" style="background:var(--negro-card); border:1px solid var(--negro-borde); padding:2.5rem 2rem; text-align:center; position:relative; transition: transform 0.35s ease, box-shadow 0.35s ease;" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 16px 40px rgba(201,168,76,0.12)';this.style.borderColor='var(--dorado)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='var(--negro-borde)'">
         <div class="pack-card-body">
           <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px; margin-bottom:1.2rem; height:100px; overflow:hidden;">
@@ -558,7 +548,6 @@
         </div>
       </div>
 
-      <!-- Pack Relaciones -->
       <div id="pack-relaciones" class="pack-card reveal" style="background:var(--negro-card); border:1px solid var(--dorado-oscuro); padding:2.5rem 2rem; text-align:center; position:relative; transition: transform 0.35s ease, box-shadow 0.35s ease;" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 16px 40px rgba(201,168,76,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
         <div style="position:absolute; top:-1px; left:50%; transform:translateX(-50%); background:var(--dorado); color:var(--negro); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.3rem 1rem;">Más popular</div>
         <div class="pack-card-body">
@@ -593,7 +582,6 @@
         </div>
       </div>
 
-      <!-- Pack Completo -->
       <div id="pack-completo" class="pack-card reveal" style="background:var(--negro-card); border:1px solid var(--negro-borde); padding:2.5rem 2rem; text-align:center; position:relative; transition: transform 0.35s ease, box-shadow 0.35s ease;" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 16px 40px rgba(201,168,76,0.12)';this.style.borderColor='var(--dorado)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='var(--negro-borde)'">
         <div class="pack-card-body">
           <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px; margin-bottom:1.2rem; height:100px; overflow:hidden;">
@@ -666,9 +654,17 @@
     </div>
   </section>
 
+  <!-- BANNER SOUL -->
   <div style="background: linear-gradient(135deg, #0d0d0d 0%, #111111 100%); border-top: 1px solid var(--dorado-oscuro); border-bottom: 1px solid var(--dorado-oscuro); padding: 1.5rem 4rem; text-align: center;">
     <p style="font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado);">✦ &nbsp; Con cualquier producto de ETHOS, colaboras con ETHOS Soul &nbsp; ✦</p>
     <p style="font-family: var(--font-display); font-size: 0.9rem; color: var(--gris); margin-top: 0.3rem; font-style: italic;">Un porcentaje de cada compra se destina al grupo de apoyo y los recursos legales gratuitos.</p>
+  </div>
+
+  <!-- BANNER TRANSPARENCIA -->
+  <div style="background: var(--negro-card); border-top: 1px solid var(--negro-borde); border-bottom: 1px solid var(--negro-borde); padding: 2.5rem 4rem; text-align: center;">
+    <p style="font-family: var(--font-body); font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dorado); margin-bottom: 0.8rem;">· Transparencia ·</p>
+    <p style="font-family: var(--font-display); font-size: clamp(1rem, 2.25vw, 2.1rem); font-style: italic; color: var(--blanco); margin-bottom: 1.2rem; line-height: 1.6;">Publicamos todo lo que entra y sale de ETHOS Soul. Con extractos. Con nombres. Cada trimestre.</p>
+    <a href="transparencia.html" style="display: inline-block; font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.75rem 2rem; border: 1px solid var(--dorado); color: var(--dorado); position: relative; overflow: hidden; transition: color 0.35s ease; text-decoration: none;">Ver transparencia →</a>
   </div>
 
   <footer>
@@ -714,7 +710,7 @@
       btn.classList.add('activo');
       document.querySelectorAll('[data-categoria]').forEach(el => {
         if (categoria === 'todo') { el.style.display = ''; }
-        else { el.style.display = (el.dataset.categoria === categoria) ? '' : 'none'; }
+        else { el.style.display = el.dataset.categoria.split(' ').includes(categoria) ? '' : 'none'; }
       });
     }
     document.querySelectorAll('.pack-item-btn').forEach(btn => {
