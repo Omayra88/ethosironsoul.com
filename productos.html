@@ -725,24 +725,28 @@
   <div class="modal-overlay" id="modal-espera">
     <div class="modal">
       <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
-      <h3>Próximo lanzamiento</h3>
-      <p>Déjame tus datos y te aviso cuando abra de nuevo.</p>
-      <div id="error-message" class="sib-form-message-panel" style="font-size:0.72rem;text-align:center;color:#661d1d;background-color:#ffeded;border-color:#ff4949;border-radius:3px;padding:0.5rem;margin-bottom:0.8rem;">
-        <span class="sib-form-message-panel__inner-text">No hemos podido validar tu suscripción.</span>
+      <h3>¡Acceso cerrado!</h3>
+      <p>Avísame cuando abra.</p>
+      <div id="sib-form-container" class="sib-form-container">
+        <div id="error-message" class="sib-form-message-panel" style="font-size:0.72rem;text-align:center;color:#661d1d;background-color:#ffeded;border-color:#ff4949;border-radius:3px;padding:0.5rem;margin-bottom:0.8rem;">
+          <span class="sib-form-message-panel__inner-text">No hemos podido validar tu suscripción.</span>
+        </div>
+        <div id="success-message" class="sib-form-message-panel" style="font-size:0.72rem;text-align:center;color:#085229;background-color:#e7faf0;border-color:#13ce66;border-radius:3px;padding:0.5rem;margin-bottom:0.8rem;">
+          <span class="sib-form-message-panel__inner-text">¡Listo! Ya estás en la lista.</span>
+        </div>
+        <div id="sib-container">
+          <form id="sib-form" method="POST" action="https://65a03631.sibforms.com/serve/MUIFAKDGkR3fR1vQpjOy3EWRhIrsO-R3uUvOv6DAtClPyAjeux7zVvIftuJTpV0x_iVbXne-tJ0Y2M1-AjXqhK_yjxYdJYiVywuLXWhETWtkVB2DT1WsrwnnLsweW1LgrRcCgri7sQaBmuFY-0XQUnGCd6fxCRQUqbxlQBUP3XwkgOsm7fGViuZRJge2htyh439tHYDgxVO9P2g1Eg==" data-type="subscription">
+            <input type="hidden" name="ORIGEN" id="origen-hidden" value="">
+            <input class="input" maxlength="200" type="text" id="NOMBRE" name="NOMBRE" autocomplete="off" placeholder="¿Cómo te llamas?" data-required="true" required />
+            <label class="entry__error entry__error--primary" style="font-size:0.65rem;"></label>
+            <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" value="" placeholder="tu mejor email" data-required="true" required />
+            <label class="entry__error entry__error--primary" style="font-size:0.65rem;"></label>
+            <button class="btn" style="width:100%;text-align:center;cursor:pointer;margin-top:0.5rem;" type="submit"><span>Apúntame</span></button>
+            <input type="text" name="email_address_check" value="" class="input--hidden">
+            <input type="hidden" name="locale" value="es">
+          </form>
+        </div>
       </div>
-      <div id="success-message" class="sib-form-message-panel" style="font-size:0.72rem;text-align:center;color:#085229;background-color:#e7faf0;border-color:#13ce66;border-radius:3px;padding:0.5rem;margin-bottom:0.8rem;">
-        <span class="sib-form-message-panel__inner-text">¡Listo! Ya estás en la lista.</span>
-      </div>
-      <form id="sib-form" method="POST" action="https://65a03631.sibforms.com/serve/MUIFAKDGkR3fR1vQpjOy3EWRhIrsO-R3uUvOv6DAtClPyAjeux7zVvIftuJTpV0x_iVbXne-tJ0Y2M1-AjXqhK_yjxYdJYiVywuLXWhETWtkVB2DT1WsrwnnLsweW1LgrRcCgri7sQaBmuFY-0XQUnGCd6fxCRQUqbxlQBUP3XwkgOsm7fGViuZRJge2htyh439tHYDgxVO9P2g1Eg==" data-type="subscription">
-        <input type="hidden" name="ORIGEN" id="origen-hidden" value="">
-        <input class="input" maxlength="200" type="text" id="NOMBRE" name="NOMBRE" autocomplete="off" placeholder="¿Cómo te llamas?" data-required="true" required />
-        <label class="entry__error entry__error--primary" style="font-size:0.65rem;"></label>
-        <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" value="" placeholder="tu mejor email" data-required="true" required />
-        <label class="entry__error entry__error--primary" style="font-size:0.65rem;"></label>
-        <button class="btn" style="width:100%;text-align:center;cursor:pointer;margin-top:0.5rem;" form="sib-form" type="submit"><span>Apúntame</span></button>
-        <input type="text" name="email_address_check" value="" class="input--hidden">
-        <input type="hidden" name="locale" value="es">
-      </form>
     </div>
   </div>
 
