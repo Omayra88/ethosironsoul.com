@@ -35,6 +35,14 @@
     "isPartOf": { "@type": "WebSite", "url": "https://ethosironsoul.com" }
   }
   </script>
+  <!-- Brevo Form CSS -->
+  <style>
+    :where(.sib-form-message-panel){display:none;}
+    :where(.sib-form-message-panel .sib-notification__icon){width:20px;height:20px;}
+    .input--hidden{display:none!important;}
+    .sib-hide-loader-icon{display:none;}
+  </style>
+  <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -213,8 +221,8 @@
     .modal-cerrar { position: absolute; top: 1rem; right: 1.2rem; background: none; border: none; color: var(--gris); font-size: 1.2rem; cursor: pointer; }
     .modal h3 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 300; margin-bottom: 0.5rem; }
     .modal p { font-size: 0.75rem; color: var(--gris); margin-bottom: 1.5rem; }
-    .modal input[type="email"] { width: 100%; background: var(--negro); border: 1px solid var(--negro-borde); color: var(--blanco); padding: 0.8rem 1rem; font-family: var(--font-body); font-size: 0.8rem; margin-bottom: 1rem; outline: none; transition: border-color var(--transicion); }
-    .modal input[type="email"]:focus { border-color: var(--dorado); }
+    .modal input[type="text"], .modal input[type="email"] { width: 100%; background: var(--negro); border: 1px solid var(--negro-borde); color: var(--blanco); padding: 0.8rem 1rem; font-family: var(--font-body); font-size: 0.8rem; margin-bottom: 1rem; outline: none; transition: border-color var(--transicion); }
+    .modal input[type="text"]:focus, .modal input[type="email"]:focus { border-color: var(--dorado); }
     .modal .btn { width: 100%; text-align: center; }
 
     .btn-comprar-wrap { position: relative; width: 100%; margin-top: 0.8rem; }
@@ -349,7 +357,7 @@
           <a href="#" class="btn-compra" style="display:block; text-align:center;"><span>Unirme a Iron</span></a>
           <span class="lanzamiento-badge">Lanzamiento cerrado</span>
         </div>
-        <button onclick="abrirModal()" style="margin-top:0.5rem; width:100%; background:none; border:1px solid var(--negro-borde); color:var(--gris); font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.65rem 1rem; cursor:pointer; transition:border-color 0.35s ease, color 0.35s ease;" onmouseover="this.style.borderColor='var(--dorado)';this.style.color='var(--dorado)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.color='var(--gris)'">Avísame del próximo lanzamiento</button>
+        <button onclick="abrirModal('Membresía Iron')" style="margin-top:0.5rem; width:100%; background:none; border:1px solid var(--negro-borde); color:var(--gris); font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.65rem 1rem; cursor:pointer; transition:border-color 0.35s ease, color 0.35s ease;" onmouseover="this.style.borderColor='var(--dorado)';this.style.color='var(--dorado)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.color='var(--gris)'">Avísame del próximo lanzamiento</button>
       </div>
       <div class="opcion-card reveal" style="border:1px solid var(--negro-borde);" onmouseover="this.style.borderColor='var(--dorado)';this.style.boxShadow='0 0 30px rgba(201,168,76,0.1)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.boxShadow=''">
         <p style="font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--dorado); margin-bottom:1rem;">Opción B</p>
@@ -388,7 +396,7 @@
         <a href="#" class="btn-compra" style="display:block; text-align:center;"><span>Unirme a Iron</span></a>
         <span class="lanzamiento-badge">Lanzamiento cerrado</span>
       </div>
-      <button onclick="abrirModal()" style="margin-top:0.5rem; width:100%; background:none; border:1px solid var(--negro-borde); color:var(--gris); font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.65rem 1rem; cursor:pointer; transition:border-color 0.35s ease, color 0.35s ease;" onmouseover="this.style.borderColor='var(--dorado)';this.style.color='var(--dorado)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.color='var(--gris)'">Avísame del próximo lanzamiento</button>
+      <button onclick="abrirModal('Membresía Iron')" style="margin-top:0.5rem; width:100%; background:none; border:1px solid var(--negro-borde); color:var(--gris); font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.65rem 1rem; cursor:pointer; transition:border-color 0.35s ease, color 0.35s ease;" onmouseover="this.style.borderColor='var(--dorado)';this.style.color='var(--dorado)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.color='var(--gris)'">Avísame del próximo lanzamiento</button>
     </div>
   </section>
 
@@ -404,7 +412,7 @@
           <p class="serie-desc">Psicología real sin filtro ideológico. Cómo funciona la mente femenina según la ciencia.</p>
           <p class="serie-precio"><sup>€</sup>47</p>
           <a href="productos.html#serie-1" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <button class="btn-espera" onclick="abrirModal('Serie 01 - Mente Femenina')">Avísame del próximo lanzamiento</button>
         </div>
       </div>
       <div class="serie-card reveal" data-lanzamiento="cerrado">
@@ -416,7 +424,7 @@
           <p class="serie-desc">Patrones de comportamiento explicados con datos y sin condescendencia.</p>
           <p class="serie-precio"><sup>€</sup>47</p>
           <a href="productos.html#serie-2" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <button class="btn-espera" onclick="abrirModal('Serie 02 - Lógica Femenina')">Avísame del próximo lanzamiento</button>
         </div>
       </div>
       <div class="serie-card reveal" data-lanzamiento="cerrado">
@@ -428,7 +436,7 @@
           <p class="serie-desc">Lo que nadie te enseñó sobre las relaciones entre hombres y mujeres.</p>
           <p class="serie-precio"><sup>€</sup>57</p>
           <a href="productos.html#serie-3" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <button class="btn-espera" onclick="abrirModal('Serie 03 - Conquista Real')">Avísame del próximo lanzamiento</button>
         </div>
       </div>
       <div class="serie-card reveal" data-lanzamiento="cerrado">
@@ -440,7 +448,7 @@
           <p class="serie-desc">Argumentos sólidos y datos reales para rebatir la narrativa dominante.</p>
           <p class="serie-precio"><sup>€</sup>57</p>
           <a href="productos.html#serie-4" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <button class="btn-espera" onclick="abrirModal('Serie 04 - Destruye el Feminismo')">Avísame del próximo lanzamiento</button>
         </div>
       </div>
       <div class="serie-card reveal" data-lanzamiento="cerrado">
@@ -452,7 +460,7 @@
           <p class="serie-desc">Por qué nos enfrentan, quién gana y qué pierden todos.</p>
           <p class="serie-precio"><sup>€</sup>57</p>
           <a href="productos.html#serie-5" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <button class="btn-espera" onclick="abrirModal('Serie 05 - Guerra de Sexos')">Avísame del próximo lanzamiento</button>
         </div>
       </div>
       <div class="serie-card reveal" data-lanzamiento="cerrado">
@@ -464,7 +472,7 @@
           <p class="serie-desc">Tu biología como herramienta real, no como excusa ni como limitación.</p>
           <p class="serie-precio"><sup>€</sup>47</p>
           <a href="productos.html#serie-6" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <button class="btn-espera" onclick="abrirModal('Serie 06 - El Ciclo')">Avísame del próximo lanzamiento</button>
         </div>
       </div>
       <div class="serie-card reveal" data-lanzamiento="cerrado">
@@ -476,7 +484,7 @@
           <p class="serie-desc">El movimiento que prometió libertad y entregó dogma. Análisis sin concesiones.</p>
           <p class="serie-precio"><sup>€</sup>47</p>
           <a href="productos.html#serie-7" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+          <button class="btn-espera" onclick="abrirModal('Serie 07 - Woke')">Avísame del próximo lanzamiento</button>
         </div>
       </div>
     </div>
@@ -541,7 +549,7 @@
         <a href="#" class="btn-compra" style="display:block; text-align:center;"><span>Unirme a la membresía</span></a>
         <span class="lanzamiento-badge">Lanzamiento cerrado</span>
       </div>
-      <button onclick="abrirModal()" style="margin-bottom:0.8rem; background:none; border:1px solid var(--negro-borde); color:var(--gris); font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.65rem 2rem; cursor:pointer; transition:border-color 0.35s ease, color 0.35s ease;" onmouseover="this.style.borderColor='var(--dorado)';this.style.color='var(--dorado)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.color='var(--gris)'">Avísame del próximo lanzamiento</button>
+      <button onclick="abrirModal('Membresía Iron')" style="margin-bottom:0.8rem; background:none; border:1px solid var(--negro-borde); color:var(--gris); font-family:var(--font-body); font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.65rem 2rem; cursor:pointer; transition:border-color 0.35s ease, color 0.35s ease;" onmouseover="this.style.borderColor='var(--dorado)';this.style.color='var(--dorado)'" onmouseout="this.style.borderColor='var(--negro-borde)';this.style.color='var(--gris)'">Avísame del próximo lanzamiento</button>
       <a href="#series" class="btn"><span>Ver las series</span></a>
     </div>
   </section>
@@ -578,9 +586,23 @@
     <div class="modal">
       <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
       <h3>Próximo lanzamiento</h3>
-      <p>Déjame tu email y te aviso cuando abra de nuevo.</p>
-      <input type="email" placeholder="tu@email.com" id="email-espera" />
-      <button class="btn" onclick="guardarEmail()"><span>Avísame</span></button>
+      <p>Déjame tus datos y te aviso cuando abra de nuevo.</p>
+      <div id="error-message" class="sib-form-message-panel" style="font-size:0.72rem;text-align:center;color:#661d1d;background-color:#ffeded;border-color:#ff4949;border-radius:3px;padding:0.5rem;margin-bottom:0.8rem;">
+        <span class="sib-form-message-panel__inner-text">No hemos podido validar tu suscripción.</span>
+      </div>
+      <div id="success-message" class="sib-form-message-panel" style="font-size:0.72rem;text-align:center;color:#085229;background-color:#e7faf0;border-color:#13ce66;border-radius:3px;padding:0.5rem;margin-bottom:0.8rem;">
+        <span class="sib-form-message-panel__inner-text">¡Listo! Ya estás en la lista.</span>
+      </div>
+      <form id="sib-form" method="POST" action="https://65a03631.sibforms.com/serve/MUIFAKDGkR3fR1vQpjOy3EWRhIrsO-R3uUvOv6DAtClPyAjeux7zVvIftuJTpV0x_iVbXne-tJ0Y2M1-AjXqhK_yjxYdJYiVywuLXWhETWtkVB2DT1WsrwnnLsweW1LgrRcCgri7sQaBmuFY-0XQUnGCd6fxCRQUqbxlQBUP3XwkgOsm7fGViuZRJge2htyh439tHYDgxVO9P2g1Eg==" data-type="subscription">
+        <input type="hidden" name="ORIGEN" id="origen-hidden" value="">
+        <input class="input" maxlength="200" type="text" id="NOMBRE" name="NOMBRE" autocomplete="off" placeholder="¿Cómo te llamas?" data-required="true" required />
+        <label class="entry__error entry__error--primary" style="font-size:0.65rem;"></label>
+        <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" value="" placeholder="tu mejor email" data-required="true" required />
+        <label class="entry__error entry__error--primary" style="font-size:0.65rem;"></label>
+        <button class="btn" style="width:100%;text-align:center;cursor:pointer;margin-top:0.5rem;" form="sib-form" type="submit"><span>Apúntame</span></button>
+        <input type="text" name="email_address_check" value="" class="input--hidden">
+        <input type="hidden" name="locale" value="es">
+      </form>
     </div>
   </div>
 
@@ -596,11 +618,23 @@
     const observer = new IntersectionObserver((entries) => { entries.forEach((entry, i) => { if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 80); }); }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     document.querySelectorAll('.faq-pregunta').forEach(btn => { btn.addEventListener('click', () => { const item = btn.parentElement; const abierto = item.classList.contains('abierto'); document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('abierto')); if (!abierto) item.classList.add('abierto'); }); });
-    function abrirModal() { document.getElementById('modal-espera').classList.add('abierto'); }
-    function cerrarModal() { document.getElementById('modal-espera').classList.remove('abierto'); }
-    document.getElementById('modal-espera').addEventListener('click', function(e) { if (e.target === this) cerrarModal(); });
-    function guardarEmail() { const email = document.getElementById('email-espera').value; if (email) { alert('¡Gracias! Te avisamos en el próximo lanzamiento.'); cerrarModal(); } }
+    var _origen='';
+    function abrirModal(o){_origen=o||'General';var h=document.getElementById('origen-hidden');if(h)h.value=_origen;document.getElementById('modal-espera').classList.add('abierto');}
+    function cerrarModal(){document.getElementById('modal-espera').classList.remove('abierto');}
+    document.getElementById('modal-espera').addEventListener('click',function(e){if(e.target===this)cerrarModal();});
   </script>
 
+  <!-- Brevo Form JS -->
+  <script>
+    window.REQUIRED_CODE_ERROR_MESSAGE='Elige un código de país';
+    window.LOCALE='es';
+    window.EMAIL_INVALID_MESSAGE=window.SMS_INVALID_MESSAGE="Email no válido.";
+    window.REQUIRED_ERROR_MESSAGE="Este campo no puede quedarse vacío.";
+    window.GENERIC_INVALID_MESSAGE="Información no válida.";
+    window.INVALID_DATE="Introduce una fecha válida";
+    window.REQUIRED_MULTISELECT_MESSAGE='Selecciona al menos una opción';
+    var AUTOHIDE=Boolean(0);
+  </script>
+  <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
 </body>
 </html>
