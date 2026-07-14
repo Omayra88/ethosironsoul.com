@@ -247,6 +247,7 @@
 
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+    .precio-oculto { display: none; }
 
     /* MÓVIL */
     @media (max-width: 768px) {
@@ -352,7 +353,7 @@
         <div style="position:absolute; top:-1px; right:2rem; background:var(--dorado); color:var(--negro); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.3rem 1rem;">Recomendado</div>
         <p style="font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--dorado); margin-bottom:1rem;">Opción A</p>
         <h3 style="font-family:var(--font-display); font-size:2rem; font-weight:300; margin-bottom:0.5rem;">Únete a Iron</h3>
-        <p style="font-family:var(--font-display); font-size:2.5rem; color:var(--dorado); line-height:1; margin-bottom:1rem;"><sup style="font-size:1rem;vertical-align:super;">€</sup>29<small style="font-size:0.9rem;color:var(--gris);font-family:var(--font-body);"> / mes</small></p>
+        <p class="precio-oculto" style="font-family:var(--font-display); font-size:2.5rem; color:var(--dorado); line-height:1; margin-bottom:1rem;"><sup style="font-size:1rem;vertical-align:super;">€</sup>29<small style="font-size:0.9rem;color:var(--gris);font-family:var(--font-body);"> / mes</small></p>
         <p style="font-size:0.85rem; color:var(--gris); line-height:1.8; margin-bottom:1.5rem;">Todo el contenido, la comunidad y las herramientas. Una cuota mensual. Cancela cuando quieras.</p>
         <ul style="list-style:none; display:flex; flex-direction:column; gap:0.6rem; margin-bottom:2rem;">
           <li style="font-size:0.8rem; color:var(--gris); padding-left:1.2rem; position:relative;"><span style="position:absolute;left:0;color:var(--dorado);">✦</span> Todas las series actuales y futuras</li>
@@ -392,7 +393,7 @@
       <div class="separador" style="margin: 1rem auto;"></div>
       <h2>Todo el contenido.<br />Una sola cuota.</h2>
       <p>Acceso completo a las 7 series, la comunidad privada, las sesiones mensuales en vivo y la herramienta de IA.</p>
-      <div class="membresia-precio"><sup>€</sup>29<small> / mes</small></div>
+      <div class="membresia-precio precio-oculto"><sup>€</sup>29<small> / mes</small></div>
       <ul class="membresia-lista">
         <li>Acceso inmediato a todas las series</li>
         <li>Nuevas series incluidas sin coste adicional</li>
@@ -419,7 +420,7 @@
           <p class="serie-numero">Serie 01</p>
           <p class="serie-nombre">La mente femenina al descubierto</p>
           <p class="serie-desc">Psicología real sin filtro ideológico. Cómo funciona la mente femenina según la ciencia.</p>
-          <p class="serie-precio"><sup>€</sup>47</p>
+          <p class="serie-precio precio-oculto"><sup>€</sup>47</p>
           <a href="productos.html#serie-1" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
           <button class="btn-espera" onclick="abrirModal('Serie 01 - Mente Femenina')">Avísame del próximo acceso</button>
         </div>
@@ -431,7 +432,7 @@
           <p class="serie-numero">Serie 02</p>
           <p class="serie-nombre">La lógica femenina al descubierto</p>
           <p class="serie-desc">Patrones de comportamiento explicados con datos y sin condescendencia.</p>
-          <p class="serie-precio"><sup>€</sup>47</p>
+          <p class="serie-precio precio-oculto"><sup>€</sup>47</p>
           <a href="productos.html#serie-2" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
           <button class="btn-espera" onclick="abrirModal('Serie 02 - Lógica Femenina')">Avísame del próximo acceso</button>
         </div>
@@ -443,7 +444,7 @@
           <p class="serie-numero">Serie 03</p>
           <p class="serie-nombre">La conquista real</p>
           <p class="serie-desc">Lo que nadie te enseñó sobre las relaciones entre hombres y mujeres.</p>
-          <p class="serie-precio"><sup>€</sup>57</p>
+          <p class="serie-precio precio-oculto"><sup>€</sup>57</p>
           <a href="productos.html#serie-3" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
           <button class="btn-espera" onclick="abrirModal('Serie 03 - Conquista Real')">Avísame del próximo acceso</button>
         </div>
@@ -455,7 +456,7 @@
           <p class="serie-numero">Serie 04</p>
           <p class="serie-nombre">Destruye el feminismo</p>
           <p class="serie-desc">Argumentos sólidos y datos reales para rebatir la narrativa dominante.</p>
-          <p class="serie-precio"><sup>€</sup>57</p>
+          <p class="serie-precio precio-oculto"><sup>€</sup>57</p>
           <a href="productos.html#serie-4" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
           <button class="btn-espera" onclick="abrirModal('Serie 04 - Destruye el Feminismo')">Avísame del próximo acceso</button>
         </div>
@@ -467,7 +468,7 @@
           <p class="serie-numero">Serie 05</p>
           <p class="serie-nombre">La guerra de sexos</p>
           <p class="serie-desc">Por qué nos enfrentan, quién gana y qué pierden todos.</p>
-          <p class="serie-precio"><sup>€</sup>57</p>
+          <p class="serie-precio precio-oculto"><sup>€</sup>57</p>
           <a href="productos.html#serie-5" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
           <button class="btn-espera" onclick="abrirModal('Serie 05 - Guerra de Sexos')">Avísame del próximo acceso</button>
         </div>
@@ -479,7 +480,7 @@
           <p class="serie-numero">Serie 06</p>
           <p class="serie-nombre">El ciclo, tu poder</p>
           <p class="serie-desc">La biología como herramienta real, no como excusa ni como limitación.</p>
-          <p class="serie-precio"><sup>€</sup>47</p>
+          <p class="serie-precio precio-oculto"><sup>€</sup>47</p>
           <a href="productos.html#serie-6" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
           <button class="btn-espera" onclick="abrirModal('Serie 06 - El Ciclo')">Avísame del próximo acceso</button>
         </div>
@@ -491,7 +492,7 @@
           <p class="serie-numero">Serie 07</p>
           <p class="serie-nombre">Woke</p>
           <p class="serie-desc">El movimiento que prometió libertad y entregó dogma. Análisis sin concesiones.</p>
-          <p class="serie-precio"><sup>€</sup>47</p>
+          <p class="serie-precio precio-oculto"><sup>€</sup>47</p>
           <a href="productos.html#serie-7" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
           <button class="btn-espera" onclick="abrirModal('Serie 07 - Woke')">Avísame del próximo acceso</button>
         </div>
@@ -505,22 +506,22 @@
       <div class="bundle-card reveal">
         <p class="bundle-nombre">Pack Fundamentos</p>
         <p class="bundle-series">Series 01 + 02 + 06<br />Mente, lógica y biología</p>
-        <div class="bundle-precio"><sup>€</sup>97</div>
-        <p class="bundle-ahorro">Ahorras 44€ frente al precio individual</p>
+        <div class="bundle-precio precio-oculto"><sup>€</sup>97</div>
+        <p class="bundle-ahorro precio-oculto">Ahorras 44€ frente al precio individual</p>
         <a href="productos.html#pack-fundamentos" class="btn"><span>Ver pack</span></a>
       </div>
       <div class="bundle-card destacado reveal">
         <p class="bundle-nombre">Pack Relaciones</p>
         <p class="bundle-series">Series 03 + 04 + 05<br />Conquista, feminismo y guerra de sexos</p>
-        <div class="bundle-precio"><sup>€</sup>127</div>
-        <p class="bundle-ahorro">Ahorras 44€ frente al precio individual</p>
+        <div class="bundle-precio precio-oculto"><sup>€</sup>127</div>
+        <p class="bundle-ahorro precio-oculto">Ahorras 44€ frente al precio individual</p>
         <a href="productos.html#pack-relaciones" class="btn"><span>Ver pack</span></a>
       </div>
       <div class="bundle-card reveal">
         <p class="bundle-nombre">Pack Completo</p>
         <p class="bundle-series">Las 7 series<br />Acceso total al contenido Iron</p>
-        <div class="bundle-precio"><sup>€</sup>247</div>
-        <p class="bundle-ahorro">Ahorras 94€ frente al precio individual</p>
+        <div class="bundle-precio precio-oculto"><sup>€</sup>247</div>
+        <p class="bundle-ahorro precio-oculto">Ahorras 94€ frente al precio individual</p>
         <a href="productos.html#pack-completo" class="btn"><span>Ver pack</span></a>
       </div>
     </div>
