@@ -254,7 +254,7 @@
       <li><a href="iron.html">Ethos Iron</a></li>
       <li><a href="productos.html">Productos</a></li>
       <li><a href="transparencia.html">Transparencia</a></li>
-      <li><a href="mailto:contacto@ethosironsoul.com">Contacto</a></li>
+      <li><a href="#js-contacto">Contacto</a></li>
     </ul>
     <div class="nav-iconos">
       <a href="https://instagram.com/o.mispecas" target="_blank" title="Instagram">
@@ -263,7 +263,7 @@
       <a href="#" target="_blank" title="YouTube">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
       </a>
-      <a href="mailto:contacto@ethosironsoul.com" title="Email">
+      <a href="#js-contacto" title="Email">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
       </a>
     </div>
@@ -520,7 +520,7 @@
     </div>
     <div style="margin-top: 2.5rem; border-top: 1px solid var(--negro-borde); padding-top: 1.5rem; text-align: center;">
       <p style="font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado); margin-bottom: 0.4rem;">· ¿Tu empresa apoya fines sociales? ·</p>
-      <p style="font-family: var(--font-display); font-size: 0.95rem; color: var(--gris); font-style: italic;">Colabora con ETHOS Soul y muestra que tu marca tiene valores. <a href="mailto:contacto@ethosironsoul.com" style="color: var(--dorado); text-decoration: underline; text-underline-offset: 3px;">Contáctanos</a></p>
+      <p style="font-family: var(--font-display); font-size: 0.95rem; color: var(--gris); font-style: italic;">Colabora con ETHOS Soul y muestra que tu marca tiene valores. <a href="#js-contacto" style="color: var(--dorado); text-decoration: underline; text-underline-offset: 3px;">Contáctanos</a></p>
     </div>
   </section>
 
@@ -545,7 +545,7 @@
       <li><a href="iron.html">Iron</a></li>
       <li><a href="productos.html">Productos</a></li>
       <li><a href="transparencia.html">Transparencia</a></li>
-      <li><a href="mailto:contacto@ethosironsoul.com">Contacto</a></li>
+      <li><a href="#js-contacto">Contacto</a></li>
     </ul>
     <p class="footer-copy">© 2026 ETHOS — Iron & Soul Group. Todos los derechos reservados.</p>
   </footer>
@@ -602,5 +602,12 @@
     var AUTOHIDE=Boolean(0);
   </script>
   <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+  <script>
+    document.querySelectorAll('a[href="#js-contacto"]').forEach(function(el){
+      var u = 'contacto';
+      var d = 'ethosironsoul' + '.com';
+      el.setAttribute('href', 'mailto:' + u + '@' + d);
+    });
+  </script>
 </body>
 </html>
