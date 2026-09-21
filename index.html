@@ -210,6 +210,9 @@
       .footer-copy { font-size: 0.5rem; }
       #btn-donar { bottom: 1.5rem; right: 1.5rem; }
     }
+  
+    /* Botón donar siempre a media pantalla, fijo al desplazarse */
+    #btn-donar { top: 50% !important; bottom: auto !important; transform: translateY(-50%); }
   </style>
 </head>
 <body>
@@ -521,7 +524,7 @@
        Reemplaza · LOGO · por <img src="logo.png" /> cuando los tengas
   ============================================================ -->
   <section id="colaboradores">
-    <p class="seccion-titulo">Colaboradores</p>
+    <p class="seccion-titulo" style="display:none;">Colaboradores</p>
     <div class="colaboradores-grid" style="display:none;">
       <div class="colaborador-item">· LOGO ·</div>
       <div class="colaborador-item">· LOGO ·</div>
@@ -534,7 +537,7 @@
          BANNER COLABORACIÓN SOUL — debajo de los logos
          Edita el texto y el email de contacto aquí
     ============================================================ -->
-    <div style="margin-top: 2.5rem; border-top: 1px solid var(--negro-borde); padding-top: 1.5rem; text-align: center;">
+    <div style="text-align: center;">
       <p style="font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado); margin-bottom: 0.4rem;">· ¿Tu empresa apoya fines sociales? ·</p>
       <p style="font-family: var(--font-display); font-size: 0.95rem; color: var(--gris); font-style: italic;">Colabora con ETHOS Soul y muestra que tu marca tiene valores. <a href="#" onclick="abrirContacto('Colaboración con ETHOS Soul'); return false;" style="color: var(--dorado); text-decoration: underline; text-underline-offset: 3px;">Contáctanos</a></p>
     </div>
@@ -672,6 +675,6 @@
     }
   </script>
 
-  <script src="cookies.js?v=2" defer></script>
+  <script src="cookies.js?v=3" defer></script>
 </body>
 </html>
