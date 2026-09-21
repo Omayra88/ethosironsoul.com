@@ -114,7 +114,7 @@
     .productos-grid::-webkit-scrollbar { height: 3px; }
     .productos-grid::-webkit-scrollbar-track { background: var(--negro-card); }
     .productos-grid::-webkit-scrollbar-thumb { background: var(--dorado-oscuro); border-radius: 2px; }
-    .producto-card { background: var(--negro-card); border: 1px solid var(--negro-borde); overflow: hidden; position: relative; transition: transform var(--transicion), box-shadow var(--transicion); cursor: pointer; min-width: 320px; max-width: 320px; flex-shrink: 0;  display: flex; flex-direction: column; }
+    .producto-card { background: var(--negro-card); border: 1px solid var(--negro-borde); overflow: hidden; position: relative; transition: transform var(--transicion), box-shadow var(--transicion); cursor: pointer; min-width: 320px; max-width: 320px; flex-shrink: 0; display: block; }
     .producto-card::before { content: ''; position: absolute; inset: 0; border: 1px solid var(--dorado); opacity: 0; transition: opacity var(--transicion); z-index: 1; pointer-events: none; }
     .producto-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(201,168,76,0.15); }
     .producto-card:hover::before { opacity: 1; }
