@@ -164,6 +164,9 @@
       #btn-donar { bottom: 1.5rem; right: 1.5rem; }
       #packs-series > div { grid-template-columns: 1fr !important; }
     }
+  
+    /* Botón donar siempre a media pantalla, fijo al desplazarse */
+    #btn-donar { top: 50% !important; bottom: auto !important; transform: translateY(-50%); }
   </style>
 </head>
 <body>
@@ -820,6 +823,6 @@
     }
   </script>
 
-  <script src="cookies.js?v=2" defer></script>
+  <script src="cookies.js?v=3" defer></script>
 </body>
 </html>
