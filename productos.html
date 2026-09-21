@@ -702,6 +702,10 @@
       <h3>Próximo lanzamiento</h3>
       <p>Déjame tu email y te aviso cuando abra de nuevo.</p>
       <input type="email" placeholder="tu@email.com" id="email-espera" />
+      <div style="display:flex; align-items:flex-start; gap:0.6rem; margin-bottom:1rem; text-align:left;">
+        <input type="checkbox" id="acepta-privacidad" required style="margin-top:0.2rem; accent-color:var(--dorado); cursor:pointer; flex-shrink:0;" />
+        <label for="acepta-privacidad" style="font-size:0.65rem; color:var(--gris); line-height:1.5; cursor:pointer;">He leído y acepto la <a href="privacidad.html" target="_blank" style="color:var(--dorado);">Política de Privacidad</a>.</label>
+      </div>
       <button class="btn" onclick="guardarEmail()"><span>Avísame</span></button>
     </div>
   </div>
@@ -721,7 +725,7 @@
     function abrirModal() { document.getElementById('modal-espera').classList.add('abierto'); }
     function cerrarModal() { document.getElementById('modal-espera').classList.remove('abierto'); }
     document.getElementById('modal-espera').addEventListener('click', function(e) { if (e.target === this) cerrarModal(); });
-    function guardarEmail() { const email = document.getElementById('email-espera').value; if (email) { alert('¡Gracias! Te avisamos en el próximo lanzamiento.'); cerrarModal(); } }
+    function guardarEmail() { const email = document.getElementById('email-espera').value; const acepta = document.getElementById('acepta-privacidad'); if (!email) return; if (acepta && !acepta.checked) { alert('Debes aceptar la Política de Privacidad para continuar.'); return; } alert('¡Gracias! Te avisamos en el próximo lanzamiento.'); cerrarModal(); }
     function filtrar(categoria, btn) {
       document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
       btn.classList.add('activo');
