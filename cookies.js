@@ -72,6 +72,7 @@ const ETHOS_COOKIES_CONFIG = {
   #ethos-cookies .ec-op{display:flex;gap:0.8rem;align-items:flex-start;margin-bottom:0.8rem;font-size:0.7rem;color:#888888;line-height:1.6}
   #ethos-cookies .ec-op input{accent-color:#c9a84c;margin-top:0.2rem;flex-shrink:0}
   #ethos-cookies .ec-op strong{color:#f5f0e8;font-weight:500}
+  body.ethos-cookies-open #btn-donar{bottom:50vh !important;transition:bottom .3s ease}
   @media(max-width:768px){#ethos-cookies{padding:1.2rem 1rem}#ethos-cookies .ec-btns{width:100%}#ethos-cookies .ec-btns button{flex:1}}`;
 
   const html = `
@@ -112,10 +113,12 @@ const ETHOS_COOKIES_CONFIG = {
     document.getElementById('ec-analiticas').checked = !!(c && c.analiticas);
     document.getElementById('ec-marketing').checked = !!(c && c.marketing);
     document.getElementById('ethos-cookies').style.display = 'block';
+    document.body.classList.add('ethos-cookies-open');
   }
   function ocultar() {
     const b = document.getElementById('ethos-cookies');
     if (b) b.style.display = 'none';
+    document.body.classList.remove('ethos-cookies-open');
   }
 
   /* Enlace "Configurar cookies" disponible en toda la web */
