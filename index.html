@@ -110,15 +110,15 @@
     #productos { padding: 5rem 0 5rem 4rem; }
     .seccion-titulo-productos { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dorado); display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-bottom: 0; padding-right: 4rem; white-space: nowrap; }
     .seccion-titulo-productos::before, .seccion-titulo-productos::after { content: ''; width: 60px; height: 1px; background: var(--dorado-oscuro); }
-    .productos-grid { display: flex; gap: 1.5rem; margin-top: 3rem; overflow-x: auto; padding-bottom: 1rem; padding-right: 4rem; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--dorado-oscuro) var(--negro-card); }
+    .productos-grid { display: flex; gap: 1.5rem; margin-top: 3rem; overflow-x: auto; padding-bottom: 1rem; padding-right: 4rem; scroll-snap-type: none; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--dorado-oscuro) var(--negro-card); }
     .productos-grid::-webkit-scrollbar { height: 3px; }
     .productos-grid::-webkit-scrollbar-track { background: var(--negro-card); }
     .productos-grid::-webkit-scrollbar-thumb { background: var(--dorado-oscuro); border-radius: 2px; }
-    .producto-card { background: var(--negro-card); border: 1px solid var(--negro-borde); overflow: hidden; position: relative; transition: transform var(--transicion), box-shadow var(--transicion); cursor: pointer; min-width: 260px; max-width: 260px; flex-shrink: 0; scroll-snap-align: start; display: flex; flex-direction: column; }
+    .producto-card { background: var(--negro-card); border: 1px solid var(--negro-borde); overflow: hidden; position: relative; transition: transform var(--transicion), box-shadow var(--transicion); cursor: pointer; min-width: 260px; max-width: 260px; flex-shrink: 0;  display: flex; flex-direction: column; }
     .producto-card::before { content: ''; position: absolute; inset: 0; border: 1px solid var(--dorado); opacity: 0; transition: opacity var(--transicion); z-index: 1; pointer-events: none; }
     .producto-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(201,168,76,0.15); }
     .producto-card:hover::before { opacity: 1; }
-    .producto-imagen { width: 100%; aspect-ratio: 1/1; object-fit: contain; background: #0d0d0d; }
+    .producto-imagen { width: 100%; aspect-ratio: 2/3; object-fit: contain; background: #0d0d0d; }
     .producto-badge { position: absolute; top: 1rem; right: 1rem; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--dorado); color: var(--negro); padding: 0.3rem 0.7rem; z-index: 2; }
     .producto-info { padding: 0.3rem 1rem; display: flex; flex-direction: column; flex: 1; }
     .producto-nombre { font-family: var(--font-display); font-size: 1rem; font-weight: 400; margin-bottom: 0.3rem; line-height: 1.3; }
