@@ -629,6 +629,9 @@
     @media (max-width: 480px) {
       .pilares-grid { grid-template-columns: 1fr; }
     }
+  
+    /* Botón donar siempre a media pantalla, fijo al desplazarse */
+    #btn-donar { top: 50% !important; bottom: auto !important; transform: translateY(-50%); }
   </style>
 </head>
 <body>
@@ -1037,6 +1040,6 @@
     }
   </script>
 
-  <script src="cookies.js?v=2" defer></script>
+  <script src="cookies.js?v=3" defer></script>
 </body>
 </html>
