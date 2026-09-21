@@ -18,23 +18,21 @@
     body { background: var(--negro); color: var(--blanco); font-family: var(--font-body); font-weight: 300; line-height: 1.8; }
     a { color: var(--dorado); text-decoration: none; }
     a:hover { text-decoration: underline; }
-
     #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; background: rgba(10,10,10,0.97); border-bottom: 1px solid var(--negro-borde); }
     .nav-logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.35em; color: var(--blanco); }
-
     .contenido { max-width: 780px; margin: 0 auto; padding: 8rem 2rem 5rem; }
-
     h1 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
     .fecha { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris); margin-bottom: 3rem; display: block; }
     .separador { width: 40px; height: 1px; background: var(--dorado); margin: 0 0 3rem; }
-
     h2 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 400; color: var(--dorado); margin: 2.5rem 0 0.8rem; }
     p { font-size: 0.82rem; color: var(--gris); margin-bottom: 1rem; }
     p strong { color: var(--blanco); font-weight: 500; }
     ul { list-style: none; margin: 0 0 1rem 0; padding: 0; }
     ul li { font-size: 0.82rem; color: var(--gris); padding-left: 1.2rem; position: relative; margin-bottom: 0.4rem; }
     ul li::before { content: '—'; position: absolute; left: 0; color: var(--dorado); }
-
+    table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+    table th { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dorado); text-align: left; padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--negro-borde); }
+    table td { font-size: 0.78rem; color: var(--gris); padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--negro-borde); vertical-align: top; }
     footer { border-top: 1px solid var(--negro-borde); padding: 2rem 4rem; text-align: center; }
     footer a { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris); }
     footer a:hover { color: var(--dorado); }
@@ -52,14 +50,20 @@
     <div class="separador"></div>
 
     <h2>1. Responsable del tratamiento</h2>
-    <p><strong>Iron & Soul Group LLC</strong>, empresa constituida en Wyoming (Estados Unidos), operando bajo la marca ETHOS.<br />
-    Email de contacto: <a href="mailto:contacto@ethosironsoul.com">contacto@ethosironsoul.com</a></p>
+    <p>
+      <strong>Iron & Soul Group LLC</strong><br />
+      Número de registro: 2026-002000783<br />
+      Estado de constitución: Wyoming, Estados Unidos<br />
+      Dirección registrada: 30 N Gould St, Ste N, Sheridan, WY 82801, EEUU<br />
+      Marca comercial: ETHOS<br />
+      Email de contacto: <span id="email-contact"></span>
+    </p>
 
     <h2>2. Qué datos recogemos</h2>
     <ul>
       <li><strong>Dirección de email</strong> — cuando te apuntas a la lista de espera o aviso de lanzamiento a través del formulario de la web.</li>
-      <li><strong>Datos de pago</strong> — gestionados íntegramente por Stripe (Guía VG) o Hotmart (membresía y productos Iron). ETHOS no almacena ni tiene acceso a tus datos de tarjeta.</li>
-      <li><strong>Datos de navegación</strong> — la web utiliza Google Fonts, que puede registrar tu IP al cargar las tipografías desde sus servidores.</li>
+      <li><strong>Datos de pago</strong> — gestionados íntegramente por Stripe (Guía VG y donaciones) o Hotmart (membresía y productos Iron). ETHOS no almacena ni tiene acceso a tus datos de tarjeta.</li>
+      <li><strong>Datos de navegación</strong> — la web utiliza Google Fonts, que puede registrar tu dirección IP al cargar las tipografías desde sus servidores.</li>
     </ul>
 
     <h2>3. Para qué usamos tus datos</h2>
@@ -79,14 +83,37 @@
       <li><strong>Hotmart</strong> — para la membresía Iron y los productos de pago. Política de privacidad: <a href="https://hotmart.com/es/legal/privacy-policy" target="_blank">hotmart.com/es/legal/privacy-policy</a></li>
     </ul>
 
-    <h2>6. Cookies</h2>
-    <p>Esta web no utiliza cookies propias de seguimiento ni analítica. Google Fonts puede establecer cookies técnicas necesarias para cargar las tipografías. No utilizamos Google Analytics ni píxeles de seguimiento de redes sociales.</p>
+    <h2>6. Política de cookies</h2>
+    <p>Una cookie es un pequeño archivo de texto que se almacena en tu dispositivo cuando visitas una web. Esta web utiliza exclusivamente cookies técnicas necesarias para su funcionamiento.</p>
+
+    <table>
+      <tr>
+        <th>Cookie</th>
+        <th>Origen</th>
+        <th>Finalidad</th>
+        <th>Duración</th>
+      </tr>
+      <tr>
+        <td>Cookies de tipografía</td>
+        <td>Google Fonts</td>
+        <td>Cargar las fuentes tipográficas de la web</td>
+        <td>Sesión</td>
+      </tr>
+    </table>
+
+    <p><strong>Lo que no usamos:</strong> no instalamos cookies de analítica (Google Analytics), cookies de publicidad, píxeles de seguimiento de redes sociales ni cookies de terceros salvo las indicadas.</p>
+    <p><strong>Cómo desactivarlas:</strong> puedes configurar tu navegador para bloquear o eliminar cookies. Ten en cuenta que bloquear las cookies técnicas puede afectar al correcto funcionamiento de la web. Instrucciones según navegador:</p>
+    <ul>
+      <li><a href="https://support.google.com/chrome/answer/95647" target="_blank">Google Chrome</a></li>
+      <li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" target="_blank">Mozilla Firefox</a></li>
+      <li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank">Safari</a></li>
+    </ul>
 
     <h2>7. Conservación de datos</h2>
     <p>Los emails recogidos a través de la lista de espera se conservan hasta que solicites su eliminación. Los datos de compra los gestiona Stripe o Hotmart según sus propias políticas de retención.</p>
 
     <h2>8. Tus derechos</h2>
-    <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición y portabilidad escribiendo a <a href="mailto:contacto@ethosironsoul.com">contacto@ethosironsoul.com</a>. Responderemos en un plazo máximo de 30 días.</p>
+    <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición y portabilidad escribiendo a <span id="email-rights"></span>. Responderemos en un plazo máximo de 30 días.</p>
 
     <h2>9. Cambios en esta política</h2>
     <p>Cualquier cambio relevante se comunicará actualizando la fecha de esta página. Te recomendamos revisarla periódicamente.</p>
@@ -95,7 +122,17 @@
   <footer>
     <a href="index.html">← Volver al inicio</a>
     <p style="font-size:0.45rem; letter-spacing:0.1em; color:#2a2a2a; text-align:center; margin-top:0.4rem;">Desarrollado por <a href="https://presenciadenegocio.com" target="_blank" style="color:#2a2a2a; text-decoration:none;">presenciadenegocio.com</a></p>
-</footer>
+  </footer>
+
+  <script>
+    // Email ofuscado anti-spam
+    const u = 'contacto';
+    const d = 'ethosironsoul.com';
+    const email = u + '@' + d;
+    const link = '<a href="mailto:' + email + '" style="color:var(--dorado);">' + email + '</a>';
+    document.getElementById('email-contact').innerHTML = link;
+    document.getElementById('email-rights').innerHTML = link;
+  </script>
 
 </body>
 </html>
