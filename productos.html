@@ -725,7 +725,37 @@
     function abrirModal() { document.getElementById('modal-espera').classList.add('abierto'); }
     function cerrarModal() { document.getElementById('modal-espera').classList.remove('abierto'); }
     document.getElementById('modal-espera').addEventListener('click', function(e) { if (e.target === this) cerrarModal(); });
-    function guardarEmail() { const email = document.getElementById('email-espera').value; const acepta = document.getElementById('acepta-privacidad'); if (!email) return; if (acepta && !acepta.checked) { alert('Debes aceptar la Política de Privacidad para continuar.'); return; } alert('¡Gracias! Te avisamos en el próximo lanzamiento.'); cerrarModal(); }
+    function guardarEmail() {
+      const email = document.getElementById('email-espera').value;
+      const acepta = document.getElementById('acepta-privacidad');
+      if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        alert('Por favor, introduce un email válido.'); return;
+      }
+      if (acepta && !acepta.checked) {
+        alert('Debes aceptar la Política de Privacidad para continuar.'); return;
+      }
+      fetch('https://formsubmit.co/ajax/contacto@ethosironsoul.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          _subject: 'Nueva lista de espera — ETHOS',
+          _captcha: 'false',
+          mensaje: 'Solicitud de aviso de lanzamiento'
+        })
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById('email-espera').value = '';
+          cerrarModal();
+          alert('¡Anotado! Te avisamos cuando abramos el lanzamiento.');
+        } else {
+          alert('Algo ha ido mal. Inténtalo de nuevo.');
+        }
+      })
+      .catch(() => alert('Error de conexión. Inténtalo de nuevo.'));
+    }
     function filtrar(categoria, btn) {
       document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
       btn.classList.add('activo');
