@@ -615,12 +615,14 @@
       <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
       <h3>¡Acceso cerrado!</h3>
       <p>Déjame tus datos y te aviso cuando abra de nuevo.</p>
+      <div id="sib-form-container" class="sib-form-container">
       <div id="error-message" class="sib-form-message-panel" style="font-size:0.72rem;text-align:center;color:#661d1d;background-color:#ffeded;border-color:#ff4949;border-radius:3px;padding:0.5rem;margin-bottom:0.8rem;">
         <span class="sib-form-message-panel__inner-text">No hemos podido validar tu suscripción.</span>
       </div>
       <div id="success-message" class="sib-form-message-panel" style="font-size:0.72rem;text-align:center;color:#085229;background-color:#e7faf0;border-color:#13ce66;border-radius:3px;padding:0.5rem;margin-bottom:0.8rem;">
         <span class="sib-form-message-panel__inner-text">¡Listo! Ya estás en la lista.</span>
       </div>
+      <div id="sib-container" class="sib-container--large sib-container--vertical">
       <form id="sib-form" method="POST" action="https://65a03631.sibforms.com/serve/MUIFAKDGkR3fR1vQpjOy3EWRhIrsO-R3uUvOv6DAtClPyAjeux7zVvIftuJTpV0x_iVbXne-tJ0Y2M1-AjXqhK_yjxYdJYiVywuLXWhETWtkVB2DT1WsrwnnLsweW1LgrRcCgri7sQaBmuFY-0XQUnGCd6fxCRQUqbxlQBUP3XwkgOsm7fGViuZRJge2htyh439tHYDgxVO9P2g1Eg==" data-type="subscription">
         <input type="hidden" name="ORIGEN" id="origen-hidden" value="">
         <input class="input" maxlength="200" type="text" id="NOMBRE" name="NOMBRE" autocomplete="off" placeholder="¿Cómo te llamas?" data-required="true" required />
@@ -635,6 +637,8 @@
         <input type="text" name="email_address_check" value="" class="input--hidden">
         <input type="hidden" name="locale" value="es">
       </form>
+      </div>
+      </div>
     </div>
   </div>
 
@@ -672,6 +676,15 @@
       var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://sibforms.com/forms/end-form/build/sib-styles.css'; document.head.appendChild(l);
       var s = document.createElement('script'); s.src = 'https://sibforms.com/forms/end-form/build/main.js'; document.body.appendChild(s);
     }
+    /* Lista de espera: no se envía si no se acepta la privacidad (actúa antes que el código de Brevo) */
+    (function(){
+      function bloquear(e){
+        var c = document.getElementById('acepta-privacidad');
+        if (c && !c.checked) { e.preventDefault(); e.stopImmediatePropagation(); if (c.reportValidity) c.reportValidity(); }
+      }
+      document.addEventListener('click', function(e){ if (e.target.closest && e.target.closest('#sib-form [type="submit"]')) bloquear(e); }, true);
+      document.addEventListener('submit', function(e){ if (e.target && e.target.id === 'sib-form') bloquear(e); }, true);
+    })();
     window.addEventListener('load', function(){ setTimeout(cargarBrevo, 2500); });
   </script>
 
