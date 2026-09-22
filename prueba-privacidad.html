@@ -39,7 +39,7 @@
   
     /* Accesibilidad: enlace "saltar al contenido" (solo visible al navegar con el teclado) */
     .saltar-al-contenido { position: absolute; left: -9999px; top: 0; z-index: 4000; background: var(--negro-card); color: var(--dorado); border: 1px solid var(--dorado); padding: 0.7rem 1.2rem; font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; }
-    .saltar-al-contenido:focus { left: 1rem; top: 1rem; }
+    .saltar-al-contenido:focus, .saltar-al-contenido:focus-visible { left: 1rem; top: 1rem; }
   </style>
 </head>
 <body>
@@ -187,7 +187,7 @@
           var r = orig.apply(this, arguments);
           setTimeout(function(){
             var cont = document.getElementById(fn === 'abrirModal' ? 'modal-espera' : 'modal-contacto');
-            var campo = cont && cont.querySelector('input:not([type=hidden]):not(.input--hidden), textarea');
+            var campo = cont && cont.querySelector('input:not([type=hidden]):not(.input--hidden):not([tabindex="-1"]):not([aria-hidden="true"]), textarea');
             if (campo) campo.focus();
           }, 60);
           return r;
