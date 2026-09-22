@@ -340,6 +340,9 @@
   
     /* Carrusel: solo desplazamiento lateral */
     #series .productos-grid { overflow-y: hidden !important; }
+  
+    /* Imágenes con medidas: mantener la altura automática salvo que el diseño fije otra */
+    :where(img[width][height]) { height: auto; }
   </style>
 </head>
 <body>
@@ -380,7 +383,7 @@
   </div>
 
   <section id="hero">
-    <img src="ETHOS Iron copia 3.png" alt="ETHOS Iron" class="hero-banner" />
+    <img src="img/ethos-iron-copia-3-2097.webp" alt="ETHOS Iron" class="hero-banner" srcset="img/ethos-iron-copia-3-800.webp 800w, img/ethos-iron-copia-3-1400.webp 1400w, img/ethos-iron-copia-3-2097.webp 2097w" sizes="(max-width: 768px) 100vw, 2698px" width="2097" height="750" fetchpriority="high" />
     <div class="hero-overlay"></div>
     <div class="hero-contenido">
       <h1 class="hero-titulo">Conocimiento</h1>
@@ -400,7 +403,7 @@
         <p>Únete a Iron Pass y accede a todo el contenido, la comunidad y mucho más.</p>
       </div>
       <div class="reveal" style="display:flex;align-items:center;justify-content:center;">
-        <img src="ETHOS Iron copia.png" alt="ETHOS Iron" class="que-es-logo" />
+        <img src="img/ethos-iron-copia-400.webp" alt="ETHOS Iron" class="que-es-logo" srcset="img/ethos-iron-copia-400.webp 400w, img/ethos-iron-copia-744.webp 744w" sizes="(max-width: 768px) 72vw, 280px" width="744" height="439" loading="lazy" decoding="async" />
       </div>
     </div>
   </section>
@@ -451,7 +454,7 @@
 
   <section id="membresia">
     <div class="membresia-imagen-wrap">
-      <img src="ETHOS IRON simple.png" alt="Iron Pass" style="width:100%; height:100%; object-fit:cover; object-position:center top; opacity:1;" />
+      <img src="img/ethos-iron-simple-858.webp" alt="Iron Pass" style="width:100%; height:100%; object-fit:cover; object-position:center top; opacity:1;" srcset="img/ethos-iron-simple-450.webp 450w, img/ethos-iron-simple-858.webp 858w" sizes="(max-width: 768px) 100vw, 100vw" width="858" height="457" loading="lazy" decoding="async" />
     </div>
     <div class="membresia-contenido reveal">
       <p class="etiqueta">Iron Pass</p>
@@ -480,7 +483,7 @@
 
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
-        <img src="S1-La mente femenina al descubierto.png" alt="La mente femenina al descubierto" class="producto-imagen" />
+        <img src="img/s1-la-mente-femenina-al-descubierto-420.webp" alt="La mente femenina al descubierto" class="producto-imagen" srcset="img/s1-la-mente-femenina-al-descubierto-420.webp 420w, img/s1-la-mente-femenina-al-descubierto-840.webp 840w, img/s1-la-mente-femenina-al-descubierto-1260.webp 1260w, img/s1-la-mente-femenina-al-descubierto-1672.webp 1672w" sizes="(max-width: 768px) 54vw, 318px" width="1672" height="941" loading="lazy" decoding="async" />
         <div class="producto-info">
           <p class="producto-nombre">La mente femenina al descubierto</p>
           <p class="producto-desc">Psicología real sin filtro ideológico.</p>
@@ -493,7 +496,7 @@
 
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
-        <img src="S2-La logica femenina al descubierto.png" alt="La lógica femenina al descubierto" class="producto-imagen" />
+        <img src="img/s2-la-logica-femenina-al-descubierto-420.webp" alt="La lógica femenina al descubierto" class="producto-imagen" srcset="img/s2-la-logica-femenina-al-descubierto-420.webp 420w, img/s2-la-logica-femenina-al-descubierto-840.webp 840w, img/s2-la-logica-femenina-al-descubierto-1260.webp 1260w, img/s2-la-logica-femenina-al-descubierto-1672.webp 1672w" sizes="(max-width: 768px) 54vw, 318px" width="1672" height="941" loading="lazy" decoding="async" />
         <div class="producto-info">
           <p class="producto-nombre">La lógica femenina al descubierto</p>
           <p class="producto-desc">Patrones de comportamiento explicados.</p>
@@ -506,7 +509,7 @@
 
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
-        <img src="S3-La conquista real.png" alt="La conquista real" class="producto-imagen" />
+        <img src="img/s3-la-conquista-real-420.webp" alt="La conquista real" class="producto-imagen" srcset="img/s3-la-conquista-real-420.webp 420w, img/s3-la-conquista-real-840.webp 840w, img/s3-la-conquista-real-1260.webp 1260w, img/s3-la-conquista-real-1672.webp 1672w" sizes="(max-width: 768px) 54vw, 318px" width="1672" height="941" loading="lazy" decoding="async" />
         <div class="producto-info">
           <p class="producto-nombre">La conquista real</p>
           <p class="producto-desc">Lo que nadie te enseñó sobre las relaciones.</p>
@@ -519,7 +522,7 @@
 
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
-        <img src="S4-Destruye el feminismo.png" alt="Destruye el feminismo" class="producto-imagen" />
+        <img src="img/s4-destruye-el-feminismo-420.webp" alt="Destruye el feminismo" class="producto-imagen" srcset="img/s4-destruye-el-feminismo-420.webp 420w, img/s4-destruye-el-feminismo-840.webp 840w, img/s4-destruye-el-feminismo-1260.webp 1260w, img/s4-destruye-el-feminismo-1672.webp 1672w" sizes="(max-width: 768px) 54vw, 318px" width="1672" height="941" loading="lazy" decoding="async" />
         <div class="producto-info">
           <p class="producto-nombre">Destruye el feminismo</p>
           <p class="producto-desc">Argumentos sólidos contra la narrativa dominante.</p>
@@ -532,7 +535,7 @@
 
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
-        <img src="S5-La guerra de sexos.png" alt="La guerra de sexos" class="producto-imagen" />
+        <img src="img/s5-la-guerra-de-sexos-420.webp" alt="La guerra de sexos" class="producto-imagen" srcset="img/s5-la-guerra-de-sexos-420.webp 420w, img/s5-la-guerra-de-sexos-840.webp 840w, img/s5-la-guerra-de-sexos-1260.webp 1260w, img/s5-la-guerra-de-sexos-1672.webp 1672w" sizes="(max-width: 768px) 54vw, 318px" width="1672" height="941" loading="lazy" decoding="async" />
         <div class="producto-info">
           <p class="producto-nombre">La guerra de sexos</p>
           <p class="producto-desc">Por qué nos enfrentan y quién gana.</p>
@@ -545,7 +548,7 @@
 
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
-        <img src="S6-El ciclo tu poder.png" alt="El ciclo, tu poder" class="producto-imagen" />
+        <img src="img/s6-el-ciclo-tu-poder-420.webp" alt="El ciclo, tu poder" class="producto-imagen" srcset="img/s6-el-ciclo-tu-poder-420.webp 420w, img/s6-el-ciclo-tu-poder-840.webp 840w, img/s6-el-ciclo-tu-poder-1260.webp 1260w, img/s6-el-ciclo-tu-poder-1672.webp 1672w" sizes="(max-width: 768px) 54vw, 318px" width="1672" height="941" loading="lazy" decoding="async" />
         <div class="producto-info">
           <p class="producto-nombre">El ciclo, tu poder</p>
           <p class="producto-desc">Tu biología como herramienta, no como excusa.</p>
@@ -558,7 +561,7 @@
 
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
-        <img src="S7- Woke.png" alt="Woke" class="producto-imagen" />
+        <img src="img/s7-woke-420.webp" alt="Woke" class="producto-imagen" srcset="img/s7-woke-420.webp 420w, img/s7-woke-840.webp 840w, img/s7-woke-1260.webp 1260w, img/s7-woke-1672.webp 1672w" sizes="(max-width: 768px) 54vw, 318px" width="1672" height="941" loading="lazy" decoding="async" />
         <div class="producto-info">
           <p class="producto-nombre">Woke</p>
           <p class="producto-desc">El movimiento que prometió libertad y entregó dogma.</p>
