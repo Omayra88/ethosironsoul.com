@@ -36,15 +36,20 @@
     footer { border-top: 1px solid var(--negro-borde); padding: 2rem 4rem; text-align: center; }
     footer a { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gris); }
     footer a:hover { color: var(--dorado); }
+  
+    /* Accesibilidad: enlace "saltar al contenido" (solo visible al navegar con el teclado) */
+    .saltar-al-contenido { position: absolute; left: -9999px; top: 0; z-index: 4000; background: var(--negro-card); color: var(--dorado); border: 1px solid var(--dorado); padding: 0.7rem 1.2rem; font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; }
+    .saltar-al-contenido:focus, .saltar-al-contenido:focus-visible { left: 1rem; top: 1rem; }
   </style>
 </head>
 <body>
+  <a class="saltar-al-contenido" href="#contenido">Saltar al contenido</a>
 
   <nav id="navbar">
     <a href="index.html" class="nav-logo">ETHOS</a>
   </nav>
 
-  <div class="contenido">
+  <div class="contenido" id="contenido" tabindex="-1">
     <h1>Política de Privacidad</h1>
     <span class="fecha">Última actualización: septiembre 2026</span>
     <div class="separador"></div>
@@ -146,6 +151,50 @@
     document.getElementById('email-rights').innerHTML = link;
   </script>
 
-  <script src="cookies.js?v=3" defer></script>
+  <script src="cookies.js?v=3" defer>  </script>
+  <script>
+    /* Accesibilidad: cerrar ventanas con Escape, avisar del estado de menú y preguntas, y llevar el foco */
+    (function(){
+      function visible(el){ return el && getComputedStyle(el).display !== 'none' && !(el.classList.contains('modal-overlay') && !el.classList.contains('abierto')); }
+      document.addEventListener('keydown', function(e){
+        if (e.key !== 'Escape') return;
+        var esp = document.getElementById('modal-espera');
+        var con = document.getElementById('modal-contacto');
+        var mov = document.getElementById('nav-movil');
+        if (esp && esp.classList.contains('abierto') && typeof cerrarModal === 'function') { cerrarModal(); return; }
+        if (con && getComputedStyle(con).display !== 'none' && typeof cerrarContacto === 'function') { cerrarContacto(); return; }
+        if (mov && mov.classList.contains('abierto') && typeof cerrarMenu === 'function') { cerrarMenu(); }
+      });
+      var ham = document.getElementById('hamburguesa');
+      if (ham) {
+        ham.setAttribute('aria-controls','nav-movil');
+        ham.setAttribute('aria-expanded','false');
+        ham.addEventListener('click', function(){ ham.setAttribute('aria-expanded', ham.classList.contains('abierto') ? 'true' : 'false'); });
+        document.querySelectorAll('#nav-movil a').forEach(function(a){ a.addEventListener('click', function(){ ham.setAttribute('aria-expanded','false'); }); });
+      }
+      document.querySelectorAll('.faq-pregunta').forEach(function(b, i){
+        var resp = b.parentElement.querySelector('.faq-respuesta');
+        if (resp) { if (!resp.id) resp.id = 'faq-respuesta-' + i; b.setAttribute('aria-controls', resp.id); }
+        b.setAttribute('aria-expanded','false');
+        b.addEventListener('click', function(){
+          document.querySelectorAll('.faq-pregunta').forEach(function(o){ o.setAttribute('aria-expanded', o.parentElement.classList.contains('abierto') ? 'true' : 'false'); });
+        });
+      });
+      ['abrirModal','abrirContacto'].forEach(function(fn){
+        if (typeof window[fn] !== 'function') return;
+        var orig = window[fn];
+        window[fn] = function(){
+          var r = orig.apply(this, arguments);
+          setTimeout(function(){
+            var cont = document.getElementById(fn === 'abrirModal' ? 'modal-espera' : 'modal-contacto');
+            var campo = cont && cont.querySelector('input:not([type=hidden]):not(.input--hidden):not([tabindex="-1"]):not([aria-hidden="true"]), textarea');
+            if (campo) campo.focus();
+          }, 60);
+          return r;
+        };
+      });
+    })();
+
+  </script>
 </body>
 </html>
