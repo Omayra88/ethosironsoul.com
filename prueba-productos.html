@@ -852,6 +852,15 @@
       var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://sibforms.com/forms/end-form/build/sib-styles.css'; document.head.appendChild(l);
       var s = document.createElement('script'); s.src = 'https://sibforms.com/forms/end-form/build/main.js'; document.body.appendChild(s);
     }
+    /* Lista de espera: no se envía si no se acepta la privacidad (actúa antes que el código de Brevo) */
+    (function(){
+      function bloquear(e){
+        var c = document.getElementById('acepta-privacidad');
+        if (c && !c.checked) { e.preventDefault(); e.stopImmediatePropagation(); if (c.reportValidity) c.reportValidity(); }
+      }
+      document.addEventListener('click', function(e){ if (e.target.closest && e.target.closest('#sib-form [type="submit"]')) bloquear(e); }, true);
+      document.addEventListener('submit', function(e){ if (e.target && e.target.id === 'sib-form') bloquear(e); }, true);
+    })();
     window.addEventListener('load', function(){ setTimeout(cargarBrevo, 2500); });
   </script>
 
