@@ -2,8 +2,39 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ETHOS Soul — Apoyo, Paz, Humanidad</title>
+  <title>ETHOS Soul | Apoyo Legal y Psicológico Gratuito para Hombres</title>
+  <!-- SEO -->
+  <meta name="description" content="Apoyo psicológico gratuito y orientación legal para hombres. Guía VG: orientación ante acusaciones en España, con donación mínima de 5 €. Grupo de apoyo privado. No estás solo." />
+  <meta name="keywords" content="ETHOS Soul, apoyo hombres España, guía violencia de género acusación, apoyo psicológico gratuito, hombres en crisis" />
+  <meta name="author" content="Omayra Pérez" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://ethosironsoul.com/soul.html" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ETHOS" />
+  <meta property="og:title" content="ETHOS Soul | Apoyo Legal y Psicológico Gratuito para Hombres" />
+  <meta property="og:description" content="Apoyo psicológico gratuito y orientación legal para hombres. Guía VG: orientación ante acusaciones en España, con donación mínima de 5 €. Grupo de apoyo privado. No estás solo." />
+  <meta property="og:url" content="https://ethosironsoul.com/soul.html" />
+  <meta property="og:image" content="https://ethosironsoul.com/SOUL%20HERO.png" />
+  <meta property="og:locale" content="es_ES" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ETHOS Soul | Apoyo Legal y Psicológico Gratuito para Hombres" />
+  <meta name="twitter:description" content="Apoyo psicológico gratuito y orientación legal para hombres. Guía VG: orientación ante acusaciones en España, con donación mínima de 5 €. Grupo de apoyo privado. No estás solo." />
+  <meta name="twitter:image" content="https://ethosironsoul.com/SOUL%20HERO.png" />
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "ETHOS Soul | Apoyo Legal y Psicológico Gratuito para Hombres",
+    "url": "https://ethosironsoul.com/soul.html",
+    "description": "Apoyo psicológico gratuito y orientación legal para hombres en situación de vulnerabilidad.",
+    "isPartOf": { "@type": "WebSite", "url": "https://ethosironsoul.com" }
+  }
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     /* ============================================================
@@ -134,61 +165,17 @@
     .nav-movil a:hover { color: var(--dorado); }
 
     /* ============================================================
-       HERO — Banner con imagen ETHOS Soul copia 4.png
-       Cambia "ETHOS Soul copia 4.png" si renombras el archivo
+       HERO — Idéntico a iron.html
+       Imagen: SOUL HERO.png
     ============================================================ */
-    #hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-    .hero-banner {
-      position: absolute;
-      right: 4rem;
-      top: 50%;
-      transform: translateY(-50%);
-      height: 55%;
-      width: auto;
-      max-width: 35%;
-      object-fit: contain;
-      object-position: center;
-    }
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, var(--negro) 45%, rgba(10,10,10,0.3) 80%, transparent 100%);
-    }
-    .hero-contenido {
-      position: relative;
-      z-index: 2;
-      padding: 8rem 4rem 4rem;
-      max-width: 560px;
-    }
-    .hero-eyebrow {
-      font-size: 0.6rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--dorado);
-      margin-bottom: 1rem;
-    }
-    .hero-titulo {
-      font-family: var(--font-display);
-      font-size: clamp(3.5rem, 8vw, 7rem);
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      line-height: 0.95;
-      margin-bottom: 1.5rem;
-    }
-    .hero-subtitulo {
-      font-family: var(--font-display);
-      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
-      font-style: italic;
-      color: var(--dorado);
-      margin-bottom: 0.8rem;
-    }
-    .hero-desc { font-size: 1.2rem; color: var(--gris); max-width: 520px; line-height: 1.8; font-family: var(--font-body); }
+    #hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .hero-banner { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center top; opacity: 0.75; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.1) 0%, rgba(10,10,10,0.1) 30%, rgba(10,10,10,0.8) 50%, var(--negro) 62%); }
+    .hero-contenido { position: relative; z-index: 2; width: 100%; padding: 32rem 2rem 0; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+    .hero-eyebrow { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--dorado); margin-bottom: 1rem; text-align: center; }
+    .hero-titulo { font-family: var(--font-display); font-size: clamp(2.5rem, 7vw, 7.5rem); font-weight: 300; letter-spacing: 0.12em; line-height: 1; margin-bottom: 0; text-transform: uppercase; text-align: center; color: var(--blanco); }
+    .hero-subtitulo { font-family: var(--font-display); font-size: clamp(1.2rem, 4vw, 4.2rem); font-weight: 300; font-style: normal; color: var(--dorado); margin-bottom: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; }
+    .hero-desc { font-family: var(--font-display); font-size: clamp(1.1rem, 1.55vw, 1.55rem); font-style: italic; color: var(--blanco); max-width: 100%; line-height: 1.6; text-align: center; white-space: nowrap; }
 
     /* ============================================================
        SECCIÓN TÍTULO DECORADO — Reutilizable
@@ -265,7 +252,6 @@
 
     /* ============================================================
        PILARES — Las 4 líneas de acción de Soul
-       Edita título, descripción e icono de cada pilar
     ============================================================ */
     #pilares {
       padding: 5rem 4rem;
@@ -316,7 +302,6 @@
 
     /* ============================================================
        GUÍA VG — Producto principal de Soul
-       Cambia el href del botón por el enlace de Stripe
     ============================================================ */
     #guia-vg {
       padding: 7rem 4rem;
@@ -396,7 +381,7 @@
     .guia-donacion p strong { color: var(--dorado); }
 
     /* ============================================================
-       GRUPO DE APOYO — Información del grupo WhatsApp
+       GRUPO DE APOYO
     ============================================================ */
     #grupo-apoyo {
       padding: 5rem 4rem;
@@ -448,8 +433,7 @@
     }
 
     /* ============================================================
-       FAQ — Preguntas frecuentes de Soul
-       Añade o elimina bloques .faq-item según necesites
+       FAQ
     ============================================================ */
     #faq {
       padding: 7rem 4rem;
@@ -551,7 +535,6 @@
 
     /* ============================================================
        BOTÓN FLOTANTE DONACIÓN
-       Cambia el href por el enlace de Stripe cuando lo tengas
     ============================================================ */
     #btn-donar {
       position: fixed;
@@ -595,19 +578,17 @@
       #navbar { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
       .hamburguesa { display: flex; }
-      #hero { min-height: 100svh; align-items: flex-end; }
-      .hero-banner { position: absolute !important; left: 0 !important; right: 0 !important; top: 0 !important; transform: none !important; width: 100% !important; height: 65% !important; max-width: 100% !important; object-fit: cover !important; object-position: center top !important; opacity: 0.6 !important; }
-      .hero-overlay { background: linear-gradient(to top, var(--negro) 38%, rgba(10,10,10,0.4) 70%, rgba(10,10,10,0.1) 100%); }
-      .hero-contenido { padding: 0 1.5rem 4rem; max-width: 100%; }
-      .hero-subtitulo { font-size: 1.1rem; }
-      .hero-desc { font-size: 0.95rem; }
-      #que-es { padding: 2rem 1.5rem 3rem; }
-      #donaciones { padding: 2rem 1rem !important; }
-      #donaciones > div { grid-template-columns: 1fr !important; gap: 2rem !important; }
-      #donaciones { padding: 3rem 1rem; }
-      #donaciones > div { grid-template-columns: 1fr !important; gap: 2rem; }
+      #hero { position: relative; min-height: 0; display: flex; align-items: flex-start; justify-content: center; overflow: hidden; }
+      .hero-banner { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center top; opacity: 0.75; }
+      .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.1) 0%, rgba(10,10,10,0.1) 30%, rgba(10,10,10,0.8) 50%, var(--negro) 62%); }
+      .hero-contenido { position: relative; z-index: 2; width: 100%; padding: 57vw 1.5rem 3rem; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+      .hero-titulo { font-family: var(--font-display); font-size: clamp(1.2rem, 6vw, 7.5rem); font-weight: 300; letter-spacing: 0.06em; line-height: 1.1; margin-bottom: 0; text-transform: uppercase; text-align: center; color: var(--blanco); }
+      .hero-subtitulo { font-family: var(--font-display); font-size: clamp(0.85rem, 3.5vw, 4.2rem); font-weight: 300; font-style: normal; color: var(--dorado); margin-bottom: 0.5rem; letter-spacing: 0; text-transform: uppercase; text-align: center; }
+      .hero-desc { font-family: var(--font-display); font-size: clamp(0.8rem, 3vw, 1.55rem); font-style: italic; color: var(--blanco); max-width: 90%; line-height: 1.6; text-align: center; white-space: normal; }
       #que-es { padding: 4rem 1.5rem; }
       .que-es-grid { grid-template-columns: 1fr; gap: 3rem; }
+      #donaciones { padding: 2rem 1rem !important; }
+      #donaciones > div { grid-template-columns: 1fr !important; gap: 2rem !important; }
       #pilares { padding: 4rem 1.5rem; }
       .pilares-grid { grid-template-columns: 1fr 1fr; }
       #guia-vg { padding: 4rem 1.5rem; }
@@ -637,17 +618,18 @@
 <body>
 
   <!-- ============================================================
-       NAVBAR — Misma estructura que index.html
+       NAVBAR
   ============================================================ -->
   <nav id="navbar">
     <a href="index.html" class="nav-logo">ETHOS</a>
     <ul class="nav-links">
       <li><a href="index.html">Inicio</a></li>
       <li><a href="index.html#sobre-mi">Sobre mí</a></li>
-      <li><a href="Soul.html" class="activo">Ethos Soul</a></li>
+      <li><a href="soul.html" class="activo">Ethos Soul</a></li>
       <li><a href="iron.html">Ethos Iron</a></li>
       <li><a href="productos.html">Productos</a></li>
-      <li><a href="index.html#contacto">Contacto</a></li>
+      <li><a href="#" onclick="abrirContacto(); return false;">Contacto</a></li>
+      <li><a href="transparencia.html">Transparencia</a></li>
     </ul>
     <div class="nav-iconos" style="display:flex; gap:1.2rem; align-items:center;">
       <a href="https://instagram.com/o.mispecas" target="_blank" title="Instagram" style="color:var(--gris); transition:color 0.35s ease;" onmouseover="this.style.color='var(--dorado)'" onmouseout="this.style.color='var(--gris)'">
@@ -668,30 +650,28 @@
   <div class="nav-movil" id="nav-movil">
     <a href="index.html" onclick="cerrarMenu()">Inicio</a>
     <a href="index.html#sobre-mi" onclick="cerrarMenu()">Sobre mí</a>
-    <a href="Soul.html" onclick="cerrarMenu()">Ethos Soul</a>
+    <a href="soul.html" onclick="cerrarMenu()">Ethos Soul</a>
     <a href="iron.html" onclick="cerrarMenu()">Ethos Iron</a>
-    <a href="index.html#productos" onclick="cerrarMenu()">Productos</a>
-    <a href="index.html#contacto" onclick="cerrarMenu()">Contacto</a>
+    <a href="productos.html" onclick="cerrarMenu()">Productos</a>
+    <a href="#" onclick="cerrarMenu(); abrirContacto(); return false;">Contacto</a>
   </div>
 
   <!-- ============================================================
-       HERO — Banner principal Soul
-       Imagen: ETHOS Soul copia 4.png
+       HERO — Idéntico a iron.html
+       Imagen: SOUL HERO.png
   ============================================================ -->
   <section id="hero">
-    <img src="ETHOS Soul copia 4.png" alt="ETHOS Soul" class="hero-banner" />
+    <img src="SOUL HERO.png" alt="ETHOS Soul" class="hero-banner" />
     <div class="hero-overlay"></div>
     <div class="hero-contenido">
-      <p class="hero-eyebrow">· Ethos Soul ·</p>
-      <h1 class="hero-titulo">Apoyo.<br />Paz.<br />Humanidad.</h1>
-      <p class="hero-subtitulo" style="white-space: nowrap;">Porque nadie debería enfrentarlo solo.</p>
+      <h1 class="hero-titulo">Apoyo. Paz. Humanidad.</h1>
+      <p class="hero-subtitulo">Porque nadie debería enfrentarlo solo</p>
       <p class="hero-desc">Un espacio de acompañamiento real, orientación legal y comunidad para quienes lo necesitan.</p>
     </div>
   </section>
 
   <!-- ============================================================
-       QUÉ ES ETHOS SOUL — Introducción y misión
-       Edita los textos y los números estadísticos
+       QUÉ ES ETHOS SOUL
   ============================================================ -->
   <section id="que-es">
     <div class="que-es-grid">
@@ -705,7 +685,7 @@
       </div>
       <div class="que-es-stats reveal">
         <div class="stat-item">
-          <div class="stat-numero">44</div>
+          <div class="stat-numero">55</div>
           <div class="stat-label">Páginas de orientación legal en la Guía VG</div>
         </div>
         <div class="stat-item" style="display:none;">
@@ -719,9 +699,15 @@
     </div>
   </section>
 
+  <!-- BANNER TRANSPARENCIA -->
+  <div style="background: var(--negro-card); border-top: 1px solid var(--negro-borde); border-bottom: 1px solid var(--negro-borde); padding: 2.5rem 4rem; text-align: center;">
+    <p style="font-family: var(--font-body); font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dorado); margin-bottom: 0.8rem;">· Transparencia ·</p>
+    <p style="font-family: var(--font-display); font-size: clamp(1rem, 2.25vw, 2.1rem); font-style: italic; color: var(--blanco); margin-bottom: 1.2rem; line-height: 1.6;">Publicamos todo lo que entra y sale de ETHOS Soul. Con extractos. Con nombres. Cada trimestre.</p>
+    <a href="transparencia.html" style="display: inline-block; font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.75rem 2rem; border: 1px solid var(--dorado); color: var(--dorado); position: relative; overflow: hidden; transition: color 0.35s ease; text-decoration: none;">Ver transparencia →</a>
+  </div>
+
   <!-- ============================================================
-       PILARES — Las 4 líneas de acción
-       Edita icono, título y descripción de cada pilar
+       PILARES
   ============================================================ -->
   <section id="pilares">
     <p class="seccion-titulo">En qué consiste</p>
@@ -751,7 +737,6 @@
 
   <!-- ============================================================
        GUÍA VG — Producto principal
-       Cambia el href del botón por el enlace de Stripe
   ============================================================ -->
   <section id="guia-vg">
     <div class="guia-grid">
@@ -762,7 +747,7 @@
         <p class="etiqueta">Producto principal</p>
         <div class="separador"></div>
         <h2>Guía VG</h2>
-        <p>Una guía legal de 44 páginas para hombres que enfrentan o temen enfrentar una acusación de violencia de género en España. Redactada con rigor, revisada por profesionales del derecho.</p>
+        <p>Una guía legal de 55 páginas para hombres que enfrentan o temen enfrentar una acusación de violencia de género en España. Redactada con rigor, revisada por profesionales del derecho.</p>
         <p><strong>No es un panfleto. Es una herramienta.</strong></p>
         <ul class="guia-lista">
           <li>Marco legal vigente en España (LO 1/2025 y jurisprudencia reciente)</li>
@@ -772,23 +757,15 @@
           <li>Revisada por especialistas en derecho penal</li>
         </ul>
         <div class="guia-donacion">
-          <p><strong>Donación mínima: 5€.</strong> Lo que aporten quienes pueden, financia el acceso de quienes no pueden.</p>
-          <!-- Cambia el href por el enlace de Stripe cuando lo tengas -->
-          <a href="#" class="btn"><span>Acceder a la Guía VG</span></a>
+          <p><strong>Donación mínima de 5€.</strong> Con esa aportación financias el acceso a la guía y ayudas a sostener el grupo de apoyo.</p>
+          <a href="https://buy.stripe.com/3cI00i8lU2US4PObXL4gg00" class="btn"><span>Acceder a la Guía VG</span></a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
-       GRUPO DE APOYO — Información del grupo privado WhatsApp
-       Edita descripción y características del grupo
-  ============================================================ -->
-  
-  <!-- ============================================================
-       DONACIONES — Qué son, adónde van y transparencia
-       Ocupa el 50% del ancho junto a explicación de transparencia
-       Edita los textos aquí cuando quieras
+       DONACIONES
   ============================================================ -->
   <section id="donaciones" style="padding: 4rem; background: var(--negro-card); border-top: 1px solid var(--negro-borde);">
     <div style="display: grid; grid-template-columns: 1fr; gap: 4rem; max-width: 700px; margin: 0 auto; align-items: center;">
@@ -796,9 +773,9 @@
         <p class="etiqueta">Donaciones</p>
         <div class="separador"></div>
         <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; line-height: 1.2; margin-bottom: 1.2rem;">Tu aportación<br />tiene nombre propio.</h2>
-        <p style="font-size: 0.9rem; color: var(--gris); line-height: 1.9; margin-bottom: 1rem;">ETHOS Soul existe para que nadie tenga que enfrentarlo solo. La Guía VG es gratuita porque creemos que el acceso a información legal no debería depender del dinero que tienes. Tu donación lo hace posible.</p>
+        <p style="font-size: 0.9rem; color: var(--gris); line-height: 1.9; margin-bottom: 1rem;">ETHOS Soul existe para que nadie tenga que enfrentarlo solo. La Guía VG tiene una donación mínima de solo 5€ porque creemos que el acceso a información legal no debería depender del dinero que tienes. Esa aportación financia el grupo de apoyo.</p>
         <p style="font-size: 0.9rem; color: var(--gris); line-height: 1.9; margin-bottom: 1.5rem;"><strong style="color: var(--blanco);">El 100% de lo recaudado</strong> se destina al grupo de apoyo psicológico privado y a mantener los recursos legales de acceso libre. Sin intermediarios. Sin comisiones de gestión.</p>
-        <a href="#" class="btn"><span>Hacer una donación</span></a>
+        <a href="https://buy.stripe.com/8x2cN459IfHE9640f34gg01" class="btn"><span>Hacer una donación</span></a>
       </div>
       <div style="display:none; border: 1px solid var(--negro-borde); padding: 2.5rem; transition: border-color 0.35s ease;" onmouseover="this.style.borderColor='var(--dorado)'" onmouseout="this.style.borderColor='var(--negro-borde)'">
         <p style="font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dorado); margin-bottom: 1.2rem;">Transparencia</p>
@@ -812,7 +789,10 @@
     </div>
   </section>
 
-<section id="grupo-apoyo">
+  <!-- ============================================================
+       GRUPO DE APOYO
+  ============================================================ -->
+  <section id="grupo-apoyo">
     <div class="grupo-contenido reveal">
       <p class="etiqueta">Comunidad</p>
       <div class="separador" style="margin: 1rem auto;"></div>
@@ -845,8 +825,7 @@
   </section>
 
   <!-- ============================================================
-       FAQ — Preguntas frecuentes sobre Soul
-       Añade o elimina .faq-item según necesites
+       FAQ
   ============================================================ -->
   <section id="faq">
     <p class="seccion-titulo">Preguntas frecuentes</p>
@@ -904,18 +883,16 @@
   </section>
 
   <!-- ============================================================
-       CTA FINAL — Llamada a la acción de cierre
+       CTA FINAL
   ============================================================ -->
   <section id="cta-final">
     <h2 class="reveal">Nadie debería<br />enfrentarlo solo.</h2>
     <p class="reveal">Accede a la Guía VG o dona para que otros puedan hacerlo.</p>
     <div class="cta-botones reveal">
-      <!-- Cambia los href por los enlaces reales cuando los tengas -->
-      <a href="#" class="btn"><span>Acceder a la Guía VG</span></a>
-      <a href="#" class="btn"><span>Hacer una donación</span></a>
+      <a href="https://buy.stripe.com/3cI00i8lU2US4PObXL4gg00" class="btn"><span>Acceder a la Guía VG</span></a>
+      <a href="https://buy.stripe.com/8x2cN459IfHE9640f34gg01" class="btn"><span>Hacer una donación</span></a>
     </div>
   </section>
-
 
   <div style="background: linear-gradient(135deg, #0d0d0d 0%, #111111 100%); border-top: 1px solid var(--dorado-oscuro); border-bottom: 1px solid var(--dorado-oscuro); padding: 1.5rem 4rem; text-align: center;">
     <p style="font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado);">✦ &nbsp; Con cualquier producto de ETHOS, colaboras con ETHOS Soul &nbsp; ✦</p>
@@ -930,7 +907,7 @@
     <ul class="footer-links">
       <li><a href="index.html">Inicio</a></li>
       <li><a href="index.html#sobre-mi">Sobre mí</a></li>
-      <li><a href="Soul.html">Soul</a></li>
+      <li><a href="soul.html">Soul</a></li>
       <li><a href="iron.html">Iron</a></li>
       <li><a href="productos.html">Productos</a></li>
       <li><a href="#" onclick="abrirContacto(); return false;">Contacto</a></li>
@@ -941,10 +918,9 @@
 
   <!-- ============================================================
        BOTÓN FLOTANTE DONACIÓN
-       Cambia el href por el enlace de Stripe cuando lo tengas
   ============================================================ -->
   <div id="btn-donar">
-    <a href="#" class="donar-circulo" title="Donar a ETHOS Soul">♡</a>
+    <a href="https://buy.stripe.com/8x2cN459IfHE9640f34gg01" class="donar-circulo" title="Donar a ETHOS Soul">♡</a>
     <span class="donar-etiqueta">Donar</span>
   </div>
 
@@ -952,12 +928,9 @@
        JAVASCRIPT
   ============================================================ -->
   <script>
-    // Navbar scroll
     window.addEventListener('scroll', () => {
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
     });
-
-    // Hamburguesa
     document.getElementById('hamburguesa').addEventListener('click', function () {
       this.classList.toggle('abierto');
       document.getElementById('nav-movil').classList.toggle('abierto');
@@ -966,8 +939,6 @@
       document.getElementById('hamburguesa').classList.remove('abierto');
       document.getElementById('nav-movil').classList.remove('abierto');
     }
-
-    // Reveal al scroll
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
@@ -976,8 +947,6 @@
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // FAQ acordeón
     document.querySelectorAll('.faq-pregunta').forEach(btn => {
       btn.addEventListener('click', () => {
         const item = btn.parentElement;
