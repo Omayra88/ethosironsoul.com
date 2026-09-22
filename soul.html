@@ -613,6 +613,9 @@
   
     /* Botón donar siempre a media pantalla, fijo al desplazarse */
     #btn-donar { top: 50% !important; bottom: auto !important; transform: translateY(-50%); }
+  
+    /* Imágenes con medidas: mantener la altura automática salvo que el diseño fije otra */
+    :where(img[width][height]) { height: auto; }
   </style>
 </head>
 <body>
@@ -661,7 +664,7 @@
        Imagen: SOUL HERO.png
   ============================================================ -->
   <section id="hero">
-    <img src="SOUL HERO.png" alt="ETHOS Soul" class="hero-banner" />
+    <img src="img/soul-hero-2000.webp" alt="ETHOS Soul" class="hero-banner" srcset="img/soul-hero-800.webp 800w, img/soul-hero-1400.webp 1400w, img/soul-hero-2000.webp 2000w, img/soul-hero-2800.webp 2800w" sizes="(max-width: 768px) 100vw, 100vw" width="3328" height="1112" fetchpriority="high" />
     <div class="hero-overlay"></div>
     <div class="hero-contenido">
       <h1 class="hero-titulo">Apoyo. Paz. Humanidad.</h1>
@@ -741,7 +744,7 @@
   <section id="guia-vg">
     <div class="guia-grid">
       <div class="guia-imagen-wrap reveal">
-        <img src="ETHOS Soul copia 3.png" alt="Guía VG — ETHOS Soul" class="guia-imagen" />
+        <img src="img/ethos-soul-copia-3-514.webp" alt="Guía VG — ETHOS Soul" class="guia-imagen" width="514" height="156" loading="lazy" decoding="async" />
       </div>
       <div class="guia-info reveal">
         <p class="etiqueta">Producto principal</p>
