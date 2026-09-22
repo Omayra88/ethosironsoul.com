@@ -266,6 +266,9 @@
   
     /* Móvil: recuadro del logo (Iron Pass, Donación) igual de alto que las fotos de las series */
     @media (max-width: 768px) { .producto-card > div[style*="aspect-ratio"] { padding: 0.5rem !important; } }
+  
+    /* Imágenes con medidas: mantener la altura automática salvo que el diseño fije otra */
+    :where(img[width][height]) { height: auto; }
   </style>
 </head>
 <body>
@@ -305,7 +308,7 @@
   </div>
 
   <section id="hero">
-    <img src="WEB.png" alt="ETHOS" class="hero-foto" />
+    <img src="img/web-1448.webp" alt="ETHOS" class="hero-foto" srcset="img/web-600.webp 600w, img/web-1000.webp 1000w, img/web-1448.webp 1448w" sizes="(max-width: 768px) 233vw, 1067px" width="1448" height="1086" fetchpriority="high" />
     <div class="hero-gradiente"></div>
     <div class="hero-gradiente-abajo"></div>
     <div class="hero-contenido">
@@ -342,7 +345,7 @@
   <section id="programas">
     <div class="programas-grid">
       <div class="programa-card reveal">
-        <img src="ETHOS Soul copia.png" alt="ETHOS Soul" class="programa-logo" />
+        <img src="img/ethos-soul-copia-300.webp" alt="ETHOS Soul" class="programa-logo" srcset="img/ethos-soul-copia-300.webp 300w, img/ethos-soul-copia-597.webp 597w" sizes="(max-width: 768px) 42vw, 249px" width="597" height="400" loading="lazy" decoding="async" />
         <p class="programa-nombre">Apoyo · Paz · Humanidad</p>
         <ul class="programa-features">
           <li><div class="feature-icono">♡</div><div class="feature-texto"><strong>Apoyo real</strong><span>Acompañamiento humano y emocional.</span></div></li>
@@ -355,7 +358,7 @@
         <a href="soul.html" class="btn"><span>Conoce Ethos Soul</span></a>
       </div>
       <div class="programa-card reveal">
-        <img src="ETHOS Iron copia.png" alt="ETHOS Iron" class="programa-logo" />
+        <img src="img/ethos-iron-copia-400.webp" alt="ETHOS Iron" class="programa-logo" srcset="img/ethos-iron-copia-400.webp 400w, img/ethos-iron-copia-744.webp 744w" sizes="(max-width: 768px) 46vw, 277px" width="744" height="439" loading="lazy" decoding="async" />
         <p class="programa-nombre">Acceso privado</p>
         <ul class="programa-features">
           <li><div class="feature-icono">◈</div><div class="feature-texto"><strong>Contenido nuevo cada 5 días</strong><span>Series documentadas sin filtro ideológico.</span></div></li>
@@ -386,7 +389,7 @@
     <div class="productos-grid">
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
-        <img src="S1-La mente femenina al descubierto.png" alt="La mente femenina al descubierto" class="producto-imagen" />
+        <img src="img/s1-la-mente-femenina-al-descubierto-420.webp" alt="La mente femenina al descubierto" class="producto-imagen" srcset="img/s1-la-mente-femenina-al-descubierto-420.webp 420w, img/s1-la-mente-femenina-al-descubierto-840.webp 840w, img/s1-la-mente-femenina-al-descubierto-1260.webp 1260w, img/s1-la-mente-femenina-al-descubierto-1672.webp 1672w" sizes="(max-width: 768px) 54vw, 318px" width="1672" height="941" loading="lazy" decoding="async" />
         <div class="producto-info">
           <p class="producto-nombre">La mente femenina al descubierto</p>
           <p class="producto-desc">Psicología real sin filtro ideológico.</p>
@@ -398,7 +401,7 @@
       </div>
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
-        <img src="S2-La logica femenina al descubierto.png" alt="La lógica femenina al descubierto" class="producto-imagen" />
+        <img src="img/s2-la-logica-femenina-al-descubierto-420.webp" alt="La lógica femenina al descubierto" class="producto-imagen" srcset="img/s2-la-logica-femenina-al-descubierto-420.webp 420w, img/s2-la-logica-femenina-al-descubierto-840.webp 840w, img/s2-la-logica-femenina-al-descubierto-1260.webp 1260w, img/s2-la-logica-femenina-al-descubierto-1672.webp 1672w" sizes="(max-width: 768px) 54vw, 318px" width="1672" height="941" loading="lazy" decoding="async" />
         <div class="producto-info">
           <p class="producto-nombre">La lógica femenina al descubierto</p>
           <p class="producto-desc">Patrones de comportamiento explicados.</p>
@@ -410,7 +413,7 @@
       </div>
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
-        <img src="S3-La conquista real.png" alt="La conquista real" class="producto-imagen" />
+        <img src="img/s3-la-conquista-real-420.webp" alt="La conquista real" class="producto-imagen" srcset="img/s3-la-conquista-real-420.webp 420w, img/s3-la-conquista-real-840.webp 840w, img/s3-la-conquista-real-1260.webp 1260w, img/s3-la-conquista-real-1672.webp 1672w" sizes="(max-width: 768px) 54vw, 318px" width="1672" height="941" loading="lazy" decoding="async" />
         <div class="producto-info">
           <p class="producto-nombre">La conquista real</p>
           <p class="producto-desc">Lo que nadie te enseñó sobre las relaciones.</p>
@@ -422,7 +425,7 @@
       </div>
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
-        <img src="S4-Destruye el feminismo.png" alt="Destruye el feminismo" class="producto-imagen" />
+        <img src="img/s4-destruye-el-feminismo-420.webp" alt="Destruye el feminismo" class="producto-imagen" srcset="img/s4-destruye-el-feminismo-420.webp 420w, img/s4-destruye-el-feminismo-840.webp 840w, img/s4-destruye-el-feminismo-1260.webp 1260w, img/s4-destruye-el-feminismo-1672.webp 1672w" sizes="(max-width: 768px) 54vw, 318px" width="1672" height="941" loading="lazy" decoding="async" />
         <div class="producto-info">
           <p class="producto-nombre">Destruye el feminismo</p>
           <p class="producto-desc">Argumentos sólidos, con datos contra la narrativa dominante.</p>
@@ -434,7 +437,7 @@
       </div>
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
-        <img src="S5-La guerra de sexos.png" alt="La guerra de sexos" class="producto-imagen" />
+        <img src="img/s5-la-guerra-de-sexos-420.webp" alt="La guerra de sexos" class="producto-imagen" srcset="img/s5-la-guerra-de-sexos-420.webp 420w, img/s5-la-guerra-de-sexos-840.webp 840w, img/s5-la-guerra-de-sexos-1260.webp 1260w, img/s5-la-guerra-de-sexos-1672.webp 1672w" sizes="(max-width: 768px) 54vw, 318px" width="1672" height="941" loading="lazy" decoding="async" />
         <div class="producto-info">
           <p class="producto-nombre">La guerra de sexos</p>
           <p class="producto-desc">Por qué nos enfrentan y quién gana.</p>
@@ -446,7 +449,7 @@
       </div>
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
-        <img src="S6-El ciclo tu poder.png" alt="El ciclo, tu poder" class="producto-imagen" />
+        <img src="img/s6-el-ciclo-tu-poder-420.webp" alt="El ciclo, tu poder" class="producto-imagen" srcset="img/s6-el-ciclo-tu-poder-420.webp 420w, img/s6-el-ciclo-tu-poder-840.webp 840w, img/s6-el-ciclo-tu-poder-1260.webp 1260w, img/s6-el-ciclo-tu-poder-1672.webp 1672w" sizes="(max-width: 768px) 54vw, 318px" width="1672" height="941" loading="lazy" decoding="async" />
         <div class="producto-info">
           <p class="producto-nombre">El ciclo, tu poder</p>
           <p class="producto-desc">La biología como herramienta, no como excusa.</p>
@@ -458,7 +461,7 @@
       </div>
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
-        <img src="S7- Woke.png" alt="Woke" class="producto-imagen" />
+        <img src="img/s7-woke-420.webp" alt="Woke" class="producto-imagen" srcset="img/s7-woke-420.webp 420w, img/s7-woke-840.webp 840w, img/s7-woke-1260.webp 1260w, img/s7-woke-1672.webp 1672w" sizes="(max-width: 768px) 54vw, 318px" width="1672" height="941" loading="lazy" decoding="async" />
         <div class="producto-info">
           <p class="producto-nombre">Woke</p>
           <p class="producto-desc">El movimiento que prometió libertad y entregó dogma.</p>
@@ -470,7 +473,7 @@
       </div>
       <div class="producto-card reveal">
         <span class="producto-badge" style="background:transparent;border:1px solid var(--dorado);color:var(--dorado);">Soul</span>
-        <img src="ETHOS Soul copia 3.png" alt="Guía VG" class="producto-imagen" />
+        <img src="img/ethos-soul-copia-3-514.webp" alt="Guía VG" class="producto-imagen" width="514" height="156" loading="lazy" decoding="async" />
         <div class="producto-info">
           <p class="producto-nombre">Guía VG</p>
           <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Sabrás qué hacer desde el primer minuto.</p>
@@ -530,7 +533,7 @@
       <div class="producto-card reveal">
         <span class="producto-badge" style="background:transparent;border:1px solid var(--dorado);color:var(--dorado);">Iron</span>
         <div style="width:100%; aspect-ratio:4/3; background:#0d0d0d; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem;">
-          <img src="ETHOS Iron copia.png" alt="Iron Pass" style="max-height:80px; width:auto; margin-bottom:1rem; opacity:0.8;" />
+          <img src="img/ethos-iron-copia-400.webp" alt="Iron Pass" style="max-height:80px; width:auto; margin-bottom:1rem; opacity:0.8;" srcset="img/ethos-iron-copia-400.webp 400w, img/ethos-iron-copia-744.webp 744w" sizes="(max-width: 768px) 35vw, 136px" width="744" height="439" loading="lazy" decoding="async" />
           <p style="font-family:var(--font-display); font-size:1.6rem; font-weight:300; text-align:center;">Iron Pass</p>
         </div>
         <div class="producto-info">
@@ -544,7 +547,7 @@
       <div class="producto-card reveal">
         <span class="producto-badge" style="background:transparent;border:1px solid var(--dorado);color:var(--dorado);">Soul</span>
         <div style="width:100%; aspect-ratio:4/3; background:#0d0d0d; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem;">
-          <img src="ETHOS Soul copia.png" alt="Donación Soul" style="max-height:80px; width:auto; margin-bottom:1rem; opacity:0.8;" />
+          <img src="img/ethos-soul-copia-300.webp" alt="Donación Soul" style="max-height:80px; width:auto; margin-bottom:1rem; opacity:0.8;" srcset="img/ethos-soul-copia-300.webp 300w, img/ethos-soul-copia-597.webp 597w" sizes="(max-width: 768px) 31vw, 120px" width="597" height="400" loading="lazy" decoding="async" />
           <p style="font-family:var(--font-display); font-size:1.6rem; font-weight:300; text-align:center;">Donación Soul</p>
         </div>
         <div class="producto-info">
