@@ -273,9 +273,14 @@
   
     /* Imágenes con medidas: mantener la altura automática salvo que el diseño fije otra */
     :where(img[width][height]) { height: auto; }
+  
+    /* Accesibilidad: enlace "saltar al contenido" (solo visible al navegar con el teclado) */
+    .saltar-al-contenido { position: absolute; left: -9999px; top: 0; z-index: 4000; background: var(--negro-card); color: var(--dorado); border: 1px solid var(--dorado); padding: 0.7rem 1.2rem; font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; }
+    .saltar-al-contenido:focus, .saltar-al-contenido:focus-visible { left: 1rem; top: 1rem; }
   </style>
 </head>
 <body>
+  <a class="saltar-al-contenido" href="#hero">Saltar al contenido</a>
 
   <nav id="navbar">
     <div class="nav-logo">ETHOS</div>
@@ -311,7 +316,7 @@
     <a href="#contacto" onclick="cerrarMenu()">Contacto</a>
   </div>
 
-  <section id="hero">
+  <section id="hero" tabindex="-1">
     <img src="img/web-1448.webp" alt="ETHOS" class="hero-foto" srcset="img/web-600.webp 600w, img/web-1000.webp 1000w, img/web-1448.webp 1448w" sizes="(max-width: 768px) 233vw, 1067px" width="1448" height="1086" fetchpriority="high" />
     <div class="hero-gradiente"></div>
     <div class="hero-gradiente-abajo"></div>
@@ -400,7 +405,7 @@
           <p class="producto-precio" style="display:none;"><sup>€</sup>47</p>
           <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Dejarás de adivinar. Empezarás a entender.</p>
           <a href="iron.html" style="display:block; text-align:center; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem; text-decoration:none; cursor:pointer;">Únete a Iron Pass</a>
-          <a href="productos.html#serie-1" class="btn-comprar"><span>Saber más</span></a>
+          <a href="productos.html#serie-1" class="btn-comprar" aria-label="Saber más sobre La mente femenina al descubierto"><span>Saber más</span></a>
         </div>
       </div>
       <div class="producto-card reveal">
@@ -412,7 +417,7 @@
           <p class="producto-precio" style="display:none;"><sup>€</sup>47</p>
           <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Dejarás de frustrarte. Todo empezará a tener sentido.</p>
           <a href="iron.html" style="display:block; text-align:center; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem; text-decoration:none; cursor:pointer;">Únete a Iron Pass</a>
-          <a href="productos.html#serie-2" class="btn-comprar"><span>Saber más</span></a>
+          <a href="productos.html#serie-2" class="btn-comprar" aria-label="Saber más sobre La lógica femenina al descubierto"><span>Saber más</span></a>
         </div>
       </div>
       <div class="producto-card reveal">
@@ -424,7 +429,7 @@
           <p class="producto-precio" style="display:none;"><sup>€</sup>57</p>
           <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Conseguirás a tu persona y sabrás cómo no perderla.</p>
           <a href="iron.html" style="display:block; text-align:center; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem; text-decoration:none; cursor:pointer;">Únete a Iron Pass</a>
-          <a href="productos.html#serie-3" class="btn-comprar"><span>Saber más</span></a>
+          <a href="productos.html#serie-3" class="btn-comprar" aria-label="Saber más sobre La conquista real"><span>Saber más</span></a>
         </div>
       </div>
       <div class="producto-card reveal">
@@ -436,7 +441,7 @@
           <p class="producto-precio" style="display:none;"><sup>€</sup>57</p>
           <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Serás el que responde con datos, no con emociones.</p>
           <a href="iron.html" style="display:block; text-align:center; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem; text-decoration:none; cursor:pointer;">Únete a Iron Pass</a>
-          <a href="productos.html#serie-4" class="btn-comprar"><span>Saber más</span></a>
+          <a href="productos.html#serie-4" class="btn-comprar" aria-label="Saber más sobre Destruye el feminismo"><span>Saber más</span></a>
         </div>
       </div>
       <div class="producto-card reveal">
@@ -448,7 +453,7 @@
           <p class="producto-precio" style="display:none;"><sup>€</sup>57</p>
           <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Dejarás de caer en la trampa<span class="solo-movil">, eso se acabó</span>.</p>
           <a href="iron.html" style="display:block; text-align:center; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem; text-decoration:none; cursor:pointer;">Únete a Iron Pass</a>
-          <a href="productos.html#serie-5" class="btn-comprar"><span>Saber más</span></a>
+          <a href="productos.html#serie-5" class="btn-comprar" aria-label="Saber más sobre La guerra de sexos"><span>Saber más</span></a>
         </div>
       </div>
       <div class="producto-card reveal">
@@ -460,7 +465,7 @@
           <p class="producto-precio" style="display:none;"><sup>€</sup>47</p>
           <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Dejarás de caminar de puntillas sin saber por qué.</p>
           <a href="iron.html" style="display:block; text-align:center; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem; text-decoration:none; cursor:pointer;">Únete a Iron Pass</a>
-          <a href="productos.html#serie-6" class="btn-comprar"><span>Saber más</span></a>
+          <a href="productos.html#serie-6" class="btn-comprar" aria-label="Saber más sobre El ciclo, tu poder"><span>Saber más</span></a>
         </div>
       </div>
       <div class="producto-card reveal">
@@ -472,7 +477,7 @@
           <p class="producto-precio" style="display:none;"><sup>€</sup>47</p>
           <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Aprenderás a identificarlo antes de que te afecte.</p>
           <a href="iron.html" style="display:block; text-align:center; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem; text-decoration:none; cursor:pointer;">Únete a Iron Pass</a>
-          <a href="productos.html#serie-7" class="btn-comprar"><span>Saber más</span></a>
+          <a href="productos.html#serie-7" class="btn-comprar" aria-label="Saber más sobre Woke"><span>Saber más</span></a>
         </div>
       </div>
       <div class="producto-card reveal">
@@ -483,7 +488,7 @@
           <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Sabrás qué hacer desde el primer minuto.</p>
           <p class="producto-desc">Guía legal para hombres acusados de violencia de género en España.</p>
           <p class="producto-precio" style="display:none;">Bajo donación mínima</p>
-          <a href="soul.html#guia-vg" class="btn-comprar"><span>Saber más</span></a>
+          <a href="soul.html#guia-vg" class="btn-comprar" aria-label="Saber más sobre Guía VG"><span>Saber más</span></a>
         </div>
       </div>
 
@@ -499,7 +504,7 @@
           <p class="producto-nombre">Pack Fundamentos</p>
           <p class="producto-desc">Mente, lógica y biología. Tres series al precio de dos.</p>
           <p class="producto-precio" style="display:none;"><sup>€</sup>97</p>
-          <a href="productos.html#pack-fundamentos" class="btn-comprar"><span>Saber más</span></a>
+          <a href="productos.html#pack-fundamentos" class="btn-comprar" aria-label="Saber más sobre Pack Fundamentos"><span>Saber más</span></a>
         </div>
       </div>
 
@@ -514,7 +519,7 @@
           <p class="producto-nombre">Pack Relaciones</p>
           <p class="producto-desc">Conquista, feminismo y guerra de sexos. El pack más popular.</p>
           <p class="producto-precio" style="display:none;"><sup>€</sup>127</p>
-          <a href="productos.html#pack-relaciones" class="btn-comprar"><span>Saber más</span></a>
+          <a href="productos.html#pack-relaciones" class="btn-comprar" aria-label="Saber más sobre Pack Relaciones"><span>Saber más</span></a>
         </div>
       </div>
 
@@ -529,7 +534,7 @@
           <p class="producto-nombre">Pack Completo</p>
           <p class="producto-desc">Acceso total al contenido Iron. Ahorras 94€.</p>
           <p class="producto-precio" style="display:none;"><sup>€</sup>247</p>
-          <a href="productos.html#pack-completo" class="btn-comprar"><span>Saber más</span></a>
+          <a href="productos.html#pack-completo" class="btn-comprar" aria-label="Saber más sobre Pack Completo"><span>Saber más</span></a>
         </div>
       </div>
 
@@ -545,7 +550,7 @@
           <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Todo el contenido. Una sola cuota.</p>
           <p class="producto-desc">Contenido cada 5 días, comunidad WhatsApp y directo mensual.</p>
           <p class="producto-precio" style="display:none;"><sup>€</sup>29<small style="font-size:0.7rem;color:var(--gris);"> / mes</small></p>
-          <a href="productos.html#iron-en-series" class="btn-comprar"><span>Saber más</span></a>
+          <a href="productos.html#iron-en-series" class="btn-comprar" aria-label="Saber más sobre Iron Pass"><span>Saber más</span></a>
         </div>
       </div>
       <div class="producto-card reveal">
@@ -559,7 +564,7 @@
           <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Ayuda a quien hoy no puede pagarlo.</p>
           <p class="producto-desc">Apoya el grupo de apoyo y los recursos legales.</p>
           <p class="producto-precio" style="display:none;">Libre</p>
-          <a href="soul.html#donaciones" class="btn-comprar"><span>Saber más</span></a>
+          <a href="soul.html#donaciones" class="btn-comprar" aria-label="Saber más sobre Donación Soul"><span>Saber más</span></a>
         </div>
       </div>
     </div>
@@ -615,9 +620,9 @@
 </footer>
 
   <div class="modal-overlay" id="modal-espera">
-    <div class="modal">
-      <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
-      <h3>¡Acceso cerrado!</h3>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="titulo-espera">
+      <button class="modal-cerrar" onclick="cerrarModal()" aria-label="Cerrar">✕</button>
+      <h3 id="titulo-espera">¡Acceso cerrado!</h3>
       <p>Déjame tus datos y te aviso cuando abra de nuevo.</p>
       <div id="sib-form-container" class="sib-form-container">
       <div id="error-message" class="sib-form-message-panel" style="font-size:0.72rem;text-align:center;color:#661d1d;background-color:#ffeded;border-color:#ff4949;border-radius:3px;padding:0.5rem;margin-bottom:0.8rem;">
@@ -702,15 +707,15 @@
        MODAL CONTACTO — sustituye al email visible (anti-spam)
   ============================================================ -->
   <div id="modal-contacto" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:2000; align-items:center; justify-content:center;" onclick="if(event.target===this)cerrarContacto()">
-    <div style="background:#111111; border:1px solid #c9a84c; padding:2.5rem 1.5rem; max-width:460px; width:90%; max-height:90vh; overflow-y:auto; position:relative; text-align:center;">
-      <button onclick="cerrarContacto()" aria-label="Cerrar" style="position:absolute; top:1rem; right:1.2rem; background:none; border:none; color:#888888; font-size:1.2rem; cursor:pointer;">✕</button>
-      <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:300; margin-bottom:0.5rem; color:#f5f0e8;">Contacto</h3>
+    <div role="dialog" aria-modal="true" aria-labelledby="titulo-contacto" style="background:#111111; border:1px solid #c9a84c; padding:2.5rem 1.5rem; max-width:460px; width:90%; max-height:90vh; overflow-y:auto; position:relative; text-align:center;">
+      <button onclick="cerrarContacto()" aria-label="Cerrar ventana de contacto" style="position:absolute; top:1rem; right:1.2rem; background:none; border:none; color:#888888; font-size:1.2rem; cursor:pointer;">✕</button>
+      <h3 id="titulo-contacto" style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:300; margin-bottom:0.5rem; color:#f5f0e8;">Contacto</h3>
       <p style="font-size:0.75rem; color:#888888; margin-bottom:1.5rem;">Escríbenos y te respondemos lo antes posible.</p>
       <input type="text" id="contacto-web" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;" />
-      <input type="text" id="contacto-nombre" placeholder="Tu nombre" style="width:100%; background:#0a0a0a; border:1px solid #1e1e1e; color:#f5f0e8; padding:0.8rem 1rem; font-family:'Montserrat',sans-serif; font-size:0.8rem; margin-bottom:0.8rem; outline:none;" />
-      <input type="email" id="contacto-email" placeholder="tu@email.com" style="width:100%; background:#0a0a0a; border:1px solid #1e1e1e; color:#f5f0e8; padding:0.8rem 1rem; font-family:'Montserrat',sans-serif; font-size:0.8rem; margin-bottom:0.8rem; outline:none;" />
-      <input type="text" id="contacto-asunto" placeholder="Asunto" style="width:100%; background:#0a0a0a; border:1px solid #1e1e1e; color:#f5f0e8; padding:0.8rem 1rem; font-family:'Montserrat',sans-serif; font-size:0.8rem; margin-bottom:0.8rem; outline:none;" />
-      <textarea id="contacto-mensaje" placeholder="Tu mensaje" rows="4" style="width:100%; background:#0a0a0a; border:1px solid #1e1e1e; color:#f5f0e8; padding:0.8rem 1rem; font-family:'Montserrat',sans-serif; font-size:0.8rem; margin-bottom:1rem; outline:none; resize:vertical;"></textarea>
+      <input type="text" id="contacto-nombre" aria-label="Tu nombre" placeholder="Tu nombre" style="width:100%; background:#0a0a0a; border:1px solid #1e1e1e; color:#f5f0e8; padding:0.8rem 1rem; font-family:'Montserrat',sans-serif; font-size:0.8rem; margin-bottom:0.8rem; outline:none;" />
+      <input type="email" id="contacto-email" aria-label="Tu email" placeholder="tu@email.com" style="width:100%; background:#0a0a0a; border:1px solid #1e1e1e; color:#f5f0e8; padding:0.8rem 1rem; font-family:'Montserrat',sans-serif; font-size:0.8rem; margin-bottom:0.8rem; outline:none;" />
+      <input type="text" id="contacto-asunto" aria-label="Asunto" placeholder="Asunto" style="width:100%; background:#0a0a0a; border:1px solid #1e1e1e; color:#f5f0e8; padding:0.8rem 1rem; font-family:'Montserrat',sans-serif; font-size:0.8rem; margin-bottom:0.8rem; outline:none;" />
+      <textarea id="contacto-mensaje" aria-label="Tu mensaje" placeholder="Tu mensaje" rows="4" style="width:100%; background:#0a0a0a; border:1px solid #1e1e1e; color:#f5f0e8; padding:0.8rem 1rem; font-family:'Montserrat',sans-serif; font-size:0.8rem; margin-bottom:1rem; outline:none; resize:vertical;"></textarea>
       <div style="display:flex; align-items:flex-start; gap:0.6rem; margin-bottom:1rem; text-align:left;">
         <input type="checkbox" id="contacto-privacidad" style="margin-top:0.2rem; accent-color:#c9a84c; cursor:pointer; flex-shrink:0;" />
         <label for="contacto-privacidad" style="font-size:0.65rem; color:#888888; line-height:1.5; cursor:pointer;">He leído y acepto la <a href="privacidad.html" target="_blank" rel="noopener noreferrer" style="color:#c9a84c;">Política de Privacidad</a>.</label>
@@ -754,6 +759,50 @@
     }
   </script>
 
-  <script src="cookies.js?v=3" defer></script>
+  <script src="cookies.js?v=3" defer>  </script>
+  <script>
+    /* Accesibilidad: cerrar ventanas con Escape, avisar del estado de menú y preguntas, y llevar el foco */
+    (function(){
+      function visible(el){ return el && getComputedStyle(el).display !== 'none' && !(el.classList.contains('modal-overlay') && !el.classList.contains('abierto')); }
+      document.addEventListener('keydown', function(e){
+        if (e.key !== 'Escape') return;
+        var esp = document.getElementById('modal-espera');
+        var con = document.getElementById('modal-contacto');
+        var mov = document.getElementById('nav-movil');
+        if (esp && esp.classList.contains('abierto') && typeof cerrarModal === 'function') { cerrarModal(); return; }
+        if (con && getComputedStyle(con).display !== 'none' && typeof cerrarContacto === 'function') { cerrarContacto(); return; }
+        if (mov && mov.classList.contains('abierto') && typeof cerrarMenu === 'function') { cerrarMenu(); }
+      });
+      var ham = document.getElementById('hamburguesa');
+      if (ham) {
+        ham.setAttribute('aria-controls','nav-movil');
+        ham.setAttribute('aria-expanded','false');
+        ham.addEventListener('click', function(){ ham.setAttribute('aria-expanded', ham.classList.contains('abierto') ? 'true' : 'false'); });
+        document.querySelectorAll('#nav-movil a').forEach(function(a){ a.addEventListener('click', function(){ ham.setAttribute('aria-expanded','false'); }); });
+      }
+      document.querySelectorAll('.faq-pregunta').forEach(function(b, i){
+        var resp = b.parentElement.querySelector('.faq-respuesta');
+        if (resp) { if (!resp.id) resp.id = 'faq-respuesta-' + i; b.setAttribute('aria-controls', resp.id); }
+        b.setAttribute('aria-expanded','false');
+        b.addEventListener('click', function(){
+          document.querySelectorAll('.faq-pregunta').forEach(function(o){ o.setAttribute('aria-expanded', o.parentElement.classList.contains('abierto') ? 'true' : 'false'); });
+        });
+      });
+      ['abrirModal','abrirContacto'].forEach(function(fn){
+        if (typeof window[fn] !== 'function') return;
+        var orig = window[fn];
+        window[fn] = function(){
+          var r = orig.apply(this, arguments);
+          setTimeout(function(){
+            var cont = document.getElementById(fn === 'abrirModal' ? 'modal-espera' : 'modal-contacto');
+            var campo = cont && cont.querySelector('input:not([type=hidden]):not(.input--hidden):not([tabindex="-1"]):not([aria-hidden="true"]), textarea');
+            if (campo) campo.focus();
+          }, 60);
+          return r;
+        };
+      });
+    })();
+
+  </script>
 </body>
 </html>
