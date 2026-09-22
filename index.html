@@ -226,6 +226,9 @@
     .programa-card { display: flex; flex-direction: column; }
     .programa-card > .programa-logo, .programa-card > .btn { align-self: flex-start; }
     .programa-card > .btn { margin-top: auto; }
+  
+    /* Móvil: recuadro del logo (Iron Pass, Donación) igual de alto que las fotos de las series */
+    @media (max-width: 768px) { .producto-card > div[style*="aspect-ratio"] { padding: 0.5rem !important; } }
   </style>
 </head>
 <body>
