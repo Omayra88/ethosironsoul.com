@@ -672,6 +672,7 @@
       <button onclick="cerrarContacto()" aria-label="Cerrar" style="position:absolute; top:1rem; right:1.2rem; background:none; border:none; color:#888888; font-size:1.2rem; cursor:pointer;">✕</button>
       <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:300; margin-bottom:0.5rem; color:#f5f0e8;">Contacto</h3>
       <p style="font-size:0.75rem; color:#888888; margin-bottom:1.5rem;">Escríbenos y te respondemos lo antes posible.</p>
+      <input type="text" id="contacto-web" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;" />
       <input type="text" id="contacto-nombre" placeholder="Tu nombre" style="width:100%; background:#0a0a0a; border:1px solid #1e1e1e; color:#f5f0e8; padding:0.8rem 1rem; font-family:'Montserrat',sans-serif; font-size:0.8rem; margin-bottom:0.8rem; outline:none;" />
       <input type="email" id="contacto-email" placeholder="tu@email.com" style="width:100%; background:#0a0a0a; border:1px solid #1e1e1e; color:#f5f0e8; padding:0.8rem 1rem; font-family:'Montserrat',sans-serif; font-size:0.8rem; margin-bottom:0.8rem; outline:none;" />
       <input type="text" id="contacto-asunto" placeholder="Asunto" style="width:100%; background:#0a0a0a; border:1px solid #1e1e1e; color:#f5f0e8; padding:0.8rem 1rem; font-family:'Montserrat',sans-serif; font-size:0.8rem; margin-bottom:0.8rem; outline:none;" />
@@ -687,6 +688,7 @@
     function abrirContacto(asunto) {
       document.getElementById('contacto-asunto').value = asunto || '';
       document.getElementById('modal-contacto').style.display = 'flex';
+      window.__contactoAbierto = Date.now();
     }
     function cerrarContacto() { document.getElementById('modal-contacto').style.display = 'none'; }
     function enviarContacto() {
@@ -697,10 +699,13 @@
       if (!nombre || !mensaje) { alert('Rellena tu nombre y tu mensaje.'); return; }
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { alert('Introduce un email válido.'); return; }
       if (!document.getElementById('contacto-privacidad').checked) { alert('Debes aceptar la Política de Privacidad para continuar.'); return; }
+      // Antispam: casilla trampa invisible y envío en menos de 2 segundos → se descarta sin avisar
+      const trampa = document.getElementById('contacto-web').value;
+      if (trampa || (Date.now() - (window.__contactoAbierto || 0)) < 2000) { cerrarContacto(); return; }
       fetch('https://formsubmit.co/ajax/contacto@ethosironsoul.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ nombre: nombre, email: email, mensaje: mensaje, _subject: 'Contacto web ETHOS — ' + (asunto || 'Sin asunto'), _captcha: 'false' })
+        body: JSON.stringify({ nombre: nombre, email: email, mensaje: mensaje, _subject: 'Contacto web ETHOS — ' + (asunto || 'Sin asunto'), _captcha: 'false', _honey: trampa })
       })
       .then(r => r.json())
       .then(d => {
