@@ -246,6 +246,13 @@
   
     /* Botón donar siempre a media pantalla, fijo al desplazarse */
     #btn-donar { top: 50% !important; bottom: auto !important; transform: translateY(-50%); }
+  
+    /* Hero Iron en móvil: que CONOCIMIENTO y los textos quepan en pantalla */
+    @media (max-width: 768px) {
+      .hero-titulo { font-size: 8vw !important; letter-spacing: 0.08em !important; }
+      .hero-subtitulo { font-size: 6vw !important; letter-spacing: 0.1em !important; }
+      .hero-desc { white-space: normal !important; font-size: 1rem !important; padding: 0 0.5rem; }
+    }
   </style>
 </head>
 <body>
@@ -665,7 +672,7 @@
        MODAL CONTACTO — sustituye al email visible (anti-spam)
   ============================================================ -->
   <div id="modal-contacto" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:2000; align-items:center; justify-content:center;" onclick="if(event.target===this)cerrarContacto()">
-    <div style="background:#111111; border:1px solid #c9a84c; padding:2.5rem; max-width:460px; width:90%; position:relative; text-align:center;">
+    <div style="background:#111111; border:1px solid #c9a84c; padding:2.5rem 1.5rem; max-width:460px; width:90%; max-height:90vh; overflow-y:auto; position:relative; text-align:center;">
       <button onclick="cerrarContacto()" aria-label="Cerrar" style="position:absolute; top:1rem; right:1.2rem; background:none; border:none; color:#888888; font-size:1.2rem; cursor:pointer;">✕</button>
       <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:300; margin-bottom:0.5rem; color:#f5f0e8;">Contacto</h3>
       <p style="font-size:0.75rem; color:#888888; margin-bottom:1.5rem;">Escríbenos y te respondemos lo antes posible.</p>
