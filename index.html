@@ -49,7 +49,7 @@
     .input--hidden{display:none!important;}
     .sib-hide-loader-icon{display:none;}
   </style>
-  <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+  
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -615,26 +615,36 @@
       <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
       <h3>¡Acceso cerrado!</h3>
       <p>Déjame tus datos y te aviso cuando abra de nuevo.</p>
+      <div id="sib-form-container" class="sib-form-container">
       <div id="error-message" class="sib-form-message-panel" style="font-size:0.72rem;text-align:center;color:#661d1d;background-color:#ffeded;border-color:#ff4949;border-radius:3px;padding:0.5rem;margin-bottom:0.8rem;">
         <span class="sib-form-message-panel__inner-text">No hemos podido validar tu suscripción.</span>
       </div>
       <div id="success-message" class="sib-form-message-panel" style="font-size:0.72rem;text-align:center;color:#085229;background-color:#e7faf0;border-color:#13ce66;border-radius:3px;padding:0.5rem;margin-bottom:0.8rem;">
         <span class="sib-form-message-panel__inner-text">¡Listo! Ya estás en la lista.</span>
       </div>
+      <div id="sib-container" class="sib-container--large sib-container--vertical" style="padding:0; background:transparent; max-width:none;">
       <form id="sib-form" method="POST" action="https://65a03631.sibforms.com/serve/MUIFAKDGkR3fR1vQpjOy3EWRhIrsO-R3uUvOv6DAtClPyAjeux7zVvIftuJTpV0x_iVbXne-tJ0Y2M1-AjXqhK_yjxYdJYiVywuLXWhETWtkVB2DT1WsrwnnLsweW1LgrRcCgri7sQaBmuFY-0XQUnGCd6fxCRQUqbxlQBUP3XwkgOsm7fGViuZRJge2htyh439tHYDgxVO9P2g1Eg==" data-type="subscription">
         <input type="hidden" name="ORIGEN" id="origen-hidden" value="">
+        <div class="sib-input sib-form-block" style="padding:0;"><div class="form__entry entry_block"><div class="form__label-row"><div class="entry__field">
         <input class="input" maxlength="200" type="text" id="NOMBRE" name="NOMBRE" autocomplete="off" placeholder="¿Cómo te llamas?" data-required="true" required />
+        </div></div>
         <label class="entry__error entry__error--primary" style="font-size:0.65rem;"></label>
+        </div></div>
+        <div class="sib-input sib-form-block" style="padding:0;"><div class="form__entry entry_block"><div class="form__label-row"><div class="entry__field">
         <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" value="" placeholder="tu mejor email" data-required="true" required />
+        </div></div>
         <label class="entry__error entry__error--primary" style="font-size:0.65rem;"></label>
+        </div></div>
         <div style="display:flex; align-items:flex-start; gap:0.6rem; margin:0.8rem 0; text-align:left;">
           <input type="checkbox" id="acepta-privacidad" required style="margin-top:0.2rem; accent-color:var(--dorado); cursor:pointer; flex-shrink:0;" />
           <label for="acepta-privacidad" style="font-size:0.65rem; color:var(--gris); line-height:1.5; cursor:pointer;">He leído y acepto la <a href="privacidad.html" target="_blank" rel="noopener noreferrer" style="color:var(--dorado);">Política de Privacidad</a>.</label>
         </div>
-        <button class="btn" style="width:100%;text-align:center;cursor:pointer;margin-top:0.5rem;" form="sib-form" type="submit"><span>Apúntame</span></button>
+        <button class="btn sib-form-block__button" style="width:100%;text-align:center;cursor:pointer;margin-top:0.5rem; padding:12px 32px; max-width:none; border:1px solid var(--dorado);" form="sib-form" type="submit"><svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512"><path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" /></svg><span>Apúntame</span></button>
         <input type="text" name="email_address_check" value="" class="input--hidden">
         <input type="hidden" name="locale" value="es">
       </form>
+      </div>
+      </div>
     </div>
   </div>
 
@@ -650,7 +660,7 @@
     const observer = new IntersectionObserver((entries) => { entries.forEach((entry, i) => { if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 80); }); }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     var _origen='';
-    function abrirModal(o){_origen=o||'General';var h=document.getElementById('origen-hidden');if(h)h.value=_origen;document.getElementById('modal-espera').classList.add('abierto');}
+    function abrirModal(o){cargarBrevo();_origen=o||'General';var h=document.getElementById('origen-hidden');if(h)h.value=_origen;document.getElementById('modal-espera').classList.add('abierto');}
     function cerrarModal(){document.getElementById('modal-espera').classList.remove('abierto');}
     document.getElementById('modal-espera').addEventListener('click',function(e){if(e.target===this)cerrarModal();});
   </script>
@@ -665,7 +675,24 @@
     window.REQUIRED_MULTISELECT_MESSAGE='Selecciona al menos una opción';
     var AUTOHIDE=Boolean(0);
   </script>
-  <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+  <script>
+    /* Brevo: se carga al abrir la lista de espera o en segundo plano tras cargar la página (no frena la carga inicial) */
+    function cargarBrevo(){
+      if (window.__brevoCargado) return; window.__brevoCargado = true;
+      var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://sibforms.com/forms/end-form/build/sib-styles.css'; document.head.appendChild(l);
+      var s = document.createElement('script'); s.src = 'https://sibforms.com/forms/end-form/build/main.js'; document.body.appendChild(s);
+    }
+    /* Lista de espera: no se envía si no se acepta la privacidad (actúa antes que el código de Brevo) */
+    (function(){
+      function bloquear(e){
+        var c = document.getElementById('acepta-privacidad');
+        if (c && !c.checked) { e.preventDefault(); e.stopImmediatePropagation(); if (c.reportValidity) c.reportValidity(); }
+      }
+      document.addEventListener('click', function(e){ if (e.target.closest && e.target.closest('#sib-form [type="submit"]')) bloquear(e); }, true);
+      document.addEventListener('submit', function(e){ if (e.target && e.target.id === 'sib-form') bloquear(e); }, true);
+    })();
+    window.addEventListener('load', function(){ setTimeout(cargarBrevo, 2500); });
+  </script>
 
   <!-- ============================================================
        MODAL CONTACTO — sustituye al email visible (anti-spam)
