@@ -253,6 +253,23 @@
       .hero-subtitulo { font-size: 6vw !important; letter-spacing: 0.05em !important; white-space: nowrap; }
       .hero-desc { white-space: normal !important; font-size: 1rem !important; padding: 0 0.5rem; }
     }
+  
+    /* Iron en móvil: imagen del hero completa (sin estirar) y tarjetas de series a tamaño móvil */
+    @media (max-width: 768px) {
+      #hero { min-height: auto !important; display: block !important; padding-top: 70px; }
+      .hero-banner { position: relative !important; inset: auto !important; width: 100% !important; height: auto !important; object-fit: contain !important; opacity: 1 !important; display: block; -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); mask-image: linear-gradient(to bottom, #000 70%, transparent 100%); }
+      .hero-overlay { display: none !important; }
+      .hero-contenido { padding: 1.5rem 1.2rem 3.5rem !important; }
+
+      .series-grid { scroll-snap-type: none !important; gap: 1rem !important; }
+      .serie-card { min-width: 210px !important; max-width: 210px !important; }
+      .serie-info { padding: 0.7rem 0.8rem !important; }
+      .serie-numero { font-size: 0.5rem !important; margin-bottom: 0.2rem !important; }
+      .serie-nombre { font-size: 0.95rem !important; line-height: 1.25 !important; margin-bottom: 0.3rem !important; }
+      .serie-desc { font-size: 0.65rem !important; line-height: 1.5 !important; margin-bottom: 0.6rem !important; }
+      .serie-info > div { font-size: 0.48rem !important; letter-spacing: 0.12em !important; padding: 0.3rem 0.4rem !important; margin-bottom: 0.5rem !important; text-align: center; display: block !important; }
+      .serie-info .btn-comprar, .serie-info .btn-espera { font-size: 0.5rem !important; letter-spacing: 0.12em !important; padding: 0.55rem 0.4rem !important; }
+    }
   </style>
 </head>
 <body>
