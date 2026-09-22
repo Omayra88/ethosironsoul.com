@@ -9,252 +9,319 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="stylesheet" href="fonts/fonts.css" />
   <style>
-    :root { --negro:#0a0a0a; --negro-card:#111111; --negro-borde:#1e1e1e; --dorado:#c9a84c; --dorado-oscuro:#8a6a20; --blanco:#f5f0e8; --gris:#888888; --font-display:'Cormorant Garamond',serif; --font-body:'Montserrat',sans-serif; --transicion:0.35s ease; }
-    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-    body { background:var(--negro); color:var(--blanco); font-family:var(--font-body); font-weight:300; line-height:1.8; }
-    img { max-width:100%; display:block; }
-    :where(img[width][height]) { height:auto; }
-    .contenedor { max-width:880px; margin:0 auto; padding:0 1.5rem; }
-    .marca { font-family:var(--font-display); font-size:1.3rem; letter-spacing:0.35em; text-align:center; padding:2rem 0 1.5rem; color:var(--blanco); }
+    :root{
+      --tinta:#070707; --panel:#0d0c0a; --humo:#15130f; --linea:#241f18;
+      --oro:#c9a84c; --oro-hondo:#8a6a20; --hueso:#f5f0e8; --ceniza:#8f8madd;
+      --ceniza:#8f8a80;
+      --display:'Cormorant Garamond',serif; --texto:'Montserrat',sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--tinta);color:var(--hueso);font-family:var(--texto);font-weight:300;line-height:1.75;-webkit-font-smoothing:antialiased}
+    img{max-width:100%;display:block}
+    :where(img[width][height]){height:auto}
+    a{color:inherit}
+    ::selection{background:var(--oro);color:var(--tinta)}
+    .ancho{max-width:1120px;margin:0 auto;padding:0 2rem}
+    .estrecho{max-width:720px;margin:0 auto;padding:0 2rem}
 
-    /* 1. Gancho + vídeo */
-    .gancho { text-align:center; padding-bottom:2rem; }
-    .gancho h1 { font-family:var(--font-display); font-size:clamp(1.9rem,4.4vw,3.1rem); font-weight:300; line-height:1.2; margin-bottom:0.8rem; }
-    .gancho h1 em { font-style:italic; color:var(--dorado); }
-    .gancho p { font-size:0.9rem; color:var(--gris); max-width:640px; margin:0 auto; }
-    .video-marco { position:relative; width:100%; aspect-ratio:16/9; background:var(--negro-card); border:1px solid var(--negro-borde); display:flex; align-items:center; justify-content:center; text-align:center; }
-    .video-marco p { font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:#3a3a3a; padding:1rem; }
-    .video-marco iframe, .video-marco video { position:absolute; inset:0; width:100%; height:100%; border:0; }
-    .bajo-video { text-align:center; font-size:0.7rem; color:var(--gris); margin-top:0.8rem; font-style:italic; }
+    /* ---------- portada ---------- */
+    #portada{position:relative;min-height:88vh;display:flex;align-items:center;overflow:hidden;border-bottom:1px solid var(--linea)}
+    #portada .foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:75% 30%;opacity:.5}
+    #portada .velo{position:absolute;inset:0;background:linear-gradient(100deg,var(--tinta) 30%,rgba(7,7,7,.55) 65%,rgba(7,7,7,.2) 100%)}
+    .portada-cuerpo{position:relative;padding:5rem 0 4rem}
+    .firma{font-family:var(--display);font-size:1.15rem;letter-spacing:.42em;color:var(--hueso);opacity:.85;margin-bottom:3.2rem}
+    .portada-cuerpo h1{font-family:var(--display);font-weight:300;font-size:clamp(2.6rem,6.2vw,5rem);line-height:1.02;letter-spacing:-.01em;max-width:15ch}
+    .portada-cuerpo h1 .fina{display:block;font-style:italic;color:var(--oro);font-size:.62em;letter-spacing:.01em;margin-top:.5rem}
+    .portada-cuerpo .entrada{margin-top:2rem;max-width:46ch;font-size:1rem;color:#c2bcb1;line-height:1.85}
+    .rayita{width:64px;height:1px;background:var(--oro);margin:2.5rem 0 0}
 
-    /* 2. Bloque de compra (aparece pasados unos minutos) */
-    #compra { display:none; margin-top:3.5rem; }
-    #compra.visible { display:block; animation:aparecer 0.8s ease; }
-    @keyframes aparecer { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
-    .oferta { border:1px solid var(--dorado-oscuro); background:linear-gradient(135deg,#0d0d0d,#141414); padding:2.5rem 2rem; text-align:center; }
-    .oferta .etiqueta { font-size:0.6rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--dorado); margin-bottom:0.8rem; }
-    .oferta h2 { font-family:var(--font-display); font-size:clamp(1.6rem,3vw,2.3rem); font-weight:300; line-height:1.25; margin-bottom:1.5rem; }
-    .incluye { list-style:none; text-align:left; max-width:560px; margin:0 auto 1.8rem; }
-    .incluye li { font-size:0.88rem; color:#cfc9bf; padding-left:1.5rem; position:relative; margin-bottom:0.7rem; }
-    .incluye li::before { content:'✦'; position:absolute; left:0; color:var(--dorado); font-size:0.7rem; top:0.25rem; }
-    .precio { margin-bottom:0.4rem; }
-    .precio .antes { font-size:1rem; color:var(--gris); text-decoration:line-through; margin-right:0.6rem; }
-    .precio .ahora { font-family:var(--font-display); font-size:3rem; color:var(--dorado); }
-    .precio .mes { font-size:0.8rem; color:var(--gris); }
-    .precio-nota { font-size:0.75rem; color:var(--blanco); margin-bottom:1.5rem; }
-    .btn { display:inline-block; font-family:var(--font-body); font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; padding:1.1rem 3rem; border:1px solid var(--dorado); color:var(--dorado); background:transparent; text-decoration:none; cursor:pointer; transition:background var(--transicion), color var(--transicion); }
-    .btn:hover { background:var(--dorado); color:var(--negro); }
-    .garantia { font-size:0.72rem; color:var(--gris); margin-top:1.2rem; line-height:1.7; }
-    .bonus { border:1px dashed var(--dorado-oscuro); padding:1.3rem 1.5rem; margin-top:1.5rem; text-align:left; }
-    .bonus strong { display:block; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--dorado); margin-bottom:0.4rem; }
-    .bonus p { font-size:0.85rem; color:#cfc9bf; margin:0; }
+    /* ---------- sala de proyección ---------- */
+    #sala{padding:5rem 0 4rem;background:linear-gradient(180deg,var(--tinta),var(--panel))}
+    .marco{position:relative;padding:14px}
+    .marco::before,.marco::after{content:'';position:absolute;width:26px;height:26px;border:1px solid var(--oro-hondo)}
+    .marco::before{top:0;left:0;border-right:0;border-bottom:0}
+    .marco::after{bottom:0;right:0;border-left:0;border-top:0}
+    .pantalla{position:relative;aspect-ratio:16/9;background:#000;border:1px solid var(--linea);display:grid;place-items:center}
+    .pantalla iframe,.pantalla video{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .pantalla .aviso{font-size:.72rem;letter-spacing:.22em;color:#403a30}
+    .pie-pantalla{display:flex;justify-content:space-between;gap:1rem;margin-top:1rem;font-size:.75rem;color:var(--ceniza)}
+    .pie-pantalla em{font-style:italic}
 
-    /* 3-6. Secciones */
-    section { padding:4rem 0; }
-    .titulo-seccion { font-family:var(--font-display); font-size:clamp(1.6rem,3.2vw,2.4rem); font-weight:300; text-align:center; line-height:1.25; margin-bottom:2.5rem; }
-    .perfiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.2rem; }
-    .perfil { border:1px solid var(--negro-borde); background:var(--negro-card); padding:1.6rem 1.5rem; }
-    .perfil h3 { font-family:var(--font-display); font-size:1.25rem; font-weight:400; color:var(--blanco); margin-bottom:0.5rem; }
-    .perfil p { font-size:0.85rem; color:var(--gris); margin:0; }
-    .testimonios { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.2rem; }
-    .testimonio { border-left:2px solid var(--dorado-oscuro); background:var(--negro-card); padding:1.4rem 1.5rem; }
-    .testimonio p { font-family:var(--font-display); font-size:1.02rem; font-style:italic; color:#cfc9bf; line-height:1.7; margin-bottom:0.7rem; }
-    .testimonio span { font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--dorado); }
-    .faq-item { border-bottom:1px solid var(--negro-borde); }
-    .faq-pregunta { width:100%; background:none; border:none; color:var(--blanco); font-family:var(--font-display); font-size:1.15rem; text-align:left; padding:1.1rem 0; cursor:pointer; display:flex; justify-content:space-between; gap:1rem; }
-    .faq-icono { color:var(--dorado); font-size:1rem; }
-    .faq-respuesta { max-height:0; overflow:hidden; transition:max-height 0.4s ease, padding 0.4s ease; }
-    .faq-item.abierto .faq-respuesta { max-height:400px; padding-bottom:1.2rem; }
-    .faq-respuesta p { font-size:0.85rem; color:var(--gris); margin:0; }
-    #cierre { text-align:center; border-top:1px solid var(--negro-borde); }
-    #cierre h2 { font-family:var(--font-display); font-size:clamp(1.8rem,3.6vw,2.6rem); font-weight:300; line-height:1.25; margin-bottom:1rem; }
-    #cierre p { font-size:0.9rem; color:var(--gris); max-width:600px; margin:0 auto 2rem; }
-    footer { border-top:1px solid var(--negro-borde); padding:2rem 1.5rem; text-align:center; }
-    footer a { font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gris); text-decoration:none; margin:0 0.6rem; }
-    footer a:hover { color:var(--dorado); }
-    .footer-copy { font-size:0.58rem; color:#3a3a3a; margin-top:0.8rem; }
-    @media (max-width:768px) {
-      section { padding:3rem 0; }
-      .oferta { padding:2rem 1.2rem; }
-      .btn { width:100%; padding:1.1rem 1rem; }
+    /* ---------- la semana ---------- */
+    #semana{padding:5.5rem 0;background:var(--panel);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+    .titulo{font-family:var(--display);font-weight:300;font-size:clamp(2rem,4vw,3rem);line-height:1.15;max-width:20ch}
+    .subtitulo{margin-top:.9rem;color:var(--ceniza);font-size:.95rem;max-width:52ch}
+    .agenda{margin-top:3rem;border-top:1px solid var(--linea)}
+    .dia{display:grid;grid-template-columns:150px 1fr;gap:2rem;padding:1.4rem 0;border-bottom:1px solid var(--linea);align-items:baseline}
+    .dia .cuando{font-family:var(--display);font-size:1.35rem;color:var(--oro)}
+    .dia .que{font-size:.95rem;color:#c2bcb1}
+    .dia .que b{color:var(--hueso);font-weight:500}
+    .constante{margin-top:2rem;font-size:.9rem;color:var(--ceniza)}
+    .constante b{color:var(--hueso);font-weight:500}
+
+    /* ---------- a quién ---------- */
+    #aquien{padding:5.5rem 0}
+    .casos{margin-top:2.8rem;display:grid;gap:0}
+    .caso{display:grid;grid-template-columns:1fr 1.25fr;gap:2.5rem;padding:2rem 0;border-top:1px solid var(--linea)}
+    .caso:last-child{border-bottom:1px solid var(--linea)}
+    .caso h3{font-family:var(--display);font-size:1.6rem;font-weight:400;line-height:1.2}
+    .caso p{color:#c2bcb1;font-size:.95rem}
+
+    /* ---------- voces ---------- */
+    #voces{padding:5.5rem 0;background:var(--humo);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+    .voces-lista{margin-top:2.5rem;columns:2;column-gap:3rem}
+    .voz{break-inside:avoid;margin-bottom:2.4rem}
+    .voz p{font-family:var(--display);font-size:1.3rem;font-style:italic;line-height:1.55;color:#ded8cd}
+    .voz cite{display:block;margin-top:.6rem;font-family:var(--texto);font-style:normal;font-size:.72rem;letter-spacing:.14em;color:var(--oro)}
+
+    /* ---------- oferta ---------- */
+    #oferta{display:none;padding:5.5rem 0}
+    #oferta.abierta{display:block}
+    .pacto{border:1px solid var(--oro-hondo);background:linear-gradient(160deg,#100e0b,#0a0908)}
+    .pacto-cabeza{padding:2.2rem 2.5rem 1.6rem;border-bottom:1px solid var(--linea)}
+    .pacto-cabeza h2{font-family:var(--display);font-size:clamp(1.9rem,3.4vw,2.7rem);font-weight:300;line-height:1.15}
+    .pacto-cabeza p{margin-top:.6rem;color:var(--ceniza);font-size:.92rem}
+    .pacto-cuerpo{display:grid;grid-template-columns:1.15fr .85fr}
+    .lote{padding:2.2rem 2.5rem}
+    .lote li{list-style:none;font-size:.93rem;color:#c2bcb1;padding:.55rem 0 .55rem 1.5rem;position:relative;border-bottom:1px solid rgba(36,31,24,.6)}
+    .lote li:last-child{border-bottom:0}
+    .lote li::before{content:'';position:absolute;left:0;top:1.05rem;width:7px;height:7px;border:1px solid var(--oro);transform:rotate(45deg)}
+    .cuenta{padding:2.2rem 2.5rem;border-left:1px solid var(--linea);display:flex;flex-direction:column;justify-content:center;text-align:center}
+    .cuenta .antes{font-size:1rem;color:var(--ceniza);text-decoration:line-through}
+    .cuenta .ahora{font-family:var(--display);font-size:4.2rem;line-height:1;color:var(--oro);margin:.3rem 0}
+    .cuenta .mes{font-size:.8rem;color:var(--ceniza);letter-spacing:.06em}
+    .cuenta .vitalicio{margin-top:.9rem;font-size:.85rem;color:var(--hueso);line-height:1.6}
+    .boton{display:inline-block;margin-top:1.6rem;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;padding:1.15rem 2rem;border:1px solid var(--oro);color:var(--oro);text-decoration:none;background:transparent;cursor:pointer;transition:background .35s ease,color .35s ease}
+    .boton:hover,.boton:focus-visible{background:var(--oro);color:var(--tinta)}
+    .letra-chica{margin-top:1.1rem;font-size:.75rem;color:var(--ceniza);line-height:1.7}
+    .reservado{padding:1.8rem 2.5rem;border-top:1px solid var(--linea);display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:center}
+    .reservado .sello{font-family:var(--display);font-size:1.05rem;font-style:italic;color:var(--oro);white-space:nowrap}
+    .reservado p{font-size:.9rem;color:#c2bcb1}
+
+    /* ---------- dudas ---------- */
+    #dudas{padding:5.5rem 0;background:var(--panel);border-top:1px solid var(--linea)}
+    .duda{border-bottom:1px solid var(--linea)}
+    .duda button{width:100%;display:flex;justify-content:space-between;gap:1.5rem;align-items:baseline;background:none;border:0;color:var(--hueso);font-family:var(--display);font-size:1.25rem;text-align:left;padding:1.2rem 0;cursor:pointer}
+    .duda button span{color:var(--oro);font-size:1rem;line-height:1}
+    .duda .respuesta{max-height:0;overflow:hidden;transition:max-height .35s ease}
+    .duda.abierta .respuesta{max-height:340px}
+    .duda .respuesta p{padding-bottom:1.3rem;font-size:.92rem;color:#c2bcb1;max-width:62ch}
+
+    /* ---------- despedida ---------- */
+    #final{padding:6rem 0;text-align:center}
+    #final h2{font-family:var(--display);font-weight:300;font-size:clamp(2rem,4.4vw,3.2rem);line-height:1.18;max-width:22ch;margin:0 auto}
+    #final p{margin:1.2rem auto 2.2rem;max-width:48ch;color:var(--ceniza);font-size:.95rem}
+
+    footer{border-top:1px solid var(--linea);padding:2.2rem 2rem;text-align:center;color:var(--ceniza)}
+    footer a{font-size:.72rem;text-decoration:none;color:var(--ceniza);margin:0 .7rem}
+    footer a:hover{color:var(--oro)}
+    footer small{display:block;margin-top:.8rem;font-size:.68rem;color:#3a352d}
+
+    @media (prefers-reduced-motion:no-preference){
+      #oferta.abierta .pacto{animation:entra .7s cubic-bezier(.2,.7,.3,1) both}
+      @keyframes entra{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+    }
+    @media (max-width:900px){
+      .pacto-cuerpo{grid-template-columns:1fr}
+      .cuenta{border-left:0;border-top:1px solid var(--linea)}
+      .voces-lista{columns:1}
+      .caso{grid-template-columns:1fr;gap:.6rem}
+      .dia{grid-template-columns:1fr;gap:.2rem}
+      .ancho,.estrecho{padding:0 1.3rem}
+      #portada{min-height:80vh}
+      #portada .velo{background:linear-gradient(180deg,rgba(7,7,7,.55),rgba(7,7,7,.92) 70%)}
+      .lote,.cuenta,.pacto-cabeza,.reservado{padding-left:1.4rem;padding-right:1.4rem}
+      .reservado{grid-template-columns:1fr;gap:.4rem}
     }
   </style>
 </head>
 <body>
-  <p class="marca">ETHOS</p>
 
-  <!-- 1. GANCHO + VÍDEO -->
-  <div class="contenedor">
-    <div class="gancho">
-      <h1>Deja de adivinar <em>qué está pasando</em> y empieza a entenderlo.</h1>
-      <p>Cómo piensa ella, qué hay detrás del discurso y dónde estás parado legalmente. Con datos, biología y fuentes que puedes comprobar tú mismo.</p>
+<header id="portada">
+  <img class="foto" src="img/web-1448.webp" srcset="img/web-600.webp 600w, img/web-1000.webp 1000w, img/web-1448.webp 1448w" sizes="100vw" width="1448" height="1086" alt="" fetchpriority="high" />
+  <div class="velo"></div>
+  <div class="ancho portada-cuerpo">
+    <p class="firma">ETHOS</p>
+    <h1>Llevas meses intentando entender qué pasó.
+      <span class="fina">Aquí está la explicación, con datos.</span></h1>
+    <p class="entrada">Cómo piensa y decide ella, qué hay detrás del discurso que te señala y dónde estás parado legalmente. Todo documentado, con las fuentes a la vista para que lo compruebes tú mismo.</p>
+    <div class="rayita"></div>
+  </div>
+</header>
+
+<section id="sala">
+  <div class="ancho">
+    <div class="marco">
+      <div class="pantalla">
+        <!-- ============================================================
+             AQUÍ VA EL VÍDEO DE LA VSL.
+             Sustituye este <p class="aviso"> por el iframe, por ejemplo:
+             <iframe src="https://www.youtube-nocookie.com/embed/TU_ID" title="ETHOS Iron" allow="autoplay; fullscreen" allowfullscreen></iframe>
+             youtube-nocookie evita tener que pedir permiso de cookies.
+        ============================================================= -->
+        <p class="aviso">aquí va el vídeo</p>
+      </div>
     </div>
-
-    <div class="video-marco">
-      <!-- ================================================================
-           AQUÍ VA EL VÍDEO DE LA VSL
-           Sustituye este <p> por el iframe de YouTube o Vimeo, por ejemplo:
-           <iframe src="https://www.youtube-nocookie.com/embed/ID_DEL_VIDEO" title="ETHOS Iron" allow="autoplay; fullscreen" allowfullscreen></iframe>
-           (usa youtube-nocookie.com para no tener que pedir permiso de cookies)
-      ================================================================= -->
-      <p>Aquí irá el vídeo</p>
+    <div class="pie-pantalla">
+      <span>Con sonido. Unos 25 minutos.</span>
+      <em>Lo que voy a enseñarte no lo vas a encontrar en un reel.</em>
     </div>
-    <p class="bajo-video">Sube el volumen. Dura unos 25 minutos y explica exactamente qué hay dentro.</p>
+  </div>
+</section>
 
-    <!-- 2. BLOQUE DE COMPRA — aparece a los 14 minutos -->
-    <div id="compra">
-      <div class="oferta">
-        <p class="etiqueta">Acceso de fundador · 50 plazas</p>
-        <h2>Todo ETHOS Iron,<br />al precio que no se repite.</h2>
-        <ul class="incluye">
-          <li>Un capítulo nuevo de serie cada 5 días, con dos series avanzando en paralelo</li>
-          <li>Todas las series: relaciones, psicología femenina y asimetrías legales</li>
-          <li>Una asimetría legal analizada cada semana</li>
-          <li>Dos píldoras de contenido a la semana</li>
-          <li>Comunidad privada de WhatsApp, conmigo dentro cada día</li>
-          <li>Ronda de preguntas y respuestas cada semana</li>
-          <li>Un directo en vivo al mes, y grabado si no puedes estar</li>
-        </ul>
-        <div class="precio">
-          <span class="antes">29,90 €</span><span class="ahora">19,90 €</span><span class="mes"> / mes</span>
-        </div>
-        <p class="precio-nota">Precio de fundador vitalicio: mientras sigas dentro, no te sube nunca.</p>
-        <a href="#" class="btn" id="btn-comprar">Quiero mi plaza de fundador</a>
-        <p class="garantia">15 días de garantía: si no es para ti, se te devuelve el dinero.<br />Cancelas cuando quieras, sin penalización ni llamadas.</p>
-        <div class="bonus">
-          <strong>Solo para las 50 plazas de fundador</strong>
-          <p><em>Tú y yo</em>: una conversación privada en audio, conmigo, sobre tu situación concreta. Cuando se acaben las plazas, este bonus no vuelve.</p>
-        </div>
+<section id="semana">
+  <div class="ancho">
+    <h2 class="titulo">Así es una semana cualquiera dentro.</h2>
+    <p class="subtitulo">No es una carpeta de vídeos que se te olvida. Es algo que pasa todas las semanas, en días fijos, contigo dentro.</p>
+    <div class="agenda">
+      <div class="dia"><div class="cuando">Lunes</div><div class="que"><b>Una asimetría legal</b>, analizada con la ley delante y la fuente citada.</div></div>
+      <div class="dia"><div class="cuando">Miércoles</div><div class="que"><b>Una píldora</b> para entender algo concreto de cómo funciona ella.</div></div>
+      <div class="dia"><div class="cuando">Jueves</div><div class="que"><b>Respondo tus preguntas</b> en vídeo. Las mandas en privado, nadie ve las tuyas.</div></div>
+      <div class="dia"><div class="cuando">Domingo</div><div class="que"><b>Una píldora de acción</b> para empezar la semana sabiendo qué hacer.</div></div>
+      <div class="dia"><div class="cuando">Último viernes</div><div class="que"><b>Directo conmigo</b>. Si no puedes estar, queda grabado.</div></div>
+    </div>
+    <p class="constante">Y de fondo, <b>un capítulo nuevo cada 5 días</b>, con dos series avanzando a la vez, y <b>el grupo privado de WhatsApp</b> donde estoy cada día.</p>
+  </div>
+</section>
+
+<section id="aquien">
+  <div class="ancho">
+    <h2 class="titulo">Sabrás en el primer minuto si esto es para ti.</h2>
+    <div class="casos">
+      <div class="caso">
+        <h3>Estás con alguien y hay cosas que se repiten</h3>
+        <p>Las mismas discusiones, los mismos silencios, la misma sensación de no saber qué ha cambiado. Vas a dejar de interpretar a ciegas.</p>
+      </div>
+      <div class="caso">
+        <h3>Estás buscando y se te van los meses</h3>
+        <p>Empieza bien, se enfría, se acaba, y nunca sabes en qué punto se torció. Vas a leer antes lo que ahora ves tarde.</p>
+      </div>
+      <div class="caso">
+        <h3>Vienes de una separación</h3>
+        <p>Con la parte legal encima y la sensación de haber perdido el tiempo. Vas a entender qué falló y con qué criterio elegir la próxima vez.</p>
+      </div>
+      <div class="caso">
+        <h3>Has decidido no volver a arriesgarte</h3>
+        <p>Y sabes que eso no es una decisión, es una retirada. Aquí no se aprende a evitar: se aprende a distinguir.</p>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- 3. PARA QUIÉN ES -->
-  <section>
-    <div class="contenedor">
-      <h2 class="titulo-seccion">Esto va a servirte si te reconoces aquí</h2>
-      <div class="perfiles">
-        <div class="perfil">
-          <h3>Tienes pareja</h3>
-          <p>Y hay cosas que se repiten sin que sepas por qué. Vas a dejar de interpretar a ciegas lo que pasa entre vosotros.</p>
+<section id="voces">
+  <div class="ancho">
+    <h2 class="titulo">Lo que cuentan los que ya están dentro.</h2>
+    <!-- ============================================================
+         SUSTITUYE ESTAS SEIS POR LAS REALES CUANDO LAS TENGAS.
+         No publiques ninguna inventada: los testimonios falsos están
+         sancionados por la normativa de consumo.
+    ============================================================= -->
+    <div class="voces-lista">
+      <blockquote class="voz"><p>[Qué entendió que antes no veía.]</p><cite>Nombre, ciudad</cite></blockquote>
+      <blockquote class="voz"><p>[Qué cambió en su relación desde que entró.]</p><cite>Nombre, ciudad</cite></blockquote>
+      <blockquote class="voz"><p>[Qué esperaba encontrar y qué se encontró.]</p><cite>Nombre, ciudad</cite></blockquote>
+      <blockquote class="voz"><p>[La parte que más le ha servido.]</p><cite>Nombre, ciudad</cite></blockquote>
+      <blockquote class="voz"><p>[Qué le aporta el grupo y los directos.]</p><cite>Nombre, ciudad</cite></blockquote>
+      <blockquote class="voz"><p>[A quién se lo recomendaría y por qué.]</p><cite>Nombre, ciudad</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<section id="oferta">
+  <div class="ancho">
+    <div class="pacto">
+      <div class="pacto-cabeza">
+        <h2>Entra ahora y tu cuota se queda congelada.</h2>
+        <p>Cincuenta plazas de fundador. Cuando se llenan, se cierran y el precio pasa a ser otro.</p>
+      </div>
+      <div class="pacto-cuerpo">
+        <ul class="lote">
+          <li>Todas las series: relaciones, psicología femenina y asimetrías legales</li>
+          <li>Un capítulo nuevo cada 5 días, con dos series en marcha a la vez</li>
+          <li>Una asimetría legal analizada cada lunes</li>
+          <li>Dos píldoras de contenido por semana</li>
+          <li>El grupo privado de WhatsApp, conmigo dentro cada día</li>
+          <li>Tus preguntas respondidas en vídeo cada jueves</li>
+          <li>Un directo al mes, y grabado si no puedes estar</li>
+        </ul>
+        <div class="cuenta">
+          <div>
+            <span class="antes">29,90 €</span>
+            <div class="ahora">19,90 €</div>
+            <div class="mes">al mes</div>
+          </div>
+          <p class="vitalicio">Mientras sigas dentro, no te sube nunca.</p>
+          <a class="boton" id="cta-1" href="#">Quiero mi plaza</a>
+          <p class="letra-chica">15 días de garantía: si no es para ti, se te devuelve el dinero.<br />Cancelas tú mismo cuando quieras, sin llamadas ni penalización.</p>
         </div>
-        <div class="perfil">
-          <h3>Estás buscando</h3>
-          <p>Y quieres dejar de perder meses con quien no encaja. Vas a saber leer antes lo que ahora ves tarde.</p>
-        </div>
-        <div class="perfil">
-          <h3>Vienes de una separación</h3>
-          <p>Y no quieres repetir. Vas a entender qué falló de verdad y con qué criterio elegir la próxima vez.</p>
-        </div>
-        <div class="perfil">
-          <h3>Has decidido no arriesgarte</h3>
-          <p>Y por dentro sabes que eso no es una solución. Aquí no vas a aprender a evitar: vas a aprender a distinguir.</p>
-        </div>
+      </div>
+      <div class="reservado">
+        <div class="sello">Solo para las 50</div>
+        <p><em>Tú y yo</em>: una conversación privada en audio, conmigo, sobre tu caso concreto. Cuando se acaben las plazas, este bonus no vuelve.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 4. TESTIMONIOS -->
-  <section>
-    <div class="contenedor">
-      <h2 class="titulo-seccion">Lo que dicen los que ya están dentro</h2>
-      <!-- ================================================================
-           SUSTITUYE ESTOS SEIS POR LOS TESTIMONIOS REALES
-           No publiques ninguno inventado: los testimonios falsos están
-           sancionados por la ley de consumo.
-      ================================================================= -->
-      <div class="testimonios">
-        <div class="testimonio"><p>[Testimonio 1 — lo que entendió o consiguió, en sus palabras.]</p><span>Nombre · Ciudad</span></div>
-        <div class="testimonio"><p>[Testimonio 2 — qué cambió desde que entró.]</p><span>Nombre · Ciudad</span></div>
-        <div class="testimonio"><p>[Testimonio 3 — qué esperaba y qué se encontró.]</p><span>Nombre · Ciudad</span></div>
-        <div class="testimonio"><p>[Testimonio 4 — la parte que más le sirvió.]</p><span>Nombre · Ciudad</span></div>
-        <div class="testimonio"><p>[Testimonio 5 — sobre la comunidad o los directos.]</p><span>Nombre · Ciudad</span></div>
-        <div class="testimonio"><p>[Testimonio 6 — para quién lo recomendaría.]</p><span>Nombre · Ciudad</span></div>
-      </div>
+<section id="dudas">
+  <div class="estrecho">
+    <h2 class="titulo">Lo que suelen preguntarme antes de entrar.</h2>
+    <div style="margin-top:2.5rem">
+      <div class="duda"><button type="button">¿Dónde veo el contenido?<span>+</span></button><div class="respuesta"><p>En Hotmart, desde su web o su app, en el móvil o en el ordenador. Al entrar se te abre la intro y el primer capítulo; a partir de ahí llega contenido nuevo cada 5 días.</p></div></div>
+      <div class="duda"><button type="button">¿Y si no es para mí?<span>+</span></button><div class="respuesta"><p>Tienes 15 días de garantía. Pides la devolución y se te devuelve el dinero, sin explicaciones ni trámites raros.</p></div></div>
+      <div class="duda"><button type="button">¿Puedo cancelar cuando quiera?<span>+</span></button><div class="respuesta"><p>Sí, tú mismo desde Hotmart, sin penalización. Mantienes el acceso hasta el final del mes que ya has pagado.</p></div></div>
+      <div class="duda"><button type="button">¿Me subirá el precio más adelante?<span>+</span></button><div class="respuesta"><p>No. Mientras no canceles, mantienes 19,90 € al mes aunque suba para quien entre después.</p></div></div>
+      <div class="duda"><button type="button">¿Cómo entro en el grupo?<span>+</span></button><div class="respuesta"><p>Al unirte recibes el enlace en tu correo. Es un grupo privado de WhatsApp donde estoy cada día.</p></div></div>
+      <div class="duda"><button type="button">¿Esto es opinión o está documentado?<span>+</span></button><div class="respuesta"><p>Está documentado. Cada serie se construye sobre estudios, datos oficiales y jurisprudencia, con las fuentes citadas para que las compruebes.</p></div></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 5. PREGUNTAS FRECUENTES -->
-  <section>
-    <div class="contenedor">
-      <h2 class="titulo-seccion">Antes de decidir</h2>
-      <div class="faq-item">
-        <button class="faq-pregunta">¿Dónde veo el contenido?<span class="faq-icono">+</span></button>
-        <div class="faq-respuesta"><p>En Hotmart, desde su web o su app, en el ordenador o en el móvil. Al entrar se te abre la intro y el primer capítulo, y a partir de ahí va llegando contenido nuevo cada 5 días.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-pregunta">¿Y si no es para mí?<span class="faq-icono">+</span></button>
-        <div class="faq-respuesta"><p>Tienes 15 días de garantía. Escribes, pides la devolución y se te devuelve el dinero. Sin explicaciones ni trámites raros.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-pregunta">¿Puedo cancelar cuando quiera?<span class="faq-icono">+</span></button>
-        <div class="faq-respuesta"><p>Sí. Es una suscripción mensual que cancelas tú mismo desde Hotmart, sin penalización. Mantienes el acceso hasta el final del mes que ya has pagado.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-pregunta">¿El precio de fundador me sube luego?<span class="faq-icono">+</span></button>
-        <div class="faq-respuesta"><p>No. Mientras no canceles, mantienes 19,90 € al mes aunque el precio suba para los que entren después.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-pregunta">¿Cómo entro en la comunidad?<span class="faq-icono">+</span></button>
-        <div class="faq-respuesta"><p>Al unirte recibes el enlace en tu correo electrónico. Es un grupo privado de WhatsApp donde estoy cada día.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-pregunta">¿Qué pasa cuando se acaben las 50 plazas?<span class="faq-icono">+</span></button>
-        <div class="faq-respuesta"><p>El precio pasa al regular y el bonus <em>Tú y yo</em> deja de estar disponible. No se reabre.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-pregunta">¿Esto es contenido de opinión?<span class="faq-icono">+</span></button>
-        <div class="faq-respuesta"><p>No. Cada serie está construida sobre datos, estudios y jurisprudencia, con las fuentes citadas para que puedas comprobarlas tú mismo.</p></div>
-      </div>
-    </div>
-  </section>
+<section id="final">
+  <div class="estrecho">
+    <h2>El año que viene vas a seguir preguntándote lo mismo. O no.</h2>
+    <p>Las plazas de fundador se cierran cuando se llenan. Después, el precio es otro y el bonus ya no está.</p>
+    <a class="boton" id="cta-2" href="#">Quiero mi plaza</a>
+  </div>
+</section>
 
-  <!-- 6. CIERRE -->
-  <section id="cierre">
-    <div class="contenedor">
-      <h2>Dentro de un año vas a seguir<br />teniendo las mismas preguntas.<br />O no.</h2>
-      <p>Las 50 plazas de fundador se cierran cuando se llenan. Después, el precio es otro y el bonus ya no está.</p>
-      <a href="#" class="btn" id="btn-comprar-2">Quiero mi plaza de fundador</a>
-    </div>
-  </section>
+<footer>
+  <a href="privacidad.html">Privacidad</a><a href="condiciones.html">Condiciones</a><a href="aviso-legal.html">Aviso legal</a><a href="#" onclick="ethosConfigurarCookies(); return false;">Cookies</a>
+  <small>© 2026 ETHOS · Iron &amp; Soul Group LLC</small>
+</footer>
 
-  <footer>
-    <a href="privacidad.html">Privacidad</a><a href="condiciones.html">Condiciones</a><a href="aviso-legal.html">Aviso legal</a><a href="#" onclick="ethosConfigurarCookies(); return false;">Cookies</a>
-    <p class="footer-copy">© 2026 ETHOS — Iron &amp; Soul Group LLC</p>
-  </footer>
+<script>
+  /* ================================================================
+     LA OFERTA APARECE A LOS 14 MINUTOS EN LA PÁGINA.
+     Cambia MINUTOS para adelantarla o retrasarla. Con 0 se ve desde el principio.
+  ================================================================= */
+  var MINUTOS = 14;
+  (function () {
+    var oferta = document.getElementById('oferta');
+    var previo = parseInt(sessionStorage.getItem('ethos_vsl_segundos') || '0', 10);
+    if (MINUTOS === 0 || previo >= MINUTOS * 60) { oferta.classList.add('abierta'); return; }
+    var inicio = Date.now();
+    var reloj = setInterval(function () {
+      var s = previo + Math.round((Date.now() - inicio) / 1000);
+      try { sessionStorage.setItem('ethos_vsl_segundos', String(s)); } catch (e) {}
+      if (s >= MINUTOS * 60) { clearInterval(reloj); oferta.classList.add('abierta'); }
+    }, 1000);
+  })();
 
-  <script>
-    /* ================================================================
-       BLOQUE DE COMPRA: aparece a los 14 minutos de estar en la página.
-       Para cambiar el momento, modifica MINUTOS.
-       Si algún día quieres que se vea desde el principio, pon MINUTOS = 0.
-    ================================================================= */
-    var MINUTOS = 14;
-    (function () {
-      var compra = document.getElementById('compra');
-      var transcurrido = parseInt(sessionStorage.getItem('ethos_vsl_segundos') || '0', 10);
-      function mostrar() { compra.classList.add('visible'); }
-      if (MINUTOS === 0 || transcurrido >= MINUTOS * 60) { mostrar(); return; }
-      var inicio = Date.now();
-      var reloj = setInterval(function () {
-        var s = transcurrido + Math.round((Date.now() - inicio) / 1000);
-        try { sessionStorage.setItem('ethos_vsl_segundos', String(s)); } catch (e) {}
-        if (s >= MINUTOS * 60) { clearInterval(reloj); mostrar(); }
-      }, 1000);
-    })();
-
-    document.querySelectorAll('.faq-pregunta').forEach(function (b, i) {
-      var resp = b.parentElement.querySelector('.faq-respuesta');
-      if (resp) { resp.id = 'vsl-faq-' + i; b.setAttribute('aria-controls', resp.id); }
-      b.setAttribute('aria-expanded', 'false');
-      b.addEventListener('click', function () {
-        var item = b.parentElement, abierto = item.classList.contains('abierto');
-        document.querySelectorAll('.faq-item').forEach(function (x) { x.classList.remove('abierto'); });
-        document.querySelectorAll('.faq-pregunta').forEach(function (x) { x.setAttribute('aria-expanded', 'false'); });
-        if (!abierto) { item.classList.add('abierto'); b.setAttribute('aria-expanded', 'true'); }
-      });
+  document.querySelectorAll('.duda button').forEach(function (b, i) {
+    var r = b.parentElement.querySelector('.respuesta');
+    r.id = 'duda-' + i;
+    b.setAttribute('aria-controls', r.id);
+    b.setAttribute('aria-expanded', 'false');
+    b.addEventListener('click', function () {
+      var item = b.parentElement, abierta = item.classList.contains('abierta');
+      document.querySelectorAll('.duda').forEach(function (x) { x.classList.remove('abierta'); });
+      document.querySelectorAll('.duda button').forEach(function (x) { x.setAttribute('aria-expanded', 'false'); x.querySelector('span').textContent = '+'; });
+      if (!abierta) { item.classList.add('abierta'); b.setAttribute('aria-expanded', 'true'); b.querySelector('span').textContent = '−'; }
     });
-  </script>
-  <script src="cookies.js?v=3" defer></script>
+  });
+</script>
+<script src="cookies.js?v=3" defer></script>
 </body>
 </html>
