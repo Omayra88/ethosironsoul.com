@@ -262,13 +262,39 @@
       .hero-contenido { padding: 1.5rem 1.2rem 3.5rem !important; }
 
       .series-grid { scroll-snap-type: none !important; gap: 1rem !important; }
-      .serie-card { min-width: 210px !important; max-width: 210px !important; }
-      .serie-info { padding: 0.7rem 0.8rem !important; }
-      .serie-numero { font-size: 0.5rem !important; margin-bottom: 0.2rem !important; }
-      .serie-nombre { font-size: 0.95rem !important; line-height: 1.25 !important; margin-bottom: 0.3rem !important; }
-      .serie-desc { font-size: 0.65rem !important; line-height: 1.5 !important; margin-bottom: 0.6rem !important; }
-      .serie-info > div { font-size: 0.48rem !important; letter-spacing: 0.12em !important; padding: 0.3rem 0.4rem !important; margin-bottom: 0.5rem !important; text-align: center; display: block !important; }
-      .serie-info .btn-comprar, .serie-info .btn-espera { font-size: 0.5rem !important; letter-spacing: 0.12em !important; padding: 0.55rem 0.4rem !important; }
+    }
+  
+    /* Tarjetas de series: mismas que las de la portada */
+    #series .productos-grid { display: flex; gap: 1.5rem; margin-top: 1.5rem; overflow-x: auto; padding-bottom: 0.5rem; padding-right: 4rem; scroll-snap-type: none; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--dorado-oscuro) var(--negro-card); align-items: stretch; }
+    #series .productos-grid::-webkit-scrollbar { height: 3px; }
+    #series .productos-grid::-webkit-scrollbar-track { background: var(--negro-card); }
+    #series .productos-grid::-webkit-scrollbar-thumb { background: var(--dorado-oscuro); border-radius: 2px; }
+    #series .producto-card { background: var(--negro-card); border: 1px solid var(--negro-borde); overflow: hidden; position: relative; transition: transform var(--transicion), box-shadow var(--transicion); cursor: pointer; min-width: 320px; max-width: 320px; flex-shrink: 0; display: flex; flex-direction: column; }
+    #series .producto-card::before { content: ''; position: absolute; inset: 0; border: 1px solid var(--dorado); opacity: 0; transition: opacity var(--transicion); z-index: 1; pointer-events: none; }
+    #series .producto-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(201,168,76,0.15); }
+    #series .producto-card:hover::before { opacity: 1; }
+    #series .producto-imagen { width: 100%; aspect-ratio: 4/3; object-fit: contain; background: #0d0d0d; }
+    #series .producto-badge { position: absolute; top: 1rem; right: 1rem; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--dorado); color: var(--negro); padding: 0.3rem 0.7rem; z-index: 2; }
+    #series .producto-info { padding: 0.3rem 1rem 0.5rem; display: flex; flex-direction: column; flex: 1; }
+    #series .producto-info .btn-comprar { margin-top: auto; }
+    #series .producto-nombre { font-family: var(--font-display); font-size: 1rem; font-weight: 400; margin-bottom: 0.2rem; line-height: 1.3; min-height: 2.6rem; }
+    #series .producto-desc { display: none; }
+    #series .producto-precio { display: none; }
+    #series .producto-precio sup { font-size: 0.7rem; vertical-align: super; }
+    #series .btn-comprar { display: block; width: 100%; text-align: center; font-size: 0.6rem; padding: 0.65rem 1rem; border: 1px solid var(--dorado); color: var(--dorado); background: none; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; position: relative; overflow: hidden; transition: color var(--transicion); text-decoration: none; margin-top: auto; }
+    #series .btn-comprar::after { content: ''; position: absolute; inset: 0; background: var(--dorado); transform: scaleX(0); transform-origin: left; transition: transform var(--transicion); z-index: 0; }
+    #series .btn-comprar span { position: relative; z-index: 1; }
+    #series .btn-comprar:hover::after { transform: scaleX(1); }
+    #series .btn-comprar:hover { color: var(--negro); }
+    @media (max-width: 768px) {
+      #series .productos-grid { padding-right: 1.2rem; gap: 1rem; }
+      #series .producto-card { min-width: 210px; max-width: 210px; }
+    }
+
+    /* Imagen de la sección membresía completa en móvil */
+    @media (max-width: 768px) {
+      .membresia-imagen-wrap { height: auto !important; }
+      .membresia-imagen-wrap img { height: auto !important; object-fit: contain !important; display: block; }
     }
   </style>
 </head>
@@ -424,103 +450,96 @@
   ============================================================ -->
   <section id="series">
     <p class="seccion-titulo">Las series</p>
-    <div class="series-grid">
+    <div class="productos-grid">
 
-      <div class="serie-card reveal" data-lanzamiento="cerrado">
-        <span class="serie-badge">Serie</span>
-        <img src="S1-La mente femenina al descubierto.png" alt="Serie 1" class="serie-imagen" />
-        <div class="serie-info">
-          <p class="serie-numero">Serie 01</p>
-          <p class="serie-nombre">La mente femenina al descubierto</p>
-          <p class="serie-desc">Psicología real sin filtro ideológico. Cómo funciona la mente femenina según la ciencia.</p>
-          <p class="serie-precio" style="display:none;"><sup>€</sup>47</p>
-          <div style="display:inline-block; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem;">Únete a Iron para acceder</div>
-          <a href="productos.html#serie-1" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+      <div class="producto-card reveal">
+        <span class="producto-badge">Serie</span>
+        <img src="S1-La mente femenina al descubierto.png" alt="La mente femenina al descubierto" class="producto-imagen" />
+        <div class="producto-info">
+          <p class="producto-nombre">La mente femenina al descubierto</p>
+          <p class="producto-desc">Psicología real sin filtro ideológico.</p>
+          <p class="producto-precio" style="display:none;"><sup>€</sup>47</p>
+          <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Dejarás de adivinar. Empezarás a entender.</p>
+          <a href="#membresia" style="display:block; text-align:center; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem; text-decoration:none; cursor:pointer;">Únete a Iron para acceder</a>
+          <a href="productos.html#serie-1" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
 
-      <div class="serie-card reveal" data-lanzamiento="cerrado">
-        <span class="serie-badge">Serie</span>
-        <img src="S2-La logica femenina al descubierto.png" alt="Serie 2" class="serie-imagen" />
-        <div class="serie-info">
-          <p class="serie-numero">Serie 02</p>
-          <p class="serie-nombre">La lógica femenina al descubierto</p>
-          <p class="serie-desc">Patrones de comportamiento explicados con datos y sin condescendencia.</p>
-          <p class="serie-precio" style="display:none;"><sup>€</sup>47</p>
-          <div style="display:inline-block; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem;">Únete a Iron para acceder</div>
-          <a href="productos.html#serie-2" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+      <div class="producto-card reveal">
+        <span class="producto-badge">Serie</span>
+        <img src="S2-La logica femenina al descubierto.png" alt="La lógica femenina al descubierto" class="producto-imagen" />
+        <div class="producto-info">
+          <p class="producto-nombre">La lógica femenina al descubierto</p>
+          <p class="producto-desc">Patrones de comportamiento explicados.</p>
+          <p class="producto-precio" style="display:none;"><sup>€</sup>47</p>
+          <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Dejarás de frustrarte. Todo empezará a tener sentido.</p>
+          <a href="#membresia" style="display:block; text-align:center; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem; text-decoration:none; cursor:pointer;">Únete a Iron para acceder</a>
+          <a href="productos.html#serie-2" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
 
-      <div class="serie-card reveal" data-lanzamiento="cerrado">
-        <span class="serie-badge">Serie</span>
-        <img src="S3-La conquista real.png" alt="Serie 3" class="serie-imagen" />
-        <div class="serie-info">
-          <p class="serie-numero">Serie 03</p>
-          <p class="serie-nombre">La conquista real</p>
-          <p class="serie-desc">Lo que nadie te enseñó sobre las relaciones entre hombres y mujeres.</p>
-          <p class="serie-precio" style="display:none;"><sup>€</sup>57</p>
-          <div style="display:inline-block; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem;">Únete a Iron para acceder</div>
-          <a href="productos.html#serie-3" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+      <div class="producto-card reveal">
+        <span class="producto-badge">Serie</span>
+        <img src="S3-La conquista real.png" alt="La conquista real" class="producto-imagen" />
+        <div class="producto-info">
+          <p class="producto-nombre">La conquista real</p>
+          <p class="producto-desc">Lo que nadie te enseñó sobre las relaciones.</p>
+          <p class="producto-precio" style="display:none;"><sup>€</sup>57</p>
+          <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Conseguirás a tu persona y sabrás cómo no perderla.</p>
+          <a href="#membresia" style="display:block; text-align:center; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem; text-decoration:none; cursor:pointer;">Únete a Iron para acceder</a>
+          <a href="productos.html#serie-3" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
 
-      <div class="serie-card reveal" data-lanzamiento="cerrado">
-        <span class="serie-badge">Serie</span>
-        <img src="S4-Destruye el feminismo.png" alt="Serie 4" class="serie-imagen" />
-        <div class="serie-info">
-          <p class="serie-numero">Serie 04</p>
-          <p class="serie-nombre">Destruye el feminismo</p>
-          <p class="serie-desc">Argumentos sólidos y datos reales para rebatir la narrativa dominante.</p>
-          <p class="serie-precio" style="display:none;"><sup>€</sup>57</p>
-          <div style="display:inline-block; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem;">Únete a Iron para acceder</div>
-          <a href="productos.html#serie-4" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+      <div class="producto-card reveal">
+        <span class="producto-badge">Serie</span>
+        <img src="S4-Destruye el feminismo.png" alt="Destruye el feminismo" class="producto-imagen" />
+        <div class="producto-info">
+          <p class="producto-nombre">Destruye el feminismo</p>
+          <p class="producto-desc">Argumentos sólidos contra la narrativa dominante.</p>
+          <p class="producto-precio" style="display:none;"><sup>€</sup>57</p>
+          <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Serás el que responde con datos, no con emociones.</p>
+          <a href="#membresia" style="display:block; text-align:center; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem; text-decoration:none; cursor:pointer;">Únete a Iron para acceder</a>
+          <a href="productos.html#serie-4" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
 
-      <div class="serie-card reveal" data-lanzamiento="cerrado">
-        <span class="serie-badge">Serie</span>
-        <img src="S5-La guerra de sexos.png" alt="Serie 5" class="serie-imagen" />
-        <div class="serie-info">
-          <p class="serie-numero">Serie 05</p>
-          <p class="serie-nombre">La guerra de sexos</p>
-          <p class="serie-desc">Por qué nos enfrentan, quién gana y qué pierden todos.</p>
-          <p class="serie-precio" style="display:none;"><sup>€</sup>57</p>
-          <div style="display:inline-block; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem;">Únete a Iron para acceder</div>
-          <a href="productos.html#serie-5" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+      <div class="producto-card reveal">
+        <span class="producto-badge">Serie</span>
+        <img src="S5-La guerra de sexos.png" alt="La guerra de sexos" class="producto-imagen" />
+        <div class="producto-info">
+          <p class="producto-nombre">La guerra de sexos</p>
+          <p class="producto-desc">Por qué nos enfrentan y quién gana.</p>
+          <p class="producto-precio" style="display:none;"><sup>€</sup>57</p>
+          <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Dejarás de caer en la trampa.</p>
+          <a href="#membresia" style="display:block; text-align:center; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem; text-decoration:none; cursor:pointer;">Únete a Iron para acceder</a>
+          <a href="productos.html#serie-5" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
 
-      <div class="serie-card reveal" data-lanzamiento="cerrado">
-        <span class="serie-badge">Serie</span>
-        <img src="S6-El ciclo tu poder.png" alt="Serie 6" class="serie-imagen" />
-        <div class="serie-info">
-          <p class="serie-numero">Serie 06</p>
-          <p class="serie-nombre">El ciclo, tu poder</p>
-          <p class="serie-desc">Tu biología como herramienta real, no como excusa ni como limitación.</p>
-          <p class="serie-precio" style="display:none;"><sup>€</sup>47</p>
-          <div style="display:inline-block; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem;">Únete a Iron para acceder</div>
-          <a href="productos.html#serie-6" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+      <div class="producto-card reveal">
+        <span class="producto-badge">Serie</span>
+        <img src="S6-El ciclo tu poder.png" alt="El ciclo, tu poder" class="producto-imagen" />
+        <div class="producto-info">
+          <p class="producto-nombre">El ciclo, tu poder</p>
+          <p class="producto-desc">Tu biología como herramienta, no como excusa.</p>
+          <p class="producto-precio" style="display:none;"><sup>€</sup>47</p>
+          <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Dejarás de caminar de puntillas sin saber por qué.</p>
+          <a href="#membresia" style="display:block; text-align:center; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem; text-decoration:none; cursor:pointer;">Únete a Iron para acceder</a>
+          <a href="productos.html#serie-6" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
 
-      <div class="serie-card reveal" data-lanzamiento="cerrado">
-        <span class="serie-badge">Serie</span>
-        <img src="S7- Woke.png" alt="Serie 7" class="serie-imagen" />
-        <div class="serie-info">
-          <p class="serie-numero">Serie 07</p>
-          <p class="serie-nombre">Woke</p>
-          <p class="serie-desc">El movimiento que prometió libertad y entregó dogma. Análisis sin concesiones.</p>
-          <p class="serie-precio" style="display:none;"><sup>€</sup>47</p>
-          <div style="display:inline-block; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem;">Únete a Iron para acceder</div>
-          <a href="productos.html#serie-7" class="btn-comprar" style="display:block;text-align:center;"><span>Saber más</span></a>
-          <button class="btn-espera" onclick="abrirModal()">Avísame del próximo lanzamiento</button>
+      <div class="producto-card reveal">
+        <span class="producto-badge">Serie</span>
+        <img src="S7- Woke.png" alt="Woke" class="producto-imagen" />
+        <div class="producto-info">
+          <p class="producto-nombre">Woke</p>
+          <p class="producto-desc">El movimiento que prometió libertad y entregó dogma.</p>
+          <p class="producto-precio" style="display:none;"><sup>€</sup>47</p>
+          <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Aprenderás a identificarlo antes de que te afecte.</p>
+          <a href="#membresia" style="display:block; text-align:center; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem; text-decoration:none; cursor:pointer;">Únete a Iron para acceder</a>
+          <a href="productos.html#serie-7" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
 
