@@ -221,6 +221,11 @@
   
     /* Carrusel: solo desplazamiento lateral */
     .productos-grid { overflow-y: hidden !important; }
+  
+    /* Tarjetas Soul e Iron: botones siempre a la misma altura */
+    .programa-card { display: flex; flex-direction: column; }
+    .programa-card > .programa-logo, .programa-card > .btn { align-self: flex-start; }
+    .programa-card > .btn { margin-top: auto; }
   </style>
 </head>
 <body>
@@ -304,6 +309,7 @@
           <li><div class="feature-icono">◇</div><div class="feature-texto"><strong>Donaciones</strong><span>Cada aporte transforma vidas.</span></div></li>
           <li><div class="feature-icono">✦</div><div class="feature-texto"><strong>Psicología de crisis</strong><span>Recursos para atravesar el momento más difícil.</span></div></li>
           <li><div class="feature-icono">⬡</div><div class="feature-texto"><strong>Grupo privado</strong><span>WhatsApp exclusivo para hombres en tu situación o que quieran apoyar.</span></div></li>
+          <li><div class="feature-icono">◎</div><div class="feature-texto"><strong>Sin juicios</strong><span>Un espacio donde nadie te señala.</span></div></li>
         </ul>
         <a href="soul.html" class="btn"><span>Conoce Ethos Soul</span></a>
       </div>
