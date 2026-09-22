@@ -207,6 +207,9 @@
   
     /* Botón donar siempre a media pantalla, fijo al desplazarse */
     #btn-donar { top: 50% !important; bottom: auto !important; transform: translateY(-50%); }
+  
+    /* Imágenes con medidas: mantener la altura automática salvo que el diseño fije otra */
+    :where(img[width][height]) { height: auto; }
   </style>
 </head>
 <body>
@@ -262,7 +265,7 @@
   <div class="producto-seccion reveal" id="iron-en-series" data-categoria="membresia serie" data-lanzamiento="abierto">
     <div class="producto-detalle">
       <div class="producto-imagen-wrap reveal">
-        <img src="ETHOS Iron copia 3.png" alt="Iron Pass" class="producto-det-imagen" />
+        <img src="img/ethos-iron-copia-3-800.webp" alt="Iron Pass" class="producto-det-imagen" srcset="img/ethos-iron-copia-3-800.webp 800w, img/ethos-iron-copia-3-1400.webp 1400w, img/ethos-iron-copia-3-2097.webp 2097w" sizes="(max-width: 768px) 94vw, 455px" width="2097" height="750" loading="lazy" decoding="async" />
       </div>
       <div class="producto-det-info">
         <span class="producto-det-badge">ETHOS Iron · La opción más completa</span>
@@ -300,7 +303,7 @@
   <div class="producto-seccion reveal" id="serie-1" data-categoria="serie" data-lanzamiento="cerrado">
     <div class="producto-detalle">
       <div class="producto-imagen-wrap">
-        <img src="S1-La mente femenina al descubierto.png" alt="La mente femenina al descubierto" class="producto-det-imagen" />
+        <img src="img/s1-la-mente-femenina-al-descubierto-840.webp" alt="La mente femenina al descubierto" class="producto-det-imagen" srcset="img/s1-la-mente-femenina-al-descubierto-420.webp 420w, img/s1-la-mente-femenina-al-descubierto-840.webp 840w, img/s1-la-mente-femenina-al-descubierto-1260.webp 1260w, img/s1-la-mente-femenina-al-descubierto-1672.webp 1672w" sizes="(max-width: 768px) 94vw, 455px" width="1672" height="941" loading="lazy" decoding="async" />
       </div>
       <div class="producto-det-info">
         <span class="producto-det-badge">Serie 01 · ETHOS Iron</span>
@@ -336,7 +339,7 @@
   <div class="producto-seccion reveal" id="serie-2" data-categoria="serie" data-lanzamiento="cerrado">
     <div class="producto-detalle invertido">
       <div class="producto-imagen-wrap">
-        <img src="S2-La logica femenina al descubierto.png" alt="La lógica femenina al descubierto" class="producto-det-imagen" />
+        <img src="img/s2-la-logica-femenina-al-descubierto-840.webp" alt="La lógica femenina al descubierto" class="producto-det-imagen" srcset="img/s2-la-logica-femenina-al-descubierto-420.webp 420w, img/s2-la-logica-femenina-al-descubierto-840.webp 840w, img/s2-la-logica-femenina-al-descubierto-1260.webp 1260w, img/s2-la-logica-femenina-al-descubierto-1672.webp 1672w" sizes="(max-width: 768px) 94vw, 455px" width="1672" height="941" loading="lazy" decoding="async" />
       </div>
       <div class="producto-det-info">
         <span class="producto-det-badge">Serie 02 · ETHOS Iron</span>
@@ -372,7 +375,7 @@
   <div class="producto-seccion reveal" id="serie-3" data-categoria="serie" data-lanzamiento="cerrado">
     <div class="producto-detalle">
       <div class="producto-imagen-wrap">
-        <img src="S3-La conquista real.png" alt="La conquista real" class="producto-det-imagen" />
+        <img src="img/s3-la-conquista-real-840.webp" alt="La conquista real" class="producto-det-imagen" srcset="img/s3-la-conquista-real-420.webp 420w, img/s3-la-conquista-real-840.webp 840w, img/s3-la-conquista-real-1260.webp 1260w, img/s3-la-conquista-real-1672.webp 1672w" sizes="(max-width: 768px) 94vw, 455px" width="1672" height="941" loading="lazy" decoding="async" />
       </div>
       <div class="producto-det-info">
         <span class="producto-det-badge">Serie 03 · ETHOS Iron</span>
@@ -408,7 +411,7 @@
   <div class="producto-seccion reveal" id="serie-4" data-categoria="serie" data-lanzamiento="cerrado">
     <div class="producto-detalle invertido">
       <div class="producto-imagen-wrap">
-        <img src="S4-Destruye el feminismo.png" alt="Destruye el feminismo" class="producto-det-imagen" />
+        <img src="img/s4-destruye-el-feminismo-840.webp" alt="Destruye el feminismo" class="producto-det-imagen" srcset="img/s4-destruye-el-feminismo-420.webp 420w, img/s4-destruye-el-feminismo-840.webp 840w, img/s4-destruye-el-feminismo-1260.webp 1260w, img/s4-destruye-el-feminismo-1672.webp 1672w" sizes="(max-width: 768px) 94vw, 455px" width="1672" height="941" loading="lazy" decoding="async" />
       </div>
       <div class="producto-det-info">
         <span class="producto-det-badge">Serie 04 · ETHOS Iron</span>
@@ -444,7 +447,7 @@
   <div class="producto-seccion reveal" id="serie-5" data-categoria="serie" data-lanzamiento="cerrado">
     <div class="producto-detalle">
       <div class="producto-imagen-wrap">
-        <img src="S5-La guerra de sexos.png" alt="La guerra de sexos" class="producto-det-imagen" />
+        <img src="img/s5-la-guerra-de-sexos-840.webp" alt="La guerra de sexos" class="producto-det-imagen" srcset="img/s5-la-guerra-de-sexos-420.webp 420w, img/s5-la-guerra-de-sexos-840.webp 840w, img/s5-la-guerra-de-sexos-1260.webp 1260w, img/s5-la-guerra-de-sexos-1672.webp 1672w" sizes="(max-width: 768px) 94vw, 455px" width="1672" height="941" loading="lazy" decoding="async" />
       </div>
       <div class="producto-det-info">
         <span class="producto-det-badge">Serie 05 · ETHOS Iron</span>
@@ -480,7 +483,7 @@
   <div class="producto-seccion reveal" id="serie-6" data-categoria="serie" data-lanzamiento="cerrado">
     <div class="producto-detalle invertido">
       <div class="producto-imagen-wrap">
-        <img src="S6-El ciclo tu poder.png" alt="El ciclo, tu poder" class="producto-det-imagen" />
+        <img src="img/s6-el-ciclo-tu-poder-840.webp" alt="El ciclo, tu poder" class="producto-det-imagen" srcset="img/s6-el-ciclo-tu-poder-420.webp 420w, img/s6-el-ciclo-tu-poder-840.webp 840w, img/s6-el-ciclo-tu-poder-1260.webp 1260w, img/s6-el-ciclo-tu-poder-1672.webp 1672w" sizes="(max-width: 768px) 94vw, 455px" width="1672" height="941" loading="lazy" decoding="async" />
       </div>
       <div class="producto-det-info">
         <span class="producto-det-badge">Serie 06 · ETHOS Iron</span>
@@ -516,7 +519,7 @@
   <div class="producto-seccion reveal" id="serie-7" data-categoria="serie" data-lanzamiento="cerrado">
     <div class="producto-detalle">
       <div class="producto-imagen-wrap">
-        <img src="S7- Woke.png" alt="Woke" class="producto-det-imagen" />
+        <img src="img/s7-woke-840.webp" alt="Woke" class="producto-det-imagen" srcset="img/s7-woke-420.webp 420w, img/s7-woke-840.webp 840w, img/s7-woke-1260.webp 1260w, img/s7-woke-1672.webp 1672w" sizes="(max-width: 768px) 94vw, 455px" width="1672" height="941" loading="lazy" decoding="async" />
       </div>
       <div class="producto-det-info">
         <span class="producto-det-badge">Serie 07 · ETHOS Iron</span>
@@ -552,7 +555,7 @@
   <div class="producto-seccion reveal" id="guia-vg" data-categoria="soul" data-lanzamiento="abierto">
     <div class="producto-detalle invertido">
       <div class="producto-imagen-wrap">
-        <img src="ETHOS Soul copia 3.png" alt="Guía VG" class="producto-det-imagen" />
+        <img src="img/ethos-soul-copia-3-514.webp" alt="Guía VG" class="producto-det-imagen" width="514" height="156" loading="lazy" decoding="async" />
       </div>
       <div class="producto-det-info">
         <span class="producto-det-badge">ETHOS Soul · Donación mínima</span>
@@ -588,9 +591,9 @@
       <div id="pack-fundamentos" class="pack-card reveal" style="background:var(--negro-card); border:1px solid var(--negro-borde); padding:2.5rem 2rem; text-align:center; position:relative; transition: transform 0.35s ease, box-shadow 0.35s ease;" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 16px 40px rgba(201,168,76,0.12)';this.style.borderColor='var(--dorado)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='var(--negro-borde)'">
         <div class="pack-card-body">
           <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px; margin-bottom:1.2rem; height:100px; overflow:hidden;">
-            <img src="S1-La mente femenina al descubierto.png" style="width:100%; height:100px; object-fit:cover; object-position:top;" />
-            <img src="S2-La logica femenina al descubierto.png" style="width:100%; height:100px; object-fit:cover; object-position:top;" />
-            <img src="S6-El ciclo tu poder.png" style="width:100%; height:100px; object-fit:cover; object-position:top;" />
+            <img src="img/s1-la-mente-femenina-al-descubierto-420.webp" style="width:100%; height:100px; object-fit:cover; object-position:top;" srcset="img/s1-la-mente-femenina-al-descubierto-420.webp 420w, img/s1-la-mente-femenina-al-descubierto-840.webp 840w, img/s1-la-mente-femenina-al-descubierto-1260.webp 1260w, img/s1-la-mente-femenina-al-descubierto-1672.webp 1672w" sizes="150px" width="1672" height="941" loading="lazy" decoding="async" alt="" />
+            <img src="img/s2-la-logica-femenina-al-descubierto-420.webp" style="width:100%; height:100px; object-fit:cover; object-position:top;" srcset="img/s2-la-logica-femenina-al-descubierto-420.webp 420w, img/s2-la-logica-femenina-al-descubierto-840.webp 840w, img/s2-la-logica-femenina-al-descubierto-1260.webp 1260w, img/s2-la-logica-femenina-al-descubierto-1672.webp 1672w" sizes="150px" width="1672" height="941" loading="lazy" decoding="async" alt="" />
+            <img src="img/s6-el-ciclo-tu-poder-420.webp" style="width:100%; height:100px; object-fit:cover; object-position:top;" srcset="img/s6-el-ciclo-tu-poder-420.webp 420w, img/s6-el-ciclo-tu-poder-840.webp 840w, img/s6-el-ciclo-tu-poder-1260.webp 1260w, img/s6-el-ciclo-tu-poder-1672.webp 1672w" sizes="150px" width="1672" height="941" loading="lazy" decoding="async" alt="" />
           </div>
           <p style="font-family:var(--font-display); font-size:1.4rem; font-weight:300; margin-bottom:0.5rem;">Pack Fundamentos</p>
           <p style="font-size:0.75rem; color:var(--gris); margin-bottom:1rem; line-height:1.6;">Series 01 + 02 + 06 · Mente, lógica y biología</p>
@@ -622,9 +625,9 @@
         <div style="position:absolute; top:-1px; left:50%; transform:translateX(-50%); background:var(--dorado); color:var(--negro); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.3rem 1rem;">Más popular</div>
         <div class="pack-card-body">
           <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px; margin-bottom:1.2rem; height:100px; overflow:hidden;">
-            <img src="S3-La conquista real.png" style="width:100%; height:100px; object-fit:cover; object-position:top;" />
-            <img src="S4-Destruye el feminismo.png" style="width:100%; height:100px; object-fit:cover; object-position:top;" />
-            <img src="S5-La guerra de sexos.png" style="width:100%; height:100px; object-fit:cover; object-position:top;" />
+            <img src="img/s3-la-conquista-real-420.webp" style="width:100%; height:100px; object-fit:cover; object-position:top;" srcset="img/s3-la-conquista-real-420.webp 420w, img/s3-la-conquista-real-840.webp 840w, img/s3-la-conquista-real-1260.webp 1260w, img/s3-la-conquista-real-1672.webp 1672w" sizes="150px" width="1672" height="941" loading="lazy" decoding="async" alt="" />
+            <img src="img/s4-destruye-el-feminismo-420.webp" style="width:100%; height:100px; object-fit:cover; object-position:top;" srcset="img/s4-destruye-el-feminismo-420.webp 420w, img/s4-destruye-el-feminismo-840.webp 840w, img/s4-destruye-el-feminismo-1260.webp 1260w, img/s4-destruye-el-feminismo-1672.webp 1672w" sizes="150px" width="1672" height="941" loading="lazy" decoding="async" alt="" />
+            <img src="img/s5-la-guerra-de-sexos-420.webp" style="width:100%; height:100px; object-fit:cover; object-position:top;" srcset="img/s5-la-guerra-de-sexos-420.webp 420w, img/s5-la-guerra-de-sexos-840.webp 840w, img/s5-la-guerra-de-sexos-1260.webp 1260w, img/s5-la-guerra-de-sexos-1672.webp 1672w" sizes="150px" width="1672" height="941" loading="lazy" decoding="async" alt="" />
           </div>
           <p style="font-family:var(--font-display); font-size:1.4rem; font-weight:300; margin-bottom:0.5rem;">Pack Relaciones</p>
           <p style="font-size:0.75rem; color:var(--gris); margin-bottom:1rem; line-height:1.6;">Series 03 + 04 + 05 · Conquista, feminismo y guerra de sexos</p>
@@ -655,9 +658,9 @@
       <div id="pack-completo" class="pack-card reveal" style="background:var(--negro-card); border:1px solid var(--negro-borde); padding:2.5rem 2rem; text-align:center; position:relative; transition: transform 0.35s ease, box-shadow 0.35s ease;" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 16px 40px rgba(201,168,76,0.12)';this.style.borderColor='var(--dorado)'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='var(--negro-borde)'">
         <div class="pack-card-body">
           <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px; margin-bottom:1.2rem; height:100px; overflow:hidden;">
-            <img src="S1-La mente femenina al descubierto.png" style="width:100%; height:100px; object-fit:cover; object-position:top;" />
-            <img src="S4-Destruye el feminismo.png" style="width:100%; height:100px; object-fit:cover; object-position:top;" />
-            <img src="S7- Woke.png" style="width:100%; height:100px; object-fit:cover; object-position:top;" />
+            <img src="img/s1-la-mente-femenina-al-descubierto-420.webp" style="width:100%; height:100px; object-fit:cover; object-position:top;" srcset="img/s1-la-mente-femenina-al-descubierto-420.webp 420w, img/s1-la-mente-femenina-al-descubierto-840.webp 840w, img/s1-la-mente-femenina-al-descubierto-1260.webp 1260w, img/s1-la-mente-femenina-al-descubierto-1672.webp 1672w" sizes="150px" width="1672" height="941" loading="lazy" decoding="async" alt="" />
+            <img src="img/s4-destruye-el-feminismo-420.webp" style="width:100%; height:100px; object-fit:cover; object-position:top;" srcset="img/s4-destruye-el-feminismo-420.webp 420w, img/s4-destruye-el-feminismo-840.webp 840w, img/s4-destruye-el-feminismo-1260.webp 1260w, img/s4-destruye-el-feminismo-1672.webp 1672w" sizes="150px" width="1672" height="941" loading="lazy" decoding="async" alt="" />
+            <img src="img/s7-woke-420.webp" style="width:100%; height:100px; object-fit:cover; object-position:top;" srcset="img/s7-woke-420.webp 420w, img/s7-woke-840.webp 840w, img/s7-woke-1260.webp 1260w, img/s7-woke-1672.webp 1672w" sizes="150px" width="1672" height="941" loading="lazy" decoding="async" alt="" />
           </div>
           <p style="font-family:var(--font-display); font-size:1.4rem; font-weight:300; margin-bottom:0.5rem;">Pack Completo</p>
           <p style="font-size:0.75rem; color:var(--gris); margin-bottom:1rem; line-height:1.6;">Las 7 series · Acceso total al contenido Iron</p>
