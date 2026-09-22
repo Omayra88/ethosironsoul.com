@@ -40,19 +40,18 @@ h1,h2,h3{font-family:var(--display);font-weight:300;line-height:1.12}
 .cinta b{color:#fff;font-weight:500}
 
 /* --- portada --- */
-#portada{position:relative;min-height:80vh;display:grid;place-items:center;text-align:center;overflow:hidden;padding:5rem 0}
-#portada .brillo{position:absolute;inset:0;background:
-   radial-gradient(60% 45% at 50% 8%,rgba(201,168,76,.16),transparent 70%),
-   radial-gradient(45% 40% at 50% 100%,rgba(201,168,76,.07),transparent 70%)}
-#portada .vetas{position:absolute;inset:0;opacity:.5;background-image:repeating-linear-gradient(90deg,rgba(201,168,76,.055) 0 1px,transparent 1px 78px);mask-image:radial-gradient(70% 60% at 50% 45%,#000 20%,transparent 78%);-webkit-mask-image:radial-gradient(70% 60% at 50% 45%,#000 20%,transparent 78%)}
-#portada .filo{position:absolute;left:50%;top:0;width:1px;height:120px;background:linear-gradient(180deg,var(--oro),transparent)}
+#portada{position:relative;padding:0 0 4rem;text-align:center}
+#portada .cartel{position:relative;width:100%;max-width:1440px;margin:0 auto}
+#portada .cartel img{width:100%;aspect-ratio:16/9;object-fit:cover}
+#portada .cartel::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,7,7,.35) 0%,rgba(7,7,7,0) 28%,rgba(7,7,7,.75) 82%,var(--tinta) 100%)}
+#portada .bajo-cartel{position:relative;z-index:2;margin-top:-4.5rem}
 .portada-txt{position:relative;z-index:2}
 .sello-marca{font-family:var(--display);font-size:1.05rem;letter-spacing:.44em;color:var(--hueso);opacity:.85}
 .sello-sub{margin-top:.35rem;font-size:.62rem;letter-spacing:.42em;color:var(--oro)}
 .chapa{display:inline-flex;align-items:center;gap:.55rem;border:1px solid var(--oro-hondo);background:rgba(201,168,76,.07);color:var(--oro-claro);font-size:.67rem;letter-spacing:.14em;padding:.45rem .9rem;margin:2.2rem 0 1.4rem}
 .chapa i{width:6px;height:6px;border-radius:50%;background:var(--oro);animation:latido 2.4s infinite}
 @keyframes latido{0%{box-shadow:0 0 0 0 rgba(201,168,76,.55)}70%{box-shadow:0 0 0 10px rgba(201,168,76,0)}100%{box-shadow:0 0 0 0 rgba(201,168,76,0)}}
-#portada h1{font-size:clamp(2.4rem,5.4vw,4.2rem);max-width:18ch;margin:0 auto}
+#portada h1{margin:0 auto;font-size:clamp(2.4rem,5.4vw,4.2rem);max-width:18ch}
 #portada h1 i{font-style:italic;color:var(--oro)}
 #portada .bajada{margin:1.4rem auto 0;max-width:52ch;color:var(--texto-sec);font-size:1.02rem}
 
@@ -199,12 +198,10 @@ footer small{display:block;margin-top:.7rem;font-size:.68rem;color:#39342c}
 <div class="cinta">Acceso de fundador · <b>50 plazas</b> · cuando se llenan, se cierra</div>
 
 <header id="portada">
-  <div class="brillo"></div>
-  <div class="vetas"></div>
-  <div class="filo"></div>
-  <div class="ancho portada-txt">
-    <p class="sello-marca">ETHOS IRON</p>
-    <p class="sello-sub">IRON PASS</p>
+  <div class="cartel">
+    <img src="img/formal-iron-1672.webp" srcset="img/formal-iron-700.webp 700w, img/formal-iron-1100.webp 1100w, img/formal-iron-1672.webp 1672w" sizes="100vw" width="1672" height="941" alt="Omayra Pérez — ETHOS Iron, acceso privado" fetchpriority="high" />
+  </div>
+  <div class="ancho bajo-cartel">
     <span class="chapa"><i></i> Apertura de fundadores</span>
     <h1 class="ap">Llevas meses intentando entender <i>qué pasó.</i></h1>
     <p class="bajada ap">Cómo piensa y decide ella, qué hay detrás del discurso que te señala y dónde estás parado legalmente. Documentado, con las fuentes a la vista para que lo compruebes tú mismo.</p>
