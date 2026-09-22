@@ -296,6 +296,10 @@
       .membresia-imagen-wrap { height: auto !important; }
       .membresia-imagen-wrap img { height: auto !important; object-fit: contain !important; display: block; }
     }
+  
+    /* Texto que solo se ve en móvil */
+    .solo-movil { display: none; }
+    @media (max-width: 768px) { .solo-movil { display: inline; } }
   </style>
 </head>
 <body>
@@ -511,7 +515,7 @@
           <p class="producto-nombre">La guerra de sexos</p>
           <p class="producto-desc">Por qué nos enfrentan y quién gana.</p>
           <p class="producto-precio" style="display:none;"><sup>€</sup>57</p>
-          <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Dejarás de caer en la trampa.</p>
+          <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Dejarás de caer en la trampa<span class="solo-movil">, eso se acabó</span>.</p>
           <a href="#membresia" style="display:block; text-align:center; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem; text-decoration:none; cursor:pointer;">Únete a Iron para acceder</a>
           <a href="productos.html#serie-5" class="btn-comprar"><span>Saber más</span></a>
         </div>
