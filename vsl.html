@@ -125,7 +125,7 @@ footer a:hover{color:var(--oro)}
 </div>
 
 <div class="ancho frase">
-  <h1>Todo lo que llevas meses intentando entender, <i>explicado aquí dentro.</i></h1>
+  <h1>Todo lo que llevas años intentando entender, <i>explicado aquí dentro.</i></h1>
 </div>
 
 <div class="ancho">
@@ -221,7 +221,9 @@ footer a:hover{color:var(--oro)}
 
 <script>
   /* La venta entera aparece a los 14 minutos. Pon MINUTOS = 0 para verla siempre. */
-  var MINUTOS = 14;
+  /* AHORA EN 0: se ve todo desde el principio para poder revisarlo.
+     Cuando esté el vídeo, pon 14 y volverá a aparecer a mitad. */
+  var MINUTOS = 0;
   (function () {
     var venta = document.getElementById('venta'), barra = document.getElementById('barra');
     function abrir(){ venta.classList.add('abierta'); barra.classList.add('puesta'); }
