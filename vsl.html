@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="fonts/fonts.css" />
 <style>
 :root{
-  --tinta:#050505;--panel:#0c0b09;--humo:#121110;--linea:#262119;
+  --tinta:#050505;--panel:#0b0a08;--linea:#262119;
   --oro:#c9a84c;--oro-claro:#ecd694;--oro-hondo:#7d5f1c;
   --hueso:#f7f3ec;--sec:#b9b3a8;--ceniza:#8b867c;
   --display:'Cormorant Garamond',serif;--sans:'Montserrat',sans-serif;
@@ -21,327 +21,130 @@ body{background:var(--tinta);color:var(--hueso);font-family:var(--sans);font-wei
 img{max-width:100%;display:block}
 :where(img[width][height]){height:auto}
 ::selection{background:var(--oro);color:#000}
-.ancho{max-width:1160px;margin:0 auto;padding:0 2rem}
-.medio{max-width:840px;margin:0 auto;padding:0 2rem}
-h1,h2,h3{font-family:var(--display);font-weight:300;line-height:1.1}
+.ancho{max-width:1080px;margin:0 auto;padding:0 1.6rem}
+h1,h2,h3{font-family:var(--display);font-weight:300;line-height:1.12}
 
-.re{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,.8,.3,1),transform .9s cubic-bezier(.16,.8,.3,1)}
-.re.vis{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.re{opacity:1;transform:none}}
-
-.cinta{position:relative;z-index:6;background:linear-gradient(90deg,#120d04,#3c2d10,#120d04);border-bottom:1px solid var(--oro-hondo);text-align:center;padding:.6rem 1rem;font-size:.7rem;letter-spacing:.1em;color:var(--oro-claro)}
+/* cinta de escasez */
+.cinta{position:sticky;top:0;z-index:20;background:linear-gradient(90deg,#120d04,#40300f,#120d04);border-bottom:1px solid var(--oro-hondo);text-align:center;padding:.62rem 1rem;font-size:.72rem;letter-spacing:.1em;color:var(--oro-claro)}
 .cinta b{color:#fff;font-weight:500}
 
-/* portada */
-#portada{padding:0 0 3rem;text-align:center}
+/* portada: imagen + una frase + vídeo */
 .cartel{width:100%;background:#000}
 .cartel img{width:100%;height:auto}
-.bajo{margin-top:2.6rem}
-.chapa{display:inline-flex;align-items:center;gap:.55rem;border:1px solid var(--oro-hondo);background:rgba(201,168,76,.08);color:var(--oro-claro);font-size:.66rem;letter-spacing:.16em;padding:.45rem .95rem;margin-bottom:1.3rem}
-.chapa i{width:6px;height:6px;border-radius:50%;background:var(--oro);animation:latido 2.6s infinite}
-@keyframes latido{0%{box-shadow:0 0 0 0 rgba(201,168,76,.5)}70%{box-shadow:0 0 0 11px rgba(201,168,76,0)}100%{box-shadow:0 0 0 0 rgba(201,168,76,0)}}
-#portada h1{font-size:clamp(2.1rem,4.6vw,3.6rem);max-width:19ch;margin:0 auto}
-#portada h1 i{font-style:italic;color:var(--oro)}
-#portada .baja{margin:1.3rem auto 0;max-width:50ch;color:var(--sec);font-size:1rem}
+.frase{text-align:center;padding:2.4rem 0 1.8rem}
+.frase h1{font-size:clamp(1.9rem,4.2vw,3.1rem);max-width:20ch;margin:0 auto}
+.frase h1 i{font-style:italic;color:var(--oro)}
 
-/* vídeo */
-#video{padding:1rem 0 4.5rem}
-.pant-caja{border:1px solid var(--oro-hondo);background:#000;box-shadow:0 0 100px rgba(201,168,76,.13)}
+.caja-video{border:1px solid var(--oro-hondo);background:#000;box-shadow:0 0 110px rgba(201,168,76,.14)}
 .pant{position:relative;aspect-ratio:16/9;display:grid;place-items:center}
 .pant iframe,.pant video{position:absolute;inset:0;width:100%;height:100%;border:0}
 .pant .ag{font-size:.7rem;letter-spacing:.2em;color:#3d382e}
-.sonido{margin-top:1rem;text-align:center;font-size:.8rem;color:var(--ceniza)}
+.sonido{margin:1rem 0 3rem;text-align:center;font-size:.8rem;color:var(--ceniza)}
 
-/* beneficios grandes */
-.gran{padding:6rem 0;border-top:1px solid var(--linea)}
-.gran .num{font-family:var(--display);font-size:.9rem;letter-spacing:.3em;color:var(--oro-hondo);margin-bottom:1.2rem}
-.gran h2{font-size:clamp(2.1rem,5vw,3.6rem);max-width:17ch}
-.gran p{margin-top:1.3rem;max-width:56ch;color:var(--sec);font-size:1.02rem}
-.gran.der{text-align:right}
-.gran.der h2,.gran.der p{margin-left:auto}
-
-/* carrusel de series */
-#series{padding:5.5rem 0 4rem;background:var(--panel);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
-.series-cab{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap}
-.series-cab h2{font-size:clamp(2rem,4vw,3rem);max-width:16ch}
-.flechas{display:flex;gap:.6rem}
-.flechas button{width:42px;height:42px;border:1px solid var(--linea);background:transparent;color:var(--oro);font-size:1.1rem;cursor:pointer;transition:border-color .3s,background .3s}
-.flechas button:hover{border-color:var(--oro);background:rgba(201,168,76,.08)}
-.pista{display:flex;gap:1.2rem;margin-top:2.5rem;overflow-x:auto;scroll-snap-type:x mandatory;overflow-y:hidden;padding-bottom:1.2rem;scrollbar-width:none}
-.pista::-webkit-scrollbar{display:none}
-.serie{flex:0 0 380px;scroll-snap-align:start;background:var(--humo);border:1px solid var(--linea);overflow:hidden;transition:border-color .35s,transform .35s}
-.serie:hover{border-color:var(--oro-hondo);transform:translateY(-4px)}
-.serie img{width:100%;aspect-ratio:16/9;object-fit:cover}
-.serie-txt{padding:1.3rem 1.4rem 1.6rem}
-.serie-txt h3{font-size:1.32rem;margin-bottom:.4rem}
-.serie-txt p{font-size:.88rem;color:var(--sec)}
-.pista-pie{margin-top:.6rem;font-size:.74rem;color:var(--ceniza)}
-
-/* ritmo semanal pegado */
-#ritmo{position:relative}
-.ritmo-caja{display:grid;grid-template-columns:.9fr 1.1fr;gap:3rem;align-items:start;padding:5.5rem 0}
-.ritmo-fijo{position:sticky;top:12vh}
-.ritmo-fijo h2{font-size:clamp(2rem,4vw,3rem);max-width:15ch}
-.ritmo-fijo p{margin-top:1.1rem;color:var(--sec);font-size:.98rem;max-width:40ch}
-.ritmo-fijo .marcador{margin-top:2rem;font-family:var(--display);font-size:3.4rem;color:var(--oro);line-height:1}
-.ritmo-fijo .marcador span{font-size:1rem;color:var(--ceniza);font-family:var(--sans);display:block;letter-spacing:.14em}
-.jornadas{display:grid;gap:1rem}
-.jornada{border:1px solid var(--linea);background:var(--humo);padding:1.7rem 1.8rem;opacity:.25;transform:translateY(30px) scale(.98);transition:opacity .6s ease,transform .6s cubic-bezier(.16,.8,.3,1),border-color .6s}
-.jornada.vis{opacity:1;transform:none;border-color:var(--oro-hondo)}
-.jornada .cuando{font-family:var(--display);font-size:1.45rem;color:var(--oro);margin-bottom:.3rem}
-.jornada p{font-size:.95rem;color:var(--sec)}
-.jornada p b{color:var(--hueso);font-weight:500}
-
-/* a quién */
-#aquien{padding:5.5rem 0;border-top:1px solid var(--linea)}
-.casos{margin-top:2.6rem;display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
-.caso{border:1px solid var(--linea);background:var(--humo);padding:1.9rem}
-.caso h3{font-size:1.3rem;margin-bottom:.5rem;color:var(--hueso)}
-.caso p{font-size:.93rem;color:var(--sec)}
-.caso .flecha{margin-top:1rem;font-size:.78rem;color:var(--oro);letter-spacing:.06em}
-
-/* voces */
-#voces{padding:5.5rem 0;background:var(--panel);border-top:1px solid var(--linea)}
-.voces{margin-top:2.4rem;display:flex;gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:1rem;scrollbar-width:none}
-.voces::-webkit-scrollbar{display:none}
-.voz{flex:0 0 340px;scroll-snap-align:start;border-top:2px solid var(--oro-hondo);background:var(--humo);padding:1.7rem}
-.voz p{font-family:var(--display);font-size:1.18rem;font-style:italic;color:#e2dcd2;line-height:1.5}
-.voz cite{display:block;margin-top:1rem;font-family:var(--sans);font-style:normal;font-size:.72rem;color:var(--oro)}
+/* venta (aparece a los 14 min) */
+#venta{display:none}
+#venta.abierta{display:block;animation:entra .7s cubic-bezier(.16,.8,.3,1) both}
+@keyframes entra{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+#venta section{padding:3.5rem 0}
+.pacto{border:1px solid var(--oro-hondo);background:var(--panel);box-shadow:0 0 90px rgba(201,168,76,.10)}
+.pacto-alto{padding:2.2rem 2.4rem 1.6rem;text-align:center;border-bottom:1px solid var(--linea)}
+.pacto-alto h2{font-size:clamp(1.8rem,3.2vw,2.5rem)}
+.pacto-alto p{margin-top:.6rem;color:var(--sec);font-size:.93rem}
+.pacto-cuerpo{display:grid;grid-template-columns:1.1fr .9fr}
+.lote{padding:2.2rem 2.4rem}
+.lote li{list-style:none;font-size:.94rem;color:var(--sec);padding:.5rem 0 .5rem 1.7rem;position:relative}
+.lote li::before{content:'✓';position:absolute;left:0;color:var(--oro)}
+.precio{padding:2.2rem 2.4rem;border-left:1px solid var(--linea);text-align:center;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(180deg,#0f0c07,#0a0907)}
+.tachado{font-size:1rem;color:var(--ceniza);text-decoration:line-through}
+.cifra{font-family:var(--display);font-size:4.2rem;line-height:1;color:var(--oro);margin:.15rem 0}
+.almes{font-size:.8rem;color:var(--ceniza)}
+.congelado{margin-top:.8rem;font-size:.88rem;color:var(--hueso)}
+.boton{display:inline-block;margin-top:1.4rem;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;padding:1.15rem 2.2rem;border:1px solid var(--oro);background:linear-gradient(180deg,var(--oro),#a8862f);color:#0b0a08;font-weight:500;text-decoration:none;cursor:pointer;transition:filter .3s,transform .3s}
+.boton:hover,.boton:focus-visible{filter:brightness(1.12);transform:translateY(-2px)}
+.letra{margin-top:.9rem;font-size:.75rem;color:var(--ceniza);line-height:1.6}
 
 /* bonus */
-#bonus{padding:6rem 0;text-align:center;background:radial-gradient(85% 70% at 50% 0%,#1b1408,var(--tinta) 72%);border-top:1px solid var(--oro-hondo);border-bottom:1px solid var(--oro-hondo)}
-.medalla{width:116px;height:116px;margin:0 auto 1.8rem;border:1px solid var(--oro);border-radius:50%;display:grid;place-items:center;position:relative}
+#bonus{text-align:center;border-top:1px solid var(--oro-hondo);border-bottom:1px solid var(--oro-hondo);background:radial-gradient(85% 70% at 50% 0%,#1a1308,var(--tinta) 72%)}
+.medalla{width:104px;height:104px;margin:0 auto 1.5rem;border:1px solid var(--oro);border-radius:50%;display:grid;place-items:center;position:relative}
 .medalla::before{content:'';position:absolute;inset:7px;border:1px solid var(--oro-hondo);border-radius:50%}
-.medalla span{font-family:var(--display);font-size:2rem;color:var(--oro);line-height:1}
-.medalla small{position:absolute;bottom:24px;font-size:.54rem;letter-spacing:.2em;color:var(--oro-claro)}
-#bonus h2{font-size:clamp(2rem,4.2vw,3rem);max-width:18ch;margin:0 auto}
-#bonus .regalo{font-family:var(--display);font-style:italic;font-size:1.6rem;color:var(--oro);margin-top:.9rem}
-#bonus .det{margin:1.2rem auto 0;max-width:50ch;color:var(--sec);font-size:.99rem}
-#bonus .corte{margin-top:1.3rem;font-size:.85rem;color:var(--oro-claro)}
+.medalla span{font-family:var(--display);font-size:1.9rem;color:var(--oro);line-height:1}
+.medalla small{position:absolute;bottom:22px;font-size:.52rem;letter-spacing:.2em;color:var(--oro-claro)}
+#bonus h2{font-size:clamp(1.8rem,3.6vw,2.6rem);max-width:18ch;margin:0 auto}
+#bonus .regalo{font-family:var(--display);font-style:italic;font-size:1.5rem;color:var(--oro);margin-top:.7rem}
+#bonus .det{margin:1rem auto 0;max-width:48ch;color:var(--sec);font-size:.95rem}
+#bonus .corte{margin-top:1.1rem;font-size:.83rem;color:var(--oro-claro)}
 
-/* oferta */
-#oferta{display:none;padding:5.5rem 0;background:radial-gradient(120% 90% at 50% 0%,#17120a,var(--tinta) 70%)}
-#oferta.abierta{display:block}
-.pacto{border:1px solid var(--oro-hondo);background:#0a0907;box-shadow:0 0 90px rgba(201,168,76,.10)}
-.pacto-alto{padding:2.4rem 2.6rem 1.8rem;text-align:center;border-bottom:1px solid var(--linea)}
-.pacto-alto h2{font-size:clamp(1.9rem,3.4vw,2.7rem)}
-.pacto-alto p{margin-top:.7rem;color:var(--sec);font-size:.95rem}
-.pacto-cuerpo{display:grid;grid-template-columns:1.1fr .9fr}
-.lote{padding:2.6rem}
-.lote li{list-style:none;font-size:.95rem;color:var(--sec);padding:.55rem 0 .55rem 1.7rem;position:relative}
-.lote li::before{content:'✓';position:absolute;left:0;color:var(--oro)}
-.caja-precio{padding:2.4rem 2.6rem;border-left:1px solid var(--linea);text-align:center;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(180deg,#0f0c07,#0a0907)}
-.tachado{font-size:1rem;color:var(--ceniza);text-decoration:line-through}
-.cifra{font-family:var(--display);font-size:4.4rem;line-height:1;color:var(--oro);margin:.2rem 0}
-.almes{font-size:.8rem;color:var(--ceniza)}
-.congelado{margin-top:.9rem;font-size:.88rem;color:var(--hueso)}
-.boton{display:inline-block;margin-top:1.5rem;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;padding:1.2rem 2.2rem;border:1px solid var(--oro);background:linear-gradient(180deg,var(--oro),#a8862f);color:#0b0a08;font-weight:500;text-decoration:none;cursor:pointer;transition:filter .3s,transform .3s}
-.boton:hover,.boton:focus-visible{filter:brightness(1.12);transform:translateY(-2px)}
-.boton.fantasma{background:transparent;color:var(--oro);font-weight:400}
-.letra{margin-top:1rem;font-size:.76rem;color:var(--ceniza);line-height:1.6}
-.bonus-pie{padding:1.8rem 2.6rem;border-top:1px solid var(--linea);display:grid;grid-template-columns:auto 1fr;gap:1.6rem;align-items:center;background:rgba(201,168,76,.05)}
-.bonus-pie .sello{font-family:var(--display);font-style:italic;font-size:1.2rem;color:var(--oro);white-space:nowrap}
-.bonus-pie p{font-size:.93rem;color:var(--sec)}
+/* voces */
+.voces{display:flex;gap:1.1rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:1rem;scrollbar-width:none}
+.voces::-webkit-scrollbar{display:none}
+.voz{flex:0 0 320px;scroll-snap-align:start;border-top:2px solid var(--oro-hondo);background:#100f0d;padding:1.5rem}
+.voz p{font-family:var(--display);font-size:1.14rem;font-style:italic;color:#e2dcd2;line-height:1.5}
+.voz cite{display:block;margin-top:.9rem;font-family:var(--sans);font-style:normal;font-size:.72rem;color:var(--oro)}
 
-#dudas{padding:5.5rem 0;background:var(--panel);border-top:1px solid var(--linea)}
+/* dudas */
 .duda{border-bottom:1px solid var(--linea)}
-.duda button{width:100%;display:flex;justify-content:space-between;gap:1.5rem;align-items:baseline;background:none;border:0;color:var(--hueso);font-family:var(--display);font-size:1.22rem;text-align:left;padding:1.15rem 0;cursor:pointer}
+.duda button{width:100%;display:flex;justify-content:space-between;gap:1.5rem;align-items:baseline;background:none;border:0;color:var(--hueso);font-family:var(--display);font-size:1.18rem;text-align:left;padding:1.1rem 0;cursor:pointer}
 .duda button span{color:var(--oro)}
 .duda .respuesta{max-height:0;overflow:hidden;transition:max-height .35s ease}
-.duda.abierta .respuesta{max-height:340px}
-.duda .respuesta p{padding-bottom:1.2rem;font-size:.93rem;color:var(--sec)}
-#final{padding:6rem 0 7rem;text-align:center}
-#final h2{font-size:clamp(2rem,4.2vw,3rem);max-width:20ch;margin:0 auto}
-#final p{margin:1.1rem auto 2rem;max-width:46ch;color:var(--sec);font-size:.95rem}
+.duda.abierta .respuesta{max-height:300px}
+.duda .respuesta p{padding-bottom:1.1rem;font-size:.9rem;color:var(--sec)}
 
-#barra{position:fixed;left:0;right:0;bottom:0;z-index:90;display:none;align-items:center;justify-content:center;gap:1.5rem;padding:.9rem 1.2rem;background:rgba(8,7,5,.97);border-top:1px solid var(--oro-hondo);backdrop-filter:blur(8px)}
+/* cierre */
+#cierre{text-align:center;padding-bottom:5rem}
+#cierre h2{font-size:clamp(1.8rem,3.6vw,2.6rem);max-width:20ch;margin:0 auto 1.6rem}
+
+/* barra */
+#barra{position:fixed;left:0;right:0;bottom:0;z-index:90;display:none;align-items:center;justify-content:center;gap:1.4rem;padding:.85rem 1.2rem;background:rgba(8,7,5,.97);border-top:1px solid var(--oro-hondo);backdrop-filter:blur(8px)}
 #barra.puesta{display:flex;animation:sube .5s ease both}
 @keyframes sube{from{transform:translateY(100%)}to{transform:none}}
-#barra .txt{font-size:.83rem;color:var(--sec)}
+#barra .txt{font-size:.82rem;color:var(--sec)}
 #barra .txt b{color:var(--hueso);font-weight:500}
 #barra .boton{margin-top:0;padding:.85rem 1.6rem}
 
-footer{border-top:1px solid var(--linea);padding:2rem 2rem 6rem;text-align:center;color:var(--ceniza)}
-footer a{font-size:.72rem;color:var(--ceniza);text-decoration:none;margin:0 .7rem}
+footer{border-top:1px solid var(--linea);padding:1.6rem 1.6rem 5.5rem;text-align:center}
+footer a{font-size:.68rem;color:#6b665d;text-decoration:none;margin:0 .6rem}
 footer a:hover{color:var(--oro)}
-footer small{display:block;margin-top:.7rem;font-size:.68rem;color:#39342c}
 
-@media (max-width:980px){
-  .ritmo-caja{grid-template-columns:1fr;gap:2rem}
-  .ritmo-fijo{position:static}
-  .casos{grid-template-columns:1fr}
+@media (max-width:860px){
   .pacto-cuerpo{grid-template-columns:1fr}
-  .caja-precio{border-left:0;border-top:1px solid var(--linea)}
-}
-@media (max-width:700px){
-  .ancho,.medio{padding:0 1.2rem}
-  .gran{padding:4.2rem 0}
-  .gran.der{text-align:left}
-  .serie{flex:0 0 78vw}
+  .precio{border-left:0;border-top:1px solid var(--linea)}
   .voz{flex:0 0 82vw}
-  .flechas{display:none}
-  .lote,.caja-precio,.pacto-alto,.bonus-pie{padding-left:1.4rem;padding-right:1.4rem}
-  .bonus-pie{grid-template-columns:1fr;gap:.5rem}
-  #barra{flex-direction:column;gap:.6rem;padding:.8rem}
+  .lote,.precio,.pacto-alto{padding-left:1.4rem;padding-right:1.4rem}
+  #barra{flex-direction:column;gap:.55rem;padding:.75rem}
   #barra .boton{width:100%;text-align:center}
 }
+@media (prefers-reduced-motion:reduce){#venta.abierta,#barra.puesta{animation:none}}
 </style>
 </head>
 <body>
 
 <div class="cinta">Acceso de fundador · <b>50 plazas</b> · cuando se llenan, se cierra</div>
 
-<header id="portada">
-  <div class="cartel">
-    <img src="img/formal-iron-1672.webp" srcset="img/formal-iron-700.webp 700w, img/formal-iron-1100.webp 1100w, img/formal-iron-1672.webp 1672w" sizes="100vw" width="1672" height="941" alt="ETHOS Iron — acceso privado" fetchpriority="high" />
-  </div>
-  <div class="ancho bajo">
-    <span class="chapa"><i></i> Apertura de fundadores</span>
-    <h1 class="re">Llevas meses intentando entender <i>qué pasó.</i></h1>
-    <p class="baja re">Cómo piensa y decide ella, cómo se construye la atracción de verdad y qué hay detrás del discurso que te señala. Documentado, con las fuentes a la vista.</p>
-  </div>
-</header>
+<div class="cartel">
+  <img src="img/formal-iron-1672.webp" srcset="img/formal-iron-700.webp 700w, img/formal-iron-1100.webp 1100w, img/formal-iron-1672.webp 1672w" sizes="100vw" width="1672" height="941" alt="ETHOS Iron — acceso privado" fetchpriority="high" />
+</div>
 
-<section id="video">
-  <div class="ancho">
-    <div class="pant-caja re">
-      <div class="pant">
-        <!-- ============================================================
-             AQUÍ VA EL VÍDEO DE LA VSL.
-             Sustituye este <p class="ag"> por el iframe, por ejemplo:
-             <iframe src="https://www.youtube-nocookie.com/embed/TU_ID" title="Iron Pass" allow="autoplay; fullscreen" allowfullscreen></iframe>
-        ============================================================= -->
-        <p class="ag">aquí va el vídeo</p>
-      </div>
-    </div>
-    <p class="sonido re">Ponlo con sonido. Te lo explico todo aquí dentro.</p>
-  </div>
-</section>
+<div class="ancho frase">
+  <h1>Todo lo que llevas meses intentando entender, <i>explicado aquí dentro.</i></h1>
+</div>
 
-<section class="gran">
-  <div class="ancho">
-    <p class="num re">I</p>
-    <h2 class="re">Vas a saber qué está pasando mientras está pasando.</h2>
-    <p class="re">Lo que ahora interpretas a ciegas tiene una explicación concreta: cómo piensa, cómo decide y qué significan las señales que llevas meses intentando descifrar.</p>
-  </div>
-</section>
-
-<section class="gran der">
-  <div class="ancho">
-    <p class="num re">II</p>
-    <h2 class="re">Vas a conseguir a la persona que quieres y sabrás sostenerla.</h2>
-    <p class="re">Atracción real, sin trucos ni frases aprendidas. Qué construye el deseo, qué lo apaga y qué hace que una relación aguante cuando pasa el enamoramiento.</p>
-  </div>
-</section>
-
-<section class="gran">
-  <div class="ancho">
-    <p class="num re">III</p>
-    <h2 class="re">Vas a poder responder con datos y sin levantar la voz.</h2>
-    <p class="re">El discurso feminista y woke, desmontado argumento por argumento, con estudios, cifras oficiales y jurisprudencia. Y las asimetrías legales que casi nadie te explica hasta que te tocan.</p>
-  </div>
-</section>
-
-<section id="series">
-  <div class="ancho">
-    <div class="series-cab">
-      <h2 class="re">Esto es lo que hay dentro.</h2>
-      <div class="flechas re">
-        <button type="button" id="izq" aria-label="Ver series anteriores">←</button>
-        <button type="button" id="der" aria-label="Ver más series">→</button>
-      </div>
-    </div>
-    <div class="pista" id="pista">
-      <article class="serie">
-        <img src="img/s1-la-mente-femenina-al-descubierto-840.webp" srcset="img/s1-la-mente-femenina-al-descubierto-420.webp 420w, img/s1-la-mente-femenina-al-descubierto-840.webp 840w, img/s1-la-mente-femenina-al-descubierto-1260.webp 1260w" sizes="(max-width: 700px) 78vw, 380px" width="1672" height="941" alt="La mente femenina al descubierto" loading="lazy" decoding="async" />
-        <div class="serie-txt"><h3>La mente femenina al descubierto</h3><p>Cómo piensa, qué la mueve y por qué hace lo que hace. Dejas de adivinar.</p></div>
-      </article>
-      <article class="serie">
-        <img src="img/s2-la-logica-femenina-al-descubierto-840.webp" srcset="img/s2-la-logica-femenina-al-descubierto-420.webp 420w, img/s2-la-logica-femenina-al-descubierto-840.webp 840w, img/s2-la-logica-femenina-al-descubierto-1260.webp 1260w" sizes="(max-width: 700px) 78vw, 380px" width="1672" height="941" alt="La lógica femenina al descubierto" loading="lazy" decoding="async" />
-        <div class="serie-txt"><h3>La lógica femenina al descubierto</h3><p>Patrones de comportamiento explicados. Todo empieza a tener sentido.</p></div>
-      </article>
-      <article class="serie">
-        <img src="img/s3-la-conquista-real-840.webp" srcset="img/s3-la-conquista-real-420.webp 420w, img/s3-la-conquista-real-840.webp 840w, img/s3-la-conquista-real-1260.webp 1260w" sizes="(max-width: 700px) 78vw, 380px" width="1672" height="941" alt="La conquista real" loading="lazy" decoding="async" />
-        <div class="serie-txt"><h3>La conquista real</h3><p>Atracción real, sin trucos. Consigues a tu persona y sabes cómo no perderla.</p></div>
-      </article>
-      <article class="serie">
-        <img src="img/s6-el-ciclo-tu-poder-840.webp" srcset="img/s6-el-ciclo-tu-poder-420.webp 420w, img/s6-el-ciclo-tu-poder-840.webp 840w, img/s6-el-ciclo-tu-poder-1260.webp 1260w" sizes="(max-width: 700px) 78vw, 380px" width="1672" height="941" alt="El ciclo, tu poder" loading="lazy" decoding="async" />
-        <div class="serie-txt"><h3>El ciclo, tu poder</h3><p>Qué cambia en ella cada semana del mes, por qué, y qué hacer con ello.</p></div>
-      </article>
-      <article class="serie">
-        <img src="img/s4-destruye-el-feminismo-840.webp" srcset="img/s4-destruye-el-feminismo-420.webp 420w, img/s4-destruye-el-feminismo-840.webp 840w, img/s4-destruye-el-feminismo-1260.webp 1260w" sizes="(max-width: 700px) 78vw, 380px" width="1672" height="941" alt="Destruye el feminismo" loading="lazy" decoding="async" />
-        <div class="serie-txt"><h3>Destruye el feminismo</h3><p>Los argumentos, uno a uno, con datos y fuentes. Respondes sin levantar la voz.</p></div>
-      </article>
-      <article class="serie">
-        <img src="img/s5-la-guerra-de-sexos-840.webp" srcset="img/s5-la-guerra-de-sexos-420.webp 420w, img/s5-la-guerra-de-sexos-840.webp 840w, img/s5-la-guerra-de-sexos-1260.webp 1260w" sizes="(max-width: 700px) 78vw, 380px" width="1672" height="941" alt="La guerra de sexos" loading="lazy" decoding="async" />
-        <div class="serie-txt"><h3>La guerra de sexos</h3><p>Cómo se fabrica el enfrentamiento y cómo dejar de caer en la trampa.</p></div>
-      </article>
-      <article class="serie">
-        <img src="img/s7-woke-840.webp" srcset="img/s7-woke-420.webp 420w, img/s7-woke-840.webp 840w, img/s7-woke-1260.webp 1260w" sizes="(max-width: 700px) 78vw, 380px" width="1672" height="941" alt="Woke" loading="lazy" decoding="async" />
-        <div class="serie-txt"><h3>Woke</h3><p>De dónde sale y cómo reconocerlo antes de que te afecte.</p></div>
-      </article>
-    </div>
-    <p class="pista-pie re">Desliza para ver todas. Y las que vienen después, también entran.</p>
-  </div>
-</section>
-
-<section id="ritmo">
-  <div class="ancho ritmo-caja">
-    <div class="ritmo-fijo">
-      <h2 class="re">Y cada semana pasa algo nuevo.</h2>
-      <p class="re">No es una carpeta de vídeos que abres una vez. Es contenido que llega en días fijos, semana tras semana, mientras sigas dentro.</p>
-      <div class="marcador re" id="marcador">0<span>de 6 entregas</span></div>
-    </div>
-    <div class="jornadas" id="jornadas">
-      <div class="jornada"><div class="cuando">Lunes</div><p><b>Una asimetría legal</b>, analizada con la ley delante y la fuente citada.</p></div>
-      <div class="jornada"><div class="cuando">Miércoles</div><p><b>Una píldora</b> para entender algo concreto de cómo funciona ella.</p></div>
-      <div class="jornada"><div class="cuando">Jueves</div><p><b>Tus preguntas respondidas en vídeo.</b> Las mandas en privado, nadie ve las tuyas.</p></div>
-      <div class="jornada"><div class="cuando">Domingo</div><p><b>Una píldora de acción</b> para empezar la semana sabiendo qué hacer.</p></div>
-      <div class="jornada"><div class="cuando">Cada 5 días</div><p><b>Un capítulo nuevo</b>, con dos series avanzando a la vez.</p></div>
-      <div class="jornada"><div class="cuando">Último viernes del mes</div><p><b>Un directo conmigo</b>, y grabado si ese día no puedes estar.</p></div>
+<div class="ancho">
+  <div class="caja-video">
+    <div class="pant">
+      <!-- ============================================================
+           AQUÍ VA EL VÍDEO DE LA VSL.
+           Sustituye este <p class="ag"> por el iframe, por ejemplo:
+           <iframe src="https://www.youtube-nocookie.com/embed/TU_ID" title="Iron Pass" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      ============================================================= -->
+      <p class="ag">aquí va el vídeo</p>
     </div>
   </div>
-</section>
+  <p class="sonido">Ponlo con sonido.</p>
+</div>
 
-<section id="aquien">
-  <div class="ancho">
-    <h2 class="re" style="font-size:clamp(2rem,4vw,3rem);max-width:20ch">Vas a saber en el primer minuto si esto es para ti.</h2>
-    <div class="casos">
-      <div class="caso re"><h3>No entiendes por qué actúa así</h3><p>Dice una cosa y hace otra, cambia de humor sin motivo aparente, y tú llevas meses interpretando señales sin manual.</p><p class="flecha">La mente y la lógica femenina, explicadas</p></div>
-      <div class="caso re"><h3>Te gusta alguien y no sabes moverte</h3><p>O empieza bien y se enfría sin que sepas en qué punto se torció. Quieres dejar de improvisar.</p><p class="flecha">La conquista real, del principio al final</p></div>
-      <div class="caso re"><h3>Hay semanas que no reconoces a tu pareja</h3><p>Y vas de puntillas sin entender qué está pasando ni cuándo va a pasar otra vez.</p><p class="flecha">El ciclo, tu poder</p></div>
-      <div class="caso re"><h3>Te acorralan con el discurso y no tienes con qué responder</h3><p>Sabes que algo no encaja en lo que te dicen, pero te faltan los datos para ponerlo encima de la mesa.</p><p class="flecha">Feminismo, guerra de sexos, woke y asimetrías legales</p></div>
-    </div>
-  </div>
-</section>
+<div id="venta">
 
-<section id="voces">
-  <div class="ancho">
-    <h2 class="re" style="font-size:clamp(2rem,4vw,3rem);max-width:20ch">Lo que cuentan los que ya están dentro.</h2>
-    <!-- SUSTITUYE POR LAS REALES, CON NOMBRE Y CIUDAD. Ninguna inventada. -->
-    <div class="voces">
-      <blockquote class="voz re"><p>[Qué entendió que antes no veía.]</p><cite>Nombre, ciudad</cite></blockquote>
-      <blockquote class="voz re"><p>[Qué cambió en su relación desde que entró.]</p><cite>Nombre, ciudad</cite></blockquote>
-      <blockquote class="voz re"><p>[Qué esperaba encontrar y qué se encontró.]</p><cite>Nombre, ciudad</cite></blockquote>
-      <blockquote class="voz re"><p>[La parte que más le ha servido.]</p><cite>Nombre, ciudad</cite></blockquote>
-      <blockquote class="voz re"><p>[Qué le aporta el grupo y los directos.]</p><cite>Nombre, ciudad</cite></blockquote>
-      <blockquote class="voz re"><p>[A quién se lo recomendaría y por qué.]</p><cite>Nombre, ciudad</cite></blockquote>
-    </div>
-  </div>
-</section>
-
-<section id="bonus">
-  <div class="medio">
-    <div class="medalla re"><span>50</span><small>PLAZAS</small></div>
-    <h2 class="re">Y algo que no se vuelve a repetir.</h2>
-    <p class="regalo re">Tú y yo</p>
-    <p class="det re">Una conversación privada en audio, conmigo, sobre tu caso concreto. No es una sesión de grupo ni un mensaje en un chat: soy yo escuchando lo tuyo y respondiéndote a ti.</p>
-    <p class="corte re">Solo entra con las 50 plazas de fundador. Cuando se llenan, este bonus no vuelve.</p>
-  </div>
-</section>
-
-<section id="oferta">
-  <div class="ancho">
+  <section class="ancho">
     <div class="pacto">
       <div class="pacto-alto">
         <h2>Entra ahora y tu cuota se queda congelada.</h2>
@@ -359,7 +162,7 @@ footer small{display:block;margin-top:.7rem;font-size:.68rem;color:#39342c}
             <li>Un directo al mes, y grabado si no puedes estar</li>
           </ul>
         </div>
-        <div class="caja-precio">
+        <div class="precio">
           <div>
             <div class="tachado">29,90 €</div>
             <div class="cifra">19,90 €</div>
@@ -370,52 +173,58 @@ footer small{display:block;margin-top:.7rem;font-size:.68rem;color:#39342c}
           <p class="letra">15 días de garantía: si no es para ti, se te devuelve el dinero.<br />Cancelas tú mismo cuando quieras, sin llamadas ni penalización.</p>
         </div>
       </div>
-      <div class="bonus-pie">
-        <div class="sello">Solo para las 50</div>
-        <p><em>Tú y yo</em>: una conversación privada en audio, conmigo, sobre tu caso concreto. Cuando se acaben las plazas, este bonus no vuelve.</p>
-      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="dudas">
-  <div class="medio">
-    <h2 class="re" style="font-size:clamp(1.9rem,3.6vw,2.6rem);max-width:24ch">Lo que suelen preguntarme antes de entrar.</h2>
-    <div style="margin-top:2.4rem">
-      <div class="duda"><button type="button">¿Dónde veo el contenido?<span>+</span></button><div class="respuesta"><p>En Hotmart, desde su web o su app, en el móvil o en el ordenador. Al entrar se te abre la intro y el primer capítulo; a partir de ahí llega contenido nuevo cada 5 días.</p></div></div>
-      <div class="duda"><button type="button">¿Y si no es para mí?<span>+</span></button><div class="respuesta"><p>Tienes 15 días de garantía. Pides la devolución y se te devuelve el dinero, sin explicaciones ni trámites raros.</p></div></div>
-      <div class="duda"><button type="button">¿Puedo cancelar cuando quiera?<span>+</span></button><div class="respuesta"><p>Sí, tú mismo desde Hotmart, sin penalización. Mantienes el acceso hasta el final del mes que ya has pagado.</p></div></div>
-      <div class="duda"><button type="button">¿Me subirá el precio más adelante?<span>+</span></button><div class="respuesta"><p>No. Mientras no canceles, mantienes 19,90 € al mes aunque suba para quien entre después.</p></div></div>
-      <div class="duda"><button type="button">¿Cómo entro en el grupo?<span>+</span></button><div class="respuesta"><p>Al unirte recibes el enlace en tu correo. Es un grupo privado de WhatsApp donde estoy cada día.</p></div></div>
-      <div class="duda"><button type="button">¿Esto es opinión o está documentado?<span>+</span></button><div class="respuesta"><p>Está documentado. Cada serie se construye sobre estudios, datos oficiales y jurisprudencia, con las fuentes citadas para que las compruebes tú mismo.</p></div></div>
+  <section id="bonus">
+    <div class="ancho">
+      <div class="medalla"><span>50</span><small>PLAZAS</small></div>
+      <h2>Y algo que no se vuelve a repetir.</h2>
+      <p class="regalo">Tú y yo</p>
+      <p class="det">Una conversación privada en audio, conmigo, sobre tu caso concreto. Solo entra con las plazas de fundador.</p>
+      <p class="corte">Cuando se llenan, este bonus no vuelve.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="final">
-  <div class="medio">
-    <h2 class="re">El año que viene vas a seguir preguntándote lo mismo. O no.</h2>
-    <p class="re">Las plazas de fundador se cierran cuando se llenan. Después, el precio es otro y el bonus ya no está.</p>
-    <a class="boton fantasma re" id="cta-2" href="#">Quiero mi plaza</a>
-  </div>
-</section>
+  <section class="ancho">
+    <!-- SUSTITUYE POR TESTIMONIOS REALES, CON NOMBRE Y CIUDAD. Ninguno inventado. -->
+    <div class="voces">
+      <blockquote class="voz"><p>[Qué entendió que antes no veía.]</p><cite>Nombre, ciudad</cite></blockquote>
+      <blockquote class="voz"><p>[Qué cambió desde que entró.]</p><cite>Nombre, ciudad</cite></blockquote>
+      <blockquote class="voz"><p>[La parte que más le ha servido.]</p><cite>Nombre, ciudad</cite></blockquote>
+      <blockquote class="voz"><p>[A quién se lo recomendaría y por qué.]</p><cite>Nombre, ciudad</cite></blockquote>
+    </div>
+  </section>
+
+  <section class="ancho">
+    <div class="duda"><button type="button">¿Y si no es para mí?<span>+</span></button><div class="respuesta"><p>Tienes 15 días de garantía. Pides la devolución y se te devuelve el dinero, sin explicaciones.</p></div></div>
+    <div class="duda"><button type="button">¿Puedo cancelar cuando quiera?<span>+</span></button><div class="respuesta"><p>Sí, tú mismo desde Hotmart, sin penalización ni llamadas. Mantienes el acceso hasta el final del mes pagado.</p></div></div>
+    <div class="duda"><button type="button">¿Me subirá el precio?<span>+</span></button><div class="respuesta"><p>No. Mientras no canceles, mantienes 19,90 € al mes aunque suba para quien entre después.</p></div></div>
+    <div class="duda"><button type="button">¿Qué pasa cuando se acaben las 50 plazas?<span>+</span></button><div class="respuesta"><p>El precio pasa al normal y el bonus <em>Tú y yo</em> deja de estar disponible. No se reabre.</p></div></div>
+  </section>
+
+  <section id="cierre" class="ancho">
+    <h2>Quedan plazas. Mañana, a lo mejor no.</h2>
+    <a class="boton" id="cta-2" href="#">Quiero mi plaza</a>
+  </section>
+
+</div>
 
 <footer>
   <a href="privacidad.html">Privacidad</a><a href="condiciones.html">Condiciones</a><a href="aviso-legal.html">Aviso legal</a><a href="#" onclick="ethosConfigurarCookies(); return false;">Cookies</a>
-  <small>© 2026 ETHOS · Iron &amp; Soul Group LLC</small>
 </footer>
 
 <div id="barra">
-  <p class="txt"><b>19,90 €/mes</b> de fundador, en vez de 29,90 € · 50 plazas</p>
+  <p class="txt"><b>19,90 €/mes</b> de fundador en vez de 29,90 € · 50 plazas</p>
   <a class="boton" id="cta-3" href="#">Quiero mi plaza</a>
 </div>
 
 <script>
-  /* La oferta y la barra aparecen a los 14 minutos. Pon MINUTOS = 0 para verlas siempre. */
+  /* La venta entera aparece a los 14 minutos. Pon MINUTOS = 0 para verla siempre. */
   var MINUTOS = 14;
   (function () {
-    var oferta = document.getElementById('oferta'), barra = document.getElementById('barra');
-    function abrir(){ oferta.classList.add('abierta'); barra.classList.add('puesta'); }
+    var venta = document.getElementById('venta'), barra = document.getElementById('barra');
+    function abrir(){ venta.classList.add('abierta'); barra.classList.add('puesta'); }
     var previo = parseInt(sessionStorage.getItem('ethos_vsl_segundos') || '0', 10);
     if (MINUTOS === 0 || previo >= MINUTOS * 60) { abrir(); return; }
     var inicio = Date.now();
@@ -425,39 +234,6 @@ footer small{display:block;margin-top:.7rem;font-size:.68rem;color:#39342c}
       if (s >= MINUTOS * 60) { clearInterval(reloj); abrir(); }
     }, 1000);
   })();
-
-  var suave = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var obs = new IntersectionObserver(function (es) {
-    es.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      var hermanos = [].slice.call(e.target.parentElement.children).filter(function (x) { return x.classList && x.classList.contains('re'); });
-      var i = Math.max(0, hermanos.indexOf(e.target));
-      e.target.style.transitionDelay = (suave ? i * 90 : 0) + 'ms';
-      e.target.classList.add('vis');
-      obs.unobserve(e.target);
-    });
-  }, { threshold: .18 });
-  document.querySelectorAll('.re').forEach(function (e) { obs.observe(e); });
-
-  /* jornadas: entran una a una y el marcador cuenta */
-  var jornadas = document.querySelectorAll('.jornada'), marcador = document.getElementById('marcador');
-  var jObs = new IntersectionObserver(function (es) {
-    es.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      e.target.classList.add('vis');
-      var n = document.querySelectorAll('.jornada.vis').length;
-      marcador.childNodes[0].nodeValue = String(n);
-      jObs.unobserve(e.target);
-    });
-  }, { threshold: .55 });
-  jornadas.forEach(function (j) { jObs.observe(j); });
-
-  /* carrusel */
-  var pista = document.getElementById('pista');
-  function paso(){ var t = pista.querySelector('.serie'); return t ? t.getBoundingClientRect().width + 19 : 380; }
-  document.getElementById('izq').addEventListener('click', function(){ pista.scrollBy({left:-paso(), behavior:'smooth'}); });
-  document.getElementById('der').addEventListener('click', function(){ pista.scrollBy({left:paso(), behavior:'smooth'}); });
 
   document.querySelectorAll('.duda button').forEach(function (b, i) {
     var r = b.parentElement.querySelector('.respuesta');
