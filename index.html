@@ -2,8 +2,54 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <meta name="google-site-verification" content="Q_LfPncxOesoh4aovV9eUWlU2yyYl4mPivm5F5H1x2c" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ETHOS — Iron & Soul</title>
+  <title>ETHOS | Contenido sin filtro y apoyo real para hombres</title>
+  <!-- SEO -->
+  <meta name="description" content="ETHOS: contenido crítico sin censura (Iron) y apoyo psicológico gratuito y orientación legal para hombres (Soul). Piensa con criterio. No estás solo." />
+  <meta name="keywords" content="ETHOS, apoyo hombres, contenido sin filtro, Iron Soul, guía legal hombres, psicología masculina España" />
+  <meta name="author" content="Omayra Pérez" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://ethosironsoul.com/" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ETHOS" />
+  <meta property="og:title" content="ETHOS | Contenido sin filtro y apoyo real para hombres" />
+  <meta property="og:description" content="ETHOS: contenido crítico sin censura (Iron) y apoyo psicológico gratuito y orientación legal para hombres (Soul). Piensa con criterio. No estás solo." />
+  <meta property="og:url" content="https://ethosironsoul.com/" />
+  <meta property="og:image" content="https://ethosironsoul.com/WEB.png" />
+  <meta property="og:locale" content="es_ES" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ETHOS | Contenido sin filtro y apoyo real para hombres" />
+  <meta name="twitter:description" content="ETHOS: contenido crítico sin censura (Iron) y apoyo psicológico gratuito y orientación legal para hombres (Soul). Piensa con criterio. No estás solo." />
+  <meta name="twitter:image" content="https://ethosironsoul.com/WEB.png" />
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ETHOS",
+    "url": "https://ethosironsoul.com",
+    "logo": "https://ethosironsoul.com/WEB.png",
+    "description": "Contenido crítico sin censura, apoyo psicológico gratuito y orientación legal para hombres.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "contacto@ethosironsoul.com",
+      "contactType": "customer service",
+      "availableLanguage": "Spanish"
+    }
+  }
+  </script>
+  <!-- Brevo Form CSS -->
+  <style>
+    :where(.sib-form-message-panel){display:none;}
+    :where(.sib-form-message-panel .sib-notification__icon){width:20px;height:20px;}
+    .input--hidden{display:none!important;}
+    .sib-hide-loader-icon{display:none;}
+  </style>
+  <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -126,10 +172,6 @@
     .producto-desc { display: none; }
     .producto-precio { display: none; }
     .producto-precio sup { font-size: 0.7rem; vertical-align: super; }
-    /* ============================================================
-       BOTÓN SABER MÁS — siempre visible en todas las tarjetas
-       Cambia el href de cada tarjeta para apuntar al producto concreto
-    ============================================================ */
     .btn-comprar { display: block; width: 100%; text-align: center; font-size: 0.6rem; padding: 0.65rem 1rem; border: 1px solid var(--dorado); color: var(--dorado); background: none; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; position: relative; overflow: hidden; transition: color var(--transicion); text-decoration: none; margin-top: auto; }
     .btn-comprar::after { content: ''; position: absolute; inset: 0; background: var(--dorado); transform: scaleX(0); transform-origin: left; transition: transform var(--transicion); z-index: 0; }
     .btn-comprar span { position: relative; z-index: 1; }
@@ -137,24 +179,21 @@
     .btn-comprar:hover { color: var(--negro); }
     .productos-cta { text-align: center; margin-top: 3rem; padding-right: 4rem; }
 
-    /* MODAL */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 2000; align-items: center; justify-content: center; }
     .modal-overlay.abierto { display: flex; }
     .modal { background: var(--negro-card); border: 1px solid var(--dorado); padding: 3rem; max-width: 440px; width: 90%; text-align: center; position: relative; }
     .modal-cerrar { position: absolute; top: 1rem; right: 1.2rem; background: none; border: none; color: var(--gris); font-size: 1.2rem; cursor: pointer; }
     .modal h3 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 300; margin-bottom: 0.5rem; }
     .modal p { font-size: 0.75rem; color: var(--gris); margin-bottom: 1.5rem; }
-    .modal input[type="email"] { width: 100%; background: var(--negro); border: 1px solid var(--negro-borde); color: var(--blanco); padding: 0.8rem 1rem; font-family: var(--font-body); font-size: 0.8rem; margin-bottom: 1rem; outline: none; transition: border-color var(--transicion); }
-    .modal input[type="email"]:focus { border-color: var(--dorado); }
+    .modal input[type="text"], .modal input[type="email"] { width: 100%; background: var(--negro); border: 1px solid var(--negro-borde); color: var(--blanco); padding: 0.8rem 1rem; font-family: var(--font-body); font-size: 0.8rem; margin-bottom: 1rem; outline: none; transition: border-color var(--transicion); }
+    .modal input[type="text"]:focus, .modal input[type="email"]:focus { border-color: var(--dorado); }
     .modal .btn { width: 100%; text-align: center; }
 
-    /* COLABORADORES */
     #colaboradores { padding: 4rem 4rem; border-top: 1px solid var(--negro-borde); }
     .colaboradores-grid { display: flex; gap: 3rem; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 2.5rem; }
     .colaborador-item { opacity: 0.35; transition: opacity var(--transicion); font-family: var(--font-display); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; }
     .colaborador-item:hover { opacity: 1; }
 
-    /* FOOTER */
     footer { background: #070707; border-top: 1px solid var(--negro-borde); padding: 2rem 4rem; text-align: center; }
     .footer-logo { font-family: var(--font-display); font-size: 1.6rem; font-weight: 300; letter-spacing: 0.4em; margin-bottom: 1.2rem; }
     .footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.2rem; list-style: none; }
@@ -162,18 +201,16 @@
     .footer-links a:hover { color: var(--dorado); }
     .footer-copy { font-size: 0.6rem; color: var(--negro-borde); letter-spacing: 0.1em; }
 
-    /* BOTÓN FLOTANTE */
     #btn-donar { position: fixed; bottom: 2.5rem; right: 2.5rem; z-index: 1500; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
     .donar-circulo { width: 58px; height: 58px; border-radius: 50%; background: var(--negro-card); border: 1px solid var(--dorado); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--dorado); cursor: pointer; text-decoration: none; transition: background var(--transicion), box-shadow var(--transicion), transform var(--transicion); animation: pulso 2.5s ease-in-out infinite; }
     .donar-circulo:hover { background: var(--dorado); color: var(--negro); box-shadow: 0 0 25px rgba(201,168,76,0.5); transform: scale(1.08); animation: none; }
     .donar-etiqueta { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dorado); }
     @keyframes pulso { 0% { box-shadow: 0 0 0 0 rgba(201,168,76,0.4); } 70% { box-shadow: 0 0 0 12px rgba(201,168,76,0); } 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); } }
 
-    /* REVEAL */
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+    .precio-oculto { display: none; }
 
-    /* MÓVIL */
     @media (max-width: 768px) {
       #navbar { padding: 1rem 1.5rem; }
       .nav-links, .nav-iconos { display: none; }
@@ -263,6 +300,7 @@
     <a href="soul.html" onclick="cerrarMenu()">Ethos Soul</a>
     <a href="iron.html" onclick="cerrarMenu()">Ethos Iron</a>
     <a href="productos.html" onclick="cerrarMenu()">Productos</a>
+    <a href="transparencia.html" onclick="cerrarMenu()">Transparencia</a>
     <a href="#contacto" onclick="cerrarMenu()">Contacto</a>
   </div>
 
@@ -288,9 +326,9 @@
         <p class="sobre-texto">
           Cuando el discurso dejó de tener sentido.<br />
           Cuando la ideología comenzó a imponerse por encima de los hechos.<br />
-          Cuando vi cómo a muchas mujeres las usaban, las callaban o las enfrentaban.<br /><br />
+          Cuando vi cómo a muchas mujeres nos usaban, nos callaban o nos enfrentaban por no comprar su discurso.<br /><br />
           Decidí construir algo diferente.<br />
-          No para pelear. Para pensar. Para sostener.<br /><br />
+          No para pelear. Para dar luz, Para pensar. Para sostener.<br /><br />
           <strong>ETHOS nació para eso:</strong><br />
           Para devolver claridad, apoyo y criterio a quienes buscan algo más que un eslogan.
         </p>
@@ -343,15 +381,9 @@
     </div>
   </section>
 
-  <!-- ============================================================
-       PRODUCTOS — Carrusel
-       Botones "Saber más" llevan a la ficha concreta en productos.html
-       Guía VG lleva a soul.html#guia-vg
-  ============================================================ -->
   <section id="productos">
     <p class="seccion-titulo-productos">Productos destacados</p>
     <div class="productos-grid">
-
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
         <img src="S1-La mente femenina al descubierto.png" alt="La mente femenina al descubierto" class="producto-imagen" />
@@ -364,7 +396,6 @@
           <a href="productos.html#serie-1" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
-
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
         <img src="S2-La logica femenina al descubierto.png" alt="La lógica femenina al descubierto" class="producto-imagen" />
@@ -377,7 +408,6 @@
           <a href="productos.html#serie-2" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
-
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
         <img src="S3-La conquista real.png" alt="La conquista real" class="producto-imagen" />
@@ -390,20 +420,18 @@
           <a href="productos.html#serie-3" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
-
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
         <img src="S4-Destruye el feminismo.png" alt="Destruye el feminismo" class="producto-imagen" />
         <div class="producto-info">
           <p class="producto-nombre">Destruye el feminismo</p>
-          <p class="producto-desc">Argumentos sólidos contra la narrativa dominante.</p>
+          <p class="producto-desc">Argumentos sólidos, con datos contra la narrativa dominante.</p>
           <p class="producto-precio" style="display:none;"><sup>€</sup>57</p>
           <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Serás el que responde con datos, no con emociones.</p>
           <a href="iron.html" style="display:block; text-align:center; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem; text-decoration:none; cursor:pointer;">Únete a Iron Pass</a>
           <a href="productos.html#serie-4" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
-
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
         <img src="S5-La guerra de sexos.png" alt="La guerra de sexos" class="producto-imagen" />
@@ -416,20 +444,18 @@
           <a href="productos.html#serie-5" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
-
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
         <img src="S6-El ciclo tu poder.png" alt="El ciclo, tu poder" class="producto-imagen" />
         <div class="producto-info">
           <p class="producto-nombre">El ciclo, tu poder</p>
-          <p class="producto-desc">Tu biología como herramienta, no como excusa.</p>
+          <p class="producto-desc">La biología como herramienta, no como excusa.</p>
           <p class="producto-precio" style="display:none;"><sup>€</sup>47</p>
           <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Dejarás de caminar de puntillas sin saber por qué.</p>
           <a href="iron.html" style="display:block; text-align:center; font-family:var(--font-body); font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--dorado); color:var(--negro); padding:0.3rem 0.8rem; margin-bottom:0.8rem; text-decoration:none; cursor:pointer;">Únete a Iron Pass</a>
           <a href="productos.html#serie-6" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
-
       <div class="producto-card reveal">
         <span class="producto-badge">Serie</span>
         <img src="S7- Woke.png" alt="Woke" class="producto-imagen" />
@@ -442,7 +468,6 @@
           <a href="productos.html#serie-7" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
-
       <div class="producto-card reveal">
         <span class="producto-badge" style="background:transparent;border:1px solid var(--dorado);color:var(--dorado);">Soul</span>
         <img src="ETHOS Soul copia 3.png" alt="Guía VG" class="producto-imagen" />
@@ -450,7 +475,7 @@
           <p class="producto-nombre">Guía VG</p>
           <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Sabrás qué hacer desde el primer minuto.</p>
           <p class="producto-desc">Guía legal para hombres acusados de violencia de género en España.</p>
-          <p class="producto-precio" style="display:none;">Donación libre</p>
+          <p class="producto-precio" style="display:none;">Bajo donación mínima</p>
           <a href="soul.html#guia-vg" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
@@ -512,12 +537,10 @@
           <p class="producto-nombre">Iron Pass</p>
           <p style="font-size:0.68rem; font-style:italic; color:var(--dorado); margin-bottom:0.5rem; line-height:1.4;">Todo el contenido. Una sola cuota.</p>
           <p class="producto-desc">Contenido cada 5 días, comunidad WhatsApp y directo mensual.</p>
-          <p class="producto-precio" style="display:none;"><sup>€</sup>49<small style="font-size:0.7rem;color:var(--gris);"> / mes</small></p>
+          <p class="producto-precio" style="display:none;"><sup>€</sup>29<small style="font-size:0.7rem;color:var(--gris);"> / mes</small></p>
           <a href="productos.html#iron-en-series" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
-
-      <!-- Donación Soul -->
       <div class="producto-card reveal">
         <span class="producto-badge" style="background:transparent;border:1px solid var(--dorado);color:var(--dorado);">Soul</span>
         <div style="width:100%; aspect-ratio:4/3; background:#0d0d0d; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem;">
@@ -532,17 +555,12 @@
           <a href="soul.html#donaciones" class="btn-comprar"><span>Saber más</span></a>
         </div>
       </div>
-
     </div>
     <div class="productos-cta">
       <a href="productos.html" class="btn"><span>Ver todos los productos</span></a>
     </div>
   </section>
 
-  <!-- ============================================================
-       COLABORADORES
-       Reemplaza · LOGO · por <img src="logo.png" /> cuando los tengas
-  ============================================================ -->
   <section id="colaboradores">
     <p class="seccion-titulo" style="display:none;">Colaboradores</p>
     <div class="colaboradores-grid" style="display:none;">
@@ -563,10 +581,16 @@
     </div>
   </section>
 
-  <!-- BANNER SOUL -->
   <div style="background: linear-gradient(135deg, #0d0d0d 0%, #111111 100%); border-top: 1px solid var(--dorado-oscuro); border-bottom: 1px solid var(--dorado-oscuro); padding: 1.5rem 4rem; text-align: center;">
     <p style="font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dorado);">✦ &nbsp; Con cualquier producto de ETHOS, colaboras con ETHOS Soul &nbsp; ✦</p>
     <p style="font-family: var(--font-display); font-size: 0.9rem; color: var(--gris); margin-top: 0.3rem; font-style: italic;">Un porcentaje de cada compra se destina al grupo de apoyo y los recursos legales gratuitos.</p>
+  </div>
+
+  <!-- BANNER TRANSPARENCIA -->
+  <div style="background: var(--negro-card); border-top: 1px solid var(--negro-borde); border-bottom: 1px solid var(--negro-borde); padding: 2.5rem 4rem; text-align: center;">
+    <p style="font-family: var(--font-body); font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dorado); margin-bottom: 0.8rem;">· Transparencia ·</p>
+    <p style="font-family: var(--font-display); font-size: clamp(1rem, 2.25vw, 2.1rem); font-style: italic; color: var(--blanco); margin-bottom: 1.2rem; line-height: 1.6;">Publicamos todo lo que entra y sale de ETHOS Soul. Con extractos. Con nombres. Cada trimestre.</p>
+    <a href="transparencia.html" style="display: inline-block; font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.75rem 2rem; border: 1px solid var(--dorado); color: var(--dorado); position: relative; overflow: hidden; transition: color 0.35s ease; text-decoration: none;">Ver transparencia →</a>
   </div>
 
   <footer id="contacto">
@@ -587,18 +611,32 @@
     <div class="modal">
       <button class="modal-cerrar" onclick="cerrarModal()">✕</button>
       <h3>Próximo lanzamiento</h3>
-      <p>Déjame tu email y te aviso cuando abra de nuevo.</p>
-      <input type="email" placeholder="tu@email.com" id="email-espera" />
-      <div style="display:flex; align-items:flex-start; gap:0.6rem; margin-bottom:1rem; text-align:left;">
-        <input type="checkbox" id="acepta-privacidad" required style="margin-top:0.2rem; accent-color:var(--dorado); cursor:pointer; flex-shrink:0;" />
-        <label for="acepta-privacidad" style="font-size:0.65rem; color:var(--gris); line-height:1.5; cursor:pointer;">He leído y acepto la <a href="privacidad.html" target="_blank" style="color:var(--dorado);">Política de Privacidad</a>.</label>
+      <p>Déjame tus datos y te aviso cuando abra de nuevo.</p>
+      <div id="error-message" class="sib-form-message-panel" style="font-size:0.72rem;text-align:center;color:#661d1d;background-color:#ffeded;border-color:#ff4949;border-radius:3px;padding:0.5rem;margin-bottom:0.8rem;">
+        <span class="sib-form-message-panel__inner-text">No hemos podido validar tu suscripción.</span>
       </div>
-      <button class="btn" onclick="guardarEmail()"><span>Avísame</span></button>
+      <div id="success-message" class="sib-form-message-panel" style="font-size:0.72rem;text-align:center;color:#085229;background-color:#e7faf0;border-color:#13ce66;border-radius:3px;padding:0.5rem;margin-bottom:0.8rem;">
+        <span class="sib-form-message-panel__inner-text">¡Listo! Ya estás en la lista.</span>
+      </div>
+      <form id="sib-form" method="POST" action="https://65a03631.sibforms.com/serve/MUIFAKDGkR3fR1vQpjOy3EWRhIrsO-R3uUvOv6DAtClPyAjeux7zVvIftuJTpV0x_iVbXne-tJ0Y2M1-AjXqhK_yjxYdJYiVywuLXWhETWtkVB2DT1WsrwnnLsweW1LgrRcCgri7sQaBmuFY-0XQUnGCd6fxCRQUqbxlQBUP3XwkgOsm7fGViuZRJge2htyh439tHYDgxVO9P2g1Eg==" data-type="subscription">
+        <input type="hidden" name="ORIGEN" id="origen-hidden" value="">
+        <input class="input" maxlength="200" type="text" id="NOMBRE" name="NOMBRE" autocomplete="off" placeholder="¿Cómo te llamas?" data-required="true" required />
+        <label class="entry__error entry__error--primary" style="font-size:0.65rem;"></label>
+        <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" value="" placeholder="tu mejor email" data-required="true" required />
+        <label class="entry__error entry__error--primary" style="font-size:0.65rem;"></label>
+        <div style="display:flex; align-items:flex-start; gap:0.6rem; margin:0.8rem 0; text-align:left;">
+          <input type="checkbox" id="acepta-privacidad" required style="margin-top:0.2rem; accent-color:var(--dorado); cursor:pointer; flex-shrink:0;" />
+          <label for="acepta-privacidad" style="font-size:0.65rem; color:var(--gris); line-height:1.5; cursor:pointer;">He leído y acepto la <a href="privacidad.html" target="_blank" rel="noopener noreferrer" style="color:var(--dorado);">Política de Privacidad</a>.</label>
+        </div>
+        <button class="btn" style="width:100%;text-align:center;cursor:pointer;margin-top:0.5rem;" form="sib-form" type="submit"><span>Apúntame</span></button>
+        <input type="text" name="email_address_check" value="" class="input--hidden">
+        <input type="hidden" name="locale" value="es">
+      </form>
     </div>
   </div>
 
   <div id="btn-donar">
-    <a href="#" class="donar-circulo" title="Donar a ETHOS Soul">♡</a>
+    <a href="https://buy.stripe.com/8x2cN459IfHE9640f34gg01" class="donar-circulo" title="Donar a ETHOS Soul">♡</a>
     <span class="donar-etiqueta">Donar</span>
   </div>
 
@@ -608,41 +646,23 @@
     function cerrarMenu() { document.getElementById('hamburguesa').classList.remove('abierto'); document.getElementById('nav-movil').classList.remove('abierto'); }
     const observer = new IntersectionObserver((entries) => { entries.forEach((entry, i) => { if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), i * 80); }); }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    function abrirModal() { document.getElementById('modal-espera').classList.add('abierto'); }
-    function cerrarModal() { document.getElementById('modal-espera').classList.remove('abierto'); }
-    document.getElementById('modal-espera').addEventListener('click', function(e) { if (e.target === this) cerrarModal(); });
-    function guardarEmail() {
-      const email = document.getElementById('email-espera').value;
-      const acepta = document.getElementById('acepta-privacidad');
-      if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-        alert('Por favor, introduce un email válido.'); return;
-      }
-      if (acepta && !acepta.checked) {
-        alert('Debes aceptar la Política de Privacidad para continuar.'); return;
-      }
-      fetch('https://formsubmit.co/ajax/contacto@ethosironsoul.com', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          email: email,
-          _subject: 'Nueva lista de espera — ETHOS',
-          _captcha: 'false',
-          mensaje: 'Solicitud de aviso de lanzamiento'
-        })
-      })
-      .then(r => r.json())
-      .then(data => {
-        if (data.success) {
-          document.getElementById('email-espera').value = '';
-          cerrarModal();
-          alert('¡Anotado! Te avisamos cuando abramos el lanzamiento.');
-        } else {
-          alert('Algo ha ido mal. Inténtalo de nuevo.');
-        }
-      })
-      .catch(() => alert('Error de conexión. Inténtalo de nuevo.'));
-    }
+    var _origen='';
+    function abrirModal(o){_origen=o||'General';var h=document.getElementById('origen-hidden');if(h)h.value=_origen;document.getElementById('modal-espera').classList.add('abierto');}
+    function cerrarModal(){document.getElementById('modal-espera').classList.remove('abierto');}
+    document.getElementById('modal-espera').addEventListener('click',function(e){if(e.target===this)cerrarModal();});
   </script>
+  <!-- Brevo Form JS -->
+  <script>
+    window.REQUIRED_CODE_ERROR_MESSAGE='Elige un código de país';
+    window.LOCALE='es';
+    window.EMAIL_INVALID_MESSAGE=window.SMS_INVALID_MESSAGE="Email no válido.";
+    window.REQUIRED_ERROR_MESSAGE="Este campo no puede quedarse vacío.";
+    window.GENERIC_INVALID_MESSAGE="Información no válida.";
+    window.INVALID_DATE="Introduce una fecha válida";
+    window.REQUIRED_MULTISELECT_MESSAGE='Selecciona al menos una opción';
+    var AUTOHIDE=Boolean(0);
+  </script>
+  <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
 
   <!-- ============================================================
        MODAL CONTACTO — sustituye al email visible (anti-spam)
