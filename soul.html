@@ -551,7 +551,6 @@
       font-size: 1.2rem; color: var(--dorado);
       cursor: pointer; text-decoration: none;
       transition: background var(--transicion), box-shadow var(--transicion), transform var(--transicion);
-      animation: pulso 2.5s ease-in-out infinite;
     }
     .donar-circulo:hover {
       background: var(--dorado); color: var(--negro);
@@ -559,11 +558,11 @@
       transform: scale(1.08); animation: none;
     }
     .donar-etiqueta { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dorado); }
-    @keyframes pulso {
-      0%   { box-shadow: 0 0 0 0 rgba(201,168,76,0.4); }
-      70%  { box-shadow: 0 0 0 12px rgba(201,168,76,0); }
-      100% { box-shadow: 0 0 0 0 rgba(201,168,76,0); }
-    }
+    @keyframes pulso { 0% { transform: scale(1); opacity: 1; } 70% { transform: scale(1.42); opacity: 0; } 100% { transform: scale(1); opacity: 0; } }
+    .donar-circulo { position: relative; }
+    .donar-circulo::before { content: ''; position: absolute; inset: -1px; border-radius: 50%; background: rgba(201,168,76,0.4); z-index: -1; animation: pulso 2.5s ease-in-out infinite; }
+    .donar-circulo:hover::before { animation: none; opacity: 0; }
+    @media (prefers-reduced-motion: reduce) { .donar-circulo::before { animation: none; opacity: 0; } }
 
     /* ============================================================
        ANIMACIONES REVEAL AL SCROLL
