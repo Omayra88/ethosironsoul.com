@@ -110,17 +110,18 @@
     #productos { padding: 2rem 0 1rem 4rem; }
     .seccion-titulo-productos { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--dorado); display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-bottom: 0; padding-right: 4rem; white-space: nowrap; }
     .seccion-titulo-productos::before, .seccion-titulo-productos::after { content: ''; width: 60px; height: 1px; background: var(--dorado-oscuro); }
-    .productos-grid { display: flex; gap: 1.5rem; margin-top: 1.5rem; overflow-x: auto; padding-bottom: 0.5rem; padding-right: 4rem; scroll-snap-type: none; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--dorado-oscuro) var(--negro-card); align-items: flex-start; }
+    .productos-grid { display: flex; gap: 1.5rem; margin-top: 1.5rem; overflow-x: auto; padding-bottom: 0.5rem; padding-right: 4rem; scroll-snap-type: none; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--dorado-oscuro) var(--negro-card); align-items: stretch; }
     .productos-grid::-webkit-scrollbar { height: 3px; }
     .productos-grid::-webkit-scrollbar-track { background: var(--negro-card); }
     .productos-grid::-webkit-scrollbar-thumb { background: var(--dorado-oscuro); border-radius: 2px; }
-    .producto-card { background: var(--negro-card); border: 1px solid var(--negro-borde); overflow: hidden; position: relative; transition: transform var(--transicion), box-shadow var(--transicion); cursor: pointer; min-width: 320px; max-width: 320px; flex-shrink: 0; display: block; }
+    .producto-card { background: var(--negro-card); border: 1px solid var(--negro-borde); overflow: hidden; position: relative; transition: transform var(--transicion), box-shadow var(--transicion); cursor: pointer; min-width: 320px; max-width: 320px; flex-shrink: 0; display: flex; flex-direction: column; }
     .producto-card::before { content: ''; position: absolute; inset: 0; border: 1px solid var(--dorado); opacity: 0; transition: opacity var(--transicion); z-index: 1; pointer-events: none; }
     .producto-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(201,168,76,0.15); }
     .producto-card:hover::before { opacity: 1; }
     .producto-imagen { width: 100%; aspect-ratio: 4/3; object-fit: contain; background: #0d0d0d; }
     .producto-badge { position: absolute; top: 1rem; right: 1rem; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--dorado); color: var(--negro); padding: 0.3rem 0.7rem; z-index: 2; }
-    .producto-info { padding: 0.3rem 1rem 0.5rem; display: flex; flex-direction: column; }
+    .producto-info { padding: 0.3rem 1rem 0.5rem; display: flex; flex-direction: column; flex: 1; }
+    .producto-info .btn-comprar { margin-top: auto; }
     .producto-nombre { font-family: var(--font-display); font-size: 1rem; font-weight: 400; margin-bottom: 0.2rem; line-height: 1.3; min-height: 2.6rem; }
     .producto-desc { display: none; }
     .producto-precio { display: none; }
@@ -429,8 +430,8 @@
       <div class="producto-card reveal">
         <span class="producto-badge" style="background:transparent;border:1px solid var(--dorado);color:var(--dorado);">Soul</span>
         <img src="ETHOS Soul copia 3.png" alt="Guía VG" class="producto-imagen" />
-        <div class="producto-info" style="min-height:134px;">
-          <p class="producto-nombre" style="min-height:42px;">Guía VG</p>
+        <div class="producto-info">
+          <p class="producto-nombre">Guía VG</p>
           <p class="producto-desc">Guía legal para hombres acusados de violencia de género en España.</p>
           <p class="producto-precio" style="display:none;">Donación libre</p>
           <a href="soul.html#guia-vg" class="btn-comprar"><span>Saber más</span></a>
@@ -490,8 +491,8 @@
           <img src="ETHOS Iron copia.png" alt="Membresía Iron" style="max-height:80px; width:auto; margin-bottom:1rem; opacity:0.8;" />
           <p style="font-family:var(--font-display); font-size:1.6rem; font-weight:300; text-align:center;">Membresía Iron</p>
         </div>
-        <div class="producto-info" style="min-height:134px;">
-          <p class="producto-nombre" style="min-height:42px;">Membresía Iron</p>
+        <div class="producto-info">
+          <p class="producto-nombre">Membresía Iron</p>
           <p class="producto-desc">Contenido cada 5 días, comunidad WhatsApp y directo mensual.</p>
           <p class="producto-precio" style="display:none;"><sup>€</sup>49<small style="font-size:0.7rem;color:var(--gris);"> / mes</small></p>
           <a href="productos.html#iron-en-series" class="btn-comprar"><span>Saber más</span></a>
@@ -505,8 +506,8 @@
           <img src="ETHOS Soul copia.png" alt="Donación Soul" style="max-height:80px; width:auto; margin-bottom:1rem; opacity:0.8;" />
           <p style="font-family:var(--font-display); font-size:1.6rem; font-weight:300; text-align:center;">Donación Soul</p>
         </div>
-        <div class="producto-info" style="min-height:134px;">
-          <p class="producto-nombre" style="min-height:42px;">Donación Soul</p>
+        <div class="producto-info">
+          <p class="producto-nombre">Donación Soul</p>
           <p class="producto-desc">Apoya el grupo de apoyo y los recursos legales gratuitos.</p>
           <p class="producto-precio" style="display:none;">Libre</p>
           <a href="soul.html#donaciones" class="btn-comprar"><span>Saber más</span></a>
@@ -628,7 +629,7 @@
        MODAL CONTACTO — sustituye al email visible (anti-spam)
   ============================================================ -->
   <div id="modal-contacto" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:2000; align-items:center; justify-content:center;" onclick="if(event.target===this)cerrarContacto()">
-    <div style="background:#111111; border:1px solid #c9a84c; padding:2.5rem; max-width:460px; width:90%; position:relative; text-align:center;">
+    <div style="background:#111111; border:1px solid #c9a84c; padding:2.5rem 1.5rem; max-width:460px; width:90%; max-height:90vh; overflow-y:auto; position:relative; text-align:center;">
       <button onclick="cerrarContacto()" aria-label="Cerrar" style="position:absolute; top:1rem; right:1.2rem; background:none; border:none; color:#888888; font-size:1.2rem; cursor:pointer;">✕</button>
       <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:300; margin-bottom:0.5rem; color:#f5f0e8;">Contacto</h3>
       <p style="font-size:0.75rem; color:#888888; margin-bottom:1.5rem;">Escríbenos y te respondemos lo antes posible.</p>
