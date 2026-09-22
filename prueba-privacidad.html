@@ -151,7 +151,8 @@
     document.getElementById('email-rights').innerHTML = link;
   </script>
 
-  <script src="cookies.js?v=3" defer>
+  <script src="cookies.js?v=3" defer>  </script>
+  <script>
     /* Accesibilidad: cerrar ventanas con Escape, avisar del estado de menú y preguntas, y llevar el foco */
     (function(){
       function visible(el){ return el && getComputedStyle(el).display !== 'none' && !(el.classList.contains('modal-overlay') && !el.classList.contains('abierto')); }
@@ -193,6 +194,7 @@
         };
       });
     })();
+
   </script>
 </body>
 </html>
