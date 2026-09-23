@@ -31,6 +31,7 @@ h1,h2,h3{font-family:var(--display);font-weight:300;line-height:1.12}
 /* portada: imagen + una frase + vídeo */
 .cartel{width:100%;background:#000}
 .cartel img{width:100%;height:auto}
+@media (min-width:861px){.cartel{max-width:62%;margin:2.2rem auto 0;border:1px solid var(--oro);padding:10px;background:linear-gradient(180deg,#0d0b07,#070605)}}
 .frase{text-align:center;padding:2.4rem 0 1.8rem}
 .frase h1{font-size:clamp(1.9rem,4.2vw,3.1rem);max-width:20ch;margin:0 auto}
 .frase h1 i{font-style:italic;color:var(--oro)}
@@ -41,6 +42,22 @@ h1,h2,h3{font-family:var(--display);font-weight:300;line-height:1.12}
 .pant .ag{font-size:.7rem;letter-spacing:.2em;color:#3d382e}
 .sonido{margin:1rem 0 3rem;text-align:center;font-size:.8rem;color:var(--ceniza)}
 
+
+
+/* entradas suaves */
+.sub{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,.8,.3,1),transform .7s cubic-bezier(.16,.8,.3,1)}
+.sub.ok{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.sub{opacity:1;transform:none}}
+
+/* banner que gira */
+.tira{position:relative;overflow:hidden;border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);background:linear-gradient(90deg,#0a0906,#14100a,#0a0906);margin-bottom:3rem}
+.tira-pista{display:flex;width:max-content;animation:gira 34s linear infinite}
+.tira span{font-family:var(--display);font-size:clamp(1.05rem,2vw,1.5rem);color:var(--hueso);padding:.85rem 0;white-space:nowrap}
+.tira span em{font-style:normal;color:var(--oro);padding:0 1.4rem}
+.tira:hover .tira-pista{animation-play-state:paused}
+@keyframes gira{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.tira-pista{animation:none}.tira{overflow-x:auto}}
+
 /* venta (aparece a los 14 min) */
 #venta{display:none}
 #venta.abierta{display:block;animation:entra .7s cubic-bezier(.16,.8,.3,1) both}
@@ -48,7 +65,7 @@ h1,h2,h3{font-family:var(--display);font-weight:300;line-height:1.12}
 #venta section{padding:3.5rem 0}
 .pacto{border:1px solid var(--oro-hondo);background:var(--panel);box-shadow:0 0 90px rgba(201,168,76,.10)}
 .pacto-alto{padding:2.2rem 2.4rem 1.6rem;text-align:center;border-bottom:1px solid var(--linea)}
-.pacto-alto h2{font-size:clamp(1.8rem,3.2vw,2.5rem)}
+.pacto-alto h2{font-size:clamp(2.05rem,3.6vw,2.8rem);color:var(--oro);font-weight:400}
 .pacto-alto p{margin-top:.6rem;color:var(--sec);font-size:.93rem}
 .pacto-cuerpo{display:grid;grid-template-columns:1.1fr .9fr}
 .lote{padding:2.2rem 2.4rem}
@@ -86,7 +103,7 @@ h1,h2,h3{font-family:var(--display);font-weight:300;line-height:1.12}
 .duda button{width:100%;display:flex;justify-content:space-between;gap:1.5rem;align-items:baseline;background:none;border:0;color:var(--hueso);font-family:var(--display);font-size:1.18rem;text-align:left;padding:1.1rem 0;cursor:pointer}
 .duda button span{color:var(--oro)}
 .duda .respuesta{max-height:0;overflow:hidden;transition:max-height .35s ease}
-.duda.abierta .respuesta{max-height:300px}
+.duda.abierta .respuesta{max-height:520px}
 .duda .respuesta p{padding-bottom:1.1rem;font-size:.9rem;color:var(--sec)}
 
 /* cierre */
@@ -142,10 +159,12 @@ footer a:hover{color:var(--oro)}
   <p class="sonido">Ponlo con sonido.</p>
 </div>
 
+<div class="tira"><div class="tira-pista"><span>Deja de perder el tiempo donde no es<em>·</em>Mejora tu relación<em>·</em>Deja de resignarte y encuentra a tu persona<em>·</em>Deja de callarte cuando te acorralan con el discurso feminista<em>·</em></span><span>Deja de perder el tiempo donde no es<em>·</em>Mejora tu relación<em>·</em>Deja de resignarte y encuentra a tu persona<em>·</em>Deja de callarte cuando te acorralan con el discurso feminista<em>·</em></span></div></div>
+
 <div id="venta">
 
   <section class="ancho">
-    <div class="pacto">
+    <div class="sub pacto">
       <div class="pacto-alto">
         <h2>Entra ahora y tu cuota se queda congelada.</h2>
         <p>Cincuenta plazas de fundador. Cuando se llenan, se cierran y el precio pasa a ser otro.</p>
@@ -178,7 +197,7 @@ footer a:hover{color:var(--oro)}
 
   <section id="bonus">
     <div class="ancho">
-      <div class="medalla"><span>50</span><small>PLAZAS</small></div>
+      <div class="sub medalla"><span>50</span><small>PLAZAS</small></div>
       <h2>Y algo que no se vuelve a repetir.</h2>
       <p class="regalo">Tú y yo</p>
       <p class="det">Una conversación privada en audio, conmigo, sobre tu caso concreto. Solo entra con las plazas de fundador.</p>
@@ -189,21 +208,22 @@ footer a:hover{color:var(--oro)}
   <section class="ancho">
     <!-- SUSTITUYE POR TESTIMONIOS REALES, CON NOMBRE Y CIUDAD. Ninguno inventado. -->
     <div class="voces">
-      <blockquote class="voz"><p>[Qué entendió que antes no veía.]</p><cite>Nombre, ciudad</cite></blockquote>
-      <blockquote class="voz"><p>[Qué cambió desde que entró.]</p><cite>Nombre, ciudad</cite></blockquote>
-      <blockquote class="voz"><p>[La parte que más le ha servido.]</p><cite>Nombre, ciudad</cite></blockquote>
-      <blockquote class="voz"><p>[A quién se lo recomendaría y por qué.]</p><cite>Nombre, ciudad</cite></blockquote>
+      <blockquote class="sub voz"><p>[Qué entendió que antes no veía.]</p><cite>Nombre, ciudad</cite></blockquote>
+      <blockquote class="sub voz"><p>[Qué cambió desde que entró.]</p><cite>Nombre, ciudad</cite></blockquote>
+      <blockquote class="sub voz"><p>[La parte que más le ha servido.]</p><cite>Nombre, ciudad</cite></blockquote>
+      <blockquote class="sub voz"><p>[A quién se lo recomendaría y por qué.]</p><cite>Nombre, ciudad</cite></blockquote>
     </div>
   </section>
 
   <section class="ancho">
-    <div class="duda"><button type="button">¿Y si no es para mí?<span>+</span></button><div class="respuesta"><p>Tienes 15 días de garantía. Pides la devolución y se te devuelve el dinero, sin explicaciones.</p></div></div>
-    <div class="duda"><button type="button">¿Puedo cancelar cuando quiera?<span>+</span></button><div class="respuesta"><p>Sí, tú mismo desde Hotmart, sin penalización ni llamadas. Mantienes el acceso hasta el final del mes pagado.</p></div></div>
-    <div class="duda"><button type="button">¿Me subirá el precio?<span>+</span></button><div class="respuesta"><p>No. Mientras no canceles, mantienes 19,90 € al mes aunque suba para quien entre después.</p></div></div>
-    <div class="duda"><button type="button">¿Qué pasa cuando se acaben las 50 plazas?<span>+</span></button><div class="respuesta"><p>El precio pasa al normal y el bonus <em>Tú y yo</em> deja de estar disponible. No se reabre.</p></div></div>
+    <div class="sub duda"><button type="button">¿Qué voy a conseguir con todo esto?<span>+</span></button><div class="respuesta"><p>Dejar de adivinar. Saber qué está pasando en tu relación cuando está pasando, y qué hacer con ello. Si estás buscando, dejar de perder meses con quien no encaja y saber moverte con la que sí te interesa, hasta conseguirla y hasta sostenerla. Entender qué cambia en ella cada semana del mes y dejar de caminar de puntillas. Y cuando te acorralen con el discurso, responder con datos y fuentes en vez de callarte. En resumen: dejar de ir a ciegas en lo que más te afecta.</p></div></div>
+    <div class="sub duda"><button type="button">¿Y si no es para mí?<span>+</span></button><div class="respuesta"><p>Tienes 15 días de garantía. Pides la devolución y se te devuelve el dinero, sin explicaciones.</p></div></div>
+    <div class="sub duda"><button type="button">¿Puedo cancelar cuando quiera?<span>+</span></button><div class="respuesta"><p>Sí, tú mismo desde Hotmart, sin penalización ni llamadas. Mantienes el acceso hasta el final del mes pagado.</p></div></div>
+    <div class="sub duda"><button type="button">¿Me subirá el precio?<span>+</span></button><div class="respuesta"><p>No. Mientras no canceles, mantienes 19,90 € al mes aunque suba para quien entre después.</p></div></div>
+    <div class="sub duda"><button type="button">¿Qué pasa cuando se acaben las 50 plazas?<span>+</span></button><div class="respuesta"><p>El precio pasa al normal y el bonus <em>Tú y yo</em> deja de estar disponible. No se reabre.</p></div></div>
   </section>
 
-  <section id="cierre" class="ancho">
+  <section id="cierre" class="ancho sub">
     <h2>Quedan plazas. Mañana, a lo mejor no.</h2>
     <a class="boton" id="cta-2" href="#">Quiero mi plaza</a>
   </section>
@@ -237,13 +257,35 @@ footer a:hover{color:var(--oro)}
     }, 1000);
   })();
 
+
+  var subObs = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var hs = [].slice.call(e.target.parentElement.children).filter(function (x) { return x.classList && x.classList.contains('sub'); });
+      e.target.style.transitionDelay = (Math.max(0, hs.indexOf(e.target)) * 80) + 'ms';
+      e.target.classList.add('ok'); subObs.unobserve(e.target);
+    });
+  }, { threshold: .15 });
+  document.querySelectorAll('.sub').forEach(function (e) { subObs.observe(e); });
+
   document.querySelectorAll('.duda button').forEach(function (b, i) {
     var r = b.parentElement.querySelector('.respuesta');
     r.id = 'duda-' + i; b.setAttribute('aria-controls', r.id); b.setAttribute('aria-expanded', 'false');
     b.addEventListener('click', function () {
       var item = b.parentElement, abierta = item.classList.contains('abierta');
       document.querySelectorAll('.duda').forEach(function (x) { x.classList.remove('abierta'); });
-      document.querySelectorAll('.duda button').forEach(function (x) { x.setAttribute('aria-expanded','false'); x.querySelector('span').textContent='+'; });
+    
+  var subObs = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var hs = [].slice.call(e.target.parentElement.children).filter(function (x) { return x.classList && x.classList.contains('sub'); });
+      e.target.style.transitionDelay = (Math.max(0, hs.indexOf(e.target)) * 80) + 'ms';
+      e.target.classList.add('ok'); subObs.unobserve(e.target);
+    });
+  }, { threshold: .15 });
+  document.querySelectorAll('.sub').forEach(function (e) { subObs.observe(e); });
+
+  document.querySelectorAll('.duda button').forEach(function (x) { x.setAttribute('aria-expanded','false'); x.querySelector('span').textContent='+'; });
       if (!abierta) { item.classList.add('abierta'); b.setAttribute('aria-expanded','true'); b.querySelector('span').textContent='−'; }
     });
   });
