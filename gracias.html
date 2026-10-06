@@ -33,6 +33,18 @@ header p{margin:1.2rem auto 0;max-width:52ch;color:var(--sec);font-size:1rem}
 .agenda li{list-style:none;font-size:.93rem;color:var(--sec);padding:.45rem 0 .45rem 1.6rem;position:relative}
 .agenda li::before{content:'✦';position:absolute;left:0;color:var(--oro);font-size:.7rem;top:.75rem}
 .agenda li b{color:var(--hueso);font-weight:500}
+.soporte{border:1px solid var(--linea);background:var(--panel);padding:2rem 1.8rem;margin-bottom:3rem}
+.soporte h2{font-size:1.4rem;margin-bottom:.4rem}
+.soporte>p{font-size:.92rem;color:var(--sec);margin-bottom:1.2rem}
+.soporte input,.soporte textarea{width:100%;background:#0a0908;border:1px solid var(--linea);color:var(--hueso);font-family:var(--sans);font-size:.88rem;padding:.8rem 1rem;margin-bottom:.8rem;outline:none}
+.soporte input:focus,.soporte textarea:focus{border-color:var(--oro-hondo)}
+.soporte textarea{resize:vertical;min-height:110px}
+.privac{display:flex;gap:.6rem;align-items:flex-start;margin:.2rem 0 1rem}
+.privac input{width:auto;margin:.3rem 0 0;accent-color:var(--oro)}
+.privac label{font-size:.76rem;color:var(--sec);line-height:1.5}
+.privac a{color:var(--oro)}
+.aviso-env{font-size:.85rem;color:var(--oro-claro);margin-top:.8rem;display:none}
+.trampa{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .ayuda{text-align:center;color:var(--sec);font-size:.9rem;padding-bottom:3rem}
 .ayuda a{color:var(--oro)}
 footer{border-top:1px solid var(--linea);padding:1.6rem;text-align:center}
@@ -91,7 +103,50 @@ footer a:hover{color:var(--oro)}
   </div>
 </section>
 
-<p class="ayuda ancho">¿Algún problema con el acceso? Escríbeme desde <a href="index.html">la web</a> y lo resolvemos.</p>
+<section class="ancho">
+  <div class="soporte">
+    <h2>¿Algún problema con el acceso?</h2>
+    <p>Escríbeme aquí mismo y lo resolvemos. Me llega directo a mí.</p>
+    <input type="text" id="s-nombre" aria-label="Tu nombre" placeholder="Tu nombre" />
+    <input type="email" id="s-email" aria-label="Tu email" placeholder="El email con el que has comprado" />
+    <textarea id="s-mensaje" aria-label="Qué ha pasado" placeholder="Cuéntame qué ha pasado"></textarea>
+    <input type="text" id="s-web" name="_honey" class="trampa" tabindex="-1" autocomplete="off" aria-hidden="true" />
+    <div class="privac">
+      <input type="checkbox" id="s-privacidad" />
+      <label for="s-privacidad">He leído y acepto la <a href="privacidad.html" target="_blank" rel="noopener noreferrer">Política de Privacidad</a>.</label>
+    </div>
+    <button type="button" class="boton" id="s-enviar" style="margin-top:0">Enviar</button>
+    <p class="aviso-env" id="s-ok">Mensaje enviado. Te respondo lo antes posible.</p>
+  </div>
+</section>
+
+<script>
+  window.__soporteAbierto = Date.now();
+  document.getElementById('s-enviar').addEventListener('click', function () {
+    var nombre = document.getElementById('s-nombre').value.trim();
+    var email = document.getElementById('s-email').value.trim();
+    var mensaje = document.getElementById('s-mensaje').value.trim();
+    var trampa = document.getElementById('s-web').value;
+    if (!nombre || !mensaje) { alert('Rellena tu nombre y tu mensaje.'); return; }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { alert('Introduce un email válido.'); return; }
+    if (!document.getElementById('s-privacidad').checked) { alert('Debes aceptar la Política de Privacidad para continuar.'); return; }
+    if (trampa || (Date.now() - window.__soporteAbierto) < 2000) { return; }
+    fetch('https://formsubmit.co/ajax/contacto@ethosironsoul.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ nombre: nombre, email: email, mensaje: mensaje, _subject: 'Soporte Iron Pass — página de gracias', _captcha: 'false', _honey: trampa })
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      if (d.success) {
+        ['s-nombre','s-email','s-mensaje'].forEach(function (i) { document.getElementById(i).value = ''; });
+        document.getElementById('s-privacidad').checked = false;
+        document.getElementById('s-ok').style.display = 'block';
+      } else { alert('Algo ha ido mal. Inténtalo de nuevo.'); }
+    })
+    .catch(function () { alert('Error de conexión. Inténtalo de nuevo.'); });
+  });
+</script>
 
 <footer>
   <a href="privacidad.html">Privacidad</a><a href="condiciones.html">Condiciones</a><a href="aviso-legal.html">Aviso legal</a>
