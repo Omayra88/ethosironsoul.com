@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="robots" content="noindex, nofollow" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ya estás dentro — Iron Pass</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="stylesheet" href="fonts/fonts.css" />
+<style>
+:root{--tinta:#050505;--panel:#0b0a08;--linea:#262119;--oro:#c9a84c;--oro-claro:#ecd694;--oro-hondo:#7d5f1c;--hueso:#f7f3ec;--sec:#b9b3a8;--display:'Cormorant Garamond',serif;--sans:'Montserrat',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--tinta);color:var(--hueso);font-family:var(--sans);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+.ancho{max-width:760px;margin:0 auto;padding:0 1.5rem}
+h1,h2{font-family:var(--display);font-weight:300;line-height:1.15}
+.cinta{background:linear-gradient(90deg,#120d04,#40300f,#120d04);border-bottom:1px solid var(--oro-hondo);text-align:center;padding:.6rem 1rem;font-size:.72rem;letter-spacing:.1em;color:var(--oro-claro)}
+header{text-align:center;padding:3.5rem 0 2.5rem}
+.medalla{width:92px;height:92px;margin:0 auto 1.6rem;border:1px solid var(--oro);border-radius:50%;display:grid;place-items:center;position:relative}
+.medalla::before{content:'';position:absolute;inset:7px;border:1px solid var(--oro-hondo);border-radius:50%}
+.medalla span{font-family:var(--display);font-size:1.7rem;color:var(--oro)}
+header h1{font-size:clamp(2rem,4.4vw,3rem);max-width:16ch;margin:0 auto}
+header p{margin:1rem auto 0;max-width:46ch;color:var(--sec);font-size:.98rem}
+.pasos{padding:1rem 0 3rem}
+.paso{display:grid;grid-template-columns:auto 1fr;gap:1.4rem;align-items:start;border:1px solid var(--linea);background:var(--panel);padding:1.6rem 1.7rem;margin-bottom:1rem}
+.paso .n{font-family:var(--display);font-size:1.7rem;color:var(--oro);line-height:1}
+.paso h2{font-size:1.3rem;margin-bottom:.3rem}
+.paso p{font-size:.93rem;color:var(--sec)}
+.boton{display:inline-block;margin-top:1rem;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;padding:1rem 1.8rem;border:1px solid var(--oro);background:linear-gradient(180deg,var(--oro),#a8862f);color:#0b0a08;font-weight:500;text-decoration:none;transition:filter .3s,transform .3s}
+.boton:hover,.boton:focus-visible{filter:brightness(1.1);transform:translateY(-2px)}
+.agenda{border:1px solid var(--oro-hondo);background:radial-gradient(90% 80% at 50% 0%,#17120a,var(--tinta) 75%);padding:2rem 1.8rem;margin-bottom:3rem}
+.agenda h2{font-size:1.5rem;text-align:center;color:var(--oro);margin-bottom:1.2rem}
+.agenda li{list-style:none;font-size:.93rem;color:var(--sec);padding:.45rem 0 .45rem 1.6rem;position:relative}
+.agenda li::before{content:'✦';position:absolute;left:0;color:var(--oro);font-size:.7rem;top:.75rem}
+.agenda li b{color:var(--hueso);font-weight:500}
+.ayuda{text-align:center;color:var(--sec);font-size:.9rem;padding-bottom:3rem}
+.ayuda a{color:var(--oro)}
+footer{border-top:1px solid var(--linea);padding:1.6rem;text-align:center}
+footer a{font-size:.68rem;color:#6b665d;text-decoration:none;margin:0 .6rem}
+footer a:hover{color:var(--oro)}
+@media (max-width:640px){.paso{grid-template-columns:1fr;gap:.4rem}}
+</style>
+</head>
+<body>
+
+<div class="cinta">Iron Pass · Ya estás dentro</div>
+
+<header class="ancho">
+  <div class="medalla"><span>✓</span></div>
+  <h1>Bienvenido. Ya eres fundador.</h1>
+  <p>Tu plaza está confirmada y tu cuota queda congelada mientras sigas dentro. Esto es todo lo que tienes que hacer ahora.</p>
+</header>
+
+<section class="ancho pasos">
+  <div class="paso">
+    <div class="n">1</div>
+    <div>
+      <h2>Revisa tu correo</h2>
+      <p>Hotmart te ha enviado tus datos de acceso. Si no lo ves, mira en spam o promociones y marca el remitente como fiable para no perderte nada.</p>
+    </div>
+  </div>
+  <div class="paso">
+    <div class="n">2</div>
+    <div>
+      <h2>Entra en el grupo privado</h2>
+      <p>Es donde estoy cada día y donde puedes preguntar lo que no le preguntarías a nadie más. También te llega el enlace por correo, por si prefieres hacerlo luego.</p>
+      <!-- PON AQUÍ EL ENLACE DEL GRUPO DE WHATSAPP cuando lo tengas -->
+      <a class="boton" href="#">Unirme al grupo</a>
+    </div>
+  </div>
+  <div class="paso">
+    <div class="n">3</div>
+    <div>
+      <h2>Empieza por la intro</h2>
+      <p>Dentro de Hotmart ya tienes abiertas la introducción y el primer capítulo. A partir de ahí, contenido nuevo cada 5 días.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ancho">
+  <div class="agenda">
+    <h2>Lo que viene a partir de ahora</h2>
+    <ul>
+      <li><b>Lunes.</b> Una asimetría legal analizada, con la fuente citada.</li>
+      <li><b>Miércoles.</b> Una píldora para entender algo concreto.</li>
+      <li><b>Jueves.</b> Respondo tus preguntas en vídeo.</li>
+      <li><b>Domingo.</b> Una píldora de acción para empezar la semana.</li>
+      <li><b>Cada 5 días.</b> Un capítulo nuevo, con dos series avanzando a la vez.</li>
+      <li><b>Último viernes del mes.</b> Directo conmigo, y grabado si no puedes estar.</li>
+    </ul>
+  </div>
+</section>
+
+<p class="ayuda ancho">¿Algún problema con el acceso? Escríbeme desde <a href="index.html">la web</a> y lo resolvemos.</p>
+
+<footer>
+  <a href="privacidad.html">Privacidad</a><a href="condiciones.html">Condiciones</a><a href="aviso-legal.html">Aviso legal</a>
+</footer>
+
+</body>
+</html>
