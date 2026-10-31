@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ETHOS Iron</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- player.js de Bunny: debe cargarse ANTES del iframe -->
+<script src="https://assets.mediadelivery.net/playerjs/playerjs-latest.min.js"></script>
+
+<style>
+  :root {
+    --fondo: #0a0a0a;
+    --oro: #c9a84c;
+    --oro-oscuro: #8a6a20;
+    --crema: #f1ead8;
+    --gris: #8c8678;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: var(--fondo); color: var(--crema); }
+  body {
+    font-family: "Montserrat", system-ui, sans-serif;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 20px 64px;
+  }
+  main { width: 100%; max-width: 960px; }
+
+  .marco {
+    position: relative; width: 100%; aspect-ratio: 16 / 9;
+    background: #000; border: 1px solid var(--oro-oscuro);
+  }
+  .marco iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  .zona-boton {
+    min-height: 120px; display: flex; justify-content: center; align-items: center;
+    padding-top: 32px;
+  }
+  #boton {
+    display: none;
+    font-family: "Montserrat", sans-serif; font-weight: 600; font-size: 17px; letter-spacing: .04em;
+    color: #0a0a0a; background: var(--oro); text-decoration: none;
+    padding: 18px 44px; border: 0; cursor: pointer;
+  }
+  #boton:hover { background: #d9b95a; }
+  #boton:focus-visible { outline: 2px solid var(--crema); outline-offset: 4px; }
+  #boton.visible { display: inline-block; animation: aparece .6s ease both; }
+  @keyframes aparece { from { opacity: 0; } to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { #boton.visible { animation: none; } }
+
+  /* Panel de pruebas: solo aparece con ?debug=1 en la dirección */
+  #debug {
+    display: none; margin-top: 24px; width: 100%; max-width: 960px;
+    font: 13px/1.5 ui-monospace, Menlo, monospace; color: var(--gris);
+    border: 1px dashed var(--oro-oscuro); padding: 12px 16px; white-space: pre-wrap;
+  }
+</style>
+</head>
+<body>
+
+<main>
+  <div class="marco">
+    <!-- Sustituye el ID del vídeo si cambias el vídeo en Bunny -->
+    <iframe
+      id="bunny-player"
+      src="https://player.mediadelivery.net/embed/795691/1a7f8493-ee30-445a-97e1-0f1ba3d9b7d5?autoplay=false&preload=true&disableIosPlayer=true"
+      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen"
+      allowfullscreen
+      title="ETHOS Iron"></iframe>
+  </div>
+
+  <div class="zona-boton">
+    <a id="boton" href="#" rel="noopener">Acceder a Iron Pass</a>
+  </div>
+
+  <div id="debug"></div>
+</main>
+
+<script>
+/* =====================================================================
+   AJUSTES: lo único que tienes que tocar
+   ===================================================================== */
+var CONFIG = {
+  // Segundo del vídeo en el que sale el botón (la VSL dura 14:14 = 854 s).
+  // Ahora: minuto 6:32 = 392 segundos. Para probar rápido, pon 20 y vuelve a poner 392.
+  SEGUNDO_BOTON: 392,
+
+  // Enlace de pago de Hotmart (con el cupón ya aplicado)
+  ENLACE_HOTMART: "PEGA_AQUI_EL_ENLACE_DE_HOTMART",
+
+  // PostHog: clave de proyecto (empieza por phc_) y región ("eu" o "us")
+  POSTHOG_CLAVE: "PEGA_AQUI_LA_CLAVE_DE_POSTHOG",
+  POSTHOG_REGION: "eu"
+};
+
+/* =====================================================================
+   MEDICIÓN (envía los eventos directamente a PostHog, sin cookies)
+   ===================================================================== */
+var params = new URLSearchParams(location.search);
+var origen = params.get("src") || params.get("utm_source") || "directo";
+var DEBUG = params.get("debug") === "1";
+
+var idAnonimo;
+try {
+  idAnonimo = sessionStorage.getItem("vsl_id");
+  if (!idAnonimo) {
+    idAnonimo = "v-" + Math.random().toString(36).slice(2) + Date.now().toString(36);
+    sessionStorage.setItem("vsl_id", idAnonimo);
+  }
+} catch (e) {
+  idAnonimo = "v-" + Math.random().toString(36).slice(2) + Date.now().toString(36);
+}
+
+var POSTHOG_ACTIVO = CONFIG.POSTHOG_CLAVE.indexOf("phc_") === 0;
+var POSTHOG_URL = "https://" + (CONFIG.POSTHOG_REGION === "us" ? "us" : "eu") + ".i.posthog.com/capture/";
+
+function registrar(evento, extra) {
+  var datos = Object.assign({ origen: origen, pagina: location.pathname }, extra || {});
+  if (DEBUG) log(evento + " " + JSON.stringify(extra || {}));
+  if (!POSTHOG_ACTIVO) return;
+  try {
+    fetch(POSTHOG_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        api_key: CONFIG.POSTHOG_CLAVE,
+        event: evento,
+        distinct_id: idAnonimo,
+        properties: Object.assign({ "$current_url": location.href }, datos)
+      }),
+      keepalive: true
+    });
+  } catch (e) {}
+}
+
+function log(texto) {
+  var caja = document.getElementById("debug");
+  caja.style.display = "block";
+  caja.textContent = texto + "\n" + caja.textContent.split("\n").slice(0, 14).join("\n");
+}
+
+/* =====================================================================
+   BOTÓN DE COMPRA
+   ===================================================================== */
+var boton = document.getElementById("boton");
+(function prepararEnlace() {
+  var destino = CONFIG.ENLACE_HOTMART;
+  try {
+    var u = new URL(destino);
+    u.searchParams.set("src", origen);   // así Hotmart te dice de dónde vino cada venta
+    destino = u.toString();
+  } catch (e) { /* si aún es el marcador, se deja tal cual */ }
+  boton.href = destino;
+})();
+
+var botonMostrado = false;
+function mostrarBoton(segundos) {
+  if (botonMostrado) return;
+  botonMostrado = true;
+  boton.classList.add("visible");
+  registrar("vsl_boton_visible", { segundo: Math.round(segundos) });
+}
+boton.addEventListener("click", function () {
+  registrar("vsl_boton_clic");
+});
+
+/* =====================================================================
+   REPRODUCTOR
+   ===================================================================== */
+registrar("vsl_visita");
+
+var player = new playerjs.Player(document.getElementById("bunny-player"));
+var ultimoSegundo = 0;
+var hitos = { 25: false, 50: false, 75: false, 100: false };
+var tramosVistos = {};
+var empezo = false;
+
+player.on("ready", function () {
+  if (DEBUG) log("reproductor listo");
+});
+
+player.on("play", function () {
+  if (!empezo) { empezo = true; registrar("vsl_play"); }
+});
+
+player.on("timeupdate", function (d) {
+  var s = d.seconds, total = d.duration;
+
+  // Botón por minuto (también si alguien se salta hasta pasar ese punto)
+  if (s >= CONFIG.SEGUNDO_BOTON) mostrarBoton(s);
+
+  // Salto hacia delante (para saber si se puede adelantar en las pruebas)
+  if (s - ultimoSegundo > 2.5) {
+    registrar("vsl_salto_adelante", { desde: Math.round(ultimoSegundo), hasta: Math.round(s) });
+  }
+  ultimoSegundo = s;
+
+  // Curva de retención: un evento por cada tramo de 10 segundos alcanzado
+  var tramo = Math.floor(s / 10) * 10;
+  if (!tramosVistos[tramo]) {
+    tramosVistos[tramo] = true;
+    registrar("vsl_tramo", { segundo: tramo });
+  }
+
+  // Hitos de visionado
+  if (total > 0) {
+    var pct = (s / total) * 100;
+    [25, 50, 75].forEach(function (h) {
+      if (pct >= h && !hitos[h]) { hitos[h] = true; registrar("vsl_hito_" + h); }
+    });
+  }
+  if (DEBUG) document.title = Math.round(s) + " s";
+});
+
+player.on("ended", function () {
+  if (!hitos[100]) { hitos[100] = true; registrar("vsl_hito_100"); }
+});
+</script>
+</body>
+</html>
