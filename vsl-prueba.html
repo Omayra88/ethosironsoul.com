@@ -398,7 +398,6 @@
 
   <div class="controles" id="controles">
     <button type="button" id="b-play" aria-label="Pausar"></button>
-    <button type="button" id="b-sonido" aria-label="Silenciar"></button>
     <button type="button" id="b-pantalla" aria-label="Pantalla completa"></button>
   </div>
 
@@ -650,7 +649,7 @@ var capa = document.getElementById("capa");
 var relleno = document.getElementById("relleno");
 var controles = document.getElementById("controles");
 var bPlay = document.getElementById("b-play");
-var bSonido = document.getElementById("b-sonido");
+var bSonido = document.getElementById("b-sonido") || document.createElement("button");
 var bPantalla = document.getElementById("b-pantalla");
 var oferta = document.getElementById("oferta");
 var detalle = document.getElementById("detalle");
