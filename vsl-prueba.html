@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>ETHOS Iron</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- player.js de Bunny: debe cargarse ANTES del iframe -->
+<script src="https://assets.mediadelivery.net/playerjs/playerjs-latest.min.js"></script>
+
+<style>
+  :root {
+    --fondo: #0a0a0a;
+    --oro: #c9a84c;
+    --oro-oscuro: #8a6a20;
+    --crema: #f1ead8;
+    --gris: #8c8678;
+    --franja: 64px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: var(--fondo); color: var(--crema); }
+  html.bloqueado, html.bloqueado body { overflow: hidden; }
+  body {
+    font-family: "Montserrat", system-ui, sans-serif;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 36px 20px 40px;
+  }
+  .escena, .detalle, .pie { width: 100%; max-width: 960px; }
+
+  /* ---------- Titular encima del vídeo ---------- */
+  .titular {
+    min-height: 118px; margin-bottom: 14px; text-align: center;
+    display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+    transition: opacity .35s ease;
+  }
+  .titular.fuera { opacity: 0; }
+  .t1 {
+    margin: 0; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600;
+    font-size: clamp(26px, 4.4vw, 40px); line-height: 1.15; color: var(--crema);
+  }
+  .t2 { margin: 10px 0 0; font-size: 14px; letter-spacing: .02em; color: var(--oro); }
+  .t2:empty { display: none; }
+  .t1, .t2, .eco { text-wrap: balance; }
+
+  /* ---------- Controles (arriba, a un lado) ---------- */
+  .controles { display: flex; justify-content: flex-end; gap: 6px; margin-bottom: 8px; }
+  .controles button {
+    width: 34px; height: 34px; padding: 0; display: grid; place-items: center;
+    background: transparent; color: var(--crema); border: 1px solid var(--oro-oscuro); cursor: pointer;
+  }
+  .controles button svg { width: 16px; height: 16px; }
+  .controles button:hover { border-color: var(--oro); }
+  .controles button:focus-visible { outline: 2px solid var(--crema); outline-offset: 2px; }
+  .controles:not(.iniciado) #b-play,
+  .controles:not(.iniciado) #b-sonido { display: none; }
+
+  /* ---------- Vídeo ---------- */
+  .marco {
+    position: relative; width: 100%; aspect-ratio: 16 / 9;
+    background: #000; border: 1px solid var(--oro-oscuro);
+  }
+  .marco iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  /* Capa transparente: tapa el reproductor de Bunny una vez empieza el vídeo,
+     para que no lleguen toques ni teclas que permitan adelantar */
+  .capa {
+    position: absolute; inset: 0; z-index: 2; display: none; cursor: pointer;
+    -webkit-tap-highlight-color: transparent; touch-action: manipulation; outline: none;
+  }
+  .capa.activa { display: block; }
+
+  /* Barra de progreso (solo se mira, no se toca) */
+  .barra {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 4px; z-index: 3;
+    background: rgba(0, 0, 0, .5); pointer-events: none;
+  }
+  .barra-relleno { height: 100%; width: 0; background: var(--oro); transition: width .45s linear; }
+
+  /* ---------- Oferta: aparece al llegar al minuto del botón ---------- */
+  .oferta { display: none; flex-direction: column; align-items: center; padding-bottom: 8px; }
+  .oferta.visible { display: flex; animation: aparece .6s ease both; }
+  .eco {
+    margin: 30px 0 16px; text-align: center;
+    font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600;
+    font-size: 30px; line-height: 1.15; color: var(--crema);
+  }
+  .boton {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    width: min(100%, 440px); padding: 18px 28px; text-align: center; text-decoration: none;
+    color: #0a0a0a; border: 0;
+    background: linear-gradient(180deg, #dcbf62 0%, #c9a84c 55%, #b8923a 100%);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28), 0 10px 34px rgba(201, 168, 76, .22);
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  }
+  .boton:hover {
+    transform: translateY(-1px); filter: brightness(1.06);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .4), 0 14px 40px rgba(201, 168, 76, .32);
+  }
+  .boton:active { transform: translateY(0); }
+  .boton:focus-visible { outline: 2px solid var(--crema); outline-offset: 4px; }
+  .boton .l1 { font-weight: 600; font-size: 18px; letter-spacing: .03em; }
+  .boton .sub {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    width: 100%; padding-top: 8px; border-top: 1px solid rgba(10, 10, 10, .22);
+  }
+  .boton .l2 { font-size: 13px; font-weight: 500; letter-spacing: .08em; }
+  .boton .l3 { font-size: 14px; font-weight: 600; letter-spacing: .03em; }
+  .garantia {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    margin: 16px 0 0; font-size: 13px; color: var(--gris); text-align: center;
+  }
+  @keyframes aparece { from { opacity: 0; } to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    .oferta.visible, .detalle.visible { animation: none; }
+    .boton, .barra-relleno, .titular { transition: none; }
+  }
+
+  /* ---------- Qué incluye (aparece con el botón) ---------- */
+  .detalle { display: none; margin-top: 56px; }
+  .detalle.visible { display: block; animation: aparece .6s ease both; }
+  .detalle h2 {
+    margin: 0 0 24px; text-align: center;
+    font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 34px; color: var(--crema);
+  }
+  .rejilla { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .rejilla li { padding: 20px 22px; border: 1px solid var(--oro-oscuro); }
+  .rejilla h3 {
+    margin: 0 0 8px; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600;
+    font-size: 22px; color: var(--oro);
+  }
+  .rejilla p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--crema); }
+  .rejilla li.bonus { grid-column: 1 / -1; border-color: var(--oro); }
+  .nota { margin: 22px 0 0; text-align: center; font-size: 13px; color: var(--gris); }
+
+  /* ---------- Pie ---------- */
+  .pie {
+    margin-top: 56px; padding-top: 20px; border-top: 1px solid rgba(138, 106, 32, .4);
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px;
+    font-size: 12px; color: var(--gris);
+  }
+  .pie a { color: var(--gris); text-decoration: underline; text-underline-offset: 3px; }
+  .pie a:hover { color: var(--crema); }
+
+  /* ---------- Pantalla completa propia: vídeo arriba y botón justo debajo ---------- */
+  .escena.pc {
+    position: fixed; inset: 0; z-index: 9999; max-width: none; width: 100%;
+    height: 100vh; height: 100dvh; background: var(--fondo);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    overflow: hidden;
+  }
+  .escena.pc .titular { display: none; }
+  .escena.pc .marco { border-left: 0; border-right: 0; }
+  .escena.pc .controles {
+    position: fixed; z-index: 10000; margin: 0; gap: 6px;
+    top: calc(env(safe-area-inset-top) + 8px); right: calc(env(safe-area-inset-right) + 8px);
+  }
+  .escena.pc .controles button { background: rgba(10, 10, 10, .6); }
+  /* el sitio de la oferta se reserva desde el principio para que el vídeo no cambie de tamaño */
+  .escena.pc .oferta { display: flex; visibility: hidden; min-height: 215px; justify-content: flex-start; }
+  .escena.pc .oferta.visible { visibility: visible; }
+  .escena.pc .eco { margin: 16px 0 12px; font-size: 24px; }
+  .escena.pc .garantia { margin-top: 10px; }
+
+  @media (orientation: landscape) {
+    .escena.pc { justify-content: center; }
+    .escena.pc .marco {
+      width: min(100%, calc((100vh - var(--franja) - env(safe-area-inset-top) - env(safe-area-inset-bottom)) * 16 / 9));
+      width: min(100%, calc((100dvh - var(--franja) - env(safe-area-inset-top) - env(safe-area-inset-bottom)) * 16 / 9));
+      border: 0;
+    }
+    .escena.pc .oferta {
+      height: var(--franja); min-height: 0; padding: 0; flex-direction: row; justify-content: center; align-items: center;
+    }
+    .escena.pc .eco, .escena.pc .garantia { display: none; }
+    .escena.pc .boton { width: auto; gap: 2px; padding: 7px 26px; }
+    .escena.pc .boton .l1 { font-size: 14px; }
+    .escena.pc .boton .sub { flex-direction: row; gap: 0; padding-top: 2px; border-top: 0; }
+    .escena.pc .boton .l2, .escena.pc .boton .l3 { font-size: 10.5px; }
+    .escena.pc .boton .l2::after { content: " · "; white-space: pre; }
+  }
+
+  /* ---------- Móvil: todo algo más pequeño (el vídeo no se toca) ---------- */
+  @media (max-width: 640px) {
+    body { padding: 24px 16px 32px; }
+    .titular { min-height: 104px; }
+    .t1 { font-size: clamp(22px, 6.4vw, 26px); }
+    .t2 { font-size: 12.5px; }
+    .controles button { width: 30px; height: 30px; }
+    .controles button svg { width: 14px; height: 14px; }
+    .eco { font-size: 25px; margin: 24px 0 14px; }
+    .boton { width: 100%; padding: 14px 18px; gap: 6px; }
+    .boton .l1 { font-size: 15.5px; }
+    .boton .sub { padding-top: 6px; }
+    .boton .l2 { font-size: 11.5px; }
+    .boton .l3 { font-size: 12.5px; }
+    .garantia { font-size: 12px; }
+    .detalle { margin-top: 44px; }
+    .detalle h2 { font-size: 28px; }
+    .rejilla { grid-template-columns: 1fr; }
+    .rejilla li { padding: 16px 18px; }
+    .rejilla h3 { font-size: 20px; }
+    .rejilla p { font-size: 13px; }
+  }
+
+  /* Panel de pruebas: solo aparece con ?debug=1 en la dirección */
+  #debug {
+    display: none; margin-top: 24px; width: 100%; max-width: 960px;
+    font: 13px/1.5 ui-monospace, Menlo, monospace; color: var(--gris);
+    border: 1px dashed var(--oro-oscuro); padding: 12px 16px; white-space: pre-wrap;
+  }
+</style>
+</head>
+<body>
+
+<div class="escena" id="escena">
+
+  <div class="titular" id="titular" aria-live="polite">
+    <p class="t1" id="t1">¿Cuántas veces te han hecho sentir que el problema eras&nbsp;tú?</p>
+    <p class="t2" id="t2">Si la respuesta es ninguna, esto no es para ti.</p>
+  </div>
+
+  <div class="controles" id="controles">
+    <button type="button" id="b-play" aria-label="Pausar"></button>
+    <button type="button" id="b-sonido" aria-label="Silenciar"></button>
+    <button type="button" id="b-pantalla" aria-label="Pantalla completa"></button>
+  </div>
+
+  <div class="marco" id="marco">
+    <!-- Sustituye el ID del vídeo si cambias el vídeo en Bunny -->
+    <iframe
+      id="bunny-player"
+      tabindex="-1"
+      src="https://player.mediadelivery.net/embed/795691/1a7f8493-ee30-445a-97e1-0f1ba3d9b7d5?autoplay=false&preload=true&disableIosPlayer=true"
+      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+      title="ETHOS Iron"></iframe>
+    <div class="capa" id="capa" tabindex="-1" role="button" aria-label="Pausar o reanudar el vídeo"></div>
+    <div class="barra" aria-hidden="true"><div class="barra-relleno" id="relleno"></div></div>
+  </div>
+
+  <div class="oferta" id="oferta">
+    <p class="eco">Ahora la ventaja es&nbsp;tuya</p>
+    <a class="boton" id="boton" href="#" rel="noopener">
+      <span class="l1">Acceder a Iron Pass</span>
+      <span class="sub">
+        <span class="l2" id="l2">Plaza Fundador</span>
+        <span class="l3" id="l3">19,90&nbsp;€ · Solo&nbsp;50&nbsp;plazas</span>
+      </span>
+    </a>
+    <p class="garantia">
+      <span>15 días de garantía de devolución</span>
+      <span>Cancelas cuando quieras</span>
+    </p>
+  </div>
+</div>
+
+<!-- TEXTO PROVISIONAL: hay que pulirlo. Lo que dice cada bloque sale de lo que ya has decidido de Iron Pass -->
+<section class="detalle" id="detalle" aria-label="Qué incluye Iron Pass">
+  <h2>Qué incluye Iron Pass</h2>
+  <ul class="rejilla">
+    <li><h3>Todas las series</h3><p>Un capítulo nuevo cada 5 días desde que entras, con dos series avanzando a la vez.</p></li>
+    <li><h3>Una asimetría legal por semana</h3><p>Cada lunes, el análisis de una asimetría legal con sus fuentes.</p></li>
+    <li><h3>Dos píldoras por semana</h3><p>Una de información los miércoles y otra de acción los domingos, para empezar la semana.</p></li>
+    <li><h3>Comunidad con presencia diaria</h3><p>Un grupo de WhatsApp donde hay alguien cada día.</p></li>
+    <li><h3>Tus preguntas, respondidas</h3><p>Cada semana respondo en vídeo las preguntas que me envías por formulario.</p></li>
+    <li><h3>Un directo al mes</h3><p>El último viernes de cada mes, charla en directo por Zoom. Queda grabada.</p></li>
+    <li class="bonus" id="bonus"><h3>Bonus de Fundador: Tú y yo</h3><p>Un audio privado de WhatsApp con respuesta a tu situación, en un máximo de 72 horas. Solo para las 50 plazas de Fundador.</p></li>
+  </ul>
+  <p class="nota">15 días de garantía de devolución · Cancelas cuando quieras</p>
+</section>
+
+<footer class="pie">
+  <span>© ETHOS · Iron &amp; Soul Group LLC</span>
+  <a href="/aviso-legal.html">Aviso legal</a>
+  <a href="/condiciones.html">Condiciones</a>
+  <a href="/privacidad.html">Privacidad</a>
+</footer>
+
+<div id="debug"></div>
+
+<script>
+/* =====================================================================
+   AJUSTES: lo único que tienes que tocar
+   ===================================================================== */
+var CONFIG = {
+  // Segundo del vídeo en el que sale el botón (la VSL dura 14:14 = 854 s).
+  // Ahora: minuto 6:32 = 392 segundos.
+  // Para probar sin esperar: abre la página con ?debug=1&boton=20
+  SEGUNDO_BOTON: 392,
+
+  // El titular cambia unos segundos antes de que salga el botón
+  ANTICIPO_TITULAR: 4,
+
+  // true = plazas de Fundador abiertas. Cuando se llenen las 50, pon false.
+  FUNDADOR_ABIERTO: true,
+
+  // Enlaces de pago de Hotmart
+  ENLACE_FUNDADOR: "PEGA_AQUI_EL_ENLACE_DE_HOTMART_CON_CUPON_FUNDADOR",
+  ENLACE_NORMAL: "PEGA_AQUI_EL_ENLACE_DE_HOTMART_SIN_CUPON",
+
+  // PostHog: clave de proyecto (empieza por phc_) y región ("eu" o "us")
+  POSTHOG_CLAVE: "PEGA_AQUI_LA_CLAVE_DE_POSTHOG",
+  POSTHOG_REGION: "eu"
+};
+
+/* =====================================================================
+   MEDICIÓN (envía los eventos directamente a PostHog, sin cookies)
+   ===================================================================== */
+var params = new URLSearchParams(location.search);
+var origen = params.get("src") || params.get("utm_source") || "directo";
+var DEBUG = params.get("debug") === "1";
+if (DEBUG && params.get("boton") !== null && !isNaN(Number(params.get("boton")))) {
+  CONFIG.SEGUNDO_BOTON = Number(params.get("boton"));
+}
+
+var idAnonimo;
+try {
+  idAnonimo = sessionStorage.getItem("vsl_id");
+  if (!idAnonimo) {
+    idAnonimo = "v-" + Math.random().toString(36).slice(2) + Date.now().toString(36);
+    sessionStorage.setItem("vsl_id", idAnonimo);
+  }
+} catch (e) {
+  idAnonimo = "v-" + Math.random().toString(36).slice(2) + Date.now().toString(36);
+}
+
+var POSTHOG_ACTIVO = CONFIG.POSTHOG_CLAVE.indexOf("phc_") === 0;
+var POSTHOG_URL = "https://" + (CONFIG.POSTHOG_REGION === "us" ? "us" : "eu") + ".i.posthog.com/capture/";
+
+function registrar(evento, extra) {
+  var datos = Object.assign({ origen: origen, pagina: location.pathname }, extra || {});
+  if (DEBUG) log(evento + " " + JSON.stringify(extra || {}));
+  if (!POSTHOG_ACTIVO) return;
+  try {
+    fetch(POSTHOG_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        api_key: CONFIG.POSTHOG_CLAVE,
+        event: evento,
+        distinct_id: idAnonimo,
+        properties: Object.assign({ "$current_url": location.href }, datos)
+      }),
+      keepalive: true
+    });
+  } catch (e) {}
+}
+
+function log(texto) {
+  var caja = document.getElementById("debug");
+  caja.style.display = "block";
+  caja.textContent = texto + "\n" + caja.textContent.split("\n").slice(0, 14).join("\n");
+}
+
+/* =====================================================================
+   ELEMENTOS E ICONOS
+   ===================================================================== */
+var escena = document.getElementById("escena");
+var titular = document.getElementById("titular");
+var t1 = document.getElementById("t1");
+var t2 = document.getElementById("t2");
+var iframe = document.getElementById("bunny-player");
+var capa = document.getElementById("capa");
+var relleno = document.getElementById("relleno");
+var controles = document.getElementById("controles");
+var bPlay = document.getElementById("b-play");
+var bSonido = document.getElementById("b-sonido");
+var bPantalla = document.getElementById("b-pantalla");
+var oferta = document.getElementById("oferta");
+var detalle = document.getElementById("detalle");
+var boton = document.getElementById("boton");
+
+function svg(contenido, relleno) {
+  return '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" ' +
+    (relleno ? 'fill="currentColor"' : 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"') +
+    '>' + contenido + '</svg>';
+}
+var ICONOS = {
+  play: svg('<path d="M8 5v14l11-7z"/>', true),
+  pausa: svg('<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>', true),
+  sonido: svg('<path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M18.5 6.5a8 8 0 0 1 0 11"/>', false),
+  silencio: svg('<path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6"/>', false),
+  ampliar: svg('<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>', false),
+  reducir: svg('<path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/>', false)
+};
+
+/* =====================================================================
+   OFERTA: texto y enlace según haya plazas de Fundador o no
+   ===================================================================== */
+(function prepararOferta() {
+  var destino = CONFIG.FUNDADOR_ABIERTO ? CONFIG.ENLACE_FUNDADOR : CONFIG.ENLACE_NORMAL;
+  document.getElementById("l2").textContent = CONFIG.FUNDADOR_ABIERTO ? "Plaza Fundador" : "Plazas de Fundador agotadas";
+  document.getElementById("l3").textContent = CONFIG.FUNDADOR_ABIERTO ? "19,90\u00a0€ · Solo\u00a050\u00a0plazas" : "29,90\u00a0€/mes";
+  if (!CONFIG.FUNDADOR_ABIERTO) document.getElementById("bonus").style.display = "none";
+  try {
+    var u = new URL(destino);
+    u.searchParams.set("src", origen);   // así Hotmart te dice de dónde vino cada venta
+    destino = u.toString();
+  } catch (e) { /* si aún es el marcador, se deja tal cual */ }
+  boton.href = destino;
+})();
+
+var botonMostrado = false;
+function mostrarBoton(segundos) {
+  if (botonMostrado) return;
+  botonMostrado = true;
+  oferta.classList.add("visible");
+  detalle.classList.add("visible");
+  cambiarTitular();
+  registrar("vsl_boton_visible", { segundo: Math.round(segundos) });
+}
+boton.addEventListener("click", function () {
+  registrar("vsl_boton_clic");
+});
+
+/* Titular: al empezar, la pregunta. Unos segundos antes del botón, la promesa. */
+var titularCambiado = false;
+function cambiarTitular() {
+  if (titularCambiado) return;
+  titularCambiado = true;
+  titular.classList.add("fuera");
+  setTimeout(function () {
+    t1.textContent = "Donde antes perdías, ahora la ventaja es\u00a0tuya.";
+    t2.textContent = "";
+    titular.classList.remove("fuera");
+    registrar("vsl_titular_promesa");
+  }, 350);
+}
+
+/* =====================================================================
+   REPRODUCTOR Y CONTROLES PROPIOS
+   ===================================================================== */
+registrar("vsl_visita");
+
+var player = new playerjs.Player(iframe);
+var ultimoSegundo = 0;
+var hitos = { 25: false, 50: false, 75: false, 100: false };
+var tramosVistos = {};
+var empezo = false;
+var reproduciendo = false;
+var silenciado = false;
+
+function pintarPlay() {
+  bPlay.innerHTML = reproduciendo ? ICONOS.pausa : ICONOS.play;
+  bPlay.setAttribute("aria-label", reproduciendo ? "Pausar" : "Reproducir");
+}
+function pintarSonido() {
+  bSonido.innerHTML = silenciado ? ICONOS.silencio : ICONOS.sonido;
+  bSonido.setAttribute("aria-label", silenciado ? "Activar sonido" : "Silenciar");
+}
+function pintarPantalla() {
+  var activa = escena.classList.contains("pc");
+  bPantalla.innerHTML = activa ? ICONOS.reducir : ICONOS.ampliar;
+  bPantalla.setAttribute("aria-label", activa ? "Salir de pantalla completa" : "Pantalla completa");
+}
+pintarPlay(); pintarSonido(); pintarPantalla();
+
+function alternar() {
+  if (reproduciendo) player.pause(); else player.play();
+}
+
+/* El primer toque pasa al reproductor de Bunny (así el móvil permite empezar el vídeo).
+   En cuanto el vídeo arranca, la capa tapa el reproductor y se le quita el foco,
+   para que ninguna tecla ni toque pueda adelantar. */
+function activarCapa() {
+  capa.classList.add("activa");
+  controles.classList.add("iniciado");
+  try { iframe.blur(); } catch (e) {}
+  try { window.focus(); } catch (e) {}
+  try { capa.focus({ preventScroll: true }); } catch (e) {}
+}
+
+capa.addEventListener("click", alternar);
+capa.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+capa.addEventListener("keydown", function (e) {
+  if (e.key === " " || e.key === "Enter") { e.preventDefault(); alternar(); }
+});
+bPlay.addEventListener("click", alternar);
+
+bSonido.addEventListener("click", function () {
+  player.getMuted(function (m) {
+    if (m) player.unmute(); else player.mute();
+    silenciado = !m;
+    pintarSonido();
+  });
+});
+
+/* Pantalla completa propia (el botón de compra queda en una franja bajo el vídeo) */
+function entrarPantalla() {
+  escena.classList.add("pc");
+  document.documentElement.classList.add("bloqueado");
+  var f = escena.requestFullscreen || escena.webkitRequestFullscreen;
+  if (f) {
+    try { var p = f.call(escena); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+  }
+  pintarPantalla();
+  registrar("vsl_pantalla_completa");
+}
+function salirPantalla() {
+  escena.classList.remove("pc");
+  document.documentElement.classList.remove("bloqueado");
+  var activo = document.fullscreenElement || document.webkitFullscreenElement;
+  if (activo) {
+    var x = document.exitFullscreen || document.webkitExitFullscreen;
+    if (x) { try { var p = x.call(document); if (p && p.catch) p.catch(function () {}); } catch (e) {} }
+  }
+  pintarPantalla();
+}
+bPantalla.addEventListener("click", function () {
+  if (escena.classList.contains("pc")) salirPantalla(); else entrarPantalla();
+});
+function alCambiarPantalla() {
+  var activo = document.fullscreenElement || document.webkitFullscreenElement;
+  if (!activo && escena.classList.contains("pc")) salirPantalla();
+}
+document.addEventListener("fullscreenchange", alCambiarPantalla);
+document.addEventListener("webkitfullscreenchange", alCambiarPantalla);
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && escena.classList.contains("pc")) salirPantalla();
+});
+
+player.on("ready", function () {
+  if (DEBUG) log("reproductor listo");
+});
+
+player.on("play", function () {
+  reproduciendo = true;
+  pintarPlay();
+  if (!empezo) {
+    empezo = true;
+    registrar("vsl_play");
+    activarCapa();
+  }
+});
+player.on("pause", function () { reproduciendo = false; pintarPlay(); });
+
+player.on("timeupdate", function (d) {
+  var s = d.seconds, total = d.duration;
+
+  // Titular y botón por minuto (también si alguien se salta hasta pasar ese punto)
+  if (s >= CONFIG.SEGUNDO_BOTON - CONFIG.ANTICIPO_TITULAR) cambiarTitular();
+  if (s >= CONFIG.SEGUNDO_BOTON) mostrarBoton(s);
+
+  // Salto hacia delante (para saber si se puede adelantar en las pruebas)
+  if (s - ultimoSegundo > 2.5) {
+    registrar("vsl_salto_adelante", { desde: Math.round(ultimoSegundo), hasta: Math.round(s) });
+  }
+  ultimoSegundo = s;
+
+  // Barra de progreso con un pequeño adelanto: a mitad marca 59 %, a 9/10 marca 93 %,
+  // y solo llega al 100 % cuando el vídeo termina de verdad
+  if (total > 0) {
+    var f = Math.min(1, s / total);
+    var d2 = f + 0.36 * f * (1 - f);
+    relleno.style.width = (d2 * 100).toFixed(2) + "%";
+  }
+
+  // Curva de retención: un evento por cada tramo de 10 segundos alcanzado
+  var tramo = Math.floor(s / 10) * 10;
+  if (!tramosVistos[tramo]) {
+    tramosVistos[tramo] = true;
+    registrar("vsl_tramo", { segundo: tramo });
+  }
+
+  // Hitos de visionado
+  if (total > 0) {
+    var pct = (s / total) * 100;
+    [25, 50, 75].forEach(function (h) {
+      if (pct >= h && !hitos[h]) { hitos[h] = true; registrar("vsl_hito_" + h); }
+    });
+  }
+  if (DEBUG) document.title = Math.round(s) + " s";
+});
+
+player.on("ended", function () {
+  reproduciendo = false;
+  pintarPlay();
+  relleno.style.width = "100%";
+  if (!hitos[100]) { hitos[100] = true; registrar("vsl_hito_100"); }
+});
+</script>
+</body>
+</html>
