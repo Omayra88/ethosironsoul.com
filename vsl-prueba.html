@@ -379,6 +379,11 @@
     .tarjeta p { font-size: 14px; }
     .cta { margin: 32px 0 52px; }
     .cierre { font-size: min(26px, calc((100vw - 40px) / 13.2)); margin-bottom: 18px; }
+    .final { margin: 40px 0 52px; }
+    .final .cierre { margin-bottom: 28px; }
+    .listado { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: 1fr; gap: 13px; max-width: 290px; margin-top: 32px; }
+    .listado li { font-size: 13.5px; }
+    .cta-final { margin-top: 34px; }
     .cierre .c1, .cierre .c2 { white-space: nowrap; }
     .testimonios .lista { column-count: 1; }
     .testimonios h2 { font-size: 30px; }
@@ -400,6 +405,20 @@
   @media (max-width: 640px) {
     .marco { width: calc(100% + 32px); margin-left: -16px; margin-right: -16px; border-left: 0; border-right: 0; }
   }
+
+  /* listado y cierre */
+  .final { margin: 56px 0 72px; }
+  .final .cierre { margin: 0 0 40px; }
+  .final .pack { margin: 0; }
+  .cta-final { margin: 44px 0 0; }
+  .listado {
+    list-style: none; margin: 44px auto 0; padding: 0; max-width: 680px; text-align: left;
+    display: grid; grid-auto-flow: column; grid-template-rows: repeat(4, auto); grid-template-columns: 1fr 1fr; gap: 16px 48px;
+  }
+  .listado li { position: relative; padding-left: 28px; font-size: 15px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--crema); }
+  .listado li::before { content: ""; position: absolute; left: 0; top: .38em; width: 9px; height: 9px; border-radius: 50%; background: var(--oro); box-shadow: 0 0 10px rgba(201, 168, 76, .55); }
+  .boton .l3 s { text-decoration: line-through; text-decoration-thickness: 2px; font-weight: 500; opacity: .7; }
+  .boton .l3 b { font-weight: 700; font-size: .86em; letter-spacing: .12em; }
 
   /* Panel de pruebas: solo aparece con ?debug=1 en la dirección */
   #debug {
@@ -546,13 +565,65 @@
     <div class="lista" id="testimonios-lista"></div>
   </section>
 
-  <div class="cta rev" id="cta-testimonios" hidden>
-    <p class="cierre"><span class="c1">Tu ventaja no espera.</span><br><span class="c2">Las plazas de Fundador, tampoco</span></p>
-    <a class="boton" data-pos="testimonios" href="#" rel="noopener">
+  <div class="cta rev" id="cta-comentarios" hidden>
+    <a class="boton" data-pos="comentarios" href="#" rel="noopener">
       <span class="l1">Acceder a Iron Pass</span>
-      <span class="sub"><span class="l2">Plaza Fundador</span><span class="l3">19,90&nbsp;€ · Solo&nbsp;50&nbsp;plazas</span></span>
+      <span class="sub"><span class="l2">Plaza Fundador</span><span class="l3">19,90&nbsp;€</span></span>
     </a>
     <p class="garantia"><span>15 días de garantía de devolución</span><span>Cancelas cuando quieras</span></p>
+  </div>
+
+  <div class="final rev" id="cta-testimonios" hidden>
+    <p class="cierre"><span class="c1">Tu ventaja no espera.</span><br><span class="c2">Las plazas de Fundador, tampoco</span></p>
+    <div class="pack rev" id="pack2">
+      <div class="pack-marco">
+        <div class="lienzo" role="img" aria-label="Todo lo que incluye Iron Pass: series, asimetrías, píldoras, comunidad, directos y bonus">
+          <div class="disp minipila" style="--d:.5s">
+          <figure><img src="/img/s2-la-logica-femenina-al-descubierto-420.webp" srcset="/img/s2-la-logica-femenina-al-descubierto-420.webp 420w, /img/s2-la-logica-femenina-al-descubierto-840.webp 840w, /img/s2-la-logica-femenina-al-descubierto-1260.webp 1260w" sizes="20vw" alt="" width="1672" height="941" loading="lazy" decoding="async"></figure>
+          <figure><img src="/img/s3-la-conquista-real-420.webp" srcset="/img/s3-la-conquista-real-420.webp 420w, /img/s3-la-conquista-real-840.webp 840w, /img/s3-la-conquista-real-1260.webp 1260w" sizes="20vw" alt="" width="1672" height="941" loading="lazy" decoding="async"></figure>
+          <figure><img src="/img/s4-destruye-el-feminismo-420.webp" srcset="/img/s4-destruye-el-feminismo-420.webp 420w, /img/s4-destruye-el-feminismo-840.webp 840w, /img/s4-destruye-el-feminismo-1260.webp 1260w" sizes="20vw" alt="" width="1672" height="941" loading="lazy" decoding="async"></figure>
+          </div>
+          <div class="disp monitor" style="--d:0s">
+            <div class="pant"><img src="/img/s1-la-mente-femenina-al-descubierto-840.webp" srcset="/img/s1-la-mente-femenina-al-descubierto-420.webp 420w, /img/s1-la-mente-femenina-al-descubierto-840.webp 840w, /img/s1-la-mente-femenina-al-descubierto-1260.webp 1260w" sizes="46vw" alt="" width="1672" height="941" loading="lazy" decoding="async"></div>
+            <div class="cuello"></div><div class="base"></div>
+          </div>
+          <div class="disp laptop" style="--d:.25s">
+            <div class="pant"><span class="en-directo">EN DIRECTO</span><div class="zoom"><i></i><i></i><i></i><i></i></div></div>
+            <div class="teclado"></div>
+          </div>
+          <div class="disp tablet" style="--d:.4s">
+            <div class="cuerpo"><img src="/img/vsl-asimetria.webp" alt="" loading="lazy" decoding="async"></div>
+          </div>
+          <div class="disp movil movil-a" style="--d:.6s">
+            <div class="cuerpo"><img class="pantalla-img" src="/img/vsl-comunidad.webp" alt="" loading="lazy" decoding="async"></div>
+          </div>
+          <div class="disp movil movil-b" style="--d:.75s">
+            <div class="cuerpo"><div class="pil-img"><img src="/img/vsl-pildora.webp" alt="" loading="lazy" decoding="async"></div></div>
+          </div>
+          <span class="disp chip chip-1 solo-fundador" style="--d:.95s">Bonus Fundador · Tú y yo</span>
+          <span class="disp chip chip-2" style="--d:1.05s">+ Bonus sorpresa</span>
+        </div>
+      </div>
+    </div>
+  
+  
+    <ul class="listado" aria-label="Todo lo que incluye Iron Pass">
+      <li>Las series</li>
+      <li>Asimetría legal semanal</li>
+      <li>Píldoras</li>
+      <li>Comunidad</li>
+      <li>Preguntas y respuestas</li>
+      <li>Live mensual</li>
+      <li class="solo-fundador">Bonus Fundador: Tú y yo</li>
+      <li>Bonus sorpresa</li>
+    </ul>
+    <div class="cta cta-final">
+      <a class="boton" data-pos="final" href="#" rel="noopener">
+        <span class="l1">Acceder a Iron Pass</span>
+        <span class="sub"><span class="l2">Plaza Fundador</span><span class="l3">19,90&nbsp;€</span></span>
+      </a>
+      <p class="garantia"><span>15 días de garantía de devolución</span><span>Cancelas cuando quieras</span></p>
+      </div>
   </div>
 </section>
 
@@ -699,8 +770,8 @@ var ICONOS = {
   } catch (e) { /* si aún es el marcador, se deja tal cual */ }
   botones.forEach(function (b) {
     var l2 = b.querySelector(".l2"), l3 = b.querySelector(".l3");
-    if (l2) l2.textContent = abierto ? "Plaza Fundador" : "Plazas de Fundador agotadas";
-    if (l3) l3.textContent = abierto ? "19,90\u00a0€ · Solo\u00a050\u00a0plazas" : "29,90\u00a0€/mes";
+    if (l2) l2.textContent = abierto ? "Plaza Fundador · Solo\u00a050\u00a0plazas" : "Plazas de Fundador agotadas";
+    if (l3) l3.innerHTML = abierto ? "<s>29,90\u00a0€</s> <b>AHORA</b> 19,90\u00a0€" : "29,90\u00a0€/mes";
     b.href = destino;
     b.addEventListener("click", function () {
       registrar("vsl_boton_clic", { posicion: b.getAttribute("data-pos") || "video" });
@@ -710,6 +781,7 @@ var ICONOS = {
     var bn = document.getElementById("bonus"); if (bn) bn.style.display = "none";
     var ci = document.querySelector(".cierre"); if (ci) ci.textContent = "Tu ventaja empieza ahora";
     var chip = document.getElementById("chip-fundador"); if (chip) chip.style.display = "none";
+    Array.prototype.forEach.call(document.querySelectorAll(".solo-fundador"), function (e) { e.style.display = "none"; });
   }
 })();
 
@@ -934,6 +1006,7 @@ Array.prototype.forEach.call(document.querySelectorAll(".rev"), revelar);
   });
   document.getElementById("testimonios").hidden = false;
   document.getElementById("cta-testimonios").hidden = false;
+  document.getElementById("cta-comentarios").hidden = false;
 })();
 </script>
 </body>
