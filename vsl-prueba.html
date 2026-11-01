@@ -419,6 +419,13 @@
   .listado li::before { content: ""; position: absolute; left: 0; top: .38em; width: 9px; height: 9px; border-radius: 50%; background: var(--oro); box-shadow: 0 0 10px rgba(201, 168, 76, .55); }
   .boton .l3 s { text-decoration: line-through; text-decoration-thickness: 2px; font-weight: 500; opacity: .7; }
   .boton .l3 b { font-weight: 700; font-size: .86em; letter-spacing: .12em; }
+  @media (max-width: 640px) {
+    .final { margin: 40px 0 52px; }
+    .final .cierre { margin-bottom: 28px; }
+    .listado { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: 1fr; gap: 13px; max-width: 290px; margin-top: 32px; }
+    .listado li { font-size: 13.5px; }
+    .cta-final { margin-top: 34px; }
+  }
 
   /* Panel de pruebas: solo aparece con ?debug=1 en la dirección */
   #debug {
