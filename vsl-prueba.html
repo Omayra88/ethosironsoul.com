@@ -120,21 +120,151 @@
   }
 
   /* ---------- Qué incluye (aparece con el botón) ---------- */
-  .detalle { display: none; margin-top: 56px; }
+  [hidden] { display: none !important; }
+  .detalle { display: none; margin-top: 72px; }
   .detalle.visible { display: block; animation: aparece .6s ease both; }
   .detalle h2 {
-    margin: 0 0 24px; text-align: center;
-    font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 34px; color: var(--crema);
+    margin: 0 0 56px; text-align: center;
+    font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 38px; color: var(--crema);
   }
-  .rejilla { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .rejilla li { padding: 20px 22px; border: 1px solid var(--oro-oscuro); }
-  .rejilla h3 {
-    margin: 0 0 8px; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600;
-    font-size: 22px; color: var(--oro);
+
+  /* aparición al deslizar */
+  .rev { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; transition-delay: var(--d, 0s); }
+  .rev.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .rev { opacity: 1; transform: none; transition: none; } }
+
+  .bloque { display: grid; grid-template-columns: 1.05fr .95fr; gap: 44px; align-items: center; margin: 0 0 84px; }
+  .bloque.inv { grid-template-columns: .95fr 1.05fr; }
+  .bloque .texto h3, .tarjeta h3 {
+    margin: 0 0 10px; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600;
+    font-size: 32px; line-height: 1.1; color: var(--oro);
   }
-  .rejilla p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--crema); }
-  .rejilla li.bonus { grid-column: 1 / -1; border-color: var(--oro); }
-  .nota { margin: 22px 0 0; text-align: center; font-size: 13px; color: var(--gris); }
+  .bloque .texto p { margin: 0; font-size: 15px; line-height: 1.7; color: var(--crema); }
+  .puntos { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 12px; }
+  .puntos li { position: relative; padding-left: 24px; font-size: 15px; line-height: 1.5; color: var(--crema); }
+  .puntos li::before { content: ""; position: absolute; left: 1px; top: .6em; width: 7px; height: 7px; background: var(--oro); transform: rotate(45deg); }
+
+  /* pila de series: se ve que hay muchas, sin saber cuántas */
+  .pila { position: relative; width: 100%; max-width: 520px; margin: 64px auto 0; aspect-ratio: 16 / 9; }
+  .carta {
+    position: absolute; inset: 0; margin: 0; overflow: hidden; background: #000;
+    border: 1px solid rgba(201, 168, 76, .45); box-shadow: 0 18px 40px rgba(0, 0, 0, .55);
+    transform-origin: 50% 100%;
+    transform: translateY(calc(var(--r, 0) * -16px)) scale(calc(1 - var(--r, 0) * .045));
+    opacity: max(0, calc(1 - var(--r, 0) * .25));
+    filter: brightness(calc(1 - var(--r, 0) * .14));
+    z-index: calc(20 - var(--r, 0));
+    transition: transform .9s cubic-bezier(.22, .8, .24, 1), opacity .9s ease, filter .9s ease;
+  }
+  .carta img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  /* hojas de la asimetría semanal */
+  .hojas { position: relative; width: 62%; max-width: 330px; margin: 0 auto; aspect-ratio: 210 / 297; }
+  .hojas img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #0a0a0a;
+    border: 1px solid rgba(201, 168, 76, .5); box-shadow: 0 18px 40px rgba(0, 0, 0, .55);
+  }
+  .hojas img:nth-child(1) { transform: translate(-7%, 4%) rotate(-5deg); opacity: .45; }
+  .hojas img:nth-child(2) { transform: translate(-3.5%, 2%) rotate(-2.5deg); opacity: .7; }
+  .hojas img:nth-child(3) { transform: none; }
+
+  /* tarjetas */
+  .tarjetas { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 0 84px; }
+  .tarjeta { padding: 26px 26px 28px; border: 1px solid var(--oro-oscuro); background: rgba(255, 255, 255, .015); }
+  .tarjeta svg { width: 28px; height: 28px; margin-bottom: 14px; fill: none; stroke: var(--oro); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .tarjeta h3 { font-size: 26px; }
+  .tarjeta p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--crema); }
+  .tarjeta.bonus { border-color: var(--oro); background: linear-gradient(180deg, rgba(201, 168, 76, .09), rgba(201, 168, 76, .02)); }
+  .tarjeta .etiqueta { display: inline-block; margin-bottom: 12px; font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #0a0a0a; background: var(--oro); padding: 4px 10px; }
+
+  /* el pack: todo junto, montado con dispositivos */
+  .pack { margin: 0 0 12px; }
+  .pack-marco { container-type: inline-size; width: 100%; max-width: 960px; margin: 0 auto; }
+  .lienzo { position: relative; width: 100%; aspect-ratio: 1000 / 570; }
+  .lienzo::before {
+    content: ""; position: absolute; inset: 6% 8% 0; filter: blur(12px);
+    background: radial-gradient(ellipse at 50% 55%, rgba(201, 168, 76, .24), rgba(201, 168, 76, 0) 64%);
+  }
+  .disp {
+    position: absolute; opacity: 0; transform: translateY(7%) scale(.96);
+    transition: opacity .8s ease, transform .9s cubic-bezier(.22, .8, .24, 1); transition-delay: var(--d, 0s);
+  }
+  .pack.in .disp { opacity: 1; transform: none; }
+  .monitor { left: 27%; top: 1%; width: 46%; z-index: 3; }
+  .monitor .pant {
+    position: relative; aspect-ratio: 16 / 9.3; overflow: hidden; background: #0c0c0c;
+    border: .55cqw solid #1d1d1d; border-radius: .9cqw;
+    box-shadow: 0 0 0 1px rgba(201, 168, 76, .45), 0 2.4cqw 5cqw rgba(0, 0, 0, .65);
+  }
+  .monitor img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .monitor .cuello { width: 8cqw; height: 4.2cqw; margin: 0 auto; background: linear-gradient(90deg, #111, #262626, #111); }
+  .monitor .base { width: 17cqw; height: .9cqw; margin: 0 auto; background: #202020; border-radius: .5cqw; box-shadow: 0 1cqw 2cqw rgba(0, 0, 0, .6); }
+  .minipila { left: 1%; top: 9%; width: 20%; z-index: 2; aspect-ratio: 16 / 12; }
+  .minipila figure {
+    position: absolute; left: 0; width: 100%; margin: 0; aspect-ratio: 16 / 9; overflow: hidden;
+    border: 1px solid rgba(201, 168, 76, .55); box-shadow: 0 1.4cqw 2.8cqw rgba(0, 0, 0, .6);
+  }
+  .minipila figure img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .minipila figure:nth-child(1) { top: 0; transform: rotate(-4deg); filter: brightness(.7); }
+  .minipila figure:nth-child(2) { top: 5.2cqw; transform: rotate(2deg); filter: brightness(.85); }
+  .minipila figure:nth-child(3) { top: 10.4cqw; transform: rotate(-2deg); }
+  .laptop { left: 67%; top: 25%; width: 32%; z-index: 4; }
+  .laptop .pant {
+    position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: #0b0b0b;
+    border: .5cqw solid #1d1d1d; border-bottom-width: .7cqw; border-radius: .9cqw .9cqw 0 0;
+    box-shadow: 0 0 0 1px rgba(201, 168, 76, .4);
+  }
+  .laptop .teclado { height: 1.4cqw; margin: 0 -2.5%; background: linear-gradient(#2c2c2c, #121212); border-radius: 0 0 1.4cqw 1.4cqw; box-shadow: 0 1.6cqw 3cqw rgba(0, 0, 0, .65); }
+  .zoom { position: absolute; inset: 5%; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 3.5%; }
+  .zoom i { position: relative; display: block; overflow: hidden; background: linear-gradient(160deg, #221d12, #0d0c0a); border: 1px solid rgba(201, 168, 76, .28); }
+  .zoom i::before { content: ""; position: absolute; left: 50%; top: 36%; width: 25%; aspect-ratio: 1; border-radius: 50%; background: rgba(201, 168, 76, .6); transform: translate(-50%, -50%); }
+  .zoom i::after { content: ""; position: absolute; left: 50%; top: 88%; width: 56%; height: 44%; border-radius: 50% 50% 0 0; background: rgba(201, 168, 76, .36); transform: translate(-50%, -50%); }
+  .en-directo {
+    position: absolute; left: 7%; top: 7%; z-index: 2; padding: .25em .7em; border-radius: 2px;
+    font: 600 clamp(6px, .95cqw, 10px)/1.2 "Montserrat", sans-serif; letter-spacing: .1em; color: #fff; background: #c0392b;
+  }
+  .tablet { left: 11%; top: 37%; width: 20%; z-index: 5; }
+  .tablet .cuerpo {
+    aspect-ratio: 3 / 4.15; overflow: hidden; background: #0c0c0c; border: .6cqw solid #1d1d1d; border-radius: 1.5cqw;
+    box-shadow: 0 0 0 1px rgba(201, 168, 76, .45), 0 2cqw 4.4cqw rgba(0, 0, 0, .65);
+  }
+  .tablet img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .movil { width: 10.4%; z-index: 6; }
+  .movil .cuerpo {
+    position: relative; aspect-ratio: 9 / 19; overflow: hidden; background: #0a0a0a; border: .5cqw solid #222; border-radius: 1.9cqw;
+    box-shadow: 0 0 0 1px rgba(201, 168, 76, .45), 0 1.6cqw 3.6cqw rgba(0, 0, 0, .65);
+  }
+  .movil-a { left: 36.5%; top: 50%; }
+  .movil-b { left: 49%; top: 57%; }
+  .wa-cab { display: flex; align-items: center; gap: 7%; height: 12%; padding: 0 8%; background: #17130a; border-bottom: 1px solid rgba(201, 168, 76, .3); }
+  .wa-cab b { width: 20%; aspect-ratio: 1; border-radius: 50%; background: rgba(201, 168, 76, .65); }
+  .wa-cab s { flex: 1; height: 22%; border-radius: 99px; background: rgba(241, 234, 216, .35); text-decoration: none; }
+  .wa-chat { display: flex; flex-direction: column; gap: 3.6%; padding: 8% 7%; }
+  .wa-chat span { display: block; width: 64%; height: 2.4cqw; border-radius: .9cqw; background: #211e15; }
+  .wa-chat span:nth-child(2n) { align-self: flex-end; width: 52%; background: rgba(201, 168, 76, .34); }
+  .wa-chat span:nth-child(3) { width: 74%; height: 3.6cqw; }
+  .wa-pie { position: absolute; left: 7%; right: 7%; bottom: 4%; height: 7%; border-radius: 99px; background: #1c190f; border: 1px solid rgba(201, 168, 76, .25); }
+  .pil-img { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); }
+  .pil-img img { display: block; width: 100%; height: auto; }
+  .chip {
+    position: absolute; z-index: 8; white-space: nowrap; padding: .6em 1.1em; border-radius: 99px; color: #0a0a0a;
+    font: 600 clamp(8px, 1.3cqw, 13px)/1.2 "Montserrat", sans-serif; letter-spacing: .09em; text-transform: uppercase;
+    background: linear-gradient(180deg, #dcbf62, #b8923a); box-shadow: 0 .9cqw 2.2cqw rgba(0, 0, 0, .5);
+  }
+  .chip-1 { left: 25%; top: 84%; }
+  .chip-2 { left: 70%; top: 10%; }
+
+  /* botones fuera del vídeo (tras el pack y tras los testimonios) */
+  .cta { display: flex; flex-direction: column; align-items: center; margin: 44px 0 72px; }
+  .cta .garantia { margin-top: 16px; }
+
+  /* testimonios */
+  .testimonios { margin: 0 0 24px; }
+  .testimonios h2 { font-size: 34px; margin-bottom: 36px; }
+  .testimonios .lista { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .testimonio { margin: 0; padding: 24px 26px; border-left: 2px solid var(--oro); background: rgba(255, 255, 255, .02); }
+  .testimonio p { margin: 0; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; font-size: 21px; line-height: 1.4; color: var(--crema); }
+  .testimonio footer { margin-top: 12px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--gris); }
 
   /* ---------- Pie ---------- */
   .pie {
@@ -219,12 +349,23 @@
     .boton .l2 { font-size: 11.5px; }
     .boton .l3 { font-size: 12.5px; }
     .garantia { font-size: 12px; }
-    .detalle { margin-top: 44px; }
-    .detalle h2 { font-size: 28px; }
-    .rejilla { grid-template-columns: 1fr; }
-    .rejilla li { padding: 16px 18px; }
-    .rejilla h3 { font-size: 20px; }
-    .rejilla p { font-size: 13px; }
+    .detalle { margin-top: 52px; }
+    .detalle h2 { font-size: 30px; margin-bottom: 40px; }
+    .bloque, .bloque.inv { grid-template-columns: 1fr; gap: 26px; margin-bottom: 60px; }
+    .bloque.inv .visual { order: -1; }
+    .bloque .texto h3 { font-size: 27px; text-align: center; }
+    .bloque .texto p { font-size: 14px; text-align: center; }
+    .puntos { max-width: 300px; margin-left: auto; margin-right: auto; }
+    .puntos li { font-size: 14px; }
+    .pila { margin-top: 54px; max-width: 94%; }
+    .hojas { width: 58%; }
+    .tarjetas { grid-template-columns: 1fr; gap: 12px; margin-bottom: 60px; }
+    .tarjeta { padding: 20px 20px 22px; }
+    .tarjeta h3 { font-size: 23px; }
+    .tarjeta p { font-size: 14px; }
+    .cta { margin: 32px 0 52px; }
+    .testimonios .lista { grid-template-columns: 1fr; }
+    .testimonio p { font-size: 19px; }
   }
 
   /* Panel de pruebas: solo aparece con ?debug=1 en la dirección */
@@ -264,7 +405,7 @@
 
   <div class="oferta" id="oferta">
     <p class="eco">Ahora la ventaja es&nbsp;tuya</p>
-    <a class="boton" id="boton" href="#" rel="noopener">
+    <a class="boton" id="boton" data-pos="video" href="#" rel="noopener">
       <span class="l1">Acceder a Iron Pass</span>
       <span class="sub">
         <span class="l2" id="l2">Plaza Fundador</span>
@@ -278,19 +419,108 @@
   </div>
 </div>
 
-<!-- TEXTO PROVISIONAL: hay que pulirlo. Lo que dice cada bloque sale de lo que ya has decidido de Iron Pass -->
+<!-- TEXTO PROVISIONAL: hay que pulirlo. Los bloques salen de lo que has decidido de Iron Pass -->
 <section class="detalle" id="detalle" aria-label="Qué incluye Iron Pass">
-  <h2>Qué incluye Iron Pass</h2>
-  <ul class="rejilla">
-    <li><h3>Todas las series</h3><p>Un capítulo nuevo cada 5 días desde que entras, con dos series avanzando a la vez.</p></li>
-    <li><h3>Una asimetría legal por semana</h3><p>Cada lunes, el análisis de una asimetría legal con sus fuentes.</p></li>
-    <li><h3>Dos píldoras por semana</h3><p>Una de información los miércoles y otra de acción los domingos, para empezar la semana.</p></li>
-    <li><h3>Comunidad con presencia diaria</h3><p>Un grupo de WhatsApp donde hay alguien cada día.</p></li>
-    <li><h3>Tus preguntas, respondidas</h3><p>Cada semana respondo en vídeo las preguntas que me envías por formulario.</p></li>
-    <li><h3>Un directo al mes</h3><p>El último viernes de cada mes, charla en directo por Zoom. Queda grabada.</p></li>
-    <li class="bonus" id="bonus"><h3>Bonus de Fundador: Tú y yo</h3><p>Un audio privado de WhatsApp con respuesta a tu situación, en un máximo de 72 horas. Solo para las 50 plazas de Fundador.</p></li>
-  </ul>
-  <p class="nota">15 días de garantía de devolución · Cancelas cuando quieras</p>
+  <h2 class="rev">Qué incluye Iron Pass</h2>
+
+  <div class="bloque rev">
+    <div class="visual">
+      <div class="pila" id="pila" role="img" aria-label="Todas las series de Iron Pass">
+        <figure class="carta"><img src="/img/s1-la-mente-femenina-al-descubierto-840.webp" srcset="/img/s1-la-mente-femenina-al-descubierto-420.webp 420w, /img/s1-la-mente-femenina-al-descubierto-840.webp 840w, /img/s1-la-mente-femenina-al-descubierto-1260.webp 1260w" sizes="(max-width: 640px) 86vw, 520px" alt="" width="1672" height="941" loading="lazy" decoding="async"></figure>
+        <figure class="carta"><img src="/img/s2-la-logica-femenina-al-descubierto-840.webp" srcset="/img/s2-la-logica-femenina-al-descubierto-420.webp 420w, /img/s2-la-logica-femenina-al-descubierto-840.webp 840w, /img/s2-la-logica-femenina-al-descubierto-1260.webp 1260w" sizes="(max-width: 640px) 86vw, 520px" alt="" width="1672" height="941" loading="lazy" decoding="async"></figure>
+        <figure class="carta"><img src="/img/s3-la-conquista-real-840.webp" srcset="/img/s3-la-conquista-real-420.webp 420w, /img/s3-la-conquista-real-840.webp 840w, /img/s3-la-conquista-real-1260.webp 1260w" sizes="(max-width: 640px) 86vw, 520px" alt="" width="1672" height="941" loading="lazy" decoding="async"></figure>
+        <figure class="carta"><img src="/img/s4-destruye-el-feminismo-840.webp" srcset="/img/s4-destruye-el-feminismo-420.webp 420w, /img/s4-destruye-el-feminismo-840.webp 840w, /img/s4-destruye-el-feminismo-1260.webp 1260w" sizes="(max-width: 640px) 86vw, 520px" alt="" width="1672" height="941" loading="lazy" decoding="async"></figure>
+        <figure class="carta"><img src="/img/s5-la-guerra-de-sexos-840.webp" srcset="/img/s5-la-guerra-de-sexos-420.webp 420w, /img/s5-la-guerra-de-sexos-840.webp 840w, /img/s5-la-guerra-de-sexos-1260.webp 1260w" sizes="(max-width: 640px) 86vw, 520px" alt="" width="1672" height="941" loading="lazy" decoding="async"></figure>
+        <figure class="carta"><img src="/img/s6-el-ciclo-tu-poder-840.webp" srcset="/img/s6-el-ciclo-tu-poder-420.webp 420w, /img/s6-el-ciclo-tu-poder-840.webp 840w, /img/s6-el-ciclo-tu-poder-1260.webp 1260w" sizes="(max-width: 640px) 86vw, 520px" alt="" width="1672" height="941" loading="lazy" decoding="async"></figure>
+        <figure class="carta"><img src="/img/s7-woke-840.webp" srcset="/img/s7-woke-420.webp 420w, /img/s7-woke-840.webp 840w, /img/s7-woke-1260.webp 1260w" sizes="(max-width: 640px) 86vw, 520px" alt="" width="1672" height="941" loading="lazy" decoding="async"></figure>
+      </div>
+    </div>
+    <div class="texto">
+      <h3>Todas las series</h3>
+      <p>Un capítulo nuevo cada 5 días desde que entras, con dos series avanzando a la vez.</p>
+    </div>
+  </div>
+
+  <div class="bloque inv rev">
+    <div class="texto">
+      <h3>Asimetría legal semanal</h3>
+      <ul class="puntos">
+        <li>Cómo te afecta a ti.</li>
+        <li>Cómo encontrarla tú mismo.</li>
+        <li>Captura de ella.</li>
+        <li>Mi opinión sobre ella.</li>
+      </ul>
+    </div>
+    <div class="visual">
+      <div class="hojas" aria-hidden="true">
+        <img src="/img/vsl-asimetria.webp" alt="" loading="lazy" decoding="async">
+        <img src="/img/vsl-asimetria.webp" alt="" loading="lazy" decoding="async">
+        <img src="/img/vsl-asimetria.webp" alt="Una asimetría legal semanal" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+
+  <div class="tarjetas">
+    <article class="tarjeta rev" style="--d:0s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 20.5l10-10a4.95 4.95 0 0 0-7-7l-10 10a4.95 4.95 0 0 0 7 7z"/><path d="M8.5 8.5l7 7"/></svg><h3>Píldoras</h3><p>Dos por semana, miércoles y domingo.</p></article>
+    <article class="tarjeta rev" style="--d:.08s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H10l-6 4z"/><path d="M8 9.5h8M8 12.5h5"/></svg><h3>Comunidad</h3><p>Presencia diaria en WhatsApp, conmigo y con personas como tú.</p></article>
+    <article class="tarjeta rev" style="--d:0s"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.6a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1.1.9-1.1 1.7"/><path d="M12 17h.01"/></svg><h3>Preguntas y respuestas</h3><p>Cada semana todas tus preguntas serán resueltas.</p></article>
+    <article class="tarjeta rev" style="--d:.08s"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3z"/></svg><h3>Live mensual</h3><p>Charla en directo conmigo y la comunidad. Queda grabada.</p></article>
+    <article class="tarjeta bonus rev" id="bonus" style="--d:0s"><span class="etiqueta">Bonus</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1-4 4-6 8-6s7 2 8 6"/></svg><h3>Fundador: Tú y yo</h3><p>Me cuentas la situación en la que quieras que yo personalmente te ayude y nos ponemos con ello. Solo para las 50 plazas Fundador.</p></article>
+    <article class="tarjeta bonus rev" style="--d:.08s"><span class="etiqueta">Bonus</span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="18" height="11"/><path d="M12 9v11M3 13h18"/><path d="M12 9c-1.6-4-6-4-6-1.6 0 1.4 3.2 1.6 6 1.6zm0 0c1.6-4 6-4 6-1.6 0 1.4-3.2 1.6-6 1.6z"/></svg><h3>Sorpresa</h3><p>Cuando decidas que esto es para ti, te llegará un regalo muy especial.</p></article>
+  </div>
+
+  <div class="pack rev" id="pack">
+    <div class="pack-marco">
+      <div class="lienzo" role="img" aria-label="Todo lo que incluye Iron Pass: series, asimetrías, píldoras, comunidad, directos y bonus">
+        <div class="disp minipila" style="--d:.5s">
+        <figure><img src="/img/s2-la-logica-femenina-al-descubierto-420.webp" srcset="/img/s2-la-logica-femenina-al-descubierto-420.webp 420w, /img/s2-la-logica-femenina-al-descubierto-840.webp 840w, /img/s2-la-logica-femenina-al-descubierto-1260.webp 1260w" sizes="20vw" alt="" width="1672" height="941" loading="lazy" decoding="async"></figure>
+        <figure><img src="/img/s3-la-conquista-real-420.webp" srcset="/img/s3-la-conquista-real-420.webp 420w, /img/s3-la-conquista-real-840.webp 840w, /img/s3-la-conquista-real-1260.webp 1260w" sizes="20vw" alt="" width="1672" height="941" loading="lazy" decoding="async"></figure>
+        <figure><img src="/img/s4-destruye-el-feminismo-420.webp" srcset="/img/s4-destruye-el-feminismo-420.webp 420w, /img/s4-destruye-el-feminismo-840.webp 840w, /img/s4-destruye-el-feminismo-1260.webp 1260w" sizes="20vw" alt="" width="1672" height="941" loading="lazy" decoding="async"></figure>
+        </div>
+        <div class="disp monitor" style="--d:0s">
+          <div class="pant"><img src="/img/s1-la-mente-femenina-al-descubierto-840.webp" srcset="/img/s1-la-mente-femenina-al-descubierto-420.webp 420w, /img/s1-la-mente-femenina-al-descubierto-840.webp 840w, /img/s1-la-mente-femenina-al-descubierto-1260.webp 1260w" sizes="46vw" alt="" width="1672" height="941" loading="lazy" decoding="async"></div>
+          <div class="cuello"></div><div class="base"></div>
+        </div>
+        <div class="disp laptop" style="--d:.25s">
+          <div class="pant"><span class="en-directo">EN DIRECTO</span><div class="zoom"><i></i><i></i><i></i><i></i></div></div>
+          <div class="teclado"></div>
+        </div>
+        <div class="disp tablet" style="--d:.4s">
+          <div class="cuerpo"><img src="/img/vsl-asimetria.webp" alt="" loading="lazy" decoding="async"></div>
+        </div>
+        <div class="disp movil movil-a" style="--d:.6s">
+          <div class="cuerpo"><div class="wa-cab"><b></b><s></s></div><div class="wa-chat"><span></span><span></span><span></span><span></span><span></span></div><div class="wa-pie"></div></div>
+        </div>
+        <div class="disp movil movil-b" style="--d:.75s">
+          <div class="cuerpo"><div class="pil-img"><img src="/img/vsl-pildora.webp" alt="" loading="lazy" decoding="async"></div></div>
+        </div>
+        <span class="disp chip chip-1" id="chip-fundador" style="--d:.95s">Bonus Fundador · Tú y yo</span>
+        <span class="disp chip chip-2" style="--d:1.05s">+ Bonus sorpresa</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta rev" id="cta-pack">
+    <a class="boton" data-pos="pack" href="#" rel="noopener">
+      <span class="l1">Acceder a Iron Pass</span>
+      <span class="sub"><span class="l2">Plaza Fundador</span><span class="l3">19,90&nbsp;€ · Solo&nbsp;50&nbsp;plazas</span></span>
+    </a>
+    <p class="garantia"><span>15 días de garantía de devolución</span><span>Cancelas cuando quieras</span></p>
+  </div>
+
+  <!-- Los testimonios se rellenan en TESTIMONIOS (ajustes). Si no hay ninguno, esta parte no se ve. -->
+  <section class="testimonios" id="testimonios" hidden aria-label="Testimonios">
+    <h2 class="rev">Lo que dicen</h2>
+    <div class="lista" id="testimonios-lista"></div>
+  </section>
+
+  <div class="cta rev" id="cta-testimonios" hidden>
+    <a class="boton" data-pos="testimonios" href="#" rel="noopener">
+      <span class="l1">Acceder a Iron Pass</span>
+      <span class="sub"><span class="l2">Plaza Fundador</span><span class="l3">19,90&nbsp;€ · Solo&nbsp;50&nbsp;plazas</span></span>
+    </a>
+    <p class="garantia"><span>15 días de garantía de devolución</span><span>Cancelas cuando quieras</span></p>
+  </div>
 </section>
 
 <footer class="pie">
@@ -324,7 +554,12 @@ var CONFIG = {
 
   // PostHog: clave de proyecto (empieza por phc_) y región ("eu" o "us")
   POSTHOG_CLAVE: "PEGA_AQUI_LA_CLAVE_DE_POSTHOG",
-  POSTHOG_REGION: "eu"
+  POSTHOG_REGION: "eu",
+
+  // Testimonios: aquí pegas los que quieras, así:
+  // { texto: "Lo que dice la persona.", nombre: "Nombre o iniciales" },
+  // Si dejas la lista vacía, esa parte de la página no se ve.
+  TESTIMONIOS: []
 };
 
 /* =====================================================================
@@ -392,7 +627,7 @@ var bSonido = document.getElementById("b-sonido");
 var bPantalla = document.getElementById("b-pantalla");
 var oferta = document.getElementById("oferta");
 var detalle = document.getElementById("detalle");
-var boton = document.getElementById("boton");
+var botones = Array.prototype.slice.call(document.querySelectorAll(".boton"));
 
 function svg(contenido, relleno) {
   return '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" ' +
@@ -412,16 +647,26 @@ var ICONOS = {
    OFERTA: texto y enlace según haya plazas de Fundador o no
    ===================================================================== */
 (function prepararOferta() {
-  var destino = CONFIG.FUNDADOR_ABIERTO ? CONFIG.ENLACE_FUNDADOR : CONFIG.ENLACE_NORMAL;
-  document.getElementById("l2").textContent = CONFIG.FUNDADOR_ABIERTO ? "Plaza Fundador" : "Plazas de Fundador agotadas";
-  document.getElementById("l3").textContent = CONFIG.FUNDADOR_ABIERTO ? "19,90\u00a0€ · Solo\u00a050\u00a0plazas" : "29,90\u00a0€/mes";
-  if (!CONFIG.FUNDADOR_ABIERTO) document.getElementById("bonus").style.display = "none";
+  var abierto = CONFIG.FUNDADOR_ABIERTO;
+  var destino = abierto ? CONFIG.ENLACE_FUNDADOR : CONFIG.ENLACE_NORMAL;
   try {
     var u = new URL(destino);
     u.searchParams.set("src", origen);   // así Hotmart te dice de dónde vino cada venta
     destino = u.toString();
   } catch (e) { /* si aún es el marcador, se deja tal cual */ }
-  boton.href = destino;
+  botones.forEach(function (b) {
+    var l2 = b.querySelector(".l2"), l3 = b.querySelector(".l3");
+    if (l2) l2.textContent = abierto ? "Plaza Fundador" : "Plazas de Fundador agotadas";
+    if (l3) l3.textContent = abierto ? "19,90\u00a0€ · Solo\u00a050\u00a0plazas" : "29,90\u00a0€/mes";
+    b.href = destino;
+    b.addEventListener("click", function () {
+      registrar("vsl_boton_clic", { posicion: b.getAttribute("data-pos") || "video" });
+    });
+  });
+  if (!abierto) {
+    var bn = document.getElementById("bonus"); if (bn) bn.style.display = "none";
+    var chip = document.getElementById("chip-fundador"); if (chip) chip.style.display = "none";
+  }
 })();
 
 var botonMostrado = false;
@@ -433,9 +678,6 @@ function mostrarBoton(segundos) {
   cambiarTitular();
   registrar("vsl_boton_visible", { segundo: Math.round(segundos) });
 }
-boton.addEventListener("click", function () {
-  registrar("vsl_boton_clic");
-});
 
 /* Titular: al empezar, la pregunta. Unos segundos antes del botón, la promesa. */
 var titularCambiado = false;
@@ -602,6 +844,53 @@ player.on("ended", function () {
   relleno.style.width = "100%";
   if (!hitos[100]) { hitos[100] = true; registrar("vsl_hito_100"); }
 });
+
+/* =====================================================================
+   APARICIÓN AL DESLIZAR, PILA DE SERIES Y TESTIMONIOS
+   ===================================================================== */
+var reducirMovimiento = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var IO = ("IntersectionObserver" in window) ? new IntersectionObserver(function (entradas) {
+  entradas.forEach(function (e) {
+    if (e.isIntersecting) { e.target.classList.add("in"); IO.unobserve(e.target); }
+  });
+}, { threshold: 0.15, rootMargin: "0px 0px -5% 0px" }) : null;
+function revelar(el) { if (IO) IO.observe(el); else el.classList.add("in"); }
+Array.prototype.forEach.call(document.querySelectorAll(".rev"), revelar);
+
+(function pilaDeSeries() {
+  var cartas = Array.prototype.slice.call(document.querySelectorAll(".pila .carta"));
+  var pila = document.getElementById("pila");
+  if (!cartas.length || !pila) return;
+  var frente = 0, reloj = null;
+  function pintar() {
+    cartas.forEach(function (c, i) { c.style.setProperty("--r", (i - frente + cartas.length) % cartas.length); });
+  }
+  pintar();
+  function arrancar() {
+    if (reloj || reducirMovimiento) return;
+    reloj = setInterval(function () { frente = (frente + 1) % cartas.length; pintar(); }, 3400);
+  }
+  function parar() { clearInterval(reloj); reloj = null; }
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (e) { if (e[0].isIntersecting) arrancar(); else parar(); }, { threshold: 0.3 }).observe(pila);
+  }
+})();
+
+(function testimonios() {
+  var lista = CONFIG.TESTIMONIOS || [];
+  if (!lista.length) return;
+  var cont = document.getElementById("testimonios-lista");
+  lista.forEach(function (t, i) {
+    var b = document.createElement("blockquote");
+    b.className = "testimonio rev";
+    b.style.setProperty("--d", (i * 0.08) + "s");
+    var p = document.createElement("p"); p.textContent = t.texto; b.appendChild(p);
+    if (t.nombre) { var f = document.createElement("footer"); f.textContent = t.nombre; b.appendChild(f); }
+    cont.appendChild(b); revelar(b);
+  });
+  document.getElementById("testimonios").hidden = false;
+  document.getElementById("cta-testimonios").hidden = false;
+})();
 </script>
 </body>
 </html>
