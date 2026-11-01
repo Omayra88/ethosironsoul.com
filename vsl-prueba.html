@@ -261,7 +261,7 @@
 
   /* testimonios */
   .testimonios { margin: 0 0 24px; }
-  .testimonios h2 { margin-bottom: 10px; font-size: 36px; }
+  .testimonios h2 { margin-bottom: 36px; font-size: 36px; }
   .testimonios .sub-t { margin: 0 0 40px; text-align: center; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
   .testimonios .lista { column-count: 2; column-gap: 18px; }
   .testimonio {
@@ -384,6 +384,19 @@
     .testimonio.destacado p { font-size: 23px; }
   }
 
+  /* El vídeo ocupa lo máximo posible de la pantalla (sin pantalla completa) */
+  @media (min-width: 900px) {
+    .escena { max-width: 1180px; }
+    .marco, .controles {
+      width: min(100%, max(960px, calc((100vh - 250px) * 16 / 9)));
+      width: min(100%, max(960px, calc((100dvh - 250px) * 16 / 9)));
+      margin-left: auto; margin-right: auto;
+    }
+  }
+  @media (max-width: 640px) {
+    .marco { width: calc(100% + 32px); margin-left: -16px; margin-right: -16px; border-left: 0; border-right: 0; }
+  }
+
   /* Panel de pruebas: solo aparece con ?debug=1 en la dirección */
   #debug {
     display: none; margin-top: 24px; width: 100%; max-width: 960px;
@@ -398,7 +411,6 @@
 
   <div class="controles" id="controles">
     <button type="button" id="b-play" aria-label="Pausar"></button>
-    <button type="button" id="b-pantalla" aria-label="Pantalla completa"></button>
   </div>
 
   <div class="titular" id="titular" aria-live="polite">
@@ -526,7 +538,6 @@
   <!-- Los testimonios se rellenan en TESTIMONIOS (ajustes). Si no hay ninguno, esta parte no se ve. -->
   <section class="testimonios" id="testimonios" hidden aria-label="Testimonios">
     <h2 class="rev">Lo que me escriben</h2>
-    <p class="sub-t rev">Comentarios reales en mis redes</p>
     <div class="lista" id="testimonios-lista"></div>
   </section>
 
@@ -650,7 +661,7 @@ var relleno = document.getElementById("relleno");
 var controles = document.getElementById("controles");
 var bPlay = document.getElementById("b-play");
 var bSonido = document.getElementById("b-sonido") || document.createElement("button");
-var bPantalla = document.getElementById("b-pantalla");
+var bPantalla = document.getElementById("b-pantalla") || document.createElement("button");
 var oferta = document.getElementById("oferta");
 var detalle = document.getElementById("detalle");
 var botones = Array.prototype.slice.call(document.querySelectorAll(".boton"));
@@ -911,7 +922,7 @@ Array.prototype.forEach.call(document.querySelectorAll(".rev"), revelar);
     b.className = "testimonio rev" + (t.destacado ? " destacado" : "");
     b.style.setProperty("--d", (i * 0.08) + "s");
     var p = document.createElement("p"); p.textContent = t.texto; b.appendChild(p);
-    var f = document.createElement("footer"); f.textContent = t.nombre || "Comentario en redes"; b.appendChild(f);
+    if (t.nombre) { var f = document.createElement("footer"); f.textContent = t.nombre; b.appendChild(f); }
     cont.appendChild(b); revelar(b);
   });
   document.getElementById("testimonios").hidden = false;
