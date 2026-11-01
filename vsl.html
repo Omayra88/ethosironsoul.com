@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>ETHOS Iron</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,15 +19,18 @@
     --oro-oscuro: #8a6a20;
     --crema: #f1ead8;
     --gris: #8c8678;
+    --franja: 64px;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; min-height: 100%; background: var(--fondo); color: var(--crema); }
+  html.bloqueado, html.bloqueado body { overflow: hidden; }
   body {
     font-family: "Montserrat", system-ui, sans-serif;
     display: flex; flex-direction: column; align-items: center;
     padding: 40px 20px 64px;
   }
-  main { width: 100%; max-width: 960px; }
+
+  .escena { width: 100%; max-width: 960px; }
 
   .marco {
     position: relative; width: 100%; aspect-ratio: 16 / 9;
@@ -35,21 +38,65 @@
   }
   .marco iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
-  .zona-boton {
-    min-height: 120px; display: flex; justify-content: center; align-items: center;
-    padding-top: 32px;
+  /* Capa transparente: tapa el reproductor de Bunny una vez empieza el vídeo,
+     para que no lleguen toques ni teclas que permitan adelantar */
+  .capa {
+    position: absolute; inset: 0; z-index: 2; display: none; cursor: pointer;
+    -webkit-tap-highlight-color: transparent; touch-action: manipulation; outline: none;
   }
+  .capa.activa { display: block; }
+
+  /* Franja bajo el vídeo: controles y botón de compra */
+  .franja {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    padding-top: 16px;
+  }
+  .controles { display: flex; gap: 8px; }
+  .controles button {
+    width: 44px; height: 44px; padding: 0; display: grid; place-items: center;
+    background: transparent; color: var(--crema); border: 1px solid var(--oro-oscuro); cursor: pointer;
+  }
+  .controles button:hover { border-color: var(--oro); }
+  .controles button:focus-visible { outline: 2px solid var(--crema); outline-offset: 2px; }
+  .controles:not(.iniciado) #b-play,
+  .controles:not(.iniciado) #b-sonido { display: none; }
+
+  /* El espacio del botón se reserva desde el principio para que el vídeo no cambie de tamaño */
+  .zona-boton { min-height: 84px; display: flex; justify-content: center; align-items: center; }
   #boton {
     display: none;
     font-family: "Montserrat", sans-serif; font-weight: 600; font-size: 17px; letter-spacing: .04em;
     color: #0a0a0a; background: var(--oro); text-decoration: none;
-    padding: 18px 44px; border: 0; cursor: pointer;
+    padding: 18px 44px; border: 0; cursor: pointer; text-align: center;
   }
   #boton:hover { background: #d9b95a; }
   #boton:focus-visible { outline: 2px solid var(--crema); outline-offset: 4px; }
   #boton.visible { display: inline-block; animation: aparece .6s ease both; }
   @keyframes aparece { from { opacity: 0; } to { opacity: 1; } }
   @media (prefers-reduced-motion: reduce) { #boton.visible { animation: none; } }
+
+  /* Pantalla completa propia: el vídeo arriba y la franja con el botón justo debajo */
+  .escena.pc {
+    position: fixed; inset: 0; z-index: 9999; max-width: none; width: 100%;
+    height: 100vh; height: 100dvh; background: var(--fondo);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+  .escena.pc .marco { border-left: 0; border-right: 0; }
+
+  @media (orientation: landscape) {
+    .escena.pc .marco {
+      width: min(100%, calc((100vh - var(--franja) - env(safe-area-inset-top) - env(safe-area-inset-bottom)) * 16 / 9));
+      width: min(100%, calc((100dvh - var(--franja) - env(safe-area-inset-top) - env(safe-area-inset-bottom)) * 16 / 9));
+      border: 0;
+    }
+    .escena.pc .franja {
+      flex-direction: row; justify-content: center; gap: 16px;
+      width: 100%; height: var(--franja); padding: 0;
+    }
+    .escena.pc .zona-boton { min-height: 0; }
+    .escena.pc #boton { font-size: 14px; padding: 12px 28px; }
+  }
 
   /* Panel de pruebas: solo aparece con ?debug=1 en la dirección */
   #debug {
@@ -61,23 +108,31 @@
 </head>
 <body>
 
-<main>
-  <div class="marco">
+<div class="escena" id="escena">
+  <div class="marco" id="marco">
     <!-- Sustituye el ID del vídeo si cambias el vídeo en Bunny -->
     <iframe
       id="bunny-player"
+      tabindex="-1"
       src="https://player.mediadelivery.net/embed/795691/1a7f8493-ee30-445a-97e1-0f1ba3d9b7d5?autoplay=false&preload=true&disableIosPlayer=true"
-      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; fullscreen"
-      allowfullscreen
+      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
       title="ETHOS Iron"></iframe>
+    <div class="capa" id="capa" tabindex="-1" role="button" aria-label="Pausar o reanudar el vídeo"></div>
   </div>
 
-  <div class="zona-boton">
-    <a id="boton" href="#" rel="noopener">Acceder a Iron Pass</a>
+  <div class="franja">
+    <div class="controles" id="controles">
+      <button type="button" id="b-play" aria-label="Pausar"></button>
+      <button type="button" id="b-sonido" aria-label="Silenciar"></button>
+      <button type="button" id="b-pantalla" aria-label="Pantalla completa"></button>
+    </div>
+    <div class="zona-boton">
+      <a id="boton" href="#" rel="noopener">Acceder a Iron Pass</a>
+    </div>
   </div>
+</div>
 
-  <div id="debug"></div>
-</main>
+<div id="debug"></div>
 
 <script>
 /* =====================================================================
@@ -85,7 +140,8 @@
    ===================================================================== */
 var CONFIG = {
   // Segundo del vídeo en el que sale el botón (la VSL dura 14:14 = 854 s).
-  // Ahora: minuto 6:32 = 392 segundos. Para probar rápido, pon 20 y vuelve a poner 392.
+  // Ahora: minuto 6:32 = 392 segundos.
+  // Para probar sin esperar: abre la página con ?debug=1&boton=20
   SEGUNDO_BOTON: 392,
 
   // Enlace de pago de Hotmart (con el cupón ya aplicado)
@@ -102,6 +158,9 @@ var CONFIG = {
 var params = new URLSearchParams(location.search);
 var origen = params.get("src") || params.get("utm_source") || "directo";
 var DEBUG = params.get("debug") === "1";
+if (DEBUG && params.get("boton") !== null && !isNaN(Number(params.get("boton")))) {
+  CONFIG.SEGUNDO_BOTON = Number(params.get("boton"));
+}
 
 var idAnonimo;
 try {
@@ -143,9 +202,34 @@ function log(texto) {
 }
 
 /* =====================================================================
+   ELEMENTOS E ICONOS
+   ===================================================================== */
+var escena = document.getElementById("escena");
+var iframe = document.getElementById("bunny-player");
+var capa = document.getElementById("capa");
+var controles = document.getElementById("controles");
+var bPlay = document.getElementById("b-play");
+var bSonido = document.getElementById("b-sonido");
+var bPantalla = document.getElementById("b-pantalla");
+var boton = document.getElementById("boton");
+
+function svg(contenido, relleno) {
+  return '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" ' +
+    (relleno ? 'fill="currentColor"' : 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"') +
+    '>' + contenido + '</svg>';
+}
+var ICONOS = {
+  play: svg('<path d="M8 5v14l11-7z"/>', true),
+  pausa: svg('<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>', true),
+  sonido: svg('<path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M18.5 6.5a8 8 0 0 1 0 11"/>', false),
+  silencio: svg('<path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6"/>', false),
+  ampliar: svg('<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>', false),
+  reducir: svg('<path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/>', false)
+};
+
+/* =====================================================================
    BOTÓN DE COMPRA
    ===================================================================== */
-var boton = document.getElementById("boton");
 (function prepararEnlace() {
   var destino = CONFIG.ENLACE_HOTMART;
   try {
@@ -168,23 +252,111 @@ boton.addEventListener("click", function () {
 });
 
 /* =====================================================================
-   REPRODUCTOR
+   REPRODUCTOR Y CONTROLES PROPIOS
    ===================================================================== */
 registrar("vsl_visita");
 
-var player = new playerjs.Player(document.getElementById("bunny-player"));
+var player = new playerjs.Player(iframe);
 var ultimoSegundo = 0;
 var hitos = { 25: false, 50: false, 75: false, 100: false };
 var tramosVistos = {};
 var empezo = false;
+var reproduciendo = false;
+var silenciado = false;
+
+function pintarPlay() {
+  bPlay.innerHTML = reproduciendo ? ICONOS.pausa : ICONOS.play;
+  bPlay.setAttribute("aria-label", reproduciendo ? "Pausar" : "Reproducir");
+}
+function pintarSonido() {
+  bSonido.innerHTML = silenciado ? ICONOS.silencio : ICONOS.sonido;
+  bSonido.setAttribute("aria-label", silenciado ? "Activar sonido" : "Silenciar");
+}
+function pintarPantalla() {
+  var activa = escena.classList.contains("pc");
+  bPantalla.innerHTML = activa ? ICONOS.reducir : ICONOS.ampliar;
+  bPantalla.setAttribute("aria-label", activa ? "Salir de pantalla completa" : "Pantalla completa");
+}
+pintarPlay(); pintarSonido(); pintarPantalla();
+
+function alternar() {
+  if (reproduciendo) player.pause(); else player.play();
+}
+
+/* El primer toque pasa al reproductor de Bunny (así el móvil permite empezar el vídeo).
+   En cuanto el vídeo arranca, la capa tapa el reproductor y se le quita el foco,
+   para que ninguna tecla ni toque pueda adelantar. */
+function activarCapa() {
+  capa.classList.add("activa");
+  controles.classList.add("iniciado");
+  try { iframe.blur(); } catch (e) {}
+  try { window.focus(); } catch (e) {}
+  try { capa.focus({ preventScroll: true }); } catch (e) {}
+}
+
+capa.addEventListener("click", alternar);
+capa.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+capa.addEventListener("keydown", function (e) {
+  if (e.key === " " || e.key === "Enter") { e.preventDefault(); alternar(); }
+});
+bPlay.addEventListener("click", alternar);
+
+bSonido.addEventListener("click", function () {
+  player.getMuted(function (m) {
+    if (m) player.unmute(); else player.mute();
+    silenciado = !m;
+    pintarSonido();
+  });
+});
+
+/* Pantalla completa propia (el botón de compra queda en la franja bajo el vídeo) */
+function entrarPantalla() {
+  escena.classList.add("pc");
+  document.documentElement.classList.add("bloqueado");
+  var f = escena.requestFullscreen || escena.webkitRequestFullscreen;
+  if (f) {
+    try { var p = f.call(escena); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+  }
+  pintarPantalla();
+  registrar("vsl_pantalla_completa");
+}
+function salirPantalla() {
+  escena.classList.remove("pc");
+  document.documentElement.classList.remove("bloqueado");
+  var activo = document.fullscreenElement || document.webkitFullscreenElement;
+  if (activo) {
+    var x = document.exitFullscreen || document.webkitExitFullscreen;
+    if (x) { try { var p = x.call(document); if (p && p.catch) p.catch(function () {}); } catch (e) {} }
+  }
+  pintarPantalla();
+}
+bPantalla.addEventListener("click", function () {
+  if (escena.classList.contains("pc")) salirPantalla(); else entrarPantalla();
+});
+function alCambiarPantalla() {
+  var activo = document.fullscreenElement || document.webkitFullscreenElement;
+  if (!activo && escena.classList.contains("pc")) salirPantalla();
+}
+document.addEventListener("fullscreenchange", alCambiarPantalla);
+document.addEventListener("webkitfullscreenchange", alCambiarPantalla);
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && escena.classList.contains("pc")) salirPantalla();
+});
 
 player.on("ready", function () {
   if (DEBUG) log("reproductor listo");
 });
 
 player.on("play", function () {
-  if (!empezo) { empezo = true; registrar("vsl_play"); }
+  reproduciendo = true;
+  pintarPlay();
+  if (!empezo) {
+    empezo = true;
+    registrar("vsl_play");
+    activarCapa();
+  }
 });
+player.on("pause", function () { reproduciendo = false; pintarPlay(); });
 
 player.on("timeupdate", function (d) {
   var s = d.seconds, total = d.duration;
@@ -216,6 +388,8 @@ player.on("timeupdate", function (d) {
 });
 
 player.on("ended", function () {
+  reproduciendo = false;
+  pintarPlay();
   if (!hitos[100]) { hitos[100] = true; registrar("vsl_hito_100"); }
 });
 </script>
