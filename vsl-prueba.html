@@ -75,8 +75,8 @@
 
   /* Barra de progreso (solo se mira, no se toca) */
   .barra {
-    position: absolute; left: 0; right: 0; bottom: 0; height: 4px; z-index: 3;
-    background: rgba(0, 0, 0, .5); pointer-events: none;
+    position: absolute; left: 0; right: 0; bottom: -5px; height: 2px; z-index: 3;
+    background: rgba(138, 106, 32, .35); pointer-events: none;
   }
   .barra-relleno { height: 100%; width: 0; background: var(--oro); transition: width .45s linear; }
 
@@ -84,9 +84,9 @@
   .oferta { display: none; flex-direction: column; align-items: center; padding-bottom: 8px; }
   .oferta.visible { display: flex; animation: aparece .6s ease both; }
   .eco {
-    margin: 30px 0 16px; text-align: center;
-    font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600;
-    font-size: 30px; line-height: 1.15; color: var(--crema);
+    margin: 30px 0 16px; text-align: center; text-transform: uppercase;
+    font-family: "Montserrat", system-ui, sans-serif; font-weight: 600;
+    font-size: 14px; letter-spacing: .16em; line-height: 1.4; color: var(--crema);
   }
   .boton {
     display: flex; flex-direction: column; align-items: center; gap: 8px;
@@ -153,7 +153,9 @@
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     overflow: hidden;
   }
-  .escena.pc .titular { display: none; }
+  .escena.pc .titular { min-height: 0; margin: 0 0 12px; padding: 0 16px; }
+  .escena.pc .t1 { font-size: 22px; }
+  .escena.pc .t2 { font-size: 12.5px; margin-top: 6px; }
   .escena.pc .marco { border-left: 0; border-right: 0; }
   .escena.pc .controles {
     position: fixed; z-index: 10000; margin: 0; gap: 6px;
@@ -163,25 +165,43 @@
   /* el sitio de la oferta se reserva desde el principio para que el vídeo no cambie de tamaño */
   .escena.pc .oferta { display: flex; visibility: hidden; min-height: 215px; justify-content: flex-start; }
   .escena.pc .oferta.visible { visibility: visible; }
-  .escena.pc .eco { margin: 16px 0 12px; font-size: 24px; }
+  .escena.pc .eco { margin: 18px 0 12px; font-size: 12.5px; }
   .escena.pc .garantia { margin-top: 10px; }
 
   @media (orientation: landscape) {
-    .escena.pc { justify-content: center; }
+    .escena.pc { --tope: 44px; justify-content: center; }
+    .escena.pc .titular { height: var(--tope); margin: 0; justify-content: center; }
+    .escena.pc .t1 { font-size: 20px; }
+    .escena.pc .t2 { display: none; }
     .escena.pc .marco {
-      width: min(100%, calc((100vh - var(--franja) - env(safe-area-inset-top) - env(safe-area-inset-bottom)) * 16 / 9));
-      width: min(100%, calc((100dvh - var(--franja) - env(safe-area-inset-top) - env(safe-area-inset-bottom)) * 16 / 9));
+      width: min(100%, calc((100vh - var(--franja) - var(--tope) - env(safe-area-inset-top) - env(safe-area-inset-bottom)) * 16 / 9));
+      width: min(100%, calc((100dvh - var(--franja) - var(--tope) - env(safe-area-inset-top) - env(safe-area-inset-bottom)) * 16 / 9));
       border: 0;
     }
     .escena.pc .oferta {
-      height: var(--franja); min-height: 0; padding: 0; flex-direction: row; justify-content: center; align-items: center;
+      height: var(--franja); min-height: 0; padding: 0; gap: 20px;
+      flex-direction: row; justify-content: center; align-items: center;
     }
-    .escena.pc .eco, .escena.pc .garantia { display: none; }
+    .escena.pc .eco { margin: 0; font-size: 10.5px; letter-spacing: .12em; }
+    .escena.pc .garantia { margin: 0; gap: 2px; font-size: 10.5px; align-items: flex-start; text-align: left; }
     .escena.pc .boton { width: auto; gap: 2px; padding: 7px 26px; }
     .escena.pc .boton .l1 { font-size: 14px; }
     .escena.pc .boton .sub { flex-direction: row; gap: 0; padding-top: 2px; border-top: 0; }
     .escena.pc .boton .l2, .escena.pc .boton .l3 { font-size: 10.5px; }
     .escena.pc .boton .l2::after { content: " · "; white-space: pre; }
+  }
+  /* Móvil en horizontal: la frase de arriba va sobre el borde superior del vídeo para no encoger la imagen */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .escena.pc { --tope: 0px; }
+    .escena.pc .titular {
+      position: fixed; top: env(safe-area-inset-top); left: 0; right: 0; z-index: 10;
+      height: auto; padding: 8px 130px 22px; pointer-events: none;
+      background: linear-gradient(180deg, rgba(0, 0, 0, .7), rgba(0, 0, 0, 0));
+    }
+    .escena.pc .t1 { font-size: 15px; text-shadow: 0 1px 6px rgba(0, 0, 0, .9); }
+  }
+  @media (orientation: landscape) and (max-width: 720px) {
+    .escena.pc .eco { display: none; }
   }
 
   /* ---------- Móvil: todo algo más pequeño (el vídeo no se toca) ---------- */
@@ -192,7 +212,7 @@
     .t2 { font-size: 12.5px; }
     .controles button { width: 30px; height: 30px; }
     .controles button svg { width: 14px; height: 14px; }
-    .eco { font-size: 25px; margin: 24px 0 14px; }
+    .eco { font-size: 12px; letter-spacing: .12em; margin: 24px 0 14px; }
     .boton { width: 100%; padding: 14px 18px; gap: 6px; }
     .boton .l1 { font-size: 15.5px; }
     .boton .sub { padding-top: 6px; }
@@ -424,7 +444,7 @@ function cambiarTitular() {
   titularCambiado = true;
   titular.classList.add("fuera");
   setTimeout(function () {
-    t1.textContent = "Donde antes perdías, ahora la ventaja es\u00a0tuya.";
+    t1.textContent = "Donde antes perdías…";
     t2.textContent = "";
     titular.classList.remove("fuera");
     registrar("vsl_titular_promesa");
