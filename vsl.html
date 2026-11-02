@@ -444,6 +444,9 @@
   .nopara li::before { transform: translateY(-50%) rotate(45deg); }
   .nopara li::after { transform: translateY(-50%) rotate(-45deg); }
 
+  .cierre-np { margin: 44px auto 0; max-width: 640px; text-align: center; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 31px; line-height: 1.25; color: var(--crema); text-wrap: balance; }
+  @media (max-width: 640px) { .cierre-np { font-size: 24px; margin-top: 34px; } }
+
   /* Panel de pruebas: solo aparece con ?debug=1 en la dirección */
   #debug {
     display: none; margin-top: 24px; width: 100%; max-width: 960px;
@@ -659,6 +662,7 @@
         <li class="rev">No quieres entender qué hace que una mujer se enamore y qué hace que se vaya.</li>
         <li class="rev">Prefieres seguir pagando a gurús que nunca te llevan a nada.</li>
       </ul>
+      <p class="cierre-np rev">Si ya te has cansado de perder el tiempo, estás a unos clics de cambiarlo todo.</p>
     </section>
     <div class="cta cta-final">
       <a class="boton" data-pos="final" href="#" rel="noopener">
