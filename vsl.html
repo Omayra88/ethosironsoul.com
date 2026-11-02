@@ -712,7 +712,7 @@ var CONFIG = {
   ENLACE_NORMAL: "PEGA_AQUI_EL_ENLACE_DE_HOTMART_SIN_CUPON",
 
   // PostHog: clave de proyecto (empieza por phc_) y región ("eu" o "us")
-  POSTHOG_CLAVE: "PEGA_AQUI_LA_CLAVE_DE_POSTHOG",
+  POSTHOG_CLAVE: "phc_pkeEinNdCZ3yJy4UWs74MREVmmga2DJkc6qtRUXVM3ea",
   POSTHOG_REGION: "eu",
 
   // Testimonios: aquí pegas los que quieras, así:
@@ -756,7 +756,7 @@ var POSTHOG_ACTIVO = CONFIG.POSTHOG_CLAVE.indexOf("phc_") === 0;
 var POSTHOG_URL = "https://" + (CONFIG.POSTHOG_REGION === "us" ? "us" : "eu") + ".i.posthog.com/capture/";
 
 function registrar(evento, extra) {
-  var datos = Object.assign({ origen: origen, pagina: location.pathname }, extra || {});
+  var datos = Object.assign({ origen: origen, pagina: location.pathname, debug: DEBUG }, extra || {});
   if (DEBUG) log(evento + " " + JSON.stringify(extra || {}));
   if (!POSTHOG_ACTIVO) return;
   try {
