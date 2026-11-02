@@ -412,13 +412,16 @@
   .final .cierre { margin: 0 0 40px; }
   .final .pack { margin: 0; }
   .cta-final { margin: 44px 0 0; }
+  .cta-medio { margin: 44px 0 0; }
   .listado {
     list-style: none; margin: 44px auto 0; padding: 0; max-width: 780px; text-align: left;
-    display: grid; grid-template-columns: 1fr; gap: 20px;
+    display: grid; grid-template-columns: 1fr; gap: 24px;
   }
   .listado li { position: relative; padding-left: 28px; font-size: 15px; line-height: 1.6; color: rgba(241, 234, 216, .82); }
-  .listado li b { font-weight: 600; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; color: var(--crema); }
-  .listado li .sep { color: var(--oro); }
+  .listado li b { display: block; font-weight: 600; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; color: var(--crema); }
+  .listado li .sep { display: none; }
+  .listado li .desc { display: block; position: relative; margin-top: 5px; }
+  .listado li .desc::before { content: "–"; position: absolute; left: -28px; width: 9px; text-align: center; font-weight: 700; color: var(--oro); }
   .listado li::before { content: ""; position: absolute; left: 0; top: .38em; width: 9px; height: 9px; border-radius: 50%; background: var(--oro); box-shadow: 0 0 10px rgba(201, 168, 76, .55); }
   .boton .l3 s { text-decoration: line-through; text-decoration-thickness: 2px; font-weight: 500; opacity: .7; }
   .boton .l3 b { font-weight: 700; font-size: .86em; letter-spacing: .12em; }
@@ -429,23 +432,21 @@
     .listado li { font-size: 13.5px; }
     .listado li b { font-size: 12.5px; }
     .cta-final { margin-top: 34px; }
-    .nopara { margin-top: 56px; }
-    .nopara h2 { font-size: 30px; margin-bottom: 26px; }
-    .nopara li { font-size: 14.5px; padding: 13px 0 13px 32px; }
   }
 
   /* Esto no es para ti si… */
-  .nopara { margin: 76px auto 0; max-width: 720px; }
-  .nopara h2 { margin: 0 0 36px; text-align: center; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 38px; line-height: 1.15; color: var(--crema); }
-  .nopara ul { list-style: none; margin: 0; padding: 0; text-align: left; }
-  .nopara li { position: relative; padding: 15px 0 15px 38px; border-top: 1px solid rgba(138, 106, 32, .35); font-size: 16px; line-height: 1.5; color: var(--crema); }
-  .nopara li:last-child { border-bottom: 1px solid rgba(138, 106, 32, .35); }
-  .nopara li::before, .nopara li::after { content: ""; position: absolute; left: 4px; top: 50%; width: 16px; height: 2px; background: var(--oro); }
+  .nopara { margin: 56px auto 0; }
+  .nopara h2 { margin: 0 0 22px; text-align: center; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 22px; line-height: 1.15; color: var(--crema); }
+  .nopara ul { list-style: none; margin: 0 auto; padding: 0; max-width: 520px; text-align: left; }
+  .nopara li { position: relative; padding: 8px 0 8px 28px; border-top: 1px solid rgba(138, 106, 32, .3); font-size: 11px; line-height: 1.45; color: var(--crema); }
+  .nopara li:last-child { border-bottom: 1px solid rgba(138, 106, 32, .3); }
+  .nopara li::before, .nopara li::after { content: ""; position: absolute; left: 3px; top: 50%; width: 10px; height: 1.5px; background: var(--oro); }
   .nopara li::before { transform: translateY(-50%) rotate(45deg); }
   .nopara li::after { transform: translateY(-50%) rotate(-45deg); }
+  @media (max-width: 640px) { .nopara { margin-top: 44px; } .nopara h2 { font-size: 20px; margin-bottom: 18px; } }
 
-  .cierre-np { margin: 44px auto 0; max-width: 640px; text-align: center; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 31px; line-height: 1.25; color: var(--crema); text-wrap: balance; }
-  @media (max-width: 640px) { .cierre-np { font-size: 24px; margin-top: 34px; } }
+  .cierre-np { margin: 44px auto 0; text-align: center; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 31px; line-height: 1.25; color: var(--crema); white-space: nowrap; }
+  @media (max-width: 640px) { .cierre-np { font-size: min(24px, calc((100vw - 36px) / 16.21)); margin-top: 34px; } }
 
   /* Panel de pruebas: solo aparece con ?debug=1 en la dirección */
   #debug {
@@ -644,6 +645,13 @@
       <li class="solo-fundador"><b>Bonus Fundador: Tú y yo</b><span class="sep"> – </span><span class="desc">Me cuentas tu situación y nos ponemos con ello. Solo 50 plazas.</span></li>
       <li><b>Bonus sorpresa</b><span class="sep"> – </span><span class="desc">Regalo muy especial cuando decides que esto es para ti.</span></li>
     </ul>
+    <div class="cta cta-medio">
+    <a class="boton" data-pos="lista" href="#" rel="noopener">
+      <span class="l1">Acceder a Iron Pass</span>
+      <span class="sub"><span class="l2">Plaza Fundador</span><span class="l3">19,90&nbsp;€</span></span>
+    </a>
+    <p class="garantia"><span>15 días de garantía de devolución</span><span>Cancelas cuando quieras</span></p>
+    </div>
     <section class="nopara" aria-label="Esto no es para ti si">
       <h2 class="rev">Esto no es para ti si…</h2>
       <ul>
@@ -662,7 +670,7 @@
         <li class="rev">No quieres entender qué hace que una mujer se enamore y qué hace que se vaya.</li>
         <li class="rev">Prefieres seguir pagando a gurús que nunca te llevan a nada.</li>
       </ul>
-      <p class="cierre-np rev">Si ya te has cansado de perder el tiempo, estás a unos clics de cambiarlo todo.</p>
+      <p class="cierre-np rev">Si ya te has cansado de perder el tiempo,<br>estás a unos clics de cambiarlo todo.</p>
     </section>
     <div class="cta cta-final">
       <a class="boton" data-pos="final" href="#" rel="noopener">
