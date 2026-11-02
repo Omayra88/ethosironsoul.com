@@ -381,8 +381,9 @@
     .cierre { font-size: min(26px, calc((100vw - 40px) / 13.2)); margin-bottom: 18px; }
     .final { margin: 40px 0 52px; }
     .final .cierre { margin-bottom: 28px; }
-    .listado { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: 1fr; gap: 13px; max-width: 290px; margin-top: 32px; }
+    .listado { gap: 16px; max-width: 100%; margin-top: 32px; }
     .listado li { font-size: 13.5px; }
+    .listado li b { font-size: 12.5px; }
     .cta-final { margin-top: 34px; }
     .cierre .c1, .cierre .c2 { white-space: nowrap; }
     .testimonios .lista { column-count: 1; }
@@ -412,20 +413,36 @@
   .final .pack { margin: 0; }
   .cta-final { margin: 44px 0 0; }
   .listado {
-    list-style: none; margin: 44px auto 0; padding: 0; max-width: 680px; text-align: left;
-    display: grid; grid-auto-flow: column; grid-template-rows: repeat(4, auto); grid-template-columns: 1fr 1fr; gap: 16px 48px;
+    list-style: none; margin: 44px auto 0; padding: 0; max-width: 780px; text-align: left;
+    display: grid; grid-template-columns: 1fr; gap: 20px;
   }
-  .listado li { position: relative; padding-left: 28px; font-size: 15px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--crema); }
+  .listado li { position: relative; padding-left: 28px; font-size: 15px; line-height: 1.6; color: rgba(241, 234, 216, .82); }
+  .listado li b { font-weight: 600; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; color: var(--crema); }
+  .listado li .sep { color: var(--oro); }
   .listado li::before { content: ""; position: absolute; left: 0; top: .38em; width: 9px; height: 9px; border-radius: 50%; background: var(--oro); box-shadow: 0 0 10px rgba(201, 168, 76, .55); }
   .boton .l3 s { text-decoration: line-through; text-decoration-thickness: 2px; font-weight: 500; opacity: .7; }
   .boton .l3 b { font-weight: 700; font-size: .86em; letter-spacing: .12em; }
   @media (max-width: 640px) {
     .final { margin: 40px 0 52px; }
     .final .cierre { margin-bottom: 28px; }
-    .listado { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: 1fr; gap: 13px; max-width: 290px; margin-top: 32px; }
+    .listado { gap: 16px; max-width: 100%; margin-top: 32px; }
     .listado li { font-size: 13.5px; }
+    .listado li b { font-size: 12.5px; }
     .cta-final { margin-top: 34px; }
+    .nopara { margin-top: 56px; }
+    .nopara h2 { font-size: 30px; margin-bottom: 26px; }
+    .nopara li { font-size: 14.5px; padding: 13px 0 13px 32px; }
   }
+
+  /* Esto no es para ti si… */
+  .nopara { margin: 76px auto 0; max-width: 720px; }
+  .nopara h2 { margin: 0 0 36px; text-align: center; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 38px; line-height: 1.15; color: var(--crema); }
+  .nopara ul { list-style: none; margin: 0; padding: 0; text-align: left; }
+  .nopara li { position: relative; padding: 15px 0 15px 38px; border-top: 1px solid rgba(138, 106, 32, .35); font-size: 16px; line-height: 1.5; color: var(--crema); }
+  .nopara li:last-child { border-bottom: 1px solid rgba(138, 106, 32, .35); }
+  .nopara li::before, .nopara li::after { content: ""; position: absolute; left: 4px; top: 50%; width: 16px; height: 2px; background: var(--oro); }
+  .nopara li::before { transform: translateY(-50%) rotate(45deg); }
+  .nopara li::after { transform: translateY(-50%) rotate(-45deg); }
 
   /* Panel de pruebas: solo aparece con ?debug=1 en la dirección */
   #debug {
@@ -615,15 +632,34 @@
   
   
     <ul class="listado" aria-label="Todo lo que incluye Iron Pass">
-      <li>Las series</li>
-      <li>Asimetría legal semanal</li>
-      <li>Píldoras</li>
-      <li>Comunidad</li>
-      <li>Preguntas y respuestas</li>
-      <li>Live mensual</li>
-      <li class="solo-fundador">Bonus Fundador: Tú y yo</li>
-      <li>Bonus sorpresa</li>
+      <li><b>Las series</b><span class="sep"> – </span><span class="desc">Capítulo nuevo cada 5 días · Dos series avanzando a la vez.</span></li>
+      <li><b>Asimetría legal semanal</b><span class="sep"> – </span><span class="desc">Lunes: análisis de cómo te afecta, cómo encontrarla, captura de ella y mi opinión.</span></li>
+      <li><b>Píldoras</b><span class="sep"> – </span><span class="desc">Dos por semana: información y acción.</span></li>
+      <li><b>Comunidad</b><span class="sep"> – </span><span class="desc">Grupo exclusivo de WhatsApp, conmigo y con personas como tú.</span></li>
+      <li><b>Preguntas y respuestas</b><span class="sep"> – </span><span class="desc">Cada semana te respondo a todas tus preguntas.</span></li>
+      <li><b>Live mensual</b><span class="sep"> – </span><span class="desc">El último viernes de cada mes, charla en directo conmigo y la comunidad. Queda grabada.</span></li>
+      <li class="solo-fundador"><b>Bonus Fundador: Tú y yo</b><span class="sep"> – </span><span class="desc">Me cuentas tu situación y nos ponemos con ello. Solo 50 plazas.</span></li>
+      <li><b>Bonus sorpresa</b><span class="sep"> – </span><span class="desc">Regalo muy especial cuando decides que esto es para ti.</span></li>
     </ul>
+    <section class="nopara" aria-label="Esto no es para ti si">
+      <h2 class="rev">Esto no es para ti si…</h2>
+      <ul>
+        <li class="rev">No quieres dejar de perder el tiempo.</li>
+        <li class="rev">Quieres dejar pasar a “tu persona” porque ya te has rendido.</li>
+        <li class="rev">No quieres mejorar tu relación.</li>
+        <li class="rev">No quieres acabar con el discurso feminista.</li>
+        <li class="rev">No quieres ser el que sabe lo que casi nadie sabe.</li>
+        <li class="rev">Prefieres seguir siendo al que se la juegan.</li>
+        <li class="rev">Te da igual que te vuelvan a hacer callar.</li>
+        <li class="rev">No quieres que nadie más te haga sentir que el problema eres tú.</li>
+        <li class="rev">Prefieres seguir mirando cómo otros tienen la relación que tú quieres.</li>
+        <li class="rev">Prefieres esperar a que se arregle solo.</li>
+        <li class="rev">No te importa perder años, y lo que cuesten, con la persona equivocada.</li>
+        <li class="rev">No te importa que una mala decisión te cueste dinero, tiempo y tranquilidad.</li>
+        <li class="rev">No quieres entender qué hace que una mujer se enamore y qué hace que se vaya.</li>
+        <li class="rev">Prefieres seguir pagando a gurús que nunca te llevan a nada.</li>
+      </ul>
+    </section>
     <div class="cta cta-final">
       <a class="boton" data-pos="final" href="#" rel="noopener">
         <span class="l1">Acceder a Iron Pass</span>
