@@ -4,7 +4,48 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>ETHOS Iron</title>
+<title>Tu ventaja no espera · ETHOS Iron</title>
+<meta name="description" content="Para quien ya se ha cansado de perder el tiempo.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ETHOS Iron">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Tu ventaja no espera">
+<meta property="og:description" content="Para quien ya se ha cansado de perder el tiempo.">
+<meta property="og:url" content="https://ethosironsoul.com/tuventaja">
+<meta property="og:image" content="https://ethosironsoul.com/img/vista-previa-tuventaja.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tu ventaja no espera">
+<meta name="twitter:description" content="Para quien ya se ha cansado de perder el tiempo.">
+<meta name="twitter:image" content="https://ethosironsoul.com/img/vista-previa-tuventaja.jpg">
+<script>
+/* Solo con la dirección de pruebas: guarda lo que se envía a la medición para poder comprobarlo */
+(function () {
+  if (location.search.indexOf("debug=1") < 0) return;
+  window.__capturas = [];
+  function guardar(cuerpo) {
+    try {
+      var o = typeof cuerpo === "string" ? JSON.parse(cuerpo) : null;
+      if (!o) return;
+      (o.batch || [o]).forEach(function (e) { window.__capturas.push({ ev: e.event, origen: (e.properties || {}).origen }); });
+    } catch (x) {}
+  }
+  var sb = navigator.sendBeacon;
+  if (sb) {
+    navigator.sendBeacon = function (u, d) {
+      try { if (String(u).indexOf("posthog") >= 0) { if (typeof d === "string") guardar(d); else if (d && d.text) d.text().then(guardar); } } catch (x) {}
+      return sb.apply(navigator, arguments);
+    };
+  }
+  var f = window.fetch;
+  window.fetch = function (u, o) {
+    try { if (String(u).indexOf("posthog") >= 0 && o && o.body) guardar(o.body); } catch (x) {}
+    return f.apply(this, arguments);
+  };
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
@@ -1062,6 +1103,20 @@ Array.prototype.forEach.call(document.querySelectorAll(".rev"), revelar);
   document.getElementById("testimonios").hidden = false;
   document.getElementById("cta-testimonios").hidden = false;
   document.getElementById("cta-comentarios").hidden = false;
+})();
+</script>
+<script>
+/* Oculta el origen (src) de la barra de direcciones cuando la página ya lo ha anotado */
+(function () {
+  try {
+    var u = new URL(location.href);
+    if (u.searchParams.has("src")) {
+      setTimeout(function () {
+        u.searchParams.delete("src");
+        history.replaceState(null, "", u.pathname + u.search + u.hash);
+      }, 1500);
+    }
+  } catch (e) {}
 })();
 </script>
 </body>
