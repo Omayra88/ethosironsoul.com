@@ -496,6 +496,21 @@
     border: 1px dashed var(--oro-oscuro); padding: 12px 16px; white-space: pre-wrap;
   }
 </style>
+<style id="audio-testimonio-css">
+  .testimonio.audio { display: flex; align-items: center; gap: 18px; padding: 22px 24px; }
+  .testimonio.audio::before { content: none; }
+  .audio-btn { flex: 0 0 auto; width: 54px; height: 54px; border-radius: 50%; border: 1px solid var(--oro); background: rgba(201, 168, 76, .12); color: var(--oro); display: grid; place-items: center; cursor: pointer; padding: 0; }
+  .audio-btn:hover, .audio-btn:focus-visible { background: rgba(201, 168, 76, .26); outline: none; }
+  .audio-btn .i-pausa { display: none; }
+  .testimonio.audio.sonando .i-play { display: none; }
+  .testimonio.audio.sonando .i-pausa { display: block; }
+  .audio-info { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 9px; }
+  .audio-titulo { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; font-size: 22px; line-height: 1.25; color: var(--crema); }
+  .audio-barra { display: block; height: 2px; background: rgba(201, 168, 76, .28); }
+  .audio-barra i { display: block; height: 100%; width: 0; background: var(--oro); }
+  .audio-tiempo { font-size: 11px; letter-spacing: .16em; color: var(--gris); }
+  @media (max-width: 640px) { .testimonio.audio { padding: 18px 18px; gap: 14px; } .audio-titulo { font-size: 20px; } }
+</style>
 </head>
 <body>
 
@@ -630,7 +645,7 @@
 
   <!-- Los testimonios se rellenan en TESTIMONIOS (ajustes). Si no hay ninguno, esta parte no se ve. -->
   <section class="testimonios" id="testimonios" hidden aria-label="Testimonios">
-    <h2 class="rev">Lo que me escriben</h2>
+    <h2 class="rev">Lo que me dicen</h2>
     <div class="lista" id="testimonios-lista"></div>
   </section>
 
@@ -755,6 +770,14 @@ var CONFIG = {
   // PostHog: clave de proyecto (empieza por phc_) y región ("eu" o "us")
   POSTHOG_CLAVE: "phc_pkeEinNdCZ3yJy4UWs74MREVmmga2DJkc6qtRUXVM3ea",
   POSTHOG_REGION: "eu",
+
+  // Audios: salen como las primeras tarjetas de "Lo que me dicen". Para añadir uno:
+  // sube el MP3 a GitHub y escribe una línea así: { archivo: "audio3.mp3", duracion: "0:30" },
+  // Si dejas la lista vacía, no se ve ninguno.
+  AUDIOS: [
+    { archivo: "audio1.mp3", duracion: "0:24" },
+    { archivo: "audio2.mp3", duracion: "0:25" }
+  ],
 
   // Testimonios: aquí pegas los que quieras, así:
   // { texto: "Lo que dice la persona.", nombre: "Nombre o iniciales" },
@@ -1004,6 +1027,7 @@ player.on("ready", function () {
 player.on("play", function () {
   reproduciendo = true;
   pintarPlay();
+  if (window.__audioPausar) window.__audioPausar();
   if (!empezo) {
     empezo = true;
     registrar("vsl_play");
@@ -1117,6 +1141,47 @@ Array.prototype.forEach.call(document.querySelectorAll(".rev"), revelar);
       }, 1500);
     }
   } catch (e) {}
+})();
+</script>
+<script>
+/* Audios: opcionales, solo suenan si los pulsan. Pausan el vídeo y entre sí. Se definen en CONFIG.AUDIOS. */
+(function audios() {
+  var lista = CONFIG.AUDIOS || [];
+  var cont = document.getElementById("testimonios-lista");
+  if (!lista.length || !cont) return;
+  var sonidos = [];
+  function fmt(s) { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2); }
+  window.__audioPausar = function () { sonidos.forEach(function (a) { if (!a.paused) a.pause(); }); };
+  var primera = cont.firstChild;
+  lista.forEach(function (it, i) {
+    var caja = document.createElement("div");
+    caja.className = "testimonio destacado audio rev";
+    caja.style.setProperty("--d", (i * 0.08) + "s");
+    caja.innerHTML = '<button type="button" class="audio-btn" aria-label="Escuchar el audio">' +
+      '<svg class="i-play" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>' +
+      '<svg class="i-pausa" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z" fill="currentColor"/></svg></button>' +
+      '<div class="audio-info"><span class="audio-titulo">Audio</span><span class="audio-barra"><i></i></span><span class="audio-tiempo"></span></div>';
+    var el = document.createElement("audio");
+    el.preload = "none"; el.src = it.archivo; caja.appendChild(el); sonidos.push(el);
+    var btn = caja.querySelector(".audio-btn"), prog = caja.querySelector(".audio-barra i"), tiempo = caja.querySelector(".audio-tiempo");
+    tiempo.textContent = it.duracion || "";
+    var empezo = false;
+    function pintar() { caja.classList.toggle("sonando", !el.paused); btn.setAttribute("aria-label", el.paused ? "Escuchar el audio" : "Pausar el audio"); }
+    btn.addEventListener("click", function () {
+      if (el.paused) {
+        sonidos.forEach(function (a) { if (a !== el && !a.paused) a.pause(); });
+        try { if (typeof player !== "undefined" && player) player.pause(); } catch (e) {}
+        var p = el.play(); if (p && p.catch) p.catch(function () {});
+        if (!empezo) { empezo = true; try { registrar("vsl_audio_play", { audio: i + 1 }); } catch (e) {} }
+      } else { el.pause(); }
+    });
+    el.addEventListener("play", pintar);
+    el.addEventListener("pause", pintar);
+    el.addEventListener("ended", function () { prog.style.width = "0"; tiempo.textContent = it.duracion || fmt(el.duration || 0); pintar(); });
+    el.addEventListener("timeupdate", function () { if (el.duration) { prog.style.width = (el.currentTime / el.duration * 100) + "%"; tiempo.textContent = fmt(el.duration - el.currentTime); } });
+    cont.insertBefore(caja, primera);
+    revelar(caja);
+  });
 })();
 </script>
 </body>
