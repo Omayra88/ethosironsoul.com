@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Destruye el feminismo · ETHOS Iron</title>
+<meta name="description" content="Argumentos reales. Datos verificados.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ETHOS Iron">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Destruye el feminismo">
+<meta property="og:description" content="Argumentos reales. Datos verificados.">
+<meta property="og:url" content="https://ethosironsoul.com/tuventajaserie">
+<meta property="og:image" content="https://ethosironsoul.com/img/vista-previa-tuventaja.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Destruye el feminismo">
+<meta name="twitter:description" content="Argumentos reales. Datos verificados.">
+<meta name="twitter:image" content="https://ethosironsoul.com/img/vista-previa-tuventaja.jpg">
+<script>
+/* Solo con la dirección de pruebas: guarda lo que se envía a la medición para poder comprobarlo */
+(function () {
+  if (location.search.indexOf("debug=1") < 0) return;
+  window.__capturas = [];
+  function guardar(cuerpo) {
+    try {
+      var o = typeof cuerpo === "string" ? JSON.parse(cuerpo) : null;
+      if (!o) return;
+      (o.batch || [o]).forEach(function (e) { window.__capturas.push({ ev: e.event, origen: (e.properties || {}).origen }); });
+    } catch (x) {}
+  }
+  var sb = navigator.sendBeacon;
+  if (sb) {
+    navigator.sendBeacon = function (u, d) {
+      try { if (String(u).indexOf("posthog") >= 0) { if (typeof d === "string") guardar(d); else if (d && d.text) d.text().then(guardar); } } catch (x) {}
+      return sb.apply(navigator, arguments);
+    };
+  }
+  var f = window.fetch;
+  window.fetch = function (u, o) {
+    try { if (String(u).indexOf("posthog") >= 0 && o && o.body) guardar(o.body); } catch (x) {}
+    return f.apply(this, arguments);
+  };
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+<style>
+  :root {
+    --fondo: #0a0a0a;
+    --oro: #c9a84c;
+    --oro-oscuro: #8a6a20;
+    --crema: #f1ead8;
+    --gris: #8c8678;
+    --franja: 64px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: var(--fondo); color: var(--crema); }
+  html.bloqueado, html.bloqueado body { overflow: hidden; }
+  body {
+    font-family: "Montserrat", system-ui, sans-serif;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 36px 20px 40px;
+  }
+  .escena, .detalle, .pie { width: 100%; max-width: 960px; }
+
+  /* ---------- Titular encima del vídeo ---------- */
+  .titular {
+    min-height: 118px; margin-bottom: 14px; text-align: center;
+    display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+    transition: opacity .35s ease;
+  }
+  .titular.fuera { opacity: 0; }
+  .t1 {
+    margin: 0; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600;
+    font-size: clamp(26px, 4.4vw, 40px); line-height: 1.15; color: var(--crema);
+  }
+  .t2 { margin: 10px 0 0; font-size: 14px; letter-spacing: .02em; color: var(--oro); }
+  .t2:empty { display: none; }
+  .t1, .t2, .eco { text-wrap: balance; }
+
+  /* ---------- Controles (arriba, a un lado) ---------- */
+  .controles { display: flex; justify-content: flex-end; gap: 6px; margin-bottom: 8px; }
+  .controles button {
+    width: 34px; height: 34px; padding: 0; display: grid; place-items: center;
+    background: transparent; color: var(--crema); border: 1px solid var(--oro-oscuro); cursor: pointer;
+  }
+  .controles button svg { width: 16px; height: 16px; }
+  .controles button:hover { border-color: var(--oro); }
+  .controles button:focus-visible { outline: 2px solid var(--crema); outline-offset: 2px; }
+  .controles:not(.iniciado) #b-play,
+  .controles:not(.iniciado) #b-sonido { display: none; }
+
+  /* ---------- Vídeo ---------- */
+  .marco {
+    position: relative; width: 100%; aspect-ratio: 16 / 9;
+    background: #000; border: 1px solid var(--oro-oscuro);
+  }
+  .marco iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  /* Capa transparente: tapa el reproductor de Bunny una vez empieza el vídeo,
+     para que no lleguen toques ni teclas que permitan adelantar */
+  .capa {
+    position: absolute; inset: 0; z-index: 2; display: none; cursor: pointer;
+    -webkit-tap-highlight-color: transparent; touch-action: manipulation; outline: none;
+  }
+  .capa.activa { display: block; }
+
+  /* Barra de progreso (solo se mira, no se toca) */
+  .barra {
+    position: absolute; left: 0; right: 0; bottom: -5px; height: 2px; z-index: 3;
+    background: rgba(138, 106, 32, .35); pointer-events: none;
+  }
+  .barra-relleno { height: 100%; width: 0; background: var(--oro); transition: width .45s linear; }
+
+  /* ---------- Oferta: aparece al llegar al minuto del botón ---------- */
+  .oferta { display: none; flex-direction: column; align-items: center; padding-bottom: 8px; }
+  .oferta.visible { display: flex; animation: aparece .6s ease both; }
+  .eco {
+    margin: 30px 0 16px; text-align: center; text-transform: uppercase;
+    font-family: "Montserrat", system-ui, sans-serif; font-weight: 600;
+    font-size: 14px; letter-spacing: .16em; line-height: 1.4; color: var(--crema);
+  }
+  .boton {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    width: min(100%, 440px); padding: 18px 28px; text-align: center; text-decoration: none;
+    color: #0a0a0a; border: 0;
+    background: linear-gradient(180deg, #dcbf62 0%, #c9a84c 55%, #b8923a 100%);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28), 0 10px 34px rgba(201, 168, 76, .22);
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  }
+  .boton:hover {
+    transform: translateY(-1px); filter: brightness(1.06);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .4), 0 14px 40px rgba(201, 168, 76, .32);
+  }
+  .boton:active { transform: translateY(0); }
+  .boton:focus-visible { outline: 2px solid var(--crema); outline-offset: 4px; }
+  .boton .l1 { font-weight: 600; font-size: 18px; letter-spacing: .03em; }
+  .boton .sub {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    width: 100%; padding-top: 8px; border-top: 1px solid rgba(10, 10, 10, .22);
+  }
+  .boton .l2 { font-size: 13px; font-weight: 500; letter-spacing: .08em; }
+  .boton .l3 { font-size: 14px; font-weight: 600; letter-spacing: .03em; }
+  .garantia {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    margin: 16px 0 0; font-size: 13px; color: var(--gris); text-align: center;
+  }
+  @keyframes aparece { from { opacity: 0; } to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    .oferta.visible, .detalle.visible { animation: none; }
+    .boton, .barra-relleno, .titular { transition: none; }
+  }
+
+  /* ---------- Qué incluye (aparece con el botón) ---------- */
+  [hidden] { display: none !important; }
+  .detalle { display: none; margin-top: 72px; }
+  .detalle.visible { display: block; animation: aparece .6s ease both; }
+  .detalle h2 {
+    margin: 0 0 56px; text-align: center;
+    font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 38px; color: var(--crema);
+  }
+
+  /* aparición al deslizar */
+  .rev { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; transition-delay: var(--d, 0s); }
+  .rev.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .rev { opacity: 1; transform: none; transition: none; } }
+
+  .bloque { display: grid; grid-template-columns: 1.05fr .95fr; gap: 44px; align-items: center; margin: 0 0 84px; }
+  .bloque.inv { grid-template-columns: .95fr 1.05fr; }
+  .bloque .texto h3, .tarjeta h3 {
+    margin: 0 0 10px; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600;
+    font-size: 32px; line-height: 1.1; color: var(--oro);
+  }
+  .bloque .texto p { margin: 0; font-size: 15px; line-height: 1.7; color: var(--crema); }
+  .puntos { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 12px; }
+  .puntos li { position: relative; padding-left: 24px; font-size: 15px; line-height: 1.5; color: var(--crema); }
+  .puntos li::before { content: ""; position: absolute; left: 1px; top: .6em; width: 7px; height: 7px; background: var(--oro); transform: rotate(45deg); }
+
+  /* pila de series: se ve que hay muchas, sin saber cuántas */
+  .pila { position: relative; width: 100%; max-width: 520px; margin: 64px auto 0; aspect-ratio: 16 / 9; }
+  .carta {
+    position: absolute; inset: 0; margin: 0; overflow: hidden; background: #000;
+    border: 1px solid rgba(201, 168, 76, .45); box-shadow: 0 18px 40px rgba(0, 0, 0, .55);
+    transform-origin: 50% 100%;
+    transform: translateY(calc(var(--r, 0) * -16px)) scale(calc(1 - var(--r, 0) * .045));
+    opacity: max(0, calc(1 - var(--r, 0) * .25));
+    filter: brightness(calc(1 - var(--r, 0) * .14));
+    z-index: calc(20 - var(--r, 0));
+    transition: transform .9s cubic-bezier(.22, .8, .24, 1), opacity .9s ease, filter .9s ease;
+  }
+  .carta img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  /* hojas de la asimetría semanal */
+  .hojas { position: relative; width: 62%; max-width: 330px; margin: 0 auto; aspect-ratio: 210 / 297; }
+  .hojas img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #0a0a0a;
+    border: 1px solid rgba(201, 168, 76, .5); box-shadow: 0 18px 40px rgba(0, 0, 0, .55);
+  }
+  .hojas img:nth-child(1) { transform: translate(-7%, 4%) rotate(-5deg); opacity: .45; }
+  .hojas img:nth-child(2) { transform: translate(-3.5%, 2%) rotate(-2.5deg); opacity: .7; }
+  .hojas img:nth-child(3) { transform: none; }
+
+  /* tarjetas */
+  .tarjetas { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 0 84px; }
+  .tarjeta { padding: 26px 26px 28px; border: 1px solid var(--oro-oscuro); background: rgba(255, 255, 255, .015); }
+  .tarjeta svg { width: 28px; height: 28px; margin-bottom: 14px; fill: none; stroke: var(--oro); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .tarjeta h3 { font-size: 26px; }
+  .tarjeta p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--crema); }
+  .tarjeta.bonus { border-color: var(--oro); background: linear-gradient(180deg, rgba(201, 168, 76, .09), rgba(201, 168, 76, .02)); }
+  .tarjeta .etiqueta { display: inline-block; margin-bottom: 12px; font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #0a0a0a; background: var(--oro); padding: 4px 10px; }
+
+  /* el pack: todo junto, montado con dispositivos */
+  .pack { margin: 0 0 12px; }
+  .pack-marco { container-type: inline-size; width: 100%; max-width: 960px; margin: 0 auto; }
+  .lienzo { position: relative; width: 100%; aspect-ratio: 1000 / 570; }
+  .lienzo::before {
+    content: ""; position: absolute; inset: 6% 8% 0; filter: blur(12px);
+    background: radial-gradient(ellipse at 50% 55%, rgba(201, 168, 76, .24), rgba(201, 168, 76, 0) 64%);
+  }
+  .disp {
+    position: absolute; opacity: 0; transform: translateY(7%) scale(.96);
+    transition: opacity .8s ease, transform .9s cubic-bezier(.22, .8, .24, 1); transition-delay: var(--d, 0s);
+  }
+  .pack.in .disp { opacity: 1; transform: none; }
+  .monitor { left: 27%; top: 1%; width: 46%; z-index: 3; }
+  .monitor .pant {
+    position: relative; aspect-ratio: 16 / 9.3; overflow: hidden; background: #0c0c0c;
+    border: .55cqw solid #1d1d1d; border-radius: .9cqw;
+    box-shadow: 0 0 0 1px rgba(201, 168, 76, .45), 0 2.4cqw 5cqw rgba(0, 0, 0, .65);
+  }
+  .monitor img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .monitor .cuello { width: 8cqw; height: 4.2cqw; margin: 0 auto; background: linear-gradient(90deg, #111, #262626, #111); }
+  .monitor .base { width: 17cqw; height: .9cqw; margin: 0 auto; background: #202020; border-radius: .5cqw; box-shadow: 0 1cqw 2cqw rgba(0, 0, 0, .6); }
+  .minipila { left: 1%; top: 9%; width: 20%; z-index: 2; aspect-ratio: 16 / 12; }
+  .minipila figure {
+    position: absolute; left: 0; width: 100%; margin: 0; aspect-ratio: 16 / 9; overflow: hidden;
+    border: 1px solid rgba(201, 168, 76, .55); box-shadow: 0 1.4cqw 2.8cqw rgba(0, 0, 0, .6);
+  }
+  .minipila figure img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .minipila figure:nth-child(1) { top: 0; transform: rotate(-4deg); filter: brightness(.7); }
+  .minipila figure:nth-child(2) { top: 5.2cqw; transform: rotate(2deg); filter: brightness(.85); }
+  .minipila figure:nth-child(3) { top: 10.4cqw; transform: rotate(-2deg); }
+  .laptop { left: 71%; top: 26%; width: 29%; z-index: 4; }
+  .laptop .pant {
+    position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: #0b0b0b;
+    border: .5cqw solid #1d1d1d; border-bottom-width: .7cqw; border-radius: .9cqw .9cqw 0 0;
+    box-shadow: 0 0 0 1px rgba(201, 168, 76, .4);
+  }
+  .laptop .teclado { height: 1.4cqw; margin: 0 -2.5%; background: linear-gradient(#2c2c2c, #121212); border-radius: 0 0 1.4cqw 1.4cqw; box-shadow: 0 1.6cqw 3cqw rgba(0, 0, 0, .65); }
+  .zoom { position: absolute; inset: 5%; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 3.5%; }
+  .zoom i { position: relative; display: block; overflow: hidden; background: linear-gradient(160deg, #221d12, #0d0c0a); border: 1px solid rgba(201, 168, 76, .28); }
+  .zoom i::before { content: ""; position: absolute; left: 50%; top: 36%; width: 25%; aspect-ratio: 1; border-radius: 50%; background: rgba(201, 168, 76, .6); transform: translate(-50%, -50%); }
+  .zoom i::after { content: ""; position: absolute; left: 50%; top: 88%; width: 56%; height: 44%; border-radius: 50% 50% 0 0; background: rgba(201, 168, 76, .36); transform: translate(-50%, -50%); }
+  .en-directo {
+    position: absolute; left: 7%; top: 7%; z-index: 2; padding: .25em .7em; border-radius: 2px;
+    font: 600 clamp(6px, .95cqw, 10px)/1.2 "Montserrat", sans-serif; letter-spacing: .1em; color: #fff; background: #c0392b;
+  }
+  .tablet { left: 11%; top: 37%; width: 20%; z-index: 5; }
+  .tablet .cuerpo {
+    aspect-ratio: 3 / 4.15; overflow: hidden; background: #0c0c0c; border: .6cqw solid #1d1d1d; border-radius: 1.5cqw;
+    box-shadow: 0 0 0 1px rgba(201, 168, 76, .45), 0 2cqw 4.4cqw rgba(0, 0, 0, .65);
+  }
+  .tablet img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .movil { width: 10.4%; z-index: 6; }
+  .movil .cuerpo {
+    position: relative; aspect-ratio: 9 / 19; overflow: hidden; background: #0a0a0a; border: .5cqw solid #222; border-radius: 1.9cqw;
+    box-shadow: 0 0 0 1px rgba(201, 168, 76, .45), 0 1.6cqw 3.6cqw rgba(0, 0, 0, .65);
+  }
+  .movil-a { left: 36.5%; top: 50%; }
+  .movil-b { left: 49%; top: 57%; }
+  .wa-cab { display: flex; align-items: center; gap: 7%; height: 12%; padding: 0 8%; background: #17130a; border-bottom: 1px solid rgba(201, 168, 76, .3); }
+  .wa-cab b { width: 20%; aspect-ratio: 1; border-radius: 50%; background: rgba(201, 168, 76, .65); }
+  .wa-cab s { flex: 1; height: 22%; border-radius: 99px; background: rgba(241, 234, 216, .35); text-decoration: none; }
+  .wa-chat { display: flex; flex-direction: column; gap: 3.6%; padding: 8% 7%; }
+  .wa-chat span { display: block; width: 64%; height: 2.4cqw; border-radius: .9cqw; background: #211e15; }
+  .wa-chat span:nth-child(2n) { align-self: flex-end; width: 52%; background: rgba(201, 168, 76, .34); }
+  .wa-chat span:nth-child(3) { width: 74%; height: 3.6cqw; }
+  .wa-pie { position: absolute; left: 7%; right: 7%; bottom: 4%; height: 7%; border-radius: 99px; background: #1c190f; border: 1px solid rgba(201, 168, 76, .25); }
+  .movil .pantalla-img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .pil-img { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); }
+  .pil-img img { display: block; width: 100%; height: auto; }
+  .chip {
+    position: absolute; z-index: 8; white-space: nowrap; padding: .6em 1.1em; border-radius: 99px; color: #0a0a0a;
+    font: 600 clamp(8px, 1.3cqw, 13px)/1.2 "Montserrat", sans-serif; letter-spacing: .09em; text-transform: uppercase;
+    background: linear-gradient(180deg, #dcbf62, #b8923a); box-shadow: 0 .9cqw 2.2cqw rgba(0, 0, 0, .5);
+  }
+  .chip-1 { left: 25%; top: 84%; }
+  .chip-2 { right: 0; top: 12%; }
+
+  /* botones fuera del vídeo (tras el pack y tras los testimonios) */
+  .cta { display: flex; flex-direction: column; align-items: center; margin: 44px 0 72px; }
+  .cta .garantia { margin-top: 16px; }
+  .cierre .c1 { text-transform: uppercase; letter-spacing: .06em; font-size: .86em; }
+  .cierre { margin: 0 0 22px; text-align: center; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 38px; line-height: 1.15; color: var(--crema); text-wrap: balance; }
+
+  /* testimonios */
+  .testimonios { margin: 0 0 24px; }
+  .testimonios h2 { margin-bottom: 36px; font-size: 36px; }
+  .testimonios .sub-t { margin: 0 0 40px; text-align: center; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
+  .testimonios .lista { column-count: 2; column-gap: 18px; }
+  .testimonio {
+    position: relative; break-inside: avoid; margin: 0 0 18px; padding: 46px 28px 24px;
+    border: 1px solid rgba(138, 106, 32, .7);
+    background: linear-gradient(180deg, rgba(201, 168, 76, .08), rgba(201, 168, 76, .015));
+  }
+  .testimonio::before {
+    content: "\201C"; position: absolute; left: 24px; top: 8px;
+    font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 74px; line-height: 1; color: var(--oro); opacity: .85;
+  }
+  .testimonio p { margin: 0; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; font-size: 22px; line-height: 1.35; color: var(--crema); }
+  .testimonio footer { margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(138, 106, 32, .45); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--oro); }
+  .testimonio.destacado { border-color: var(--oro); background: linear-gradient(180deg, rgba(201, 168, 76, .16), rgba(201, 168, 76, .03)); }
+  .testimonio.destacado p { font-size: 27px; }
+
+  /* ---------- Pie ---------- */
+  .pie {
+    margin-top: 56px; padding-top: 20px; border-top: 1px solid rgba(138, 106, 32, .4);
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px;
+    font-size: 12px; color: var(--gris);
+  }
+  .pie a { color: var(--gris); text-decoration: underline; text-underline-offset: 3px; }
+  .pie a:hover { color: var(--crema); }
+
+  /* ---------- Pantalla completa propia: vídeo arriba y botón justo debajo ---------- */
+  .escena.pc {
+    position: fixed; inset: 0; z-index: 9999; max-width: none; width: 100%;
+    height: 100vh; height: 100dvh; background: var(--fondo);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    overflow: hidden;
+  }
+  .escena.pc .titular { min-height: 0; margin: 0 0 12px; padding: 0 16px; }
+  .escena.pc .t1 { font-size: 22px; }
+  .escena.pc .t2 { font-size: 12.5px; margin-top: 6px; }
+  .escena.pc .marco { border-left: 0; border-right: 0; }
+  .escena.pc .controles {
+    position: fixed; z-index: 10000; margin: 0; gap: 6px;
+    top: calc(env(safe-area-inset-top) + 8px); right: calc(env(safe-area-inset-right) + 8px);
+  }
+  .escena.pc .controles button { background: rgba(10, 10, 10, .6); }
+  /* el sitio de la oferta se reserva desde el principio para que el vídeo no cambie de tamaño */
+  .escena.pc .oferta { display: flex; visibility: hidden; min-height: 215px; justify-content: flex-start; }
+  .escena.pc .oferta.visible { visibility: visible; }
+  .escena.pc .eco { margin: 18px 0 12px; font-size: 12.5px; }
+  .escena.pc .garantia { margin-top: 10px; }
+
+  @media (orientation: landscape) {
+    .escena.pc { --tope: 44px; justify-content: center; }
+    .escena.pc .titular { height: var(--tope); margin: 0; justify-content: center; }
+    .escena.pc .t1 { font-size: 20px; }
+    .escena.pc .t2 { display: none; }
+    .escena.pc .marco {
+      width: min(100%, calc((100vh - var(--franja) - var(--tope) - env(safe-area-inset-top) - env(safe-area-inset-bottom)) * 16 / 9));
+      width: min(100%, calc((100dvh - var(--franja) - var(--tope) - env(safe-area-inset-top) - env(safe-area-inset-bottom)) * 16 / 9));
+      border: 0;
+    }
+    .escena.pc .oferta {
+      height: var(--franja); min-height: 0; padding: 0; gap: 20px;
+      flex-direction: row; justify-content: center; align-items: center;
+    }
+    .escena.pc .eco { margin: 0; font-size: 10.5px; letter-spacing: .12em; }
+    .escena.pc .garantia { margin: 0; gap: 2px; font-size: 10.5px; align-items: flex-start; text-align: left; }
+    .escena.pc .boton { width: auto; gap: 2px; padding: 7px 26px; }
+    .escena.pc .boton .l1 { font-size: 14px; }
+    .escena.pc .boton .sub { flex-direction: row; gap: 0; padding-top: 2px; border-top: 0; }
+    .escena.pc .boton .l2, .escena.pc .boton .l3 { font-size: 10.5px; }
+    .escena.pc .boton .l2::after { content: " · "; white-space: pre; }
+  }
+  /* Móvil en horizontal: la frase de arriba va sobre el borde superior del vídeo para no encoger la imagen */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .escena.pc { --tope: 0px; }
+    .escena.pc .titular {
+      position: fixed; top: env(safe-area-inset-top); left: 0; right: 0; z-index: 10;
+      height: auto; padding: 8px 130px 22px; pointer-events: none;
+      background: linear-gradient(180deg, rgba(0, 0, 0, .7), rgba(0, 0, 0, 0));
+    }
+    .escena.pc .t1 { font-size: 15px; text-shadow: 0 1px 6px rgba(0, 0, 0, .9); }
+  }
+  @media (orientation: landscape) and (max-width: 720px) {
+    .escena.pc .eco { display: none; }
+  }
+
+  /* ---------- Móvil: todo algo más pequeño (el vídeo no se toca) ---------- */
+  @media (max-width: 640px) {
+    body { padding: 24px 16px 32px; }
+    .titular { min-height: 104px; }
+    .t1 { font-size: clamp(22px, 6.4vw, 26px); }
+    .t2 { font-size: 12.5px; }
+    .controles button { width: 30px; height: 30px; }
+    .controles button svg { width: 14px; height: 14px; }
+    .eco { font-size: 12px; letter-spacing: .12em; margin: 24px 0 14px; }
+    .boton { width: 100%; padding: 14px 18px; gap: 6px; }
+    .boton .l1 { font-size: 15.5px; }
+    .boton .sub { padding-top: 6px; }
+    .boton .l2 { font-size: 11.5px; }
+    .boton .l3 { font-size: 12.5px; }
+    .garantia { font-size: 12px; }
+    .detalle { margin-top: 52px; }
+    .detalle h2 { font-size: 30px; margin-bottom: 40px; }
+    .bloque, .bloque.inv { grid-template-columns: 1fr; gap: 26px; margin-bottom: 60px; }
+    .bloque.inv .visual { order: -1; }
+    .bloque .texto h3 { font-size: 27px; text-align: center; }
+    .bloque .texto p { font-size: 14px; text-align: center; }
+    .puntos { max-width: 300px; margin-left: auto; margin-right: auto; }
+    .puntos li { font-size: 14px; }
+    .pila { margin-top: 54px; max-width: 94%; }
+    .hojas { width: 58%; }
+    .tarjetas { grid-template-columns: 1fr; gap: 12px; margin-bottom: 60px; }
+    .tarjeta { padding: 20px 20px 22px; }
+    .tarjeta h3 { font-size: 23px; }
+    .tarjeta p { font-size: 14px; }
+    .cta { margin: 32px 0 52px; }
+    .cierre { font-size: min(26px, calc((100vw - 40px) / 13.2)); margin-bottom: 18px; }
+    .final { margin: 40px 0 52px; }
+    .final .cierre { margin-bottom: 28px; }
+    .listado { gap: 16px; max-width: 100%; margin-top: 32px; }
+    .listado li { font-size: 13.5px; }
+    .listado li b { font-size: 12.5px; }
+    .cta-final { margin-top: 34px; }
+    .cierre .c1, .cierre .c2 { white-space: nowrap; }
+    .testimonios .lista { column-count: 1; }
+    .testimonios h2 { font-size: 30px; }
+    .testimonios .sub-t { margin-bottom: 28px; font-size: 11.5px; }
+    .testimonio { padding: 42px 22px 20px; }
+    .testimonio p { font-size: 20px; }
+    .testimonio.destacado p { font-size: 23px; }
+  }
+
+  /* El vídeo ocupa lo máximo posible de la pantalla (sin pantalla completa) */
+  @media (min-width: 900px) {
+    .escena { max-width: 1180px; }
+    .marco, .controles {
+      width: min(100%, max(960px, calc((100vh - 250px) * 16 / 9)));
+      width: min(100%, max(960px, calc((100dvh - 250px) * 16 / 9)));
+      margin-left: auto; margin-right: auto;
+    }
+  }
+  @media (max-width: 640px) {
+    .marco { width: calc(100% + 32px); margin-left: -16px; margin-right: -16px; border-left: 0; border-right: 0; }
+  }
+
+  /* listado y cierre */
+  .final { margin: 56px 0 72px; }
+  .final .cierre { margin: 0 0 40px; }
+  .final .pack { margin: 0; }
+  .cta-final { margin: 44px 0 0; }
+  .cta-medio { margin: 44px 0 0; }
+  .listado {
+    list-style: none; margin: 44px auto 0; padding: 0; max-width: 780px; text-align: left;
+    display: grid; grid-template-columns: 1fr; gap: 24px;
+  }
+  .listado li { position: relative; padding-left: 28px; font-size: 15px; line-height: 1.6; color: rgba(241, 234, 216, .82); }
+  .listado li b { display: block; font-weight: 600; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; color: var(--crema); }
+  .listado li .sep { display: none; }
+  .listado li .desc { display: block; position: relative; margin-top: 5px; }
+  .listado li .desc::before { content: "–"; position: absolute; left: -28px; width: 9px; text-align: center; font-weight: 700; color: var(--oro); }
+  .listado li::before { content: ""; position: absolute; left: 0; top: .38em; width: 9px; height: 9px; border-radius: 50%; background: var(--oro); box-shadow: 0 0 10px rgba(201, 168, 76, .55); }
+  .boton .l3 s { text-decoration: line-through; text-decoration-thickness: 2px; font-weight: 500; opacity: .7; }
+  .boton .l3 b { font-weight: 700; font-size: .86em; letter-spacing: .12em; }
+  @media (max-width: 640px) {
+    .final { margin: 40px 0 52px; }
+    .final .cierre { margin-bottom: 28px; }
+    .listado { gap: 16px; max-width: 100%; margin-top: 32px; }
+    .listado li { font-size: 13.5px; }
+    .listado li b { font-size: 12.5px; }
+    .cta-final { margin-top: 34px; }
+  }
+
+  /* Esto no es para ti si… */
+  .nopara { margin: 56px auto 0; }
+  .nopara h2 { margin: 0 0 22px; text-align: center; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 22px; line-height: 1.15; color: var(--crema); }
+  .nopara ul { list-style: none; margin: 0 auto; padding: 0; max-width: 520px; text-align: left; }
+  .nopara li { position: relative; padding: 8px 0 8px 28px; border-top: 1px solid rgba(138, 106, 32, .3); font-size: 11px; line-height: 1.45; color: var(--crema); }
+  .nopara li:last-child { border-bottom: 1px solid rgba(138, 106, 32, .3); }
+  .nopara li::before, .nopara li::after { content: ""; position: absolute; left: 3px; top: 50%; width: 10px; height: 1.5px; background: var(--oro); }
+  .nopara li::before { transform: translateY(-50%) rotate(45deg); }
+  .nopara li::after { transform: translateY(-50%) rotate(-45deg); }
+  @media (max-width: 640px) { .nopara { margin-top: 44px; } .nopara h2 { font-size: 20px; margin-bottom: 18px; } }
+
+  .cierre-np { margin: 44px auto 0; text-align: center; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; font-size: 31px; line-height: 1.25; color: var(--crema); white-space: nowrap; }
+  @media (max-width: 640px) { .cierre-np { font-size: min(24px, calc((100vw - 36px) / 16.21)); margin-top: 34px; } }
+
+  /* Panel de pruebas: solo aparece con ?debug=1 en la dirección */
+  #debug {
+    display: none; margin-top: 24px; width: 100%; max-width: 960px;
+    font: 13px/1.5 ui-monospace, Menlo, monospace; color: var(--gris);
+    border: 1px dashed var(--oro-oscuro); padding: 12px 16px; white-space: pre-wrap;
+  }
+</style>
+<style id="audio-testimonio-css">
+  .testimonio.audio { display: flex; align-items: center; gap: 18px; padding: 22px 24px; }
+  .testimonio.audio::before { content: none; }
+  .audio-btn { flex: 0 0 auto; width: 54px; height: 54px; border-radius: 50%; border: 1px solid var(--oro); background: rgba(201, 168, 76, .12); color: var(--oro); display: grid; place-items: center; cursor: pointer; padding: 0; }
+  .audio-btn:hover, .audio-btn:focus-visible { background: rgba(201, 168, 76, .26); outline: none; }
+  .audio-btn .i-pausa { display: none; }
+  .testimonio.audio.sonando .i-play { display: none; }
+  .testimonio.audio.sonando .i-pausa { display: block; }
+  .audio-info { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 9px; }
+  .audio-titulo { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; font-size: 22px; line-height: 1.25; color: var(--crema); }
+  .audio-barra { display: block; height: 2px; background: rgba(201, 168, 76, .28); }
+  .audio-barra i { display: block; height: 100%; width: 0; background: var(--oro); }
+  .audio-tiempo { font-size: 11px; letter-spacing: .16em; color: var(--gris); }
+  @media (max-width: 640px) { .testimonio.audio { padding: 18px 18px; gap: 14px; } .audio-titulo { font-size: 20px; } }
+</style>
+
+<style id="serie-css">
+  /* La serie no tiene vídeo: el detalle se ve desde el primer momento */
+  .detalle { display: block; margin-top: 56px; }
+  .portada { width: 100%; max-width: 960px; }
+  .marco-img { border: 1px solid var(--oro-oscuro); overflow: hidden; }
+  .marco-img img { display: block; width: 100%; height: auto; }
+  .bloque > div { min-width: 0; }
+  .cabecera { text-align: center; margin-bottom: 26px; }
+  .cabecera .sello { margin: 0 0 14px; font-size: 11px; letter-spacing: .34em; text-transform: uppercase; color: var(--oro); }
+  .cabecera h1 { margin: 0; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600;
+    font-size: clamp(34px, 7vw, 62px); line-height: 1.04; color: var(--crema); }
+  .cabecera .lema { margin: 16px 0 0; font-size: 15px; line-height: 1.6; color: var(--oro); }
+  .cabecera .lema b { display: block; font-weight: 500; }
+  .boton .l3 s { color: var(--gris); }
+  .precio-linea { font-size: 13px; letter-spacing: .08em; }
+  .listado { list-style: none; padding: 0; margin: 0 auto 8px; max-width: 760px; }
+  .listado li { padding: 15px 0; border-bottom: 1px solid rgba(138,106,32,.3); }
+  .listado li b { display: block; font-size: 15px; font-weight: 600; letter-spacing: .01em; color: var(--oro); margin-bottom: 5px; }
+  .listado .desc { display: block; font-size: 15px; line-height: 1.65; color: var(--crema); }
+  .nopara { margin: 0 auto 24px; max-width: 760px; }
+  .nopara ul { list-style: none; padding: 0; margin: 0; }
+  .nopara li { padding: 11px 0 11px 26px; position: relative; font-size: 15px; line-height: 1.6; color: var(--crema); }
+  .cierre-np { margin: 30px auto 0; max-width: 34ch; text-align: center; text-wrap: balance;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(20px, 3.4vw, 28px); line-height: 1.45; color: var(--crema); }
+  @media (max-width: 640px) { .cierre-np { font-size: 20px; max-width: 30ch; } .cierre-np br { display: none; } }
+  .bloque-texto { margin: 0 auto 64px; max-width: 760px; text-align: center; }
+  .bloque-texto h2 { margin-bottom: 18px; }
+  .bloque-texto p { margin: 0 0 14px; font-size: 16px; line-height: 1.75; color: var(--crema); }
+  .bloque-texto .remate { margin-top: 22px; font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(22px, 3.6vw, 30px); line-height: 1.4; color: var(--oro); }
+  .objeciones { margin: 0 auto 72px; max-width: 760px; }
+  .obj { padding: 20px 0; border-top: 1px solid rgba(138,106,32,.3); }
+  .obj:last-child { border-bottom: 1px solid rgba(138,106,32,.3); }
+  .obj h3 { margin: 0 0 8px; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500;
+    font-size: clamp(20px, 3vw, 26px); line-height: 1.3; color: var(--crema); }
+  .obj p { margin: 0; font-size: 15px; line-height: 1.7; color: var(--gris); }
+  .panel-ethos { width: 100%; height: 100%; background: #0b0b0b; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 1.1cqw; padding: 2cqw 1.4cqw; text-align: center; }
+  .panel-ethos .pe-marca { font-size: clamp(4px,.52cqw,7px); letter-spacing: .36em; color: var(--oro); }
+  .panel-ethos .pe-linea { width: 40%; height: 1px; background: var(--oro-oscuro); }
+  .panel-ethos .pe-titulo { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600;
+    font-size: clamp(9px,1.45cqw,19px); line-height: 1.15; color: var(--crema); }
+  .panel-ethos .pe-pie { font-size: clamp(4px,.5cqw,7px); letter-spacing: .28em; color: var(--gris); }
+  .chip-1 { left: 16% !important; top: 90% !important; font-size: clamp(7px,1.05cqw,11px) !important; }
+  .remate-tarjeta { margin-top: 10px !important; color: var(--oro) !important; font-style: italic; }
+  .fuente-mini { margin: 10px 0 0; font-size: 12px; letter-spacing: .1em; color: var(--gris); }
+  @media (max-width: 760px) { .detalle { margin-top: 36px; } }
+</style>
+</head>
+<body>
+
+<div class="portada">
+  <div class="cabecera">
+    <p class="sello">ETHOS Iron</p>
+    <h1>Destruye el feminismo</h1>
+    <p class="lema"><b>Argumentos reales.</b><b>Datos verificados.</b></p>
+  </div>
+  <div class="marco-img">
+    <img src="/img/s4-destruye-el-feminismo-840.webp"
+         srcset="/img/s4-destruye-el-feminismo-420.webp 420w, /img/s4-destruye-el-feminismo-840.webp 840w, /img/s4-destruye-el-feminismo-1260.webp 1260w"
+         sizes="(max-width: 640px) 92vw, 960px"
+         alt="Destruye el feminismo, serie de ETHOS Iron" width="1672" height="941">
+  </div>
+</div>
+
+<section class="detalle" id="detalle" aria-label="La serie Destruye el feminismo">
+
+  <section class="bloque-texto rev" aria-label="Esto te ha pasado">
+    <h2>Dices una frase y ya eres el machista</h2>
+    <p>Sale el tema, abres la boca y en dos segundos eres tú el que tiene que justificarse, así que te callas, y luego en el coche te vienen todas las respuestas.</p>
+    <p class="remate">Lo que te falta no es la razón, son los datos.</p>
+  </section>
+
+  <div class="pack rev" id="pack">
+    <div class="pack-marco">
+      <div class="lienzo" role="img" aria-label="La serie en vídeo, los PDF de fuentes, el argumentario y la guía de actuación">
+        <div class="disp minipila" style="--d:.5s">
+          <figure><img src="/img/s4-destruye-el-feminismo-420.webp" alt="" width="1672" height="941" loading="lazy" decoding="async"></figure>
+          <figure><img src="/img/s4-destruye-el-feminismo-420.webp" alt="" width="1672" height="941" loading="lazy" decoding="async"></figure>
+          <figure><img src="/img/s4-destruye-el-feminismo-420.webp" alt="" width="1672" height="941" loading="lazy" decoding="async"></figure>
+        </div>
+        <div class="disp monitor" style="--d:0s">
+          <div class="pant"><img src="/img/s4-destruye-el-feminismo-840.webp" srcset="/img/s4-destruye-el-feminismo-420.webp 420w, /img/s4-destruye-el-feminismo-840.webp 840w, /img/s4-destruye-el-feminismo-1260.webp 1260w" sizes="46vw" alt="" width="1672" height="941" loading="lazy" decoding="async"></div>
+          <div class="cuello"></div><div class="base"></div>
+        </div>
+        <div class="disp tablet" style="--d:.4s">
+          <div class="cuerpo"><img src="/img/vsl-asimetria.webp" alt="" loading="lazy" decoding="async"></div>
+        </div>
+        <div class="disp movil movil-a" style="--d:.6s">
+          <div class="cuerpo"><div class="panel-ethos"><span class="pe-marca">ETHOS IRON</span><span class="pe-linea"></span><span class="pe-titulo">Destruye el feminismo</span></div></div>
+        </div>
+        <div class="disp movil movil-b" style="--d:.75s">
+          <div class="cuerpo"><div class="pil-img"><img src="/img/vsl-asimetria.webp" alt="" loading="lazy" decoding="async"></div></div>
+        </div>
+        <span class="disp chip chip-1" style="--d:.95s">Bonus · Guía de actuación ante una denuncia</span>
+        <span class="disp chip chip-2" style="--d:1.05s">+ Argumentario completo</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="objeciones rev" aria-label="Lo que estás pensando">
+    <h2>Lo que estás pensando ahora mismo</h2>
+    <div class="obj">
+      <h3>&ldquo;Yo no quiero discutir con nadie.&rdquo;</h3>
+      <p>Ni yo. Esto va de que no te quedes en blanco cuando te toque, y de poder decir lo que piensas sin que te pase por encima el primero que levanta la voz.</p>
+    </div>
+    <div class="obj">
+      <h3>&ldquo;Me van a llamar machista igual.&rdquo;</h3>
+      <p>Te lo van a llamar, la diferencia es que esta vez vas a tener la ley abierta y el dato delante, y ahí la etiqueta deja de funcionar y queda mal el que la usa.</p>
+    </div>
+    <div class="obj">
+      <h3>&ldquo;Esto ya lo he visto en redes.&rdquo;</h3>
+      <p>Lo que hay en redes casi nunca lleva fuente, y en cuanto alguien te pide de dónde lo has sacado te quedas igual que antes. Aquí cada cifra lleva su enlace oficial.</p>
+    </div>
+    <div class="obj">
+      <h3>&ldquo;No tengo tiempo de leerme leyes.&rdquo;</h3>
+      <p>Las he leído yo. Te doy el artículo exacto, qué dice con sus palabras y cómo te afecta a ti, sin tener que abrir un BOE en tu vida si no quieres.</p>
+    </div>
+  </section>
+
+  <div class="bloque rev">
+    <div class="visual">
+      <div class="marco-img">
+        <img src="/img/s4-destruye-el-feminismo-840.webp"
+             srcset="/img/s4-destruye-el-feminismo-420.webp 420w, /img/s4-destruye-el-feminismo-840.webp 840w, /img/s4-destruye-el-feminismo-1260.webp 1260w"
+             sizes="(max-width: 640px) 86vw, 460px" alt="" width="1672" height="941" loading="lazy" decoding="async">
+      </div>
+    </div>
+    <div class="texto">
+      <h3>16 episodios en vídeo</h3>
+      <p>Un vídeo de apertura y 15 episodios, uno por cada argumento que te vas a encontrar.</p>
+      <p>Los ves cuando quieras, las veces que quieras, y el acceso es de por vida.</p>
+    </div>
+  </div>
+
+  <h2 class="rev">Lo que vas a poder hacer</h2>
+  <ul class="listado rev" aria-label="Lo que vas a poder hacer">
+    <li><b>Cuando te saquen la brecha salarial</b><span class="desc">Vas a saber qué mide ese dato de verdad, de dónde sale y qué deja fuera, con el informe en la mano.</span></li>
+    <li><b>Cuando se hable de denuncias</b><span class="desc">Vas a saber qué dice la ley palabra por palabra sobre quién accede a qué, y qué pasa desde el minuto uno.</span></li>
+    <li><b>Cuando digan que la violencia va en un solo sentido</b><span class="desc">Vas a tener los datos de hombres agredidos que están publicados y no salen en ninguna campaña.</span></li>
+    <li><b>Cuando usen la palabra feminicidio</b><span class="desc">Vas a saber de dónde viene ese término, quién lo impulsó y qué se consigue nombrándolo así.</span></li>
+    <li><b>Cuando te digan que te lo estás inventando</b><span class="desc">Vas a poder citar lo que escribieron las autoras de los setenta, con la frase, la página y la editorial.</span></li>
+    <li><b>Cuando te pongan a Rosie la Remachadora de ejemplo</b><span class="desc">Vas a conocer la historia real del cartel y la de las cuentas bancarias, que no es la que te han contado.</span></li>
+    <li><b>Cuando te pidan que pagues por el pasado</b><span class="desc">Vas a saber por qué la compensación histórica no se sostiene jurídicamente, y explicarlo en dos frases.</span></li>
+    <li><b>Cuando nieguen la biología</b><span class="desc">Vas a tener las diferencias que se aceptan en medicina y se niegan en el debate, con el estudio al lado.</span></li>
+    <li><b>Cuando saquen el patriarcado</b><span class="desc">Vas a tener la pregunta que deja la conversación en silencio, y vas a entender por qué no hay respuesta.</span></li>
+    <li><b>Cuando digan que la ley trata igual a todos</b><span class="desc">Vas a poder enseñar los artículos que nombran tu sexo, con el enlace al BOE para que lo lean ellos.</span></li>
+    <li><b>Cuando toquen cuotas o micromachismo</b><span class="desc">Vas a ver cómo están construidos esos argumentos para que no puedas rebatirlos, y por dónde se rompen.</span></li>
+    <li><b>Cuando salga el deporte trans o el lenguaje inclusivo</b><span class="desc">Vas a tener los dos frentes con más ruido explicados con cifras, no con opiniones.</span></li>
+  </ul>
+
+  <div class="bloque inv rev">
+    <div class="texto">
+      <h3>Un PDF de fuentes en cada episodio</h3>
+      <ul class="puntos">
+        <li>Cada cifra, con su enlace oficial.</li>
+        <li>INE, CGPJ, BOE, estudios con DOI.</li>
+        <li>Los pasos exactos para encontrarla tú.</li>
+      </ul>
+    </div>
+    <div class="visual">
+      <div class="hojas" aria-hidden="true">
+        <img src="/img/vsl-asimetria.webp" alt="" loading="lazy" decoding="async">
+        <img src="/img/vsl-asimetria.webp" alt="" loading="lazy" decoding="async">
+        <img src="/img/vsl-asimetria.webp" alt="Un PDF de fuentes en cada episodio" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+
+  <div class="tarjetas">
+    <article class="tarjeta rev" style="--d:0s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H10l-6 4z"/><path d="M8 9.5h8M8 12.5h5"/></svg><h3>El argumentario</h3><p>Los argumentos que te vas a encontrar y cómo rebatir cada uno, en un documento aparte para tenerlo a mano cuando salga el tema.</p></article>
+    <article class="tarjeta rev" style="--d:.08s"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><h3>Acceso de por vida</h3><p>Pago único. Entras una vez y vuelves cuando lo necesites, sin caducidad.</p></article>
+    <article class="tarjeta rev" style="--d:0s"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg><h3>Compruébalo tú mismo</h3><p>Todos los datos salen en pantalla con su fuente, así que puedes verificar cualquiera de ellos en un minuto.</p></article>
+    <article class="tarjeta bonus rev" style="--d:.08s"><span class="etiqueta">Bonus</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 4.5-3.2 7.9-8 9-4.8-1.1-8-4.5-8-9V7z"/><path d="M9.5 12l2 2 3.5-4"/></svg><h3>Guía de actuación ante una denuncia</h3><p>Qué ocurre, en qué orden y qué puedes hacer si alguna vez te ves ahí.</p><p class="remate-tarjeta">El documento que espero que no necesites nunca.</p></article>
+  </div>
+
+  <div class="bloque rev">
+    <div class="visual">
+      <div class="marco-img">
+        <img src="/img/formal-iron-1100.webp" srcset="/img/formal-iron-700.webp 700w, /img/formal-iron-1100.webp 1100w, /img/formal-iron-1672.webp 1672w" sizes="(max-width: 640px) 86vw, 460px" alt="" width="1100" height="619" loading="lazy" decoding="async">
+      </div>
+    </div>
+    <div class="texto">
+      <h3>Por qué te lo cuenta una mujer</h3>
+      <p>Cuando un hombre cuestiona el feminismo radical, el ataque es inmediato: machista, misógino, no entiende. Esas etiquetas no refutan el argumento, lo esquivan.</p>
+      <p>Cuando una mujer usa los mismos datos, esas etiquetas no funcionan, y eso te da a ti la munición que necesitas.</p>
+    </div>
+  </div>
+
+  <div class="cta rev" id="cta-arriba">
+    <a class="boton" data-pos="oferta" href="#" rel="noopener">
+      <span class="l1">Quiero dejar de callarme</span>
+      <span class="sub">
+        <span class="l2">16 episodios · Acceso de por vida</span>
+        <span class="l3">98&nbsp;€ · pago único</span>
+      </span>
+    </a>
+    <p class="garantia"><span>15 días de garantía de devolución</span></p>
+  </div>
+
+<section class="testimonios" id="testimonios" hidden aria-label="Testimonios">
+    <h2 class="rev">Lo que me dicen</h2>
+    <div class="lista" id="testimonios-lista"></div>
+  </section>
+
+  <section class="nopara rev" aria-label="Esto no es para ti si">
+    <h2 class="rev">Esto no es para ti si…</h2>
+    <ul>
+      <li class="rev">Buscas rabia y no argumentos.</li>
+      <li class="rev">Quieres que te den la razón sin comprobar nada.</li>
+      <li class="rev">Te da igual quedarte callado la próxima vez.</li>
+      <li class="rev">Prefieres discutir con lo que has oído por ahí.</li>
+      <li class="rev">No piensas abrir ni uno de los enlaces.</li>
+      <li class="rev">Crees que esto va de odiar a las mujeres.</li>
+    </ul>
+    <p class="cierre-np rev">Si estás cansado del mismo discurso de siempre, <br>gánale con lo único que no pueden rebatir.</p>
+  </section>
+
+  <div class="cta cta-final rev">
+    <a class="boton" data-pos="final" href="#" rel="noopener">
+      <span class="l1">Quiero dejar de callarme</span>
+      <span class="sub"><span class="l2">16 episodios · Acceso de por vida</span><span class="l3">98&nbsp;€ · pago único</span></span>
+    </a>
+    <p class="garantia"><span>15 días de garantía de devolución</span></p>
+  </div>
+</section>
+
+<footer class="pie">
+  <span>© ETHOS · Iron &amp; Soul Group LLC</span>
+  <a href="/aviso-legal.html">Aviso legal</a>
+  <a href="/condiciones.html">Condiciones</a>
+  <a href="/privacidad.html">Privacidad</a>
+</footer>
+
+<div id="debug"></div>
+
+<script>
+/* =====================================================================
+   AJUSTES: lo único que tienes que tocar
+   ===================================================================== */
+var CONFIG = {
+  // Enlace de pago de Hotmart de la serie
+  ENLACE_SERIE: "https://pay.hotmart.com/M108483059R?off=orj8c9nv",
+
+  // PostHog: clave de proyecto (empieza por phc_) y región ("eu" o "us")
+  POSTHOG_CLAVE: "phc_pkeEinNdCZ3yJy4UWs74MREVmmga2DJkc6qtRUXVM3ea",
+  POSTHOG_REGION: "eu",
+
+  // Audios: salen como las primeras tarjetas de "Lo que me dicen".
+  AUDIOS: [
+    { archivo: "audio2.mp3", duracion: "0:25" }
+  ],
+
+  // Testimonios: { texto: "...", nombre: "opcional" }. Lista vacía = no se ve esa parte.
+  TESTIMONIOS: [
+    { destacado: true, texto: "Qué buena explicación. El problema de las feministas es que su lucha la convirtieron en un brazo armado de un partido que odia a los padres y culpan a los demás por sus errores" },
+    { destacado: true, texto: "Madre mía del señor!! Qué cantidad de verdades tan dolorosas. Yo fui denunciado sin ninguna prueba […]" },
+    { texto: "No he encontrado a nadie que haga un análisis del género femenino tan acertado como tú, jamás." },
+    { texto: "De verdad sigo admirando como haces pedagogía. A mí ya no me queda paciencia jeje" },
+    { texto: "Siempre serás cuidada por nosotros, nuestra guerrera fiel! Escucharte es un pequeño gran alivio […]" },
+    { texto: "Pura realidad. Gracias por hacer lo que haces" }
+  ]
+};
+
+/* =====================================================================
+   MEDICIÓN (envía los eventos directamente a PostHog, sin cookies)
+   ===================================================================== */
+var params = new URLSearchParams(location.search);
+var origen = params.get("src") || params.get("utm_source") || "directo";
+var DEBUG = params.get("debug") === "1";
+
+var idAnonimo;
+try {
+  idAnonimo = sessionStorage.getItem("serie_id");
+  if (!idAnonimo) {
+    idAnonimo = "s-" + Math.random().toString(36).slice(2) + Date.now().toString(36);
+    sessionStorage.setItem("serie_id", idAnonimo);
+  }
+} catch (e) {
+  idAnonimo = "s-" + Math.random().toString(36).slice(2) + Date.now().toString(36);
+}
+
+var POSTHOG_ACTIVO = CONFIG.POSTHOG_CLAVE.indexOf("phc_") === 0;
+var POSTHOG_URL = "https://" + (CONFIG.POSTHOG_REGION === "us" ? "us" : "eu") + ".i.posthog.com/capture/";
+
+function registrar(evento, extra) {
+  var datos = Object.assign({ origen: origen, pagina: location.pathname, debug: DEBUG }, extra || {});
+  if (DEBUG) log(evento + " " + JSON.stringify(extra || {}));
+  if (!POSTHOG_ACTIVO) return;
+  try {
+    fetch(POSTHOG_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        api_key: CONFIG.POSTHOG_CLAVE,
+        event: evento,
+        distinct_id: idAnonimo,
+        properties: Object.assign({ "$current_url": location.href }, datos)
+      }),
+      keepalive: true
+    });
+  } catch (e) {}
+}
+
+function log(texto) {
+  var caja = document.getElementById("debug");
+  caja.style.display = "block";
+  caja.textContent = texto + "\n" + caja.textContent.split("\n").slice(0, 14).join("\n");
+}
+
+registrar("serie_visita");
+
+/* =====================================================================
+   BOTONES DE COMPRA
+   ===================================================================== */
+(function prepararBotones() {
+  var destino = CONFIG.ENLACE_SERIE;
+  try {
+    var u = new URL(destino);
+    u.searchParams.set("src", origen);   // así Hotmart te dice de dónde vino cada venta
+    destino = u.toString();
+  } catch (e) {}
+  Array.prototype.forEach.call(document.querySelectorAll(".boton"), function (b) {
+    b.href = destino;
+    b.addEventListener("click", function () {
+      registrar("serie_boton_clic", { posicion: b.getAttribute("data-pos") || "portada" });
+    });
+  });
+})();
+
+/* =====================================================================
+   APARICIÓN AL DESLIZAR Y TESTIMONIOS
+   ===================================================================== */
+var IO = ("IntersectionObserver" in window) ? new IntersectionObserver(function (entradas) {
+  entradas.forEach(function (e) {
+    if (e.isIntersecting) { e.target.classList.add("in"); IO.unobserve(e.target); }
+  });
+}, { threshold: 0.15, rootMargin: "0px 0px -5% 0px" }) : null;
+function revelar(el) { if (IO) IO.observe(el); else el.classList.add("in"); }
+Array.prototype.forEach.call(document.querySelectorAll(".rev"), revelar);
+
+(function testimonios() {
+  var lista = CONFIG.TESTIMONIOS || [];
+  if (!lista.length) return;
+  var cont = document.getElementById("testimonios-lista");
+  lista.forEach(function (t, i) {
+    var b = document.createElement("blockquote");
+    b.className = "testimonio rev" + (t.destacado ? " destacado" : "");
+    b.style.setProperty("--d", (i * 0.08) + "s");
+    var p = document.createElement("p"); p.textContent = t.texto; b.appendChild(p);
+    if (t.nombre) { var f = document.createElement("footer"); f.textContent = t.nombre; b.appendChild(f); }
+    cont.appendChild(b); revelar(b);
+  });
+  document.getElementById("testimonios").hidden = false;
+})();
+
+/* Audios: solo suenan si los pulsan, y se pausan entre sí. Se definen en CONFIG.AUDIOS. */
+(function audios() {
+  var lista = CONFIG.AUDIOS || [];
+  var cont = document.getElementById("testimonios-lista");
+  if (!lista.length || !cont) return;
+  var sonidos = [];
+  function fmt(s) { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2); }
+  var primera = cont.firstChild;
+  lista.forEach(function (it, i) {
+    var caja = document.createElement("div");
+    caja.className = "testimonio destacado audio rev";
+    caja.style.setProperty("--d", (i * 0.08) + "s");
+    caja.innerHTML = '<button type="button" class="audio-btn" aria-label="Escuchar el audio">' +
+      '<svg class="i-play" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>' +
+      '<svg class="i-pausa" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z" fill="currentColor"/></svg></button>' +
+      '<div class="audio-info"><span class="audio-titulo">Audio</span><span class="audio-barra"><i></i></span><span class="audio-tiempo"></span></div>';
+    var el = document.createElement("audio");
+    el.preload = "none"; el.src = it.archivo; caja.appendChild(el); sonidos.push(el);
+    var btn = caja.querySelector(".audio-btn"), prog = caja.querySelector(".audio-barra i"), tiempo = caja.querySelector(".audio-tiempo");
+    tiempo.textContent = it.duracion || "";
+    var empezo = false;
+    function pintar() { caja.classList.toggle("sonando", !el.paused); btn.setAttribute("aria-label", el.paused ? "Escuchar el audio" : "Pausar el audio"); }
+    btn.addEventListener("click", function () {
+      if (el.paused) {
+        sonidos.forEach(function (a) { if (a !== el && !a.paused) a.pause(); });
+        var pr = el.play(); if (pr && pr.catch) pr.catch(function () {});
+        if (!empezo) { empezo = true; try { registrar("serie_audio_play", { audio: i + 1 }); } catch (e) {} }
+      } else { el.pause(); }
+    });
+    el.addEventListener("play", pintar);
+    el.addEventListener("pause", pintar);
+    el.addEventListener("ended", function () { prog.style.width = "0"; tiempo.textContent = it.duracion || fmt(el.duration || 0); pintar(); });
+    el.addEventListener("timeupdate", function () { if (el.duration) { prog.style.width = (el.currentTime / el.duration * 100) + "%"; tiempo.textContent = fmt(el.duration - el.currentTime); } });
+    cont.insertBefore(caja, primera);
+    revelar(caja);
+  });
+  document.getElementById("testimonios").hidden = false;
+})();
+
+/* Cuánto baja la gente por la página */
+(function scroll() {
+  var marcas = [25, 50, 75, 100], hechas = {};
+  window.addEventListener("scroll", function () {
+    var alto = document.documentElement.scrollHeight - window.innerHeight;
+    if (alto <= 0) return;
+    var pct = Math.round((window.scrollY / alto) * 100);
+    marcas.forEach(function (m) { if (pct >= m && !hechas[m]) { hechas[m] = true; registrar("serie_scroll", { hasta: m }); } });
+  }, { passive: true });
+})();
+</script>
+
+<script>
+/* Oculta el origen (src) de la barra de direcciones cuando la página ya lo ha anotado */
+(function () {
+  try {
+    var u = new URL(location.href);
+    if (u.searchParams.has("src")) {
+      setTimeout(function () {
+        u.searchParams.delete("src");
+        history.replaceState(null, "", u.pathname + u.search + u.hash);
+      }, 1500);
+    }
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
